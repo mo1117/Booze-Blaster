@@ -15,15 +15,15 @@ import com.boozeblaster.tasks.IndividualTask
  * 1 point per correct answer can be achieved
  */
 class FactOrFictionTask(
-    player: Player,
-    subTasks: List<FactOrFiction>
+    private val player: Player,
+    private val subTasks: List<FactOrFiction>
 ) : IndividualTask(
     player = player,
     subTasks = subTasks
 ) {
 
     @Composable
-    override fun displayContent() {
+    override fun DisplayContent() {
         //TODO load the compose content for the screen (GameScreen)
     }
 

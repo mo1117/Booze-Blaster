@@ -5,12 +5,12 @@ import com.boozeblaster.minigames.common.NeverHaveIEver
 import com.boozeblaster.tasks.CommonTask
 
 class NeverHaveIEverTask(
-    subTasks: List<NeverHaveIEver>
+    private val subTasks: List<NeverHaveIEver>
 ) : CommonTask(
     subTasks = subTasks
 ) {
     @Composable
-    override fun displayContent() {
+    override fun DisplayContent() {
         TODO("Not yet implemented")
     }
 }

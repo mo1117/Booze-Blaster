@@ -6,6 +6,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -82,6 +86,34 @@ fun HomeScreenContent(
                 fontSize = fontSize,
                 fontFamily = fontFamily
             )
+            Spacer(
+                modifier = modifier.size(size = 100.dp)
+            )
+            var text by remember {
+                mutableStateOf("hi")
+            }
+            SimpleButton(
+                modifier = buttonModifier,
+                onClick = { text = "moin" },
+                text = text,
+                fontSize = fontSize,
+                fontFamily = fontFamily
+            )
+// TEST DONT DELETE
+//            val p = Player(1, "h", "h", "h", 5)
+//            val s = "GuessTheLyrics"
+//            val clazz = Class.forName("com.boozeblaster.tasks.individual.${s}Task")
+//            val generator = Class.forName("com.boozeblaster.generators.individual.${s}Generator")
+//                .getMethod("getList")
+//
+//            val instance = Class.forName("com.boozeblaster.generators.individual.GuessTheLyricsGenerator").newInstance()
+//
+//            val o = clazz.getConstructor(Player::class.java, List::class.java).newInstance(
+//                p,
+//                generator.invoke(instance)
+//            ) as GuessTheLyricsTask
+//
+//            Text(o.print())
         }
     }
 }

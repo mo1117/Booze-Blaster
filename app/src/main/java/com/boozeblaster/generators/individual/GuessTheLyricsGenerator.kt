@@ -1,6 +1,6 @@
-package com.boozeblaster.generators
+package com.boozeblaster.generators.individual
 
-import com.boozeblaster.minigames.MiniGame
+import com.boozeblaster.generators.MiniGameGenerator
 import com.boozeblaster.minigames.individual.GuessTheLyrics
 
 class GuessTheLyricsGenerator : MiniGameGenerator() {
@@ -12,6 +12,7 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
      * List of GuessTheLyrics instances
      */
     private companion object {
+
         private val list = listOf(
             GuessTheLyrics(
                 songName = "Smells Like Teen Spirit",

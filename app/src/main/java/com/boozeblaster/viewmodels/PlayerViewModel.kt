@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.boozeblaster.models.Player
 import com.boozeblaster.repositories.PlayerRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +21,10 @@ class PlayerViewModel(private val playerRepository: PlayerRepository): ViewModel
                     _playerListState.value = listOfPlayers
                 }
         }
+    }
+
+    fun getAllPlayers(): Flow<List<Player>> {
+        return playerRepository.getAllPlayers()
     }
 
     suspend fun addPlayer(player: Player) {

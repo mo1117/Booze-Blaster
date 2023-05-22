@@ -13,11 +13,9 @@ abstract class MiniGameGenerator {
     abstract fun getList(): List<MiniGame>
 
     /**
-     * Sub classes call this method passing a list consisting of the specific mini game's instances
-     *
-     * Method is open since it might need to be overridden
+     * Sub classes call this method by passing a list consisting of the specific mini game's instances
      */
-    open fun getList(list: List<MiniGame>): List<MiniGame> {
+    fun getList(list: List<MiniGame>): List<MiniGame> {
         var randoms = arrayOf<Int>()
         var ret = listOf<MiniGame>()
         for (i in 0 until 3) {

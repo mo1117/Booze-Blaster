@@ -2,7 +2,6 @@ package com.boozeblaster.tasks
 
 import androidx.compose.runtime.Composable
 import com.boozeblaster.models.Player
-import com.boozeblaster.screens.Screen
 
 /**
  * The base class representing a Task
@@ -19,12 +18,17 @@ abstract class Task(
     private val maxPoints: Int = 4
 
     /**
-     * Needs implementation in the specific Task classes
+     * Needs implementation in the specific task classes
      *
-     * Used to display the content for the GameScreen
+     * From our GameScreen we call the method displayContent()
+     *
+     * For each task, a different layout is expected
+     *
+     * This way, we do not have to implement a screen for each specific task, but can just use
+     * the GameScreen and load its content based on which Task is currently being handled
      */
     @Composable
-    abstract fun displayContent()
+    abstract fun DisplayContent()
 
 
     /**

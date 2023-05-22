@@ -5,24 +5,30 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.R
+import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 @Composable
 fun StartGameScreen(navController: NavController) {
     val playerViewModel: PlayerViewModel =
         viewModel(factory = InjectorUtils.providePlayerViewModelFactory(context = LocalContext.current))
     val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
 
 
     Scaffold(
@@ -34,8 +40,14 @@ fun StartGameScreen(navController: NavController) {
     ) { paddingValues ->
         StartGameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            onAddClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
-            onRemovePlayerClicked = playerViewModel::deletePlayer
+            getSavedPlayers = {
+                coroutineScope.launch {
+                    playerViewModel.getAllPlayers()
+                }
+            },
+            onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
+            onRemovePlayerClicked = playerViewModel::deletePlayer,
+            onStartClicked = { navController.navigate(route = Screen.GameScreen.route) }
         )
     }
 }
@@ -43,9 +55,10 @@ fun StartGameScreen(navController: NavController) {
 @Composable
 fun StartGameScreenContent(
     modifier: Modifier,
-    onAddClicked: () -> Unit,
-    onRemovePlayerClicked: (Player) -> Unit
-    //TODO Add function that actually STARTS the game
+    getSavedPlayers: () -> Job,
+    onAddPlayerClicked: () -> Unit,
+    onRemovePlayerClicked: (Player) -> Unit,
+    onStartClicked: () -> Unit
 ) {
     Surface(
         modifier = modifier
@@ -58,7 +71,7 @@ fun StartGameScreenContent(
             modifier = modifier.background(color = LightBackground) // TODO darkmode
         ) {
             Button(
-                onClick = { onAddClicked() }, colors = ButtonDefaults.buttonColors(
+                onClick = { onAddPlayerClicked() }, colors = ButtonDefaults.buttonColors(
                     contentColor = LightBackground, backgroundColor = LightBackground
                 )
             ) {
@@ -68,6 +81,24 @@ fun StartGameScreenContent(
                     modifier = modifier.background(color = LightBackground)
                 )
             }
+
+            //Test
+//            val savedPlayers = getSavedPlayers()
+
+
+            //TODO Here we need to instantiate our singleton Game object
+            //TODO Create a list of tasks and use the generators to generate the subtasks
+            //TODO To create our list of tasks just call TaskGenerator.generateTasks(players, rounds)
+            //TODO players = List<Player> and rounds = Int can be chosen before starting the game
+            //TODO Call Game.getInstance with the list of tasks and players
+
+            SimpleButton(
+                modifier = Modifier,
+                onClick = { onStartClicked() },
+                text = "Start",
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.boozeblaster.generators
 
 import com.boozeblaster.models.Player
+import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.tasks.Task
 import kotlin.random.Random
@@ -15,28 +16,59 @@ import kotlin.random.Random
 object TaskGenerator {
 
     private val INDIVIDUAL_TASKS = arrayOf("FactOrFiction", "GuessTheLyrics")
-    private val COMMON_TASKS = arrayOf<String>()
+    private val COMMON_TASKS = arrayOf("NeverHaveIEver")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
-        val tasks = listOf<Task>()
+        var tasks = listOf<Task>()
         for (round in 0 until rounds) {
-            //TODO add common tasks
+            tasks += generateCommonTask()
             for (i in players.indices) {
-                //TODO add individual tasks to players
+                tasks += generateIndividualTask(player = players.get(index = i))
             }
         }
         return tasks
     }
 
-    private fun generateRandomIndividualTask(player: Player): IndividualTask? {
+    /**
+     * This method generates a random individual task and assigns it to a player
+     *
+     * First, we generate a random index and take the string from the array INDIVIDUAL_TASKS
+     *
+     * Then, get the class for the specific Task with its constructor, an instance of the matching
+     * generator with its getList() method
+     *
+     * We return a new instance of the given Task and initialize it with the passed argument Player
+     * and the return value of the getList() method
+     * @param player Player
+     * @return IndividualTask (specific individual task)
+     */
+    private fun generateIndividualTask(player: Player): IndividualTask {
         val random = Random.nextInt(from = 0, until = INDIVIDUAL_TASKS.size)
         val game = INDIVIDUAL_TASKS[random]
-        val generator = Class.forName("com.boozeblaster.generators.${game}Generator")
-            .getMethod("getList")
 
+        val constructor = Class.forName("com.boozeblaster.tasks.individual.${game}Task")
+            .getConstructor(Player::class.java, List::class.java)
 
-        val clazz = Class.forName(game).kotlin
-        val method = clazz.java.getConstructor()
-        return null
+        val generator = Class.forName("com.boozeblaster.generators.individual.${game}Generator")
+        val method = generator.getMethod("getList")
+
+        return constructor.newInstance(player, method.invoke(generator)) as IndividualTask
+    }
+
+    /**
+     * Works similar to the method above
+     * @return CommonTask (Specific common task)
+     */
+    private fun generateCommonTask(): CommonTask {
+        val random = Random.nextInt(from = 0, until = COMMON_TASKS.size)
+        val game = COMMON_TASKS[random]
+
+        val constructor = Class.forName("com.boozeblaster.tasks.common.${game}Task")
+            .getConstructor(List::class.java)
+
+        val generator = Class.forName("com.boozeblaster.generators.common.${game}Generator")
+        val method = generator.getMethod("getList")
+
+        return constructor.newInstance(method.invoke(generator)) as CommonTask
     }
 }

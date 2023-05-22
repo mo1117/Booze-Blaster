@@ -13,11 +13,12 @@ class Player(
     @PrimaryKey(autoGenerate = true)
     private val id: Int = 0,
     private var name: String,
-    private var birthDate: String,
-    private var dare: String,
-    private var points: Int = 0,
-//    private var sips: Int = 0
+    private var birthDate: String
 ) {
+
+    private var dare: String = ""
+    private var points: Int = 0
+    private var sips: Int = 0
 
     fun getId(): Int = this.id
 
@@ -39,6 +40,10 @@ class Player(
 
     fun getDare(): String = this.dare
 
+    fun setPoints(points: Int) {
+        this.points = points
+    }
+
     fun addPoints(points: Int) {
         this.points += points
         if (this.points < 0) {
@@ -48,4 +53,14 @@ class Player(
 
     fun getPoints(): Int = this.points
 
+
+    fun setSips(sips: Int) {
+        this.sips = sips
+    }
+
+    fun addSips(sips: Int) {
+        this.sips += sips
+    }
+
+    fun getSips(): Int = this.sips
 }

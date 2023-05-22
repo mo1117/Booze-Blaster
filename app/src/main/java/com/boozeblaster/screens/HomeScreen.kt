@@ -50,9 +50,9 @@ fun HomeScreenContent(
     onAddPlayerClicked: () -> Unit
 ) {
 
-    val p1 = Player(name = "Mo", birthDate = "egal", dare = "nix", points = 0)
-    val p2 = Player(2, "Mo2", "egal", "nix", 0)
-    val p3 = Player(3, "Mo3", "egal","nix",0)
+    val p1 = Player(name = "Mo", birthDate = "egal")
+    val p2 = Player(2, "Mo2", "egal")
+    val p3 = Player(3, "Mo3", "egal")
     Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 3), true)
 
     Surface(

@@ -14,7 +14,7 @@ import com.boozeblaster.models.Player
  */
 @Database(
     entities = [Player::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 
@@ -37,6 +37,7 @@ abstract class PlayerDatabase : RoomDatabase() {
                         }
                     }
                 )
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also {
                         INSTANCE = it

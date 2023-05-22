@@ -8,5 +8,5 @@ abstract class CommonTask(
     private val subTasks: List<MiniGame>
 ) : Task() {
     @Composable
-    abstract override fun displayContent()
+    abstract override fun DisplayContent()
 }

@@ -25,5 +25,5 @@ abstract class IndividualTask(
      * Only implemented in the specific individual tasks (!)
      */
     @Composable
-    abstract override fun displayContent()
+    abstract override fun DisplayContent()
 }

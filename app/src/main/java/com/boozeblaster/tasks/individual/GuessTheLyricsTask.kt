@@ -1,5 +1,6 @@
 package com.boozeblaster.tasks.individual
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.individual.GuessTheLyrics
 import com.boozeblaster.models.Player
@@ -14,6 +15,6 @@ class GuessTheLyricsTask (
 ) {
     @Composable
     override fun DisplayContent() {
-        //TODO Here we load the compose content for the screen
+        Text(text = "Guess the lyrics")
     }
 }

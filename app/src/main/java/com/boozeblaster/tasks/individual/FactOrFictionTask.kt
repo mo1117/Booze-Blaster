@@ -1,5 +1,6 @@
 package com.boozeblaster.tasks.individual
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.individual.FactOrFiction
 import com.boozeblaster.models.Player
@@ -24,7 +25,7 @@ class FactOrFictionTask(
 
     @Composable
     override fun DisplayContent() {
-        //TODO load the compose content for the screen (GameScreen)
+        Text(text = "Fact or Fiction?")
     }
 
 }

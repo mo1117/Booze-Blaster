@@ -15,6 +15,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.generators.TaskGenerator
+import com.boozeblaster.models.Game
+import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
@@ -34,7 +37,7 @@ fun HomeScreen(navController: NavController) {
     ) { paddingValues ->
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            onStartClicked = { navController.navigate(route = Screen.StartGameScreen.route) },
+            onStartClicked = { navController.navigate(route = Screen.GameScreen.route) },
             onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) }
         )
     }
@@ -46,6 +49,12 @@ fun HomeScreenContent(
     onStartClicked: () -> Unit,
     onAddPlayerClicked: () -> Unit
 ) {
+
+    val p1 = Player(name = "Mo", birthDate = "egal", dare = "nix", points = 0)
+    val p2 = Player(2, "Mo2", "egal", "nix", 0)
+    val p3 = Player(3, "Mo3", "egal","nix",0)
+    Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 3), true)
+
     Surface(
         modifier = modifier
             .fillMaxWidth(fraction = 1f)

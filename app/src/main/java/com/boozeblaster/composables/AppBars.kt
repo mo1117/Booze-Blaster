@@ -47,9 +47,6 @@ fun HomeTopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = {}) {
-                Icon(imageVector = Icons.Default.AccountBox, contentDescription = "User")
-            }
             Switch(checked = true, onCheckedChange = {  }) //TODO darkmode
         },
         modifier = Modifier.clip(

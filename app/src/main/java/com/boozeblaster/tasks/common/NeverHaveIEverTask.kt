@@ -1,5 +1,6 @@
 package com.boozeblaster.tasks.common
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.common.NeverHaveIEver
 import com.boozeblaster.tasks.CommonTask
@@ -11,6 +12,6 @@ class NeverHaveIEverTask(
 ) {
     @Composable
     override fun DisplayContent() {
-        TODO("Not yet implemented")
+        Text("NeverHaveIEver")
     }
 }

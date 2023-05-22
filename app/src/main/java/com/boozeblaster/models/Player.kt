@@ -11,11 +11,12 @@ import androidx.room.PrimaryKey
 @Entity
 class Player(
     @PrimaryKey(autoGenerate = true)
-    private val id: Int,
+    private val id: Int = 0,
     private var name: String,
     private var birthDate: String,
     private var dare: String,
-    private var points: Int = 0
+    private var points: Int = 0,
+//    private var sips: Int = 0
 ) {
 
     fun getId(): Int = this.id
@@ -46,4 +47,5 @@ class Player(
     }
 
     fun getPoints(): Int = this.points
+
 }

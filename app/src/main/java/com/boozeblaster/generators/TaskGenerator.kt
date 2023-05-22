@@ -34,7 +34,7 @@ object TaskGenerator {
      *
      * First, we generate a random index and take the string from the array INDIVIDUAL_TASKS
      *
-     * Then, get the class for the specific Task with its constructor, an instance of the matching
+     * Then, get the constructor of the class for the specific Task, and an instance of the matching
      * generator with its getList() method
      *
      * We return a new instance of the given Task and initialize it with the passed argument Player
@@ -49,10 +49,12 @@ object TaskGenerator {
         val constructor = Class.forName("com.boozeblaster.tasks.individual.${game}Task")
             .getConstructor(Player::class.java, List::class.java)
 
+        val instance = Class.forName("com.boozeblaster.generators.individual.${game}Generator")
+            .newInstance()
         val generator = Class.forName("com.boozeblaster.generators.individual.${game}Generator")
-        val method = generator.getMethod("getList")
+            .getMethod("getList")
 
-        return constructor.newInstance(player, method.invoke(generator)) as IndividualTask
+        return constructor.newInstance(player, generator.invoke(instance)) as IndividualTask
     }
 
     /**
@@ -66,9 +68,11 @@ object TaskGenerator {
         val constructor = Class.forName("com.boozeblaster.tasks.common.${game}Task")
             .getConstructor(List::class.java)
 
+        val instance = Class.forName("com.boozeblaster.generators.common.${game}Generator")
+            .newInstance()
         val generator = Class.forName("com.boozeblaster.generators.common.${game}Generator")
-        val method = generator.getMethod("getList")
+            .getMethod("getList")
 
-        return constructor.newInstance(method.invoke(generator)) as CommonTask
+        return constructor.newInstance(generator.invoke(instance)) as CommonTask
     }
 }

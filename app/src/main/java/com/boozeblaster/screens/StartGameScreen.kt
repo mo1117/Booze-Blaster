@@ -90,7 +90,7 @@ fun StartGameScreenContent(
             //TODO Create a list of tasks and use the generators to generate the subtasks
             //TODO To create our list of tasks just call TaskGenerator.generateTasks(players, rounds)
             //TODO players = List<Player> and rounds = Int can be chosen before starting the game
-            //TODO Call Game.getInstance with the list of tasks and players
+            //TODO Call Game.init with a list of players, tasks, and whether or not adult mode is enabled
 
             SimpleButton(
                 modifier = Modifier,

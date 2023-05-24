@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
 
-class NeverHaveIEver(
+class WhoInThisRoom(
     private val statement: String
 ) : MiniGame {
 
@@ -22,7 +22,8 @@ class NeverHaveIEver(
                 .fillMaxWidth(fraction = 1f)
                 .clickable(onClick = { callback() })
         ) {
-            Text(text = "jajajaja")
+            Text(text = "Who in this room...")
+            Text(text = statement)
         }
     }
 }

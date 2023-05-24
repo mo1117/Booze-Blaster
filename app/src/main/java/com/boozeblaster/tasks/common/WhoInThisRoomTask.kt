@@ -1,33 +1,19 @@
-package com.boozeblaster.tasks.individual
+package com.boozeblaster.tasks.common
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.boozeblaster.minigames.individual.FactOrFiction
-import com.boozeblaster.models.Player
-import com.boozeblaster.tasks.IndividualTask
+import com.boozeblaster.minigames.common.WhoInThisRoom
+import com.boozeblaster.tasks.CommonTask
 
-/**
- * A class that represents the Fact or Fiction mini-game
- *
- * Each assigned player will get three different statements displayed
- *
- * Every statement has to be labeled as fact or fiction
- *
- * 1 point per correct answer can be achieved
- */
-class FactOrFictionTask(
-    private val player: Player,
-    private val subTasks: List<FactOrFiction>
-) : IndividualTask(
-    player = player,
+class WhoInThisRoomTask(
+    private val subTasks: List<WhoInThisRoom>
+) : CommonTask(
     subTasks = subTasks
 ) {
 
@@ -49,7 +35,7 @@ class FactOrFictionTask(
                 verticalArrangement = Arrangement.Top
             ) {
                 subTasks.get(subTaskCounter).DisplayContent(
-                    player = player,
+                    player = null,
                     callback = {
                         if (subTaskCounter == 2) {
                             callback()
@@ -60,5 +46,4 @@ class FactOrFictionTask(
             }
         }
     }
-
 }

@@ -1,11 +1,12 @@
 package com.boozeblaster.generators.individual
 
 import com.boozeblaster.generators.MiniGameGenerator
+import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.minigames.individual.GuessTheLyrics
 
 class GuessTheLyricsGenerator : MiniGameGenerator() {
-    override fun getList(): List<GuessTheLyrics> {
-        return super.getList(list = list) as List<GuessTheLyrics>
+    override fun getList(): List<MiniGame> {
+        return super.getList(list = list)
     }
 
     /**
@@ -218,27 +219,6 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
                 lyrics = "And it's time that we see it, the fire's dying out",
                 lyricsCompletion = "Can't believe that I say this, we're out of chances now"
             ),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
             GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
         )
     }

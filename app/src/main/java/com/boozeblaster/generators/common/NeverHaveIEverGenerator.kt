@@ -1,20 +1,27 @@
 package com.boozeblaster.generators.common
 
 import com.boozeblaster.generators.MiniGameGenerator
+import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.minigames.common.NeverHaveIEver
+import com.boozeblaster.models.Game
 
 class NeverHaveIEverGenerator : MiniGameGenerator() {
-    override fun getList(): List<NeverHaveIEver> {
-        return super.getList(list = list) as List<NeverHaveIEver>
+    override fun getList(): List<MiniGame> {
+        val list = if (Game.getInstance().isAdultMode()) {
+            adultModeList
+        } else {
+            normalList
+        }
+        return super.getList(list = list)
     }
 
     /**
      * Two lists consisting of NeverHaveIEver instances
      *
-     * If adult mode is enabled, we can call super.getList with a combination of both lists
+     * One list for the normal mode, and one for adult mode
      */
     private companion object {
-        val list = listOf(
+        private val normalList = listOf(
             NeverHaveIEver(statement = ""),
             NeverHaveIEver(statement = ""),
             NeverHaveIEver(statement = ""),
@@ -24,7 +31,7 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
             NeverHaveIEver(statement = ""),
             NeverHaveIEver(statement = ""),
         )
-        val adultModeList = listOf(
+        private val adultModeList = listOf(
             NeverHaveIEver(statement = ""),
             NeverHaveIEver(statement = ""),
             NeverHaveIEver(statement = ""),

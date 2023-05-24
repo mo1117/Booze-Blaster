@@ -18,11 +18,14 @@ abstract class MiniGameGenerator {
     fun getList(list: List<MiniGame>): List<MiniGame> {
         var randoms = arrayOf<Int>()
         var ret = listOf<MiniGame>()
-        for (i in 0 until 3) {
+        var counter = 0
+
+        while (counter < 3) {
             val random = Random.nextInt(from = 0, until = list.size)
             if (random !in randoms) {
                 randoms += random
-                ret += list.get(index = random)
+                ret = ret.plus(list.get(index = random))
+                counter++
             }
         }
         return ret

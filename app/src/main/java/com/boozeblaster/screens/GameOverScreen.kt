@@ -2,6 +2,7 @@ package com.boozeblaster.screens
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,8 +13,8 @@ import com.boozeblaster.models.Player
 
 @Composable
 fun GameOverScreen(navController: NavController) {
-    val game = Game.getInstance()
     val scaffoldState = rememberScaffoldState()
+    val game = Game.getInstance()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -34,4 +35,5 @@ fun GameOverScreenContent(
     players: List<Player>
 ) {
     //TODO GameOverScreen content displaying sips etc
+    Text(text = "GameOver")
 }

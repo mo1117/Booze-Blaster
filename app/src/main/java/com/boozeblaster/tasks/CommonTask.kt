@@ -2,11 +2,12 @@ package com.boozeblaster.tasks
 
 import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.MiniGame
-import com.boozeblaster.tasks.Task
 
 abstract class CommonTask(
     private val subTasks: List<MiniGame>
-) : Task() {
+) : Task(
+    subTasks = subTasks
+) {
     @Composable
-    abstract override fun DisplayContent()
+    abstract override fun Display(callback: () -> Unit)
 }

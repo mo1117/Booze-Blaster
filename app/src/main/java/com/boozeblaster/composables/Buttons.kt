@@ -16,11 +16,13 @@ fun SimpleButton(
     onClick: () -> Unit,
     text: String,
     fontSize: Int,
-    fontFamily: FontFamily
+    fontFamily: FontFamily,
+    enabled: Boolean = true
 ) {
     Button(
         onClick = { onClick() },
-        modifier = modifier
+        modifier = modifier,
+        enabled = enabled
     ) {
         Text(text = text, fontFamily = fontFamily, fontSize = fontSize.sp)
     }

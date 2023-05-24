@@ -15,15 +15,15 @@ import kotlin.random.Random
  */
 object TaskGenerator {
 
-    private val INDIVIDUAL_TASKS = arrayOf("FactOrFiction", "GuessTheLyrics")
-    private val COMMON_TASKS = arrayOf("NeverHaveIEver")
+    private val INDIVIDUAL_TASKS = arrayOf("GuessTheLyrics", "FactOrFiction")
+    private val COMMON_TASKS = arrayOf("NeverHaveIEver", "WhoInThisRoom")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
         var tasks = listOf<Task>()
         for (round in 0 until rounds) {
-            tasks += generateCommonTask()
+            tasks = tasks.plus(generateCommonTask())
             for (i in players.indices) {
-                tasks += generateIndividualTask(player = players.get(index = i))
+                tasks = tasks.plus(generateIndividualTask(player = players.get(index = i)))
             }
         }
         return tasks

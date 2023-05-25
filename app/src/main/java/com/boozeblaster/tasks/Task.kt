@@ -1,6 +1,6 @@
 package com.boozeblaster.tasks
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
 
@@ -15,33 +15,27 @@ import com.boozeblaster.models.Player
  * @see CommonTask
  */
 abstract class Task(
-    private val subTasks: List<MiniGame>
+    subTasks: List<MiniGame>
 ) {
     private val maxPoints: Int = 4
 
-    /**
-     * Needs implementation in the specific task classes
-     *
-     * From our GameScreen we call the method Display()
-     *
-     * For each task, a different layout is expected
-     *
-     * This way, we do not have to implement a screen for each specific task, but can just use
-     * the GameScreen and load its content based on which Task is currently being handled
-     *
-     * A callback method is needed to trigger a recomposition for the GameScreen
-     *
-     * When the callback method gets called, we want the GameScreen to display the next Task
-     */
+    private var showCover by mutableStateOf(true)
+
+    @Composable
+    fun DisplayTask(callback: () -> Unit) {
+        if (showCover) {
+            DisplayCover(onSurfaceClicked = {showCover = false} )
+        } else {
+            Display(callback = callback)
+        }
+    }
+
     @Composable
     abstract fun Display(callback: () -> Unit)
 
+    @Composable
+    abstract fun DisplayCover(onSurfaceClicked: () -> Unit)
 
-    /**
-     * Method responsible for adding points to a player
-     * @param player Player that gets points added
-     * @param points Points to be added
-     */
     fun addPoints(player: Player, points: Int) {
         if (points > maxPoints) {
             player.addPoints(points = maxPoints)
@@ -53,6 +47,4 @@ abstract class Task(
     fun addSips(player: Player, sips: Int) {
         player.addSips(sips = sips)
     }
-
-    fun getSubTasks(): List<MiniGame> = subTasks
 }

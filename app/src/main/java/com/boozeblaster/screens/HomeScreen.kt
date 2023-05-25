@@ -53,7 +53,7 @@ fun HomeScreenContent(
     val p1 = Player(name = "Mo", birthDate = "egal")
     val p2 = Player(2, "Mo2", "egal")
     val p3 = Player(3, "Mo3", "egal")
-    Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 3), true)
+    Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 3), false)
 
     Surface(
         modifier = modifier

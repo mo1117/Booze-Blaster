@@ -23,7 +23,7 @@ class FactOrFiction(
                 .fillMaxWidth(fraction = 1f)
                 .clickable(onClick = { callback() })
         ) {
-            Text(text = "$question")
+            Text(text = "$question\n$isCorrect")
         }
     }
 }

@@ -1,15 +1,13 @@
 package com.boozeblaster.tasks.individual
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.boozeblaster.minigames.individual.FactOrFiction
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
@@ -32,13 +30,28 @@ class FactOrFictionTask(
 ) {
 
     @Composable
+    override fun DisplayCover(onSurfaceClicked: () -> Unit) {
+        Surface(
+            modifier = Modifier
+                .fillMaxHeight(fraction = 1f)
+                .fillMaxWidth(fraction = 1f)
+                .clickable(onClick = { onSurfaceClicked() })
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(text = player.getName())
+                Spacer(Modifier.size(50.dp))
+                Text("GuessTheLyrics - Be aware of the timer")
+            }
+        }
+    }
+
+    private var subTaskCounter by mutableStateOf(0)
+
+    @Composable
     override fun Display(callback: () -> Unit) {
-        var subTaskCounter by remember {
-            mutableStateOf(0)
-        }
-        LaunchedEffect(key1 = this) {
-            subTaskCounter = 0
-        }
         Surface(
             modifier = Modifier
                 .fillMaxWidth(fraction = 1f)

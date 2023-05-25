@@ -22,8 +22,7 @@ class WhoInThisRoom(
                 .fillMaxWidth(fraction = 1f)
                 .clickable(onClick = { callback() })
         ) {
-            Text(text = "Who in this room...")
-            Text(text = statement)
+            Text(text = "Who in this room...\n$statement")
         }
     }
 }

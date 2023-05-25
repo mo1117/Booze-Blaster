@@ -48,7 +48,7 @@ fun GameScreenContent(
     }
     val currentTask = tasks.get(index = taskCounter)
 
-    currentTask.Display(callback = {
+    currentTask.DisplayTask(callback = {
         if (taskCounter + 1 == tasks.size) {
             gameFinished()
         } else {

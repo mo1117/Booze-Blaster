@@ -9,12 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.models.Game
-import com.boozeblaster.models.Player
 
 @Composable
 fun GameOverScreen(navController: NavController) {
     val scaffoldState = rememberScaffoldState()
-    val game = Game.getInstance()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -23,17 +21,16 @@ fun GameOverScreen(navController: NavController) {
         }
     ) { paddingValues ->
         GameOverScreenContent(
-            modifier = Modifier.padding(paddingValues = paddingValues),
-            players = game.getPlayers()
+            modifier = Modifier.padding(paddingValues = paddingValues)
         )
     }
 }
 
 @Composable
 fun GameOverScreenContent(
-    modifier: Modifier,
-    players: List<Player>
+    modifier: Modifier
 ) {
+    val players = Game.getInstance().getPlayers()
     //TODO GameOverScreen content displaying sips etc
     Text(text = "GameOver")
 }

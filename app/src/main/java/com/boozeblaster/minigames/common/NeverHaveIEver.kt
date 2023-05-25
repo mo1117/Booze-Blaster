@@ -22,7 +22,7 @@ class NeverHaveIEver(
                 .fillMaxWidth(fraction = 1f)
                 .clickable(onClick = { callback() })
         ) {
-            Text(text = "jajajaja")
+            Text(text = "Never Have I Ever...\n$statement")
         }
     }
 }

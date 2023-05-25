@@ -4,10 +4,13 @@ import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.MiniGame
 
 abstract class CommonTask(
-    private val subTasks: List<MiniGame>
+    subTasks: List<MiniGame>
 ) : Task(
     subTasks = subTasks
 ) {
     @Composable
     abstract override fun Display(callback: () -> Unit)
+
+    @Composable
+    abstract override fun DisplayCover(onSurfaceClicked: () -> Unit)
 }

@@ -1,7 +1,10 @@
 package com.boozeblaster.screens
 
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -15,7 +18,6 @@ import com.boozeblaster.tasks.Task
 fun GameScreen(navController: NavController = rememberNavController()) {
     val game = Game.getInstance() // Singleton instance
     val tasks = game.getTasks()
-    val players = game.getPlayers()
     val scaffoldState = rememberScaffoldState()
 
     if (tasks.isEmpty()) {
@@ -26,13 +28,19 @@ fun GameScreen(navController: NavController = rememberNavController()) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            SimpleTopAppBar(onBackButtonClick = { navController.popBackStack() })
+            //TODO When the back button gets clicked in-game we ask for confirmation to leave
+            SimpleTopAppBar(onBackButtonClick = {
+                navController.popBackStack()
+            })
         }
     ) { paddingValues ->
         GameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             tasks = tasks,
-            gameFinished = { navController.navigate(route = Screen.GameOverScreen.route) }
+            gameFinished = {
+                navController.popBackStack()
+                navController.navigate(route = Screen.GameOverScreen.route)
+            }
         )
     }
 }
@@ -48,11 +56,17 @@ fun GameScreenContent(
     }
     val currentTask = tasks.get(index = taskCounter)
 
-    currentTask.DisplayTask(callback = {
-        if (taskCounter + 1 == tasks.size) {
-            gameFinished()
-        } else {
-            taskCounter++
-        }
-    })
+    Surface(
+        modifier = modifier
+            .fillMaxHeight(fraction = 1f)
+            .fillMaxWidth(fraction = 1f)
+    ) {
+        currentTask.DisplayTask(callback = {
+            if (taskCounter + 1 == tasks.size) {
+                gameFinished()
+            } else {
+                taskCounter++
+            }
+        })
+    }
 }

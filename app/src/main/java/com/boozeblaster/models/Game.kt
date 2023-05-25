@@ -52,4 +52,14 @@ class Game private constructor(
      * @return Whether or not the current game has adult mode enabled
      */
     fun isAdultMode(): Boolean = this.adultMode
+
+    /**
+     * Resets all player's points and sips
+     */
+    fun reset() {
+        for (player in this.players) {
+            player.setPoints(points = 0)
+            player.setSips(sips = 0)
+        }
+    }
 }

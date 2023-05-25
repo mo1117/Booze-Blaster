@@ -19,10 +19,14 @@ abstract class Task(
 ) {
     private val maxPoints: Int = 4
 
-    private var showCover by mutableStateOf(true)
-
     @Composable
     fun DisplayTask(callback: () -> Unit) {
+        var showCover by remember {
+            mutableStateOf(true)
+        }
+        LaunchedEffect(key1 = this) {
+            showCover = true
+        }
         if (showCover) {
             DisplayCover(onSurfaceClicked = {showCover = false} )
         } else {

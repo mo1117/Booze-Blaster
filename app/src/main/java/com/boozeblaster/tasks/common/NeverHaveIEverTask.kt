@@ -35,10 +35,11 @@ class NeverHaveIEverTask(
         }
     }
 
-    private var subTaskCounter by mutableStateOf(0)
-
     @Composable
     override fun Display(callback: () -> Unit) {
+        var subTaskCounter by remember {
+            mutableStateOf(0)
+        }
         Surface(
             modifier = Modifier
                 .fillMaxWidth(fraction = 1f)

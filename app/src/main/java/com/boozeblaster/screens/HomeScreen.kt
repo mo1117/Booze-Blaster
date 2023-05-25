@@ -8,10 +8,8 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
@@ -19,14 +17,9 @@ import com.boozeblaster.generators.TaskGenerator
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.LightBackground
-import com.boozeblaster.utils.InjectorUtils
-import com.boozeblaster.viewmodels.PlayerViewModel
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val playerViewModel: PlayerViewModel =
-        viewModel(factory = InjectorUtils.providePlayerViewModelFactory(context = LocalContext.current))
-    //TODO: is playerViewModel needed here?
     val scaffoldState = rememberScaffoldState()
 
     Scaffold(
@@ -53,7 +46,7 @@ fun HomeScreenContent(
     val p1 = Player(name = "Mo", birthDate = "egal")
     val p2 = Player(2, "Mo2", "egal")
     val p3 = Player(3, "Mo3", "egal")
-    Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 3), false)
+    Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 1), false)
 
     Surface(
         modifier = modifier

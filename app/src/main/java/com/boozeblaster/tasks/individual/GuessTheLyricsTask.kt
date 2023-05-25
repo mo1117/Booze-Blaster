@@ -39,29 +39,24 @@ class GuessTheLyricsTask(
         }
     }
 
-    private var subTaskCounter by mutableStateOf(0)
-
     @Composable
     override fun Display(callback: () -> Unit) {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth(fraction = 1f)
-                .fillMaxHeight(fraction = 1f)
+        var subTaskCounter by remember {
+            mutableStateOf(0)
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
-            ) {
-                subTasks.get(subTaskCounter).DisplayContent(
-                    player = player,
-                    callback = {
-                        if (subTaskCounter == 2) {
-                            callback()
-                        } else {
-                            subTaskCounter++
-                        }
-                    })
-            }
+            subTasks.get(subTaskCounter).DisplayContent(
+                player = player,
+                callback = {
+                    if (subTaskCounter == 2) {
+                        callback()
+                    } else {
+                        subTaskCounter++
+                    }
+                })
         }
     }
 }

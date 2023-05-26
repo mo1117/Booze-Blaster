@@ -15,9 +15,7 @@ import com.boozeblaster.models.Player
 abstract class IndividualTask(
     player: Player,
     subTasks: List<MiniGame>
-) : Task(
-    subTasks = subTasks
-) {
+) : Task() {
     @Composable
     abstract override fun Display(callback: () -> Unit)
 

@@ -8,11 +8,13 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.generators.TaskGenerator
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
@@ -31,7 +33,8 @@ fun HomeScreen(navController: NavController) {
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             onStartClicked = { navController.navigate(route = Screen.GameScreen.route) },
-            onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) }
+            onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
+            onTutorialClicked = { navController.navigate(route = Screen.TutorialScreen.route) }
         )
     }
 }
@@ -40,13 +43,19 @@ fun HomeScreen(navController: NavController) {
 fun HomeScreenContent(
     modifier: Modifier,
     onStartClicked: () -> Unit,
-    onAddPlayerClicked: () -> Unit
+    onAddPlayerClicked: () -> Unit,
+    onTutorialClicked: () -> Unit
 ) {
 
     val p1 = Player(name = "Mo", birthDate = "egal")
     val p2 = Player(2, "Mo2", "egal")
     val p3 = Player(3, "Mo3", "egal")
-    Game.init(listOf(p1,p2,p3), TaskGenerator.generateTasks(listOf(p1,p2,p3), 1), false)
+    Game.init(
+        listOf(p1, p2, p3),
+        TaskGenerator.generateTasks(listOf(p1, p2, p3), 1),
+        Difficulty.MEDIUM,
+        false
+    )
 
     Surface(
         modifier = modifier
@@ -63,6 +72,7 @@ fun HomeScreenContent(
                 .size(width = 150.dp, height = 75.dp)
             val fontSize = 16
             val fontFamily = FontFamily.SansSerif
+            val buttonColor = Color.Red
 
             Spacer(
                 modifier = modifier.size(size = 100.dp) //TODO Maybe use percentual layouts?
@@ -72,7 +82,8 @@ fun HomeScreenContent(
                 onClick = { onStartClicked() },
                 text = "Start",
                 fontSize = fontSize,
-                fontFamily = fontFamily
+                fontFamily = fontFamily,
+                color = buttonColor
             )
             Spacer(
                 modifier = modifier.size(size = 100.dp)
@@ -82,10 +93,19 @@ fun HomeScreenContent(
                 onClick = { onAddPlayerClicked() },
                 text = "Add Player",
                 fontSize = fontSize,
-                fontFamily = fontFamily
+                fontFamily = fontFamily,
+                color = buttonColor
             )
             Spacer(
                 modifier = modifier.size(size = 100.dp)
+            )
+            SimpleButton(
+                modifier = buttonModifier,
+                onClick = { onTutorialClicked() },
+                text = "How To Play",
+                fontSize = fontSize,
+                fontFamily = fontFamily,
+                color = buttonColor
             )
         }
     }

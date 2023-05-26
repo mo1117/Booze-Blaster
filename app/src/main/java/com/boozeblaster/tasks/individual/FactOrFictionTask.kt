@@ -43,7 +43,7 @@ class FactOrFictionTask(
             ) {
                 Text(text = player.getName())
                 Spacer(Modifier.size(50.dp))
-                Text("GuessTheLyrics - Be aware of the timer")
+                Text("Fact or Fiction my guy")
             }
         }
     }

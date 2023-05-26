@@ -35,5 +35,9 @@ fun Navigation() {
         composable(route = Screen.GameOverScreen.route) {
             GameOverScreen(navController = navController)
         }
+        
+        composable(route = Screen.TutorialScreen.route) {
+            TutorialScreen(navController = navController)
+        }
     }
 }

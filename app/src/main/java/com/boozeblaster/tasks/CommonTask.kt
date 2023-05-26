@@ -5,9 +5,7 @@ import com.boozeblaster.minigames.MiniGame
 
 abstract class CommonTask(
     subTasks: List<MiniGame>
-) : Task(
-    subTasks = subTasks
-) {
+) : Task() {
     @Composable
     abstract override fun Display(callback: () -> Unit)
 

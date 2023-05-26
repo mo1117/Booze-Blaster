@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -97,7 +98,8 @@ fun StartGameScreenContent(
                 onClick = { onStartClicked() },
                 text = "Start",
                 fontSize = 20,
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
+                color = Color.Magenta
             )
         }
     }

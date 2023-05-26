@@ -8,6 +8,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -76,7 +77,8 @@ fun GameOverScreenContent(
                 },
                 text = "Play Again",
                 fontSize = 20,
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
+                color = Color.Magenta
             )
         }
     }

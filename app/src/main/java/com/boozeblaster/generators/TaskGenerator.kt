@@ -4,6 +4,7 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.tasks.Task
+import com.boozeblaster.tasks.common.SipTransferTask
 import kotlin.random.Random
 
 /**
@@ -16,12 +17,12 @@ import kotlin.random.Random
 object TaskGenerator {
 
     private val INDIVIDUAL_TASKS = arrayOf("GuessTheLyrics", "FactOrFiction")
-    private val COMMON_TASKS = arrayOf("NeverHaveIEver", "WhoInThisRoom")
+    private val COMMON_TASKS = arrayOf("NeverHaveIEver", "WhoInThisRoom", "SetRule")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
         var tasks = listOf<Task>()
         for (round in 0 until rounds) {
-            tasks = tasks.plus(generateCommonTask())
+            tasks = tasks.plus(generateCommonTask(isLastRound = rounds - round == 1))
             for (i in players.indices) {
                 tasks = tasks.plus(generateIndividualTask(player = players.get(index = i)))
             }
@@ -59,9 +60,12 @@ object TaskGenerator {
 
     /**
      * Works similar to the method above
-     * @return CommonTask (Specific common task)
+     * @return CommonTask (Specific common task) - Or a SipTransferTask if we are in the last round
      */
-    private fun generateCommonTask(): CommonTask {
+    private fun generateCommonTask(isLastRound: Boolean): CommonTask {
+        if (isLastRound) {
+            return SipTransferTask(subTasks = emptyList())
+        }
         val random = Random.nextInt(from = 0, until = COMMON_TASKS.size)
         val game = COMMON_TASKS[random]
 

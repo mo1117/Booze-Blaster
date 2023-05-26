@@ -10,10 +10,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
-import com.boozeblaster.ui.theme.*
-import com.boozeblaster.viewmodels.PlayerViewModel
+import com.boozeblaster.ui.theme.DarkAppBar
+import com.boozeblaster.ui.theme.DarkFontColor
+import com.boozeblaster.ui.theme.LightAppBar
+import com.boozeblaster.ui.theme.LightFontColor
 import kotlin.system.exitProcess
 
 @Composable

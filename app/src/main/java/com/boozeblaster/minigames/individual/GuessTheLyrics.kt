@@ -1,15 +1,15 @@
 package com.boozeblaster.minigames.individual
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
+import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 
 class GuessTheLyrics(
@@ -18,7 +18,6 @@ class GuessTheLyrics(
     private val lyrics: String,
     private val lyricsCompletion: String,
 ) : MiniGame {
-
     /**
      * We want to trigger recomposition whenever the "Show Solution" Button gets clicked
      *
@@ -34,13 +33,13 @@ class GuessTheLyrics(
             showSolution = false
         }
 
-        Spacer(modifier = Modifier.size(size = 50.dp))
-        Text(text = this.songName)
-        Spacer(modifier = Modifier.size(size = 50.dp))
-        Text(text = this.artist)
-        Spacer(modifier = Modifier.size(size = 50.dp))
-        Text(text = this.lyrics)
-        Spacer(modifier = Modifier.size(size = 50.dp))
+        SimpleSpacer(size = 50)
+        SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = FontFamily.SansSerif)
+        SimpleSpacer(size = 50)
+        SimpleTextDisplay(text = this.artist, fontSize = 32, fontFamily = FontFamily.SansSerif)
+        SimpleSpacer(size = 50)
+        SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = FontFamily.SansSerif)
+        SimpleSpacer(size = 50)
         if (!showSolution) {
             SimpleButton(
                 modifier = Modifier,
@@ -49,16 +48,32 @@ class GuessTheLyrics(
                 },
                 text = "Show Solution",
                 fontSize = 16,
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
+                color = Color.Blue
             )
-        }
-        Spacer(modifier = Modifier.size(size = 50.dp))
-        if (showSolution) {
-            Text(text = this.lyricsCompletion)
-            Spacer(modifier = Modifier.size(size = 50.dp))
-        }
-        if (showSolution) {
+        } else {
+            SimpleSpacer(size = 50)
+            if (showSolution) {
+                SimpleTextDisplay(
+                    text = this.lyricsCompletion,
+                    fontSize = 28,
+                    fontFamily = FontFamily.SansSerif
+                )
+                SimpleSpacer(size = 50)
+            }
             Row {
+                SimpleButton(
+                    modifier = Modifier,
+                    onClick = {
+                        player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
+                        callback()
+                    },
+                    text = "Wrong",
+                    fontSize = 16,
+                    fontFamily = FontFamily.SansSerif,
+                    color = Color.Red
+                )
+                SimpleSpacer(size = 50)
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
@@ -67,21 +82,10 @@ class GuessTheLyrics(
                     },
                     text = "Right",
                     fontSize = 16,
-                    fontFamily = FontFamily.SansSerif
-                )
-                Spacer(modifier = Modifier.size(size = 50.dp))
-                SimpleButton(
-                    modifier = Modifier,
-                    onClick = {
-                        player!!.addSips(sips = 2) //TODO hardcore drink mode more sips than 2
-                        callback()
-                    },
-                    text = "Wrong",
-                    fontSize = 16,
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = FontFamily.SansSerif,
+                    color = Color.Green
                 )
             }
         }
-
     }
 }

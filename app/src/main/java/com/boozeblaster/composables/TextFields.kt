@@ -7,8 +7,11 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun SimpleTextField(
@@ -43,6 +46,16 @@ fun SimpleTextField(
 }
 
 @Composable
-fun SimpleTextDisplay() {
-
+fun SimpleTextDisplay(
+    text: String,
+    fontSize: Int,
+    fontFamily: FontFamily
+) {
+    Text(
+        text = text,
+        fontSize = fontSize.sp,
+        fontFamily = fontFamily,
+        softWrap = true,
+        textAlign = TextAlign.Center
+    )
 }

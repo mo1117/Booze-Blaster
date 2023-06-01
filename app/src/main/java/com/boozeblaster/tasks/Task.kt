@@ -1,8 +1,10 @@
 package com.boozeblaster.tasks
 
+import android.content.Context
 import androidx.compose.runtime.*
-import com.boozeblaster.minigames.MiniGame
+import androidx.compose.ui.platform.LocalContext
 import com.boozeblaster.models.Player
+import kotlinx.coroutines.launch
 
 /**
  * The base class representing a Task

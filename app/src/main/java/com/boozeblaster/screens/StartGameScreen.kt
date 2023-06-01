@@ -17,7 +17,9 @@ import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.models.Player
+import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
@@ -36,7 +38,8 @@ fun StartGameScreen(navController: NavController) {
         scaffoldState = scaffoldState,
         topBar = {
             SimpleTopAppBar(
-                onBackButtonClick = { navController.popBackStack() })
+                onBackButtonClick = { navController.popBackStack() }
+            )
         }
     ) { paddingValues ->
         StartGameScreenContent(
@@ -69,7 +72,9 @@ fun StartGameScreenContent(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
-            modifier = modifier.background(color = LightBackground) // TODO darkmode
+            modifier = modifier.background(
+                color = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+            )
         ) {
             Button(
                 onClick = { onAddPlayerClicked() }, colors = ButtonDefaults.buttonColors(
@@ -79,13 +84,12 @@ fun StartGameScreenContent(
                 Image(
                     painter = painterResource(id = R.drawable.add_player),
                     contentDescription = "Add Player",
-                    modifier = modifier.background(color = LightBackground)
+                    modifier = modifier.background(
+                        color = if (DarkmodeController.isDarkmode())
+                            DarkBackGround else LightBackground
+                    )
                 )
             }
-
-            //Test
-//            val savedPlayers = getSavedPlayers()
-
 
             //TODO Here we need to instantiate our singleton Game object
             //TODO Create a list of tasks and use the generators to generate the subtasks

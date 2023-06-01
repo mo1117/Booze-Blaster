@@ -12,6 +12,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.boozeblaster.controllers.DarkmodeController
+import com.boozeblaster.ui.theme.DarkFontColor
+import com.boozeblaster.ui.theme.LightFontColor
 
 @Composable
 fun SimpleTextField(
@@ -56,6 +59,7 @@ fun SimpleTextDisplay(
         fontSize = fontSize.sp,
         fontFamily = fontFamily,
         softWrap = true,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
+        color = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
     )
 }

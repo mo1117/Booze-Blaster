@@ -14,10 +14,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.generators.TaskGenerator
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
 
 @Composable
@@ -28,11 +31,12 @@ fun HomeScreen(navController: NavController) {
         scaffoldState = scaffoldState,
         topBar = {
             HomeTopAppBar()
-        }
+        },
+        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
     ) { paddingValues ->
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            onStartClicked = { navController.navigate(route = Screen.GameScreen.route) },
+            onStartClicked = { navController.navigate(route = Screen.StartGameScreen.route) },
             onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
             onTutorialClicked = { navController.navigate(route = Screen.TutorialScreen.route) }
         )
@@ -65,21 +69,23 @@ fun HomeScreenContent(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
-            modifier = modifier.background(color = LightBackground) // TODO darkmode
+            modifier = modifier.background(
+                color = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+            )
         ) {
             // Change button specifications here as we want them to look consistent
             val buttonModifier = Modifier
                 .size(width = 150.dp, height = 75.dp)
             val fontSize = 16
             val fontFamily = FontFamily.SansSerif
-            val buttonColor = Color.Red
+            val buttonColor = Color.Cyan
 
-            Spacer(
-                modifier = modifier.size(size = 100.dp) //TODO Maybe use percentual layouts?
-            )
+            SimpleSpacer(size = 100)
             SimpleButton(
                 modifier = buttonModifier,
-                onClick = { onStartClicked() },
+                onClick = {
+                    onStartClicked()
+                },
                 text = "Start",
                 fontSize = fontSize,
                 fontFamily = fontFamily,

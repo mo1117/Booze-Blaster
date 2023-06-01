@@ -10,9 +10,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.models.Game
 import com.boozeblaster.tasks.Task
+import com.boozeblaster.ui.theme.DarkBackGround
+import com.boozeblaster.ui.theme.LightBackground
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun GameScreen(navController: NavController = rememberNavController()) {
@@ -31,8 +36,10 @@ fun GameScreen(navController: NavController = rememberNavController()) {
             //TODO When the back button gets clicked in-game we ask for confirmation to leave
             SimpleTopAppBar(onBackButtonClick = {
                 navController.popBackStack()
+                navController.popBackStack()
             })
-        }
+        },
+        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
     ) { paddingValues ->
         GameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -51,6 +58,8 @@ fun GameScreenContent(
     tasks: List<Task>,
     gameFinished: () -> Unit
 ) {
+
+   val coroutineScope = rememberCoroutineScope()
     var taskCounter by remember {
         mutableStateOf(value = 0)
     }
@@ -61,12 +70,18 @@ fun GameScreenContent(
             .fillMaxHeight(fraction = 1f)
             .fillMaxWidth(fraction = 1f)
     ) {
-        currentTask.DisplayTask(callback = {
-            if (taskCounter + 1 == tasks.size) {
-                gameFinished()
-            } else {
-                taskCounter++
+        currentTask.DisplayTask(
+            callback = {
+                if (taskCounter + 1 == tasks.size) {
+                    gameFinished()
+                } else {
+                    coroutineScope.launch {
+                        //TODO somehow add delays so no more "bugs" when loading content
+                        taskCounter++
+                        delay(timeMillis = 100)
+                    }
+                }
             }
-        })
+        )
     }
 }

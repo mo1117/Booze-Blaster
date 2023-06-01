@@ -1,5 +1,6 @@
 package com.boozeblaster.tasks.individual
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
@@ -8,9 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.minigames.individual.GuessTheLyrics
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
+import com.boozeblaster.ui.theme.DarkBackGround
+import com.boozeblaster.ui.theme.LightBackground
 
 class GuessTheLyricsTask(
     private val player: Player,
@@ -30,7 +34,11 @@ class GuessTheLyricsTask(
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier.background(
+                    color = if (DarkmodeController.isDarkmode())
+                        DarkBackGround else LightBackground
+                )
             ) {
                 Text(text = player.getName())
                 Spacer(Modifier.size(50.dp))
@@ -46,7 +54,11 @@ class GuessTheLyricsTask(
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.Top,
+            modifier = Modifier.background(
+                color = if (DarkmodeController.isDarkmode())
+                    DarkBackGround else LightBackground
+            )
         ) {
             subTasks.get(subTaskCounter).DisplayContent(
                 player = player,

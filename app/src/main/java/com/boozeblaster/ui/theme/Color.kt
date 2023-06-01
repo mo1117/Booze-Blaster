@@ -8,9 +8,9 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
 //TODO Adjust colors, they look a bit crappy
-val DarkAppBar = Color(0xFF4E422A)
-val DarkBackGround = Color(0xFF305038)
+val DarkAppBar = Color(0xFF2B2926)
+val DarkBackGround = Color(0xFF004D40)
 val DarkFontColor = Color.White
-val LightAppBar = Color(0xFFD5CC1E)
-val LightBackground = Color(0x4AC52EB1)
+val LightAppBar = Color(0xFF84FFFF)
+val LightBackground = Color(0xFFFFFF8D)
 val LightFontColor = Color.Black

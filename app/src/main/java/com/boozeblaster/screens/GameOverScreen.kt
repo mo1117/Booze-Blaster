@@ -27,7 +27,10 @@ fun GameOverScreen(navController: NavController) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            SimpleTopAppBar(onBackButtonClick = { navController.popBackStack() })
+            SimpleTopAppBar(onBackButtonClick = {
+                navController.popBackStack()
+                navController.popBackStack()
+            })
         }
     ) { paddingValues ->
         GameOverScreenContent(
@@ -46,7 +49,7 @@ fun GameOverScreenContent(
     modifier: Modifier,
     playAgain: () -> Unit
 ) {
-    // Filter the list of players by their points
+    // Sort the list of players by their points
     val players = Game.getInstance().getPlayers()
         .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
     Surface(
@@ -68,7 +71,7 @@ fun GameOverScreenContent(
                 Spacer(modifier = modifier.size(50.dp))
                 Text(text = "Sips")
             }
-            for (player in players) {
+            for (player in players) { //TODO wrong order?
                 Row {
                     Text(text = "${player.getName()}")
                     Spacer(modifier = modifier.size(50.dp))

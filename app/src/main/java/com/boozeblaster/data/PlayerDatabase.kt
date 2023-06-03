@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.boozeblaster.models.Player
+import com.boozeblaster.utils.CustomConverters
 
 /**
  * The database for the Player(s)
@@ -14,10 +16,11 @@ import com.boozeblaster.models.Player
  */
 @Database(
     entities = [Player::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 
+@TypeConverters(CustomConverters::class)
 abstract class PlayerDatabase : RoomDatabase() {
     abstract fun playerDao(): PlayerDao
 

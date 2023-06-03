@@ -1,9 +1,18 @@
 package com.boozeblaster.minigames
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.models.Player
 
-interface MiniGame {
+abstract class MiniGame {
+
+    protected val fontSize = 16
+    protected val fontFamily = FontFamily.SansSerif
+
+    protected var points = 0
+    protected var sips = 0
+    protected var showDialog = false
+
     /**
      * Every type of MiniGame needs to implement the DisplayContent method
      *
@@ -11,5 +20,5 @@ interface MiniGame {
      * MiniGame
      */
     @Composable
-    fun DisplayContent(player: Player?, callback: () -> Unit)
+    abstract fun DisplayContent(player: Player?, callback: () -> Unit)
 }

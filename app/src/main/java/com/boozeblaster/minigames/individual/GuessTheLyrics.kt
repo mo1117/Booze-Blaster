@@ -5,6 +5,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import com.boozeblaster.composables.PointsOrSipsDialog
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
@@ -17,34 +18,40 @@ class GuessTheLyrics(
     private val artist: String,
     private val lyrics: String,
     private val lyricsCompletion: String,
-) : MiniGame {
+) : MiniGame() {
+
     /**
      * We want to trigger recomposition whenever the "Show Solution" Button gets clicked
-     *
-     * LaunchedEffect() helps to avoid remembering the showSolution variable's value on each
-     * (re)composition
      */
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit) {
+
+        // Whether or not we want to show the solution
         var showSolution by remember {
-            mutableStateOf(false)
+            mutableStateOf(value = false)
         }
-        LaunchedEffect(key1 = this) {
-            showSolution = false
+
+        // Disable both "Right" and "Wrong" buttons after first click - otherwise a user could
+        // spam the button to gain more points
+        var buttonClicked by remember {
+            mutableStateOf(value = false)
         }
 
         SimpleSpacer(size = 50)
-        SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = FontFamily.SansSerif)
+        SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = fontFamily)
         SimpleSpacer(size = 50)
-        SimpleTextDisplay(text = this.artist, fontSize = 32, fontFamily = FontFamily.SansSerif)
+        SimpleTextDisplay(text = this.artist, fontSize = 32, fontFamily = fontFamily)
         SimpleSpacer(size = 50)
-        SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = FontFamily.SansSerif)
+        SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = fontFamily)
         SimpleSpacer(size = 50)
+
         if (!showSolution) {
+
+            // Show Solution Button
             SimpleButton(
                 modifier = Modifier,
                 onClick = {
-                    showSolution = !showSolution
+                    showSolution = true
                 },
                 text = "Show Solution",
                 fontSize = 16,
@@ -52,40 +59,57 @@ class GuessTheLyrics(
                 color = Color.Blue
             )
         } else {
+            SimpleTextDisplay(
+                text = this.lyricsCompletion,
+                fontSize = 28,
+                fontFamily = FontFamily.SansSerif
+            )
             SimpleSpacer(size = 50)
-            if (showSolution) {
-                SimpleTextDisplay(
-                    text = this.lyricsCompletion,
-                    fontSize = 28,
-                    fontFamily = FontFamily.SansSerif
-                )
-                SimpleSpacer(size = 50)
-            }
             Row {
+
+                // "Wrong" Button
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
+                        sips = 2 * Game.getInstance().getSipMultiplier()
                         player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
-                        callback()
+                        showDialog = true
+                        buttonClicked = true
                     },
                     text = "Wrong",
                     fontSize = 16,
                     fontFamily = FontFamily.SansSerif,
-                    color = Color.Red
+                    color = Color.Red,
+                    enabled = !buttonClicked
                 )
                 SimpleSpacer(size = 50)
+
+                // "Right" Button
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
+                        points = 1
                         player!!.addPoints(points = 1)
-                        callback()
+                        showDialog = true
+                        buttonClicked = true
                     },
                     text = "Right",
                     fontSize = 16,
                     fontFamily = FontFamily.SansSerif,
-                    color = Color.Green
+                    color = Color.Green,
+                    enabled = !buttonClicked
                 )
             }
+        }
+
+        // Show dialog that tells the player if they were correct
+        if (showDialog) {
+            PointsOrSipsDialog(points = points, sips = sips, callback = {
+                showSolution = false
+                buttonClicked = false
+                showDialog = false
+                callback()
+            })
         }
     }
 }

@@ -72,7 +72,12 @@ class FactOrFictionTask(
             subTasks.get(index = subTaskCounter).DisplayContent(
                 player = player,
                 callback = {
-                    if (subTaskCounter == 2) callback() else subTaskCounter++
+                    if (subTaskCounter == subTasks.size - 1) {
+                        subTaskCounter = 0
+                        callback()
+                    } else {
+                        subTaskCounter++
+                    }
                 })
         }
     }

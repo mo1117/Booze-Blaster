@@ -8,12 +8,8 @@ import com.boozeblaster.models.Game
 class WhoInThisRoomGenerator : MiniGameGenerator() {
 
     override fun getList(): List<MiniGame> {
-        val list = if (Game.getInstance().isAdultMode()) {
-            adultModeList
-        } else {
-            normalList
-        }
-        return super.getList(list = list)
+        val list = if (Game.getInstance().isAdultMode()) adultModeList else normalList
+        return super.getList(list = list, amount = 4)
     }
 
     /**

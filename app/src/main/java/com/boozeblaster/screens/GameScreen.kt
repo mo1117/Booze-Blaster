@@ -10,25 +10,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.models.Game
-import com.boozeblaster.tasks.Task
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @Composable
 fun GameScreen(navController: NavController = rememberNavController()) {
-    val game = Game.getInstance() // Singleton instance
-    val tasks = game.getTasks()
+    val game = Game.getInstance()
     val scaffoldState = rememberScaffoldState()
-
-    if (tasks.isEmpty()) {
-        //TODO If the tasks are empty, something went wrong - we might want to alert the user here
-        navController.popBackStack()
-    }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -43,7 +34,7 @@ fun GameScreen(navController: NavController = rememberNavController()) {
     ) { paddingValues ->
         GameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            tasks = tasks,
+            game = game,
             gameFinished = {
                 navController.popBackStack()
                 navController.navigate(route = Screen.GameOverScreen.route)
@@ -55,31 +46,37 @@ fun GameScreen(navController: NavController = rememberNavController()) {
 @Composable
 fun GameScreenContent(
     modifier: Modifier,
-    tasks: List<Task>,
+    game: Game,
     gameFinished: () -> Unit
 ) {
 
-   val coroutineScope = rememberCoroutineScope()
     var taskCounter by remember {
         mutableStateOf(value = 0)
     }
-    val currentTask = tasks.get(index = taskCounter)
+    val currentTask = game.getTask(index = taskCounter)
+
+    var daresAdded by remember {
+        mutableStateOf(value = false)
+    }
 
     Surface(
         modifier = modifier
             .fillMaxHeight(fraction = 1f)
             .fillMaxWidth(fraction = 1f)
     ) {
+
         currentTask.DisplayTask(
             callback = {
-                if (taskCounter + 1 == tasks.size) {
-                    gameFinished()
-                } else {
-                    coroutineScope.launch {
-                        //TODO somehow add delays so no more "bugs" when loading content
+                if (taskCounter + 1 == game.getTasks().size) {
+                    if (!daresAdded) {
+                        game.appendDareTasks()
+                        daresAdded = true
                         taskCounter++
-                        delay(timeMillis = 100)
+                    } else {
+                        gameFinished()
                     }
+                } else {
+                    taskCounter++
                 }
             }
         )

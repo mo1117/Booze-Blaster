@@ -1,24 +1,29 @@
-package com.boozeblaster.tasks.common
+package com.boozeblaster.tasks.individual
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.controllers.DarkmodeController
-import com.boozeblaster.minigames.common.NeverHaveIEver
-import com.boozeblaster.tasks.CommonTask
+import com.boozeblaster.minigames.individual.Dare
+import com.boozeblaster.models.Player
+import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import kotlinx.coroutines.delay
 
-class NeverHaveIEverTask(
-    private val subTasks: List<NeverHaveIEver>
-) : CommonTask(
-    subTasks = subTasks
+class DareTask(
+    private val player: Player
+) : IndividualTask(
+    player = player,
+    subTasks = emptyList()
 ) {
 
     @Composable
@@ -37,21 +42,22 @@ class NeverHaveIEverTask(
                         DarkBackGround else LightBackground
                 )
             ) {
-                Text(text = "NeverHaveIEver")
-                Spacer(Modifier.size(50.dp))
+                SimpleTextDisplay(
+                    text = "$player\n\nYou lost!\nTime to complete your dare!",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
             }
         }
     }
 
     @Composable
     override fun Display(callback: () -> Unit) {
-        var subTaskCounter by remember {
-            mutableStateOf(0)
-        }
         Surface(
             modifier = Modifier
-                .fillMaxWidth(fraction = 1f)
                 .fillMaxHeight(fraction = 1f)
+                .fillMaxWidth(fraction = 1f)
+                .clickable(onClick = { callback() })
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,16 +67,11 @@ class NeverHaveIEverTask(
                         DarkBackGround else LightBackground
                 )
             ) {
-                subTasks.get(index = subTaskCounter).DisplayContent(
-                    player = null,
-                    callback = {
-                        if (subTaskCounter == subTasks.size - 1) {
-                            subTaskCounter = 0
-                            callback()
-                        } else {
-                            subTaskCounter++
-                        }
-                    })
+                SimpleTextDisplay(
+                    text = "${player.getName()}\n\n${player.getDare()}",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
             }
         }
     }

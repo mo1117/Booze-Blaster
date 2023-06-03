@@ -1,4 +1,4 @@
-package com.boozeblaster.minigames.common
+package com.boozeblaster.minigames.individual
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,23 +11,14 @@ import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
 
-class WhoInThisRoom(
-    private val statement: String
+class Dare(
+    private val dare: String
 ) : MiniGame() {
+
+    override fun toString(): String = this.dare
 
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit) {
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight(fraction = 1f)
-                .fillMaxWidth(fraction = 1f)
-                .clickable(onClick = { callback() })
-        ) {
-            SimpleTextDisplay(
-                text = "Who in this room...\n$statement",
-                fontSize = super.fontSize,
-                fontFamily = super.fontFamily
-            )
-        }
+        // STUB
     }
 }

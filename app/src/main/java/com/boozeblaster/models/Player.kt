@@ -1,7 +1,10 @@
 package com.boozeblaster.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.boozeblaster.minigames.individual.Dare
+import java.util.Date
 
 /**
  * The class representing an instance of a player
@@ -9,15 +12,18 @@ import androidx.room.PrimaryKey
  * @property Entity We want to store players in our database persistent
  */
 @Entity
-class Player(
+data class Player(
     @PrimaryKey(autoGenerate = true)
     private val id: Int = 0,
     private var name: String,
-    private var birthDate: String
+    private var birthDate: Date
 ) {
 
-    private var dare: String = ""
+    @Ignore()
+    private var dare: Dare = Dare(dare = "")
+    @Ignore()
     private var points: Int = 0
+    @Ignore()
     private var sips: Int = 0
 
     fun getId(): Int = this.id
@@ -28,17 +34,17 @@ class Player(
 
     fun getName(): String = this.name
 
-    fun setBirthDate(birthDate: String) {
+    fun setBirthDate(birthDate: Date) {
         this.birthDate = birthDate
     }
 
-    fun getBirthDate(): String = this.birthDate
+    fun getBirthDate(): Date = this.birthDate
 
-    fun setDare(dare: String) {
+    fun setDare(dare: Dare) {
         this.dare = dare
     }
 
-    fun getDare(): String = this.dare
+    fun getDare(): Dare = this.dare
 
     fun setPoints(points: Int) {
         this.points = points

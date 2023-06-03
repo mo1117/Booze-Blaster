@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +16,7 @@ import com.boozeblaster.models.Game
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 class SetRuleTask(subTasks: List<SetRule> = emptyList()) : CommonTask(subTasks = emptyList()) {
@@ -45,9 +47,6 @@ class SetRuleTask(subTasks: List<SetRule> = emptyList()) : CommonTask(subTasks =
         }
     }
 
-    /**
-     * We do not display any content here - just invoke the callback() method instantly
-     */
     @Composable
     override fun Display(callback: () -> Unit) {
         callback()

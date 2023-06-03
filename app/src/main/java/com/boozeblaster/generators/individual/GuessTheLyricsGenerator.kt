@@ -6,7 +6,7 @@ import com.boozeblaster.minigames.individual.GuessTheLyrics
 
 class GuessTheLyricsGenerator : MiniGameGenerator() {
     override fun getList(): List<MiniGame> {
-        return super.getList(list = list)
+        return super.getList(list = list, amount = 3)
     }
 
     /**
@@ -219,6 +219,32 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
                 lyrics = "And it's time that we see it, the fire's dying out",
                 lyricsCompletion = "Can't believe that I say this, we're out of chances now"
             ),
+            GuessTheLyrics(
+                songName = "Viva La Vida",
+                artist = "Coldplay",
+                lyrics = "One minute I held the key",
+                lyricsCompletion = "Next the walls were closed on me"
+            ),
+            GuessTheLyrics(
+                songName = "Something I Need",
+                artist = "OneRepublic",
+                lyrics = "And I had the week that came from hell",
+                lyricsCompletion = "And yes I know that you could tell"
+            ),
+            GuessTheLyrics(
+                songName = "Hey Brother",
+                artist = "Avicii",
+                lyrics = "What if I lose it all?",
+                lyricsCompletion = "Oh sister, I will help you out"
+            ),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
             GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
         )
     }

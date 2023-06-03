@@ -1,10 +1,9 @@
 package com.boozeblaster.tasks
 
-import android.content.Context
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
-import com.boozeblaster.models.Player
-import kotlinx.coroutines.launch
+import androidx.compose.ui.text.font.FontFamily
+import com.boozeblaster.tasks.common.SetRuleTask
+import com.boozeblaster.tasks.common.SipTransferTask
 
 /**
  * The base class representing a Task
@@ -17,7 +16,9 @@ import kotlinx.coroutines.launch
  * @see CommonTask
  */
 abstract class Task {
-    private val maxPoints: Int = 4
+
+    protected val fontSize = 16
+    protected val fontFamily = FontFamily.SansSerif
 
     /**
      * This method handles displaying a certain Task
@@ -29,13 +30,19 @@ abstract class Task {
         var showCover by remember {
             mutableStateOf(true)
         }
-        LaunchedEffect(key1 = this) {
-            showCover = true
-        }
+
         if (showCover) {
             DisplayCover(onSurfaceClicked = { showCover = false })
         } else {
-            Display(callback = callback)
+            if (this is SetRuleTask || this is SipTransferTask) {
+                showCover = true
+                callback()
+            } else {
+                Display(callback = {
+                    showCover = true
+                    callback()
+                })
+            }
         }
     }
 
@@ -55,16 +62,4 @@ abstract class Task {
      */
     @Composable
     abstract fun Display(callback: () -> Unit)
-
-    fun addPoints(player: Player, points: Int) {
-        if (points > maxPoints) {
-            player.addPoints(points = maxPoints)
-        } else {
-            player.addPoints(points = points)
-        }
-    }
-
-    fun addSips(player: Player, sips: Int) {
-        player.addSips(sips = sips)
-    }
 }

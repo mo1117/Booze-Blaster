@@ -37,7 +37,7 @@ fun SimpleButton(
         },
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(color),
+        colors = ButtonDefaults.buttonColors(backgroundColor = color),
         shape = AbsoluteRoundedCornerShape(percent = 100)
     ) {
         SimpleTextDisplay(

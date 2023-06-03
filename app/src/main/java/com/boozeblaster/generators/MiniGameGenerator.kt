@@ -14,16 +14,21 @@ abstract class MiniGameGenerator {
 
     /**
      * Sub classes call this method by passing a list consisting of the specific mini game's instances
+     *
+     * This method is used to fill the subTasks lists of each Task
+     * @param list List of mini games
+     * @param amount How many mini games we want to generate (default = 3)
      */
-    fun getList(list: List<MiniGame>): List<MiniGame> {
+    fun getList(list: List<MiniGame>, amount: Int): List<MiniGame> {
         var randoms = arrayOf<Int>()
         var ret = listOf<MiniGame>()
         var counter = 0
+        var random: Int
 
-        while (counter < 3) {
-            val random = Random.nextInt(from = 0, until = list.size)
+        while (counter < amount) {
+            random = Random.nextInt(from = 0, until = list.size)
             if (random !in randoms) {
-                randoms += random
+                randoms = randoms.plus(element = random)
                 ret = ret.plus(list.get(index = random))
                 counter++
             }

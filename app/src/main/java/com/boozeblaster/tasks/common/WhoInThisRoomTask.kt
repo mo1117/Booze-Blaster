@@ -64,7 +64,8 @@ class WhoInThisRoomTask(
                 subTasks.get(subTaskCounter).DisplayContent(
                     player = null,
                     callback = {
-                        if (subTaskCounter == 2) {
+                        if (subTaskCounter == subTasks.size - 1) {
+                            subTaskCounter = 0
                             callback()
                         } else {
                             subTaskCounter++

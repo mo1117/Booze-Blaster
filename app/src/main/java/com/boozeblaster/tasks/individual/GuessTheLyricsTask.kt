@@ -60,10 +60,11 @@ class GuessTheLyricsTask(
                     DarkBackGround else LightBackground
             )
         ) {
-            subTasks.get(subTaskCounter).DisplayContent(
+            subTasks.get(index = subTaskCounter).DisplayContent(
                 player = player,
                 callback = {
-                    if (subTaskCounter == 2) {
+                    if (subTaskCounter == subTasks.size - 1) {
+                        subTaskCounter = 0
                         callback()
                     } else {
                         subTaskCounter++

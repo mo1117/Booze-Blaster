@@ -22,9 +22,10 @@ object TaskGenerator {
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
         var tasks = listOf<Task>()
         for (round in 0 until rounds) {
-            tasks = tasks.plus(generateCommonTask(isLastRound = rounds - round == 1))
+            tasks = tasks.plus(element = generateCommonTask(isLastRound = rounds - round == 1))
             for (i in players.indices) {
-                tasks = tasks.plus(generateIndividualTask(player = players.get(index = i)))
+                tasks =
+                    tasks.plus(element = generateIndividualTask(player = players.get(index = i)))
             }
         }
         return tasks

@@ -7,12 +7,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
 
 class NeverHaveIEver(
     private val statement: String
-) : MiniGame {
+) : MiniGame() {
 
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit) {
@@ -22,7 +23,11 @@ class NeverHaveIEver(
                 .fillMaxWidth(fraction = 1f)
                 .clickable(onClick = { callback() })
         ) {
-            Text(text = "Never Have I Ever...\n$statement")
+            SimpleTextDisplay(
+                text = "Never Have I Ever...\n\n",
+                fontSize = super.fontSize,
+                fontFamily = super.fontFamily
+            )
         }
     }
 }

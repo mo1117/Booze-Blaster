@@ -14,6 +14,7 @@ import com.boozeblaster.minigames.common.WhoInThisRoom
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.widgets.Timer
 
 class WhoInThisRoomTask(
     private val subTasks: List<WhoInThisRoom>
@@ -70,7 +71,7 @@ class WhoInThisRoomTask(
                         } else {
                             subTaskCounter++
                         }
-                    })
+                    }, timer = Timer.getInstance())
             }
         }
     }

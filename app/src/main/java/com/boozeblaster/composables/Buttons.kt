@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun SimpleButton(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     text: String,
     fontSize: Int,

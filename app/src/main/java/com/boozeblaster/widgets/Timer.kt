@@ -1,7 +1,7 @@
 package com.boozeblaster.widgets
 
-import androidx.compose.runtime.rememberCoroutineScope
-import java.util.Timer
+import android.os.CountDownTimer
+
 
 /**
  * Work in progress...
@@ -9,25 +9,40 @@ import java.util.Timer
  * Will see if this works
  */
 class Timer private constructor(
-    private val seconds: Int
-): Timer() {
+    private val millisInFuture: Long,
+    private val countDownInterval: Long,
+    private val onFinished: () -> Unit = { }
+) : CountDownTimer(millisInFuture, countDownInterval) {
     companion object {
         @Volatile
         private var INSTANCE: Timer? = null
 
         fun getInstance(): Timer {
-            if (INSTANCE == null) {
-                return Timer(seconds = 15)
-            }
+            checkInstance()
             return INSTANCE!! // Not-null assertion operator safe here
         }
 
-        fun init(seconds: Int) {
-            INSTANCE = Timer(seconds = seconds)
+        private fun checkInstance(millisInFuture: Long = 15000) {
+            if (INSTANCE == null) {
+                INSTANCE = Timer(millisInFuture = millisInFuture, countDownInterval = 1000)
+            }
         }
     }
 
-    fun start(seconds: Int) {
-        INSTANCE = Timer(seconds = seconds)
+    fun init(millisInFuture: Long, onFinished: () -> Unit) {
+        INSTANCE =
+            Timer(
+                millisInFuture = millisInFuture,
+                countDownInterval = 1000,
+                onFinished = onFinished
+            )
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+        println(millisUntilFinished)
+    }
+
+    override fun onFinish() {
+        this.onFinished()
     }
 }

@@ -52,6 +52,12 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
                 lyricsCompletion = "No one can save me, the damage is done"
             ),
             GuessTheLyrics(
+                songName = "I Want It That Way",
+                artist = "Backstreet Boys",
+                lyrics = "But we are two worlds apart",
+                lyricsCompletion = "Can't reach to your heart"
+            ),
+            GuessTheLyrics(
                 songName = "I Was Made For Lovin' You",
                 artist = "KISS",
                 lyrics = "And tonight I wanna lay it at your feet",
@@ -237,13 +243,66 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
                 lyrics = "What if I lose it all?",
                 lyricsCompletion = "Oh sister, I will help you out"
             ),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(
+                songName = "Blinding Lights",
+                artist = "The Weeknd",
+                lyrics = "I said, ooh, I'm drowning in the night",
+                lyricsCompletion = "Oh, when I'm like this, you're the one I trust"
+            ),
+            GuessTheLyrics(
+                songName = "Hollywood",
+                artist = "LA Vision, Gigi D'Agostino",
+                lyrics = "The dark is taking my mind",
+                lyricsCompletion = "Don't wanna leave you behind"
+            ),
+            GuessTheLyrics(
+                songName = "Watermelon Sugar",
+                artist = "Harry Styles",
+                lyrics = "I'm just thinking out loud",
+                lyricsCompletion = "I don't know if I could ever go without"
+            ),
+            GuessTheLyrics(
+                songName = "Do I Wanna Know?",
+                artist = "Arctic Monkeys",
+                lyrics = "That the nights were mainly made for sayin' things",
+                lyricsCompletion = "That you can't say tomorrow day"
+            ),
+            GuessTheLyrics(
+                songName = "The Nights",
+                artist = "Avicii",
+                lyrics = "\"When thunderclouds start pouring down\nLight a fire they can't put out",
+                lyricsCompletion = "Carve your name into those shining stars\""
+            ),
+            GuessTheLyrics(
+                songName = "Closer",
+                artist = "The Chainsmokers, Halsey",
+                lyrics = "You, look as good as the day I met you",
+                lyricsCompletion = "I forget just why I left you, I was insane"
+            ),
+            GuessTheLyrics(
+                songName = "Happier",
+                artist = "Marshmello, Bastille",
+                lyrics = "Then only for a minute\nI want to change my mind 'cause",
+                lyricsCompletion = "This just don't feel right to me"
+            ),
+            GuessTheLyrics(
+                songName = "Last Friday Night",
+                artist = "Katy Perry",
+                lyrics = "Yeah, we maxed our credit card cards and got kicked out of the bar",
+                lyricsCompletion = "So we hit the boulevard last Friday Night"
+            ),
+            GuessTheLyrics(
+                songName = "International Love",
+                artist = "Pitbull, Chris Brown",
+                lyrics = "In Romania, she pulled me to the side and told me",
+                lyricsCompletion = "\"Pit, you can have me and my sister\""
+            ),
+            GuessTheLyrics(
+                songName = "Summer Jam",
+                artist = "R.I.O, U-Jean",
+                lyrics = "Hot chicks, cool drinks make the summer jam",
+                lyricsCompletion = "We gonna party as much as we can"
+            ),
             GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
             GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
         )

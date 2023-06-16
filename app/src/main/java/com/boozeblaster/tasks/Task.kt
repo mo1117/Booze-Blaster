@@ -21,32 +21,6 @@ abstract class Task {
     protected val fontFamily = FontFamily.SansSerif
 
     /**
-     * This method handles displaying a certain Task
-     *
-     * @param callback Invoke this method to tell the GameScreen to load the next Task
-     */
-    @Composable
-    fun DisplayTask(callback: () -> Unit) {
-        var showCover by remember {
-            mutableStateOf(true)
-        }
-
-        if (showCover) {
-            DisplayCover(onSurfaceClicked = { showCover = false })
-        } else {
-            if (this is SetRuleTask || this is SipTransferTask) {
-                showCover = true
-                callback()
-            } else {
-                Display(callback = {
-                    showCover = true
-                    callback()
-                })
-            }
-        }
-    }
-
-    /**
      * This method is invoked before the Display() method
      *
      * Upon loading a new Task, we first display some information about the task that is to be
@@ -62,4 +36,39 @@ abstract class Task {
      */
     @Composable
     abstract fun Display(callback: () -> Unit)
+
+    /**
+     * This method handles displaying a certain Task
+     *
+     * @param callback Invoke this method to tell the GameScreen to load the next Task
+     */
+    @Composable
+    fun DisplayTask(callback: () -> Unit) {
+        var showCover by remember {
+            mutableStateOf(true)
+        }
+
+        if (showCover) {
+            DisplayCover(onSurfaceClicked = { showCover = false })
+        } else {
+            if (shouldDisplayOnlyCover(task = this)) {
+                showCover = true
+                callback()
+            } else {
+                Display(callback = {
+                    showCover = true
+                    callback()
+                })
+            }
+        }
+    }
+
+    /**
+     * For some tasks, we might only want to show the cover and no actual content
+     * @param task Task
+     * @return Whether we only want to show the cover for this task
+     */
+    private fun shouldDisplayOnlyCover(task: Task): Boolean {
+        return task is SetRuleTask || this is SipTransferTask
+    }
 }

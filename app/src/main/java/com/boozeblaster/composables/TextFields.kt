@@ -25,7 +25,7 @@ fun SimpleTextField(
     isError: Boolean,
     singleLine: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
-    onDone: () -> Unit,
+    onDone: () -> Unit = {},
     onChange: (String) -> Unit
 ) {
     OutlinedTextField(
@@ -44,7 +44,7 @@ fun SimpleTextField(
         )
     )
     if (isError) {
-        //TODO display error message?
+        SimpleTextDisplay(text = errorMsg, fontSize = 16, fontFamily = FontFamily.SansSerif)
     }
 }
 

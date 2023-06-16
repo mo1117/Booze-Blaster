@@ -5,6 +5,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import com.boozeblaster.composables.PointsOrSipsDialog
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
@@ -12,6 +13,7 @@ import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.widgets.Timer
 
 class GuessTheLyrics(
     private val songName: String,
@@ -20,12 +22,8 @@ class GuessTheLyrics(
     private val lyricsCompletion: String,
 ) : MiniGame() {
 
-    /**
-     * We want to trigger recomposition whenever the "Show Solution" Button gets clicked
-     */
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
-
+    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
         // Whether or not we want to show the solution
         var showSolution by remember {
             mutableStateOf(value = false)
@@ -36,6 +34,15 @@ class GuessTheLyrics(
         var buttonClicked by remember {
             mutableStateOf(value = false)
         }
+
+        timer.init(millisInFuture = 15000, onFinished = {
+            sips = 2 * Game.getInstance().getSipMultiplier()
+            player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
+            showSolution = true
+        })
+
+//        timer.cancel()
+//        timer.start()
 
         SimpleSpacer(size = 50)
         SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = fontFamily)

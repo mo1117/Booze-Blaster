@@ -1,6 +1,5 @@
 package com.boozeblaster.composables
 
-import android.content.Context
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -9,7 +8,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.ui.theme.DarkAppBar
@@ -51,7 +50,7 @@ fun HomeTopAppBar() {
             Switch(
                 checked = DarkmodeController.isDarkmode(),
                 onCheckedChange = {
-                    DarkmodeController.setDarkmode(darkmode = !DarkmodeController.isDarkmode())
+                    DarkmodeController.toggle()
                 })
         },
         modifier = Modifier.clip(
@@ -66,8 +65,6 @@ fun HomeTopAppBar() {
 
 @Composable
 fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
-    val sharedPreferences =
-        LocalContext.current.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
     TopAppBar(
         title = {
             Text(
@@ -90,7 +87,45 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
             Switch(
                 checked = DarkmodeController.isDarkmode(),
                 onCheckedChange = {
-                    DarkmodeController.setDarkmode(darkmode = !DarkmodeController.isDarkmode())
+                    DarkmodeController.toggle()
+                })
+        },
+        modifier = Modifier.clip(
+            shape = RoundedCornerShape(
+                bottomEnd = 10.dp,
+                bottomStart = 10.dp
+            )
+        ),
+        backgroundColor = if (DarkmodeController.isDarkmode()) DarkAppBar else LightAppBar
+    )
+}
+
+@Composable
+fun GameScreenAppBar(onBackButtonClick: () -> Unit) {
+    TopAppBar(
+        title = {},
+        navigationIcon = {
+            IconButton(onClick = {
+                onBackButtonClick()
+            }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "BackButton",
+                    tint = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
+                )
+            }
+        },
+        actions = {
+            SimpleTextDisplay(
+                text = "Round x / y",
+                fontSize = 16,
+                fontFamily = FontFamily.SansSerif
+            )
+            SimpleSpacer(size = 10)
+            Switch(
+                checked = DarkmodeController.isDarkmode(),
+                onCheckedChange = {
+                    DarkmodeController.toggle()
                 })
         },
         modifier = Modifier.clip(

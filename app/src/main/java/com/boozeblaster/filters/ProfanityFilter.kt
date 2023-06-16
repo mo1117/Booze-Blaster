@@ -2,6 +2,7 @@ package com.boozeblaster.filters
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.io.File
 
 /**
  * The ProfanityFilter is used to check if a username contains profanity
@@ -40,7 +41,8 @@ class ProfanityFilter {
                 return false
             } catch (e: Exception) {
                 for (curseWord in offlineList) {
-                    if (input.contains(other = curseWord, ignoreCase = true)) {
+                    // Do NOT use .contains Method or e.g. Assassin will be filtered xD
+                    if (input.equals(other = curseWord, ignoreCase = true)) {
                         return true
                     }
                 }
@@ -52,5 +54,15 @@ class ProfanityFilter {
          * Used to filter some bad words in case the API call throws and exception
          */
         private val offlineList = listOf("retard")
+
+        private fun loadOfflineList(): List<String> {
+            val list = arrayListOf<String>()
+            File("app/src/main/assets/bad_words.txt").forEachLine(
+                charset = Charsets.UTF_8,
+                action = {
+                    list.add(element = it)
+                })
+            return list
+        }
     }
 }

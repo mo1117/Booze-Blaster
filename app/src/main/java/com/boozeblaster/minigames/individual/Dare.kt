@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
+import com.boozeblaster.widgets.Timer
 
 class Dare(
     private val dare: String
@@ -18,7 +19,7 @@ class Dare(
     override fun toString(): String = this.dare
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
         // STUB
     }
 }

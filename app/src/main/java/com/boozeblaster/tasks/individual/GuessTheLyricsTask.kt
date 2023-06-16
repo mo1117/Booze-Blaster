@@ -15,6 +15,7 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.widgets.Timer
 
 class GuessTheLyricsTask(
     private val player: Player,
@@ -69,7 +70,7 @@ class GuessTheLyricsTask(
                     } else {
                         subTaskCounter++
                     }
-                })
+                }, timer = Timer.getInstance())
         }
     }
 }

@@ -15,7 +15,7 @@ class FactOrFictionGenerator : MiniGameGenerator() {
      */
     private companion object {
         private val list = listOf(
-            FactOrFiction(question = "Grass is blue", isCorrect = false),
+            FactOrFiction(question = "Some cats are allergic to people.", isCorrect = true),
             FactOrFiction(question = "Grass is red", isCorrect = false),
             FactOrFiction(question = "Grass is pink", isCorrect = false),
         )

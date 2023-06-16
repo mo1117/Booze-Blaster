@@ -31,7 +31,8 @@ fun GameOverScreen(navController: NavController) {
                 navController.popBackStack()
                 navController.popBackStack()
             })
-        }
+        },
+        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
     ) { paddingValues ->
         GameOverScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -51,7 +52,8 @@ fun GameOverScreenContent(
 ) {
     // Sort the list of players by their points
     val players = Game.getInstance().getPlayers()
-        .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
+        .sortedByDescending(selector = { player -> player.getPoints() })
+//        .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
     Surface(
         modifier = modifier
             .fillMaxWidth(fraction = 1f)

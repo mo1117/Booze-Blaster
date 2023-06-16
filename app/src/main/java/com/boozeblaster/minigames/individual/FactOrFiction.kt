@@ -19,6 +19,7 @@ import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.widgets.Timer
 
 class FactOrFiction(
     private val question: String,
@@ -26,7 +27,7 @@ class FactOrFiction(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
 
         // Disable both "Right" and "Wrong" buttons after first click - otherwise a user could
         // spam the button to gain more points

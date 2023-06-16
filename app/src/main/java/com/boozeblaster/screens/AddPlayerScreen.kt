@@ -18,7 +18,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.composables.SimpleTextField
 import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.models.Player
+import com.boozeblaster.ui.theme.DarkBackGround
+import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
 import java.util.*
@@ -35,12 +38,16 @@ fun AddPlayerScreen(navController: NavController = rememberNavController()) {
             SimpleTopAppBar(
                 onBackButtonClick = { navController.popBackStack() }
             )
-        }
+        },
+        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
     ) { paddingValues ->
         AddPlayerScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
+            playerUIState = playerViewModel.playerUIState,
             onAddPlayerClicked = { playerViewModel::addPlayer },
-            onStartClicked = { }
+            onPlayerValueChange = { newUiState, event ->
+                playerViewModel.updateUIState(newUiState, event)
+            }
         )
     }
 }
@@ -48,8 +55,9 @@ fun AddPlayerScreen(navController: NavController = rememberNavController()) {
 @Composable
 fun AddPlayerScreenContent(
     modifier: Modifier,
+    playerUIState: AddPlayerUIState,
     onAddPlayerClicked: (Player) -> Unit,
-    onStartClicked: () -> Unit
+    onPlayerValueChange: (AddPlayerUIState, AddPlayerUIEvent) -> Unit
 ) {
     Surface(
         modifier = modifier
@@ -62,11 +70,16 @@ fun AddPlayerScreenContent(
         ) {
             SimpleTextField(
                 modifier = Modifier,
-                value = "",
+                value = playerUIState.userName,
                 label = "Name:",
-                isError = true,
-                onDone = { /*TODO*/ },
-                onChange = {}
+                isError = playerUIState.nameError,
+                errorMsg = "Invalid Name",
+                onChange = { input ->
+                    onPlayerValueChange(
+                        playerUIState.copy(userName = input),
+                        AddPlayerUIEvent.UsernameChanged
+                    )
+                }
             )
 
 //            val calendar = Calendar.getInstance()

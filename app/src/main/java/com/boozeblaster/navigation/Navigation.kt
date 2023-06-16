@@ -39,5 +39,9 @@ fun Navigation() {
         composable(route = Screen.TutorialScreen.route) {
             TutorialScreen(navController = navController)
         }
+
+        composable(route = Screen.DifficultyPickerScreen.route) {
+            DifficultyPickerScreen(navController = navController)
+        }
     }
 }

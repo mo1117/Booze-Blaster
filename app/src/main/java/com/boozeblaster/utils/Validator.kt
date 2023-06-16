@@ -1,20 +1,22 @@
 package com.boozeblaster.utils
 
+import com.boozeblaster.filters.ProfanityFilter
+import java.util.*
+
 object Validator {
 
-    fun validateUsername(name: String): ValidationResult {
-        if (name.length < 2) {
+    fun validateUsername(username: String): ValidationResult {
+        if (username.length < 2 || username.length > 15 || ProfanityFilter.containsProfanity(input = username)) {
             return ValidationResult(success = false)
         }
         return ValidationResult(success = true)
     }
 
-    fun validateBirthdate(): ValidationResult {
+    fun validateBirthdate(birthDate: Date): ValidationResult {
         return ValidationResult(false)
     }
-
 }
 
 data class ValidationResult(
-    private val success: Boolean
+    val success: Boolean
 )

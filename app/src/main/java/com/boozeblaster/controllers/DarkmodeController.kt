@@ -28,10 +28,16 @@ class DarkmodeController private constructor(
             return false
         }
 
-        fun setDarkmode(darkmode: Boolean) {
+        /**
+         * Changes the current darkmode settings
+         *
+         * On -> Off and vice versa
+         */
+        fun toggle() {
             if (INSTANCE != null) {
-                INSTANCE!!.darkmode = darkmode
-                INSTANCE!!.editor.putBoolean("dark_mode", darkmode)
+                val darkMode = !isDarkmode()
+                INSTANCE!!.darkmode = darkMode
+                INSTANCE!!.editor.putBoolean("dark_mode", darkMode)
                 INSTANCE!!.editor.apply()
             }
         }

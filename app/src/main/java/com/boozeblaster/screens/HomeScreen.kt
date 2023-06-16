@@ -6,8 +6,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,6 +15,7 @@ import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
@@ -52,21 +51,6 @@ fun HomeScreenContent(
     onAddPlayerClicked: () -> Unit,
     onTutorialClicked: () -> Unit
 ) {
-
-    val calendar = GregorianCalendar()
-    calendar.set(2000, 11, 17)
-    val date = calendar.gregorianChange
-
-    val p1 = Player(name = "Mo", birthDate = date)
-    val p2 = Player(2, "Mo2", date)
-    val p3 = Player(3, "Mo3", date)
-
-    Game.init(
-        listOf(p1, p2, p3),
-        1,
-        Difficulty.MEDIUM,
-        false
-    )
 
     Surface(
         modifier = modifier

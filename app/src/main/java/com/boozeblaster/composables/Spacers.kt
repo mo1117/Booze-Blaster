@@ -8,5 +8,5 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SimpleSpacer(size: Int) {
-    Spacer(modifier = Modifier.size(size = 50.dp))
+    Spacer(modifier = Modifier.size(size = size.dp))
 }

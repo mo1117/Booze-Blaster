@@ -14,6 +14,7 @@ import com.boozeblaster.minigames.common.NeverHaveIEver
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.widgets.Timer
 
 class NeverHaveIEverTask(
     private val subTasks: List<NeverHaveIEver>
@@ -70,7 +71,8 @@ class NeverHaveIEverTask(
                         } else {
                             subTaskCounter++
                         }
-                    })
+                    }, timer = Timer.getInstance()
+                )
             }
         }
     }

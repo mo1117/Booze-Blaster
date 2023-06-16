@@ -15,4 +15,6 @@ sealed class Screen(val route: String) {
     object GameOverScreen: Screen(route = "gameOver")
 
     object TutorialScreen: Screen(route = "tutorial")
+
+    object DifficultyPickerScreen: Screen(route = "difficulty")
 }

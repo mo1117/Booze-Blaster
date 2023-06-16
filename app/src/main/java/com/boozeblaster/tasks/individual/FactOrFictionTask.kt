@@ -15,6 +15,7 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.widgets.Timer
 
 /**
  * A class that represents the Fact or Fiction mini-game
@@ -78,7 +79,7 @@ class FactOrFictionTask(
                     } else {
                         subTaskCounter++
                     }
-                })
+                }, timer = Timer.getInstance())
         }
     }
 }

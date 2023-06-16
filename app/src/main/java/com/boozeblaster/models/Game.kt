@@ -15,7 +15,7 @@ class Game private constructor(
     private val players: List<Player>,
     private var tasks: List<Task>,
     private val rounds: Int,
-    private val difficulty: Difficulty,
+    private var difficulty: Difficulty = Difficulty.MEDIUM,
     private val adultMode: Boolean
 ) {
     companion object {
@@ -34,7 +34,6 @@ class Game private constructor(
                     players = emptyList(),
                     tasks = emptyList(),
                     rounds = 0,
-                    difficulty = Difficulty.EASY,
                     adultMode = false
                 )
             }
@@ -52,7 +51,7 @@ class Game private constructor(
         fun init(
             players: List<Player>,
             rounds: Int,
-            difficulty: Difficulty,
+            difficulty: Difficulty = Difficulty.MEDIUM,
             adultMode: Boolean
         ) {
             INSTANCE = Game(
@@ -85,14 +84,14 @@ class Game private constructor(
      * Appends the dare tasks of the 1 to 2 losers to the task list
      */
     fun appendDareTasks() {
-        val losers = this.players // List of players based on their points (descending)
-            .sortedByDescending(selector = { player -> player.getPoints() })
-            .subList(fromIndex = 0, toIndex = 2)
+        val losers = players // List of players based on their points (ascending)
+            .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
+            .subList(fromIndex = 0, toIndex = 2) // Take only the last two (two losers max)
 
-        this.tasks = this.tasks.plus(DareTask(player = losers.get(index = 0)))
+        tasks = tasks.plus(DareTask(player = losers.get(index = 0)))
 
-        if (this.players.size > 5) {
-            this.tasks = this.tasks.plus(DareTask(player = losers.get(index = 1)))
+        if (players.size > 5) {
+            tasks = tasks.plus(DareTask(player = losers.get(index = 1)))
         }
     }
 
@@ -116,6 +115,10 @@ class Game private constructor(
             Difficulty.HARD -> 3
             Difficulty.ALCOHOLIC -> 4
         }
+    }
+
+    fun setDifficulty(difficulty: Difficulty) {
+        this.difficulty = difficulty
     }
 
     /**

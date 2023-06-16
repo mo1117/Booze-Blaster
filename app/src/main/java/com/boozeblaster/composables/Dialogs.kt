@@ -1,64 +1,75 @@
 package com.boozeblaster.composables
 
-import androidx.compose.animation.*
+import android.media.MediaPlayer
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Card
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
 import kotlinx.coroutines.delay
+import com.boozeblaster.R
 
 @Composable
 fun PointsOrSipsDialog(
     points: Int,
     sips: Int,
-    callback: () -> Unit
+    callback: () -> Unit,
+    duration: Long = 2500
 ) {
+
+    // TODO do we wanna play sounds when answer is wrong / correct? maybe good maybe unnecessary
+//    val sound = if (points > 0) R.raw.test else R.raw.test
+//    val mediaPlayer = MediaPlayer.create(LocalContext.current, sound)
 
     var showDialog by remember {
         mutableStateOf(false)
     }
 
+    val appendS = if (points > 1) "s" else ""
+
     LaunchedEffect(key1 = Unit) {
+//        mediaPlayer.start()
         showDialog = true
-        delay(timeMillis = 1000)
+        delay(timeMillis = duration / 2)
         showDialog = false
-        delay(timeMillis = 1000)
+        delay(timeMillis = duration / 2)
+//        mediaPlayer.stop()
         callback()
     }
 
     AnimatedVisibility(
         visible = showDialog,
-        enter = fadeIn(
-            animationSpec = tween(durationMillis = 750)
+        enter = slideInHorizontally(
+            animationSpec = tween(durationMillis = 750),
+            initialOffsetX = { -500 }
         ),
-        exit = fadeOut(
-            animationSpec = tween(durationMillis = 750)
+        exit = slideOutHorizontally(
+            animationSpec = tween(durationMillis = 750),
+            targetOffsetX = { 500 }
         )
     ) {
         Card(
             backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(fraction = 1f)
         ) {
             Column(
-                verticalArrangement = Arrangement.Top,
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SimpleTextDisplay(
-                    text = if (points > 0) "$points Points Added!" else "Drink $sips Sips!",
-                    fontSize = 16,
+                    text = if (points > 0) "$points Point$appendS Added!" else "Drink $sips Sips!",
+                    fontSize = 30,
                     fontFamily = FontFamily.SansSerif
                 )
             }

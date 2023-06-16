@@ -4,8 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,15 +15,20 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.controllers.DarkmodeController
+import com.boozeblaster.enums.Difficulty
+import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Composable
 fun StartGameScreen(navController: NavController) {
@@ -40,7 +44,8 @@ fun StartGameScreen(navController: NavController) {
             SimpleTopAppBar(
                 onBackButtonClick = { navController.popBackStack() }
             )
-        }
+        },
+        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
     ) { paddingValues ->
         StartGameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -51,7 +56,9 @@ fun StartGameScreen(navController: NavController) {
             },
             onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
             onRemovePlayerClicked = playerViewModel::deletePlayer,
-            onStartClicked = { navController.navigate(route = Screen.GameScreen.route) }
+            onContinueClicked = {
+                navController.navigate(route = Screen.DifficultyPickerScreen.route)
+            }
         )
     }
 }
@@ -62,8 +69,13 @@ fun StartGameScreenContent(
     getSavedPlayers: () -> Job,
     onAddPlayerClicked: () -> Unit,
     onRemovePlayerClicked: (Player) -> Unit,
-    onStartClicked: () -> Unit
+    onContinueClicked: () -> Unit
 ) {
+
+    var difficulty by remember {
+        mutableStateOf(Difficulty.MEDIUM)
+    }
+
     Surface(
         modifier = modifier
             .fillMaxWidth(fraction = 1f)
@@ -99,7 +111,23 @@ fun StartGameScreenContent(
 
             SimpleButton(
                 modifier = Modifier,
-                onClick = { onStartClicked() },
+                onClick = {
+                    val calendar = GregorianCalendar()
+                    calendar.set(2000, 11, 17)
+                    val date = calendar.gregorianChange
+
+                    val p1 = Player(name = "Mo", birthDate = date)
+                    val p2 = Player(2, "Mo2", date)
+                    val p3 = Player(3, "Mo3", date)
+
+                    Game.init(
+                        listOf(p1, p2),
+                        1,
+                        Difficulty.MEDIUM,
+                        false
+                    )
+                    onContinueClicked()
+                },
                 text = "Start",
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif,
@@ -107,4 +135,8 @@ fun StartGameScreenContent(
             )
         }
     }
+}
+
+private fun isPicked(chosenDifficulty: Difficulty, difficulty: Difficulty): Boolean {
+    return chosenDifficulty == difficulty
 }

@@ -8,7 +8,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.minigames.common.SipTransfer
 import com.boozeblaster.tasks.CommonTask
@@ -35,7 +37,11 @@ class SipTransferTask(subTasks: List<SipTransfer> = emptyList()) :
                 )
             ) {
                 Spacer(Modifier.size(50.dp))
-                Text(text = "SipTransfer")
+                SimpleTextDisplay(
+                    text = "SipTransfer",
+                    fontSize = 20,
+                    fontFamily = FontFamily.SansSerif
+                )
             }
         }
     }

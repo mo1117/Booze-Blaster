@@ -16,7 +16,7 @@ import kotlin.random.Random
  */
 object TaskGenerator {
 
-    private val INDIVIDUAL_TASKS = arrayOf("GuessTheLyrics", "FactOrFiction")
+    private val INDIVIDUAL_TASKS = arrayOf(/*"GuessTheLyrics", "FactOrFiction"*/"GuessTheSong")
     private val COMMON_TASKS = arrayOf("NeverHaveIEver", "WhoInThisRoom", "SetRule")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
@@ -60,8 +60,10 @@ object TaskGenerator {
     }
 
     /**
-     * Works similar to the method above
+     * Works similar to generateIndividualTask
+     * @param isLastRound Whether we are in the last round
      * @return CommonTask (Specific common task) - Or a SipTransferTask if we are in the last round
+     * @see TaskGenerator.generateIndividualTask
      */
     private fun generateCommonTask(isLastRound: Boolean): CommonTask {
         if (isLastRound) {

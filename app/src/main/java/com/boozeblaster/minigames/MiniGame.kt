@@ -3,6 +3,7 @@ package com.boozeblaster.minigames
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.models.Player
+import com.boozeblaster.widgets.Timer
 
 abstract class MiniGame {
 
@@ -20,5 +21,5 @@ abstract class MiniGame {
      * MiniGame
      */
     @Composable
-    abstract fun DisplayContent(player: Player?, callback: () -> Unit)
+    abstract fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer)
 }

@@ -9,11 +9,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.minigames.common.WhoInThisRoom
 import com.boozeblaster.tasks.CommonTask
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.widgets.Timer
 
 class WhoInThisRoomTask(
@@ -34,8 +32,7 @@ class WhoInThisRoomTask(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,
                 modifier = Modifier.background(
-                    color = if (DarkmodeController.isDarkmode())
-                        DarkBackGround else LightBackground
+                    color = getBackgroundColor()
                 )
             ) {
                 Text(text = "WhoInThisRoom")
@@ -58,8 +55,7 @@ class WhoInThisRoomTask(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,
                 modifier = Modifier.background(
-                    color = if (DarkmodeController.isDarkmode())
-                        DarkBackGround else LightBackground
+                    color = getBackgroundColor()
                 )
             ) {
                 subTasks.get(subTaskCounter).DisplayContent(

@@ -16,7 +16,7 @@ import kotlin.random.Random
  */
 object TaskGenerator {
 
-    private val INDIVIDUAL_TASKS = arrayOf(/*"GuessTheLyrics", "FactOrFiction"*/"GuessTheSong")
+    private val INDIVIDUAL_TASKS = arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong")
     private val COMMON_TASKS = arrayOf("NeverHaveIEver", "WhoInThisRoom", "SetRule")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {

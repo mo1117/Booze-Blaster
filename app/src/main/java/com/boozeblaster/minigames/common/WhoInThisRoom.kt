@@ -7,16 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.widgets.Timer
 
 class WhoInThisRoom(
@@ -35,8 +32,7 @@ class WhoInThisRoom(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,
                 modifier = Modifier.background(
-                    color = if (DarkmodeController.isDarkmode())
-                        DarkBackGround else LightBackground
+                    color = getBackgroundColor()
                 )
             ) {
                 SimpleTextDisplay(

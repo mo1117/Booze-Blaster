@@ -11,11 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
 
 @Composable
 fun TutorialScreen(navController: NavController) {
@@ -28,7 +26,7 @@ fun TutorialScreen(navController: NavController) {
                 onBackButtonClick = { navController.popBackStack() }
             )
         },
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+        backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         TutorialScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -57,7 +55,7 @@ fun TutorialScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
             modifier = modifier.background(
-                color = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+                color = getBackgroundColor()
             )
         ) {
             SimpleTextDisplay(

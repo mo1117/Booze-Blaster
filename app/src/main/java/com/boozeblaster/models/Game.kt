@@ -1,5 +1,6 @@
 package com.boozeblaster.models
 
+import android.util.Log
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.generators.TaskGenerator
@@ -30,7 +31,13 @@ class Game private constructor(
          */
         fun getInstance(): Game {
             if (INSTANCE == null) {
-                return Game(
+                Log.e(
+                    "Game",
+                    "Could not return Singleton instance of Game. Have you tried " +
+                            "initializing it before?"
+                )
+                Log.w("Game", "EMPTY GAME CREATED!")
+                INSTANCE = Game(
                     players = emptyList(),
                     tasks = emptyList(),
                     rounds = 0,

@@ -2,7 +2,6 @@ package com.boozeblaster.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
@@ -18,11 +17,10 @@ import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.getButtonColor
 
 @Composable
 fun DifficultyPickerScreen(navController: NavController) {
@@ -33,7 +31,7 @@ fun DifficultyPickerScreen(navController: NavController) {
         topBar = {
             SimpleTopAppBar(onBackButtonClick = { navController.popBackStack() })
         },
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+        backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         DifficultyPickerScreenContent(modifier = Modifier.padding(paddingValues = paddingValues),
             onStartClicked = { navController.navigate(route = Screen.GameScreen.route) })
@@ -64,9 +62,7 @@ fun DifficultyPickerScreenContent(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
-            modifier = modifier.background(
-                color = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
-            )
+            modifier = modifier.background(color = getBackgroundColor())
         ) {
             SimpleTextDisplay(
                 text = "Pick a Difficulty!",
@@ -81,7 +77,7 @@ fun DifficultyPickerScreenContent(
                 text = "Easy",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.EASY) Color.Blue else Color.Gray
+                color = if (difficulty == Difficulty.EASY) getButtonColor() else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Drinking for the first time?",
@@ -96,7 +92,7 @@ fun DifficultyPickerScreenContent(
                 text = "Medium",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.MEDIUM) Color.Blue else Color.Gray
+                color = if (difficulty == Difficulty.MEDIUM) getButtonColor() else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Way to go!",
@@ -111,7 +107,7 @@ fun DifficultyPickerScreenContent(
                 text = "Hard",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.HARD) Color.Blue else Color.Gray
+                color = if (difficulty == Difficulty.HARD) getButtonColor() else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Daring today, aren't we?",
@@ -126,7 +122,7 @@ fun DifficultyPickerScreenContent(
                 text = "Alcoholic",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.ALCOHOLIC) Color.Blue else Color.Gray
+                color = if (difficulty == Difficulty.ALCOHOLIC) getButtonColor() else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Better call an ambulance!",
@@ -144,7 +140,6 @@ fun DifficultyPickerScreenContent(
                 text = "Start",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = Color.Magenta,
                 enabled = difficulty != null
             )
         }

@@ -11,10 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.composables.GameScreenAppBar
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.models.Game
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.widgets.MyMediaPlayer
 
 @Composable
 fun GameScreen(navController: NavController = rememberNavController()) {
@@ -26,11 +25,12 @@ fun GameScreen(navController: NavController = rememberNavController()) {
         topBar = {
             //TODO When the back button gets clicked in-game we ask for confirmation to leave
             GameScreenAppBar(onBackButtonClick = {
+                MyMediaPlayer.stop()
                 navController.popBackStack()
                 navController.popBackStack()
             })
         },
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+        backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         GameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),

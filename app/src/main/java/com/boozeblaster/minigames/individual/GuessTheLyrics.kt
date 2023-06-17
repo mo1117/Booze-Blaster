@@ -3,13 +3,12 @@ package com.boozeblaster.minigames.individual
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import com.boozeblaster.composables.PointsOrSipsDialog
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
@@ -62,8 +61,7 @@ class GuessTheLyrics(
                 },
                 text = "Show Solution",
                 fontSize = 16,
-                fontFamily = FontFamily.SansSerif,
-                color = Color.Blue
+                fontFamily = FontFamily.SansSerif
             )
         } else {
             SimpleTextDisplay(
@@ -72,12 +70,14 @@ class GuessTheLyrics(
                 fontFamily = FontFamily.SansSerif
             )
             SimpleSpacer(size = 50)
+
             Row {
 
                 // "Wrong" Button
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
+                        points = 0
                         sips = 2 * Game.getInstance().getSipMultiplier()
                         player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
                         showDialog = true
@@ -86,8 +86,8 @@ class GuessTheLyrics(
                     text = "Wrong",
                     fontSize = 16,
                     fontFamily = FontFamily.SansSerif,
-                    color = Color.Red,
-                    enabled = !buttonClicked
+                    enabled = !buttonClicked,
+                    buttonType = ButtonType.INCORRECT
                 )
                 SimpleSpacer(size = 50)
 
@@ -96,6 +96,7 @@ class GuessTheLyrics(
                     modifier = Modifier,
                     onClick = {
                         points = 1
+                        sips = 0
                         player!!.addPoints(points = 1)
                         showDialog = true
                         buttonClicked = true
@@ -103,8 +104,8 @@ class GuessTheLyrics(
                     text = "Right",
                     fontSize = 16,
                     fontFamily = FontFamily.SansSerif,
-                    color = Color.Green,
-                    enabled = !buttonClicked
+                    enabled = !buttonClicked,
+                    buttonType = ButtonType.CORRECT
                 )
             }
         }

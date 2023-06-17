@@ -1,5 +1,6 @@
 package com.boozeblaster.filters
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
@@ -40,6 +41,8 @@ class ProfanityFilter {
                 }
                 return false
             } catch (e: Exception) {
+                Log.e("ProfanityFilter", "Something went wrong!")
+                e.printStackTrace()
                 for (curseWord in offlineList) {
                     // Do NOT use .contains Method or e.g. Assassin will be filtered xD
                     if (input.equals(other = curseWord, ignoreCase = true)) {

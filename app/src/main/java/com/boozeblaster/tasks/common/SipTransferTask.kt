@@ -4,18 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.minigames.common.SipTransfer
 import com.boozeblaster.tasks.CommonTask
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
 
 class SipTransferTask(subTasks: List<SipTransfer> = emptyList()) :
     CommonTask(subTasks = emptyList()) {
@@ -32,8 +29,7 @@ class SipTransferTask(subTasks: List<SipTransfer> = emptyList()) :
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,
                 modifier = Modifier.background(
-                    color = if (DarkmodeController.isDarkmode())
-                        DarkBackGround else LightBackground
+                    color = getBackgroundColor()
                 )
             ) {
                 Spacer(Modifier.size(50.dp))

@@ -192,6 +192,117 @@ class GuessTheSongGenerator : MiniGameGenerator() {
                 artist = "Usher, Lil Jon, Ludacris",
                 resid = R.raw.yeah
             ),
+            GuessTheSong(
+                songName = "Infinity",
+                artist = "Timmy Trumpet",
+                resid = R.raw.infinity,
+                duration = 12000
+            ),
+            GuessTheSong(
+                songName = "Afterglow",
+                artist = "Wilkinson, Becky Hill",
+                resid = R.raw.afterglow
+            ),
+            GuessTheSong(songName = "Alone", artist = "Marshmello", resid = R.raw.alone),
+            GuessTheSong(
+                songName = "Bangarang",
+                artist = "Skrillex, Sirah",
+                resid = R.raw.bangarang
+            ),
+            GuessTheSong(
+                songName = "Better Off Alone",
+                artist = "Alice Deejay",
+                resid = R.raw.better_off_alone
+            ),
+            GuessTheSong(
+                songName = "Boulevard of Broken Dreams",
+                artist = "Green Day",
+                resid = R.raw.boulevard_of_broken_dreams
+            ),
+            GuessTheSong(
+                songName = "Californication",
+                artist = "Red Hot Chili Peppers",
+                resid = R.raw.californication
+            ),
+            GuessTheSong(
+                songName = "Can't Stop",
+                artist = "Red Hot Chili Peppers",
+                resid = R.raw.cant_stop
+            ),
+            GuessTheSong(
+                songName = "CASTLE OF GLASS",
+                artist = "Linkin Park",
+                resid = R.raw.castle_of_glass
+            ),
+            GuessTheSong(songName = "Changes", artist = "2Pac, Talent", resid = R.raw.changes),
+            GuessTheSong(
+                songName = "Empire State Of Mind",
+                artist = "JAY-Z, Alicia Keys",
+                resid = R.raw.empire_state_of_mind
+            ),
+            GuessTheSong(
+                songName = "Ni**as In Paris",
+                artist = "JAY-Z, Kanye West",
+                resid = R.raw.fellas_in_paris
+            ),
+            GuessTheSong(
+                songName = "Freed From Desire",
+                artist = "Gala",
+                resid = R.raw.free_from_desire
+            ),
+            GuessTheSong(
+                songName = "Gangsta's Paradise",
+                artist = "Coolio, L.V.",
+                resid = R.raw.gangstas_paradise
+            ),
+            GuessTheSong(
+                songName = "Hey, Soul Sister",
+                artist = "Train",
+                resid = R.raw.hey_soul_sister
+            ),
+            GuessTheSong(
+                songName = "Highway to Hell",
+                artist = "AC/DC",
+                resid = R.raw.highway_to_hell
+            ),
+            GuessTheSong(
+                songName = "I Was Made For Lovin' You",
+                artist = "KISS",
+                resid = R.raw.i_was_made_for_lovin_you
+            ),
+            GuessTheSong(songName = "In the End", artist = "Linkin Park", resid = R.raw.in_the_end),
+            GuessTheSong(
+                songName = "L'Amour Toujours",
+                artist = "Gigi D'Agostino",
+                resid = R.raw.lamour_toujours
+            ),
+            GuessTheSong(
+                songName = "Last Resort",
+                artist = "Papa Roach",
+                resid = R.raw.last_resort
+            ),
+            GuessTheSong(
+                songName = "Love Me Again",
+                artist = "John Newman",
+                resid = R.raw.love_me_again
+            ),
+            GuessTheSong(songName = "Mamma Mia", artist = "ABBA", resid = R.raw.mamma_mia),
+            GuessTheSong(songName = "Satellite", artist = "Rise Against", resid = R.raw.satellite),
+            GuessTheSong(songName = "Summer", artist = "Calvin Harris", resid = R.raw.summer),
+            GuessTheSong(songName = "Treasure", artist = "Bruno Mars", resid = R.raw.treasure),
+            GuessTheSong(songName = "21 Guns", artist = "Green Day", resid = R.raw.twenty_one_guns),
+            GuessTheSong(
+                songName = "U Can't Touch This",
+                artist = "MC Hammer",
+                resid = R.raw.u_cant_touch_this
+            ),
+            GuessTheSong(
+                songName = "Viva La Vida",
+                artist = "Coldplay",
+                resid = R.raw.viva_la_vida
+            ),
+            GuessTheSong(songName = "Waka Waka", artist = "Shakira", resid = R.raw.waka_waka),
+            GuessTheSong(songName = "Wavin' Flag", artist = "K'NAAN", resid = R.raw.wavin_flag),
 //            GuessTheSong(songName = "", artist = "", resid = 0),
         )
     }

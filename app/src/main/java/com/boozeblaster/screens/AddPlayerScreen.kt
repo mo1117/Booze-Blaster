@@ -1,15 +1,11 @@
 package com.boozeblaster.screens
 
-import android.app.DatePickerDialog
-import android.widget.DatePicker
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,13 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.composables.SimpleTextField
 import com.boozeblaster.composables.SimpleTopAppBar
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.models.Player
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
-import java.util.*
 
 @Composable
 fun AddPlayerScreen(navController: NavController = rememberNavController()) {
@@ -39,7 +32,7 @@ fun AddPlayerScreen(navController: NavController = rememberNavController()) {
                 onBackButtonClick = { navController.popBackStack() }
             )
         },
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+        backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         AddPlayerScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -66,7 +59,8 @@ fun AddPlayerScreenContent(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+            verticalArrangement = Arrangement.Top,
+            modifier = modifier.background(color = getBackgroundColor())
         ) {
             SimpleTextField(
                 modifier = Modifier,

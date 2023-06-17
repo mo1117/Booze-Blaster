@@ -1,24 +1,17 @@
 package com.boozeblaster.minigames.individual
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.composables.PointsOrSipsDialog
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.controllers.DarkmodeController
+import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.widgets.Timer
 
 class FactOrFiction(
@@ -37,7 +30,7 @@ class FactOrFiction(
 
         SimpleSpacer(size = 50)
         SimpleTextDisplay(
-            text = "$question",
+            text = question,
             fontSize = fontSize,
             fontFamily = fontFamily
         )
@@ -55,8 +48,8 @@ class FactOrFiction(
                 text = "Wrong",
                 fontSize = 16,
                 fontFamily = FontFamily.SansSerif,
-                color = Color.Red,
-                enabled = !buttonClicked
+                enabled = !buttonClicked,
+                buttonType = ButtonType.INCORRECT
             )
             SimpleSpacer(size = 50)
 
@@ -71,8 +64,8 @@ class FactOrFiction(
                 text = "Right",
                 fontSize = 16,
                 fontFamily = FontFamily.SansSerif,
-                color = Color.Green,
-                enabled = !buttonClicked
+                enabled = !buttonClicked,
+                buttonType = ButtonType.CORRECT
             )
         }
         SimpleSpacer(size = 50)
@@ -90,10 +83,12 @@ class FactOrFiction(
     private fun checkAnswer(player: Player, answer: Boolean) {
         if (answer == isCorrect) {
             points = 1
+            sips = 0
             player.addPoints(points = points)
             return
         }
-        sips = 2 * Game.getInstance().getSipMultiplier()
+        points = 0
+        sips = Game.getInstance().getSipMultiplier()
         player.addSips(sips = sips)
     }
 }

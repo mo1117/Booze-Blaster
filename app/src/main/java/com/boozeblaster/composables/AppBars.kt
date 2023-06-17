@@ -11,10 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.controllers.DarkmodeController
-import com.boozeblaster.ui.theme.DarkAppBar
-import com.boozeblaster.ui.theme.DarkFontColor
-import com.boozeblaster.ui.theme.LightAppBar
-import com.boozeblaster.ui.theme.LightFontColor
+import com.boozeblaster.ui.theme.*
 import kotlin.system.exitProcess
 
 @Composable
@@ -27,7 +24,7 @@ fun HomeTopAppBar() {
         title = {
             Text(
                 text = "Booze Blaster",
-                color = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
+                color = getFontColor()
             )
         },
         navigationIcon = {
@@ -37,7 +34,7 @@ fun HomeTopAppBar() {
                 Icon(
                     imageVector = Icons.Default.Menu,
                     contentDescription = "Menu",
-                    tint = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
+                    tint = getFontColor()
                 )
             }
             DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
@@ -59,7 +56,7 @@ fun HomeTopAppBar() {
                 bottomStart = 10.dp
             )
         ),
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkAppBar else LightAppBar
+        backgroundColor = getAppBarColor()
     )
 }
 
@@ -69,7 +66,7 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
         title = {
             Text(
                 text = "Booze Blaster",
-                color = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
+                color = getFontColor()
             )
         },
         navigationIcon = {
@@ -79,7 +76,7 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "BackButton",
-                    tint = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
+                    tint = getFontColor()
                 )
             }
         },
@@ -96,7 +93,7 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
                 bottomStart = 10.dp
             )
         ),
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkAppBar else LightAppBar
+        backgroundColor = getAppBarColor()
     )
 }
 
@@ -111,7 +108,7 @@ fun GameScreenAppBar(onBackButtonClick: () -> Unit) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "BackButton",
-                    tint = if (DarkmodeController.isDarkmode()) DarkFontColor else LightFontColor
+                    tint = getFontColor()
                 )
             }
         },
@@ -134,6 +131,6 @@ fun GameScreenAppBar(onBackButtonClick: () -> Unit) {
                 bottomStart = 10.dp
             )
         ),
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkAppBar else LightAppBar
+        backgroundColor = getAppBarColor()
     )
 }

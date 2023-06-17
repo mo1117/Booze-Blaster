@@ -4,10 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -15,17 +15,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTopAppBar
-import com.boozeblaster.controllers.DarkmodeController
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
-import com.boozeblaster.ui.theme.DarkBackGround
 import com.boozeblaster.ui.theme.LightBackground
+import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
@@ -45,7 +42,7 @@ fun StartGameScreen(navController: NavController) {
                 onBackButtonClick = { navController.popBackStack() }
             )
         },
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+        backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         StartGameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -71,11 +68,6 @@ fun StartGameScreenContent(
     onRemovePlayerClicked: (Player) -> Unit,
     onContinueClicked: () -> Unit
 ) {
-
-    var difficulty by remember {
-        mutableStateOf(Difficulty.MEDIUM)
-    }
-
     Surface(
         modifier = modifier
             .fillMaxWidth(fraction = 1f)
@@ -85,7 +77,7 @@ fun StartGameScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
             modifier = modifier.background(
-                color = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+                color = getBackgroundColor()
             )
         ) {
             Button(
@@ -97,8 +89,7 @@ fun StartGameScreenContent(
                     painter = painterResource(id = R.drawable.add_player),
                     contentDescription = "Add Player",
                     modifier = modifier.background(
-                        color = if (DarkmodeController.isDarkmode())
-                            DarkBackGround else LightBackground
+                        color = getBackgroundColor()
                     )
                 )
             }
@@ -122,7 +113,7 @@ fun StartGameScreenContent(
 
                     Game.init(
                         listOf(p1, p2),
-                        1,
+                        2,
                         Difficulty.MEDIUM,
                         false
                     )
@@ -130,13 +121,8 @@ fun StartGameScreenContent(
                 },
                 text = "Start",
                 fontSize = 20,
-                fontFamily = FontFamily.SansSerif,
-                color = Color.Magenta
+                fontFamily = FontFamily.SansSerif
             )
         }
     }
-}
-
-private fun isPicked(chosenDifficulty: Difficulty, difficulty: Difficulty): Boolean {
-    return chosenDifficulty == difficulty
 }

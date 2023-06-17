@@ -8,21 +8,13 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.controllers.DarkmodeController
-import com.boozeblaster.enums.Difficulty
-import com.boozeblaster.models.Game
-import com.boozeblaster.models.Player
-import com.boozeblaster.ui.theme.DarkBackGround
-import com.boozeblaster.ui.theme.LightBackground
-import java.util.*
+import com.boozeblaster.ui.theme.getBackgroundColor
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -33,7 +25,7 @@ fun HomeScreen(navController: NavController) {
         topBar = {
             HomeTopAppBar()
         },
-        backgroundColor = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+        backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
@@ -61,7 +53,7 @@ fun HomeScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
             modifier = modifier.background(
-                color = if (DarkmodeController.isDarkmode()) DarkBackGround else LightBackground
+                color = getBackgroundColor()
             )
         ) {
             // Change button specifications here as we want them to look consistent
@@ -69,7 +61,6 @@ fun HomeScreenContent(
                 .size(width = 150.dp, height = 75.dp)
             val fontSize = 16
             val fontFamily = FontFamily.SansSerif
-            val buttonColor = Color.Cyan
 
             SimpleSpacer(size = 100)
             SimpleButton(
@@ -79,8 +70,7 @@ fun HomeScreenContent(
                 },
                 text = "Start",
                 fontSize = fontSize,
-                fontFamily = fontFamily,
-                color = buttonColor
+                fontFamily = fontFamily
             )
             Spacer(
                 modifier = modifier.size(size = 100.dp)
@@ -90,8 +80,7 @@ fun HomeScreenContent(
                 onClick = { onAddPlayerClicked() },
                 text = "Add Player",
                 fontSize = fontSize,
-                fontFamily = fontFamily,
-                color = buttonColor
+                fontFamily = fontFamily
             )
             Spacer(
                 modifier = modifier.size(size = 100.dp)
@@ -101,8 +90,7 @@ fun HomeScreenContent(
                 onClick = { onTutorialClicked() },
                 text = "How To Play",
                 fontSize = fontSize,
-                fontFamily = fontFamily,
-                color = buttonColor
+                fontFamily = fontFamily
             )
         }
     }

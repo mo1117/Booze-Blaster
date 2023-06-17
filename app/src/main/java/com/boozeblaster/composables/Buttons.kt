@@ -1,19 +1,14 @@
 package com.boozeblaster.composables
 
-import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.boozeblaster.enums.ButtonType
+import com.boozeblaster.ui.theme.getButtonColor
 
 /**
  * Represents a simple button that can be used to display text and perform onClick actions
@@ -25,11 +20,14 @@ fun SimpleButton(
     text: String,
     fontSize: Int,
     fontFamily: FontFamily,
-    color: Color,
-    enabled: Boolean = true
+    color: Color? = null,
+    enabled: Boolean = true,
+    buttonType: ButtonType = ButtonType.UI
 ) {
 
     //TODO maybe we want some cool standard button onClick effects?
+
+    val buttonColor = color ?: getButtonColor(buttonType = buttonType)
 
     Button(
         onClick = {
@@ -37,7 +35,7 @@ fun SimpleButton(
         },
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(backgroundColor = color),
+        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
         shape = AbsoluteRoundedCornerShape(percent = 100)
     ) {
         SimpleTextDisplay(

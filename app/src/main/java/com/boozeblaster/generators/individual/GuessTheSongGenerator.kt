@@ -303,6 +303,84 @@ class GuessTheSongGenerator : MiniGameGenerator() {
             ),
             GuessTheSong(songName = "Waka Waka", artist = "Shakira", resid = R.raw.waka_waka),
             GuessTheSong(songName = "Wavin' Flag", artist = "K'NAAN", resid = R.raw.wavin_flag),
+            GuessTheSong(songName = "Animals", artist = "Martin Garrix", resid = R.raw.animals),
+            GuessTheSong(songName = "Bad Romance", artist = "Lady Gaga", resid = R.raw.bad_romance),
+            GuessTheSong(
+                songName = "Blue (Da Ba Dee)",
+                artist = "Eiffel 65, Gabry Ponte",
+                resid = R.raw.blue
+            ),
+            GuessTheSong(
+                songName = "Firestone",
+                artist = "Kygo, Conrad Sewell",
+                resid = R.raw.firestone
+            ),
+            GuessTheSong(
+                songName = "Gimme! Gimme! Gimme! (A Man After Midnight)",
+                artist = "ABBA",
+                resid = R.raw.gimme_gimme_gimme
+            ),
+            GuessTheSong(songName = "Levels", artist = "Avicii", resid = R.raw.levels),
+            GuessTheSong(
+                songName = "Stole the Show",
+                artist = "Kygo, Parson James",
+                resid = R.raw.stole_the_show
+            ),
+            GuessTheSong(
+                songName = "Sweet Dreams (Are Made of This)",
+                artist = "Eurythmics, Annie Lennox, Dave Stewart",
+                resid = R.raw.sweet_dreams
+            ),
+            GuessTheSong(songName = "The Nights", artist = "Avicii", resid = R.raw.the_nights),
+            GuessTheSong(
+                songName = "We Found Love",
+                artist = "Rihanna, Calvin Harris",
+                resid = R.raw.we_found_love
+            ),
+            GuessTheSong(
+                songName = "No Money",
+                artist = "Galantis",
+                resid = R.raw.no_money,
+                duration = 12000
+            ),
+            GuessTheSong(
+                songName = "Scared to Be Lonely",
+                artist = "Martin Garrix, Dua Lipa",
+                resid = R.raw.scared_to_be_lonely,
+                duration = 14000
+            ),
+            GuessTheSong(
+                songName = "A Thousand Miles",
+                artist = "Vanessa Carlton",
+                resid = R.raw.a_thousand_miles
+            ),
+            GuessTheSong(songName = "Africa", artist = "TOTO", resid = R.raw.africa),
+            GuessTheSong(
+                songName = "Ain't Nobody (Loves Me Better)",
+                artist = "Felix Jaehn, Jasmine Thompson",
+                resid = R.raw.aint_nobody
+            ),
+            GuessTheSong(
+                songName = "Alors on danse",
+                artist = "Stromae",
+                resid = R.raw.alors_on_danse
+            ),
+            GuessTheSong(songName = "Low", artist = "Flo Rida, T-Pain", resid = R.raw.low),
+            GuessTheSong(songName = "Pepas", artist = "Farruko", resid = R.raw.pepas),
+            GuessTheSong(songName = "Pong Dance", artist = "Vigiland", resid = R.raw.pong_dance),
+            GuessTheSong(
+                songName = "Rather Be",
+                artist = "Clean Bandit, Jess Glynne",
+                resid = R.raw.rather_be
+            ),
+            GuessTheSong(
+                songName = "Snow (Hey Oh)",
+                artist = "Red Hot Chili Peppers",
+                resid = R.raw.snow
+            ),
+//            GuessTheSong(songName = "", artist = "", resid = 0),
+//            GuessTheSong(songName = "", artist = "", resid = 0),
+//            GuessTheSong(songName = "", artist = "", resid = 0),
 //            GuessTheSong(songName = "", artist = "", resid = 0),
         )
     }

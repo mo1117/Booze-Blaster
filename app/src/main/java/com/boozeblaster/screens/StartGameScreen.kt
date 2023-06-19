@@ -54,7 +54,7 @@ fun StartGameScreen(navController: NavController) {
             onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
             onRemovePlayerClicked = playerViewModel::deletePlayer,
             onContinueClicked = {
-                navController.navigate(route = Screen.DifficultyPickerScreen.route)
+                navController.navigate(route = Screen.AdultModePickerScreen.route)
             }
         )
     }
@@ -119,7 +119,7 @@ fun StartGameScreenContent(
                     )
                     onContinueClicked()
                 },
-                text = "Start",
+                text = "Continue",
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif
             )

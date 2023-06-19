@@ -2,19 +2,21 @@ package com.boozeblaster.screens
 
 sealed class Screen(val route: String) {
 
-    object HomeScreen: Screen(route = "home")
+    object HomeScreen : Screen(route = "home")
 
-    object StartGameScreen: Screen(route = "startGame")
+    object StartGameScreen : Screen(route = "startGame")
 
-    object AddPlayerScreen: Screen(route = "addPlayer")
+    object AddPlayerScreen : Screen(route = "addPlayer")
 
-    object EditPlayerScreen: Screen(route = "editPlayer")
+    object EditPlayerScreen : Screen(route = "editPlayer")
 
-    object GameScreen: Screen(route = "game")
+    object GameScreen : Screen(route = "game")
 
-    object GameOverScreen: Screen(route = "gameOver")
+    object GameOverScreen : Screen(route = "gameOver")
 
-    object TutorialScreen: Screen(route = "tutorial")
+    object TutorialScreen : Screen(route = "tutorial")
 
-    object DifficultyPickerScreen: Screen(route = "difficulty")
+    object DifficultyPickerScreen : Screen(route = "difficulty")
+
+    object AdultModePickerScreen : Screen(route = "adultMode")
 }

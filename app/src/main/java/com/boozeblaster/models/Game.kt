@@ -17,7 +17,7 @@ class Game private constructor(
     private var tasks: List<Task>,
     private val rounds: Int,
     private var difficulty: Difficulty = Difficulty.MEDIUM,
-    private val adultMode: Boolean
+    private var adultMode: Boolean
 ) {
     companion object {
         @Volatile
@@ -100,6 +100,14 @@ class Game private constructor(
         if (players.size > 5) {
             tasks = tasks.plus(DareTask(player = losers.get(index = 1)))
         }
+    }
+
+    /**
+     * Set the adult mode to enabled or disabled
+     * @param adultMode Boolean
+     */
+    fun setAdultMode(adultMode: Boolean) {
+        this.adultMode = adultMode
     }
 
     /**

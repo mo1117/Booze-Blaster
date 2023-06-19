@@ -157,6 +157,8 @@ class GuessTheSong(
                 )
                 SimpleSpacer(size = 50)
             }
+        } else {
+            // TODO: Sound is currently playing - show an image (e.g. a speaker icon)
         }
 
         // Show dialog that tells the player if they were correct

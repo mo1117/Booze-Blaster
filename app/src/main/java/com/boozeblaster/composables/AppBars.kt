@@ -11,7 +11,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.controllers.DarkmodeController
-import com.boozeblaster.ui.theme.*
+import com.boozeblaster.models.Game
+import com.boozeblaster.ui.theme.getAppBarColor
+import com.boozeblaster.ui.theme.getFontColor
 import kotlin.system.exitProcess
 
 @Composable
@@ -98,7 +100,9 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
 }
 
 @Composable
-fun GameScreenAppBar(onBackButtonClick: () -> Unit) {
+fun GameScreenAppBar(onBackButtonClick: () -> Unit, currentRound: Int) {
+    val totalRounds = Game.getInstance().getRounds()
+
     TopAppBar(
         title = {},
         navigationIcon = {
@@ -114,7 +118,7 @@ fun GameScreenAppBar(onBackButtonClick: () -> Unit) {
         },
         actions = {
             SimpleTextDisplay(
-                text = "Round x / y",
+                text = "Round $currentRound / $totalRounds",
                 fontSize = 16,
                 fontFamily = FontFamily.SansSerif
             )

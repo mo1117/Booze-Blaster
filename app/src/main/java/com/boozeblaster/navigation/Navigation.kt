@@ -43,5 +43,9 @@ fun Navigation() {
         composable(route = Screen.DifficultyPickerScreen.route) {
             DifficultyPickerScreen(navController = navController)
         }
+        
+        composable(route = Screen.AdultModePickerScreen.route) {
+            AdultModePickerScreen(navController = navController)
+        }
     }
 }

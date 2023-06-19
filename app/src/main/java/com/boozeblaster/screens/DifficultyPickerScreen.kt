@@ -20,7 +20,6 @@ import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
-import com.boozeblaster.ui.theme.getButtonColor
 
 @Composable
 fun DifficultyPickerScreen(navController: NavController) {
@@ -51,8 +50,7 @@ fun DifficultyPickerScreenContent(
     val buttonFontSize = 20
     val textFontSize = 26
     val fontFamily = FontFamily.SansSerif
-    val minWidth = 150.dp
-    val minHeight = 50.dp
+    val buttonModifier = Modifier.sizeIn(minWidth = 150.dp, minHeight = 50.dp)
 
     Surface(
         modifier = modifier
@@ -61,7 +59,7 @@ fun DifficultyPickerScreenContent(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
             modifier = modifier.background(color = getBackgroundColor())
         ) {
             SimpleTextDisplay(
@@ -72,12 +70,12 @@ fun DifficultyPickerScreenContent(
             SimpleSpacer(size = 30)
 
             SimpleButton(
-                modifier = Modifier.sizeIn(minWidth = minWidth, minHeight = minHeight),
+                modifier = buttonModifier,
                 onClick = { difficulty = Difficulty.EASY },
                 text = "Easy",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.EASY) getButtonColor() else Color.Gray
+                color = if (difficulty == Difficulty.EASY) null else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Drinking for the first time?",
@@ -87,12 +85,12 @@ fun DifficultyPickerScreenContent(
             SimpleSpacer(size = 40)
 
             SimpleButton(
-                modifier = Modifier.sizeIn(minWidth = minWidth, minHeight = minHeight),
+                modifier = buttonModifier,
                 onClick = { difficulty = Difficulty.MEDIUM },
                 text = "Medium",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.MEDIUM) getButtonColor() else Color.Gray
+                color = if (difficulty == Difficulty.MEDIUM) null else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Way to go!",
@@ -102,12 +100,12 @@ fun DifficultyPickerScreenContent(
             SimpleSpacer(size = 40)
 
             SimpleButton(
-                modifier = Modifier.sizeIn(minWidth = minWidth, minHeight = minHeight),
+                modifier = buttonModifier,
                 onClick = { difficulty = Difficulty.HARD },
                 text = "Hard",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.HARD) getButtonColor() else Color.Gray
+                color = if (difficulty == Difficulty.HARD) null else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Daring today, aren't we?",
@@ -117,12 +115,12 @@ fun DifficultyPickerScreenContent(
             SimpleSpacer(size = 40)
 
             SimpleButton(
-                modifier = Modifier.sizeIn(minWidth = minWidth, minHeight = minHeight),
+                modifier = buttonModifier,
                 onClick = { difficulty = Difficulty.ALCOHOLIC },
                 text = "Alcoholic",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
-                color = if (difficulty == Difficulty.ALCOHOLIC) getButtonColor() else Color.Gray
+                color = if (difficulty == Difficulty.ALCOHOLIC) null else Color.Gray
             )
             SimpleTextDisplay(
                 text = "Better call an ambulance!",
@@ -132,7 +130,7 @@ fun DifficultyPickerScreenContent(
             SimpleSpacer(size = 100)
 
             SimpleButton(
-                modifier = Modifier.sizeIn(minWidth = minWidth, minHeight = minHeight),
+                modifier = buttonModifier,
                 onClick = {
                     Game.getInstance().setDifficulty(difficulty = difficulty!!)
                     onStartClicked()

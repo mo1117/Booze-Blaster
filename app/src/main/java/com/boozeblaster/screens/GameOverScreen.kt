@@ -26,8 +26,11 @@ fun GameOverScreen(navController: NavController) {
         scaffoldState = scaffoldState,
         topBar = {
             SimpleTopAppBar(onBackButtonClick = {
-                navController.popBackStack()
-                navController.popBackStack()
+                navController.navigate(route = Screen.HomeScreen.route) {
+                    popUpTo(id = navController.graph.startDestinationId) {
+                        inclusive = false
+                    }
+                }
             })
         },
         backgroundColor = getBackgroundColor()

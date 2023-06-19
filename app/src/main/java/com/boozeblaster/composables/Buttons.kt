@@ -3,12 +3,15 @@ package com.boozeblaster.composables
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.getButtonColor
+import com.boozeblaster.ui.theme.getFontColor
 
 /**
  * Represents a simple button that can be used to display text and perform onClick actions
@@ -30,9 +33,7 @@ fun SimpleButton(
     val buttonColor = color ?: getButtonColor(buttonType = buttonType)
 
     Button(
-        onClick = {
-            onClick()
-        },
+        onClick = { onClick() },
         modifier = modifier,
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
@@ -44,4 +45,32 @@ fun SimpleButton(
             fontFamily = fontFamily
         )
     }
+}
+
+@Composable
+fun SimpleIconButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    color: Color? = null,
+    enabled: Boolean = true,
+    buttonType: ButtonType = ButtonType.UI,
+    imageVector: ImageVector,
+    contentDescription: String = ""
+) {
+
+    val buttonColor = color ?: getButtonColor(buttonType = buttonType)
+
+    Button(
+        onClick = { onClick() },
+        modifier = modifier,
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = contentDescription,
+            tint = getFontColor()
+        )
+    }
+
 }

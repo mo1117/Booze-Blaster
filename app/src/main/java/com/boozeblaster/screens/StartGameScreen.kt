@@ -8,27 +8,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleIconButton
+import com.boozeblaster.composables.SimpleImageButton
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
-import com.boozeblaster.ui.theme.LightBackground
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils
+import com.boozeblaster.viewmodels.GameSettingsViewModel
 import com.boozeblaster.viewmodels.PlayerViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
 @Composable
-fun StartGameScreen(navController: NavController) {
+fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSettingsViewModel) {
     val playerViewModel: PlayerViewModel =
         viewModel(factory = InjectorUtils.providePlayerViewModelFactory(context = LocalContext.current))
     val scaffoldState = rememberScaffoldState()
@@ -39,7 +43,12 @@ fun StartGameScreen(navController: NavController) {
         scaffoldState = scaffoldState,
         topBar = {
             SimpleTopAppBar(
-                onBackButtonClick = { navController.popBackStack() }
+                onBackButtonClick = {
+                    //Set the values of the view model to null
+                    gameSettingsViewModel.setAdultMode(adultMode = null)
+                    gameSettingsViewModel.setDifficulty(difficulty = null)
+                    navController.popBackStack()
+                }
             )
         },
         backgroundColor = getBackgroundColor()
@@ -75,30 +84,25 @@ fun StartGameScreenContent(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
             modifier = modifier.background(
                 color = getBackgroundColor()
             )
         ) {
-            Button(
-                onClick = { onAddPlayerClicked() }, colors = ButtonDefaults.buttonColors(
-                    contentColor = LightBackground, backgroundColor = LightBackground
-                )
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.add_player),
-                    contentDescription = "Add Player",
-                    modifier = modifier.background(
-                        color = getBackgroundColor()
-                    )
-                )
-            }
+            SimpleImageButton(
+                modifier = Modifier.size(width = 100.dp, height = 100.dp),
+                onClick = { onAddPlayerClicked() },
+                imageId = R.drawable.add_player,
+                contentDescription = "Add Player",
+                text = "Add Player",
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
 
             //TODO Here we need to instantiate our singleton Game object
-            //TODO Create a list of tasks and use the generators to generate the subtasks
-            //TODO To create our list of tasks just call TaskGenerator.generateTasks(players, rounds)
-            //TODO players = List<Player> and rounds = Int can be chosen before starting the game
-            //TODO Call Game.init with a list of players, tasks, and whether or not adult mode is enabled
+            //TODO The adult / pg mode is set in the next screen
+            //TODO The difficulty is picked in the 2nd next screen
+            //TODO Init the
 
             SimpleButton(
                 modifier = Modifier,

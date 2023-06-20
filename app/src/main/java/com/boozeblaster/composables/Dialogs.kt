@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontFamily
+import com.boozeblaster.enums.AnimationConstants
 import kotlinx.coroutines.delay
 
 @Composable
@@ -46,11 +47,11 @@ fun PointsOrSipsDialog(
     AnimatedVisibility(
         visible = showDialog,
         enter = slideInHorizontally(
-            animationSpec = tween(durationMillis = 750),
+            animationSpec = tween(durationMillis = AnimationConstants.POINTS_OR_SIPS_FADE_IN_OUT.durationMillis),
             initialOffsetX = { -500 }
         ),
         exit = slideOutHorizontally(
-            animationSpec = tween(durationMillis = 750),
+            animationSpec = tween(durationMillis = AnimationConstants.POINTS_OR_SIPS_FADE_IN_OUT.durationMillis),
             targetOffsetX = { 500 }
         )
     ) {

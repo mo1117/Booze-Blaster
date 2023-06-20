@@ -1,16 +1,15 @@
 package com.boozeblaster.minigames.individual
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.boozeblaster.composables.PointsOrSipsDialog
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.R
+import com.boozeblaster.composables.*
+import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
@@ -18,6 +17,7 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.widgets.MyMediaPlayer
 import com.boozeblaster.widgets.Timer
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Class representing the GuessTheSong minigame
@@ -34,6 +34,8 @@ class GuessTheSong(
 
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
+        val coroutineScope = rememberCoroutineScope()
+
         MyMediaPlayer.create(context = LocalContext.current, resid = this.resid)
 
         val buttonModifier = Modifier
@@ -41,6 +43,10 @@ class GuessTheSong(
 
         // Whether or not we want to show the solution
         var showSolution by remember {
+            mutableStateOf(value = false)
+        }
+
+        var shouldHideSolutionButton by remember {
             mutableStateOf(value = false)
         }
 
@@ -66,110 +72,122 @@ class GuessTheSong(
                 MyMediaPlayer.stop()
                 soundPlayed = true
             }
+            //Sound is currently playing
+            SimpleImage(imageId = R.drawable.speaker_on)
+            SimpleSpacer(size = 30)
+            AnimatingText(text = "Listen up", fontSize = 20, fontFamily = FontFamily.SansSerif)
+//            SimpleTextDisplay(
+//                text = "Listen up!",
+//                fontSize = 30,
+//                fontFamily = fontFamily
+//            )
         }
 
         if (soundPlayed) {
 
-            if (!showSolution) {
-
+            if (!showSolution && !shouldHideSolutionButton) {
                 // Show Solution Button
-                SimpleButton(
-                    modifier = Modifier,
+                SimpleImageButton(
                     onClick = {
                         showSolution = true
+                        shouldHideSolutionButton = true
                     },
+                    imageId = R.drawable.lightbulb_off,
                     text = "Show Solution",
-                    fontSize = 16,
-                    fontFamily = FontFamily.SansSerif,
-                    color = Color.Blue,
-                    buttonType = ButtonType.UI
+                    fontSize = fontSize,
+                    fontFamily = fontFamily
                 )
-            } else {
-
-                // Display song name and artist
-                SimpleSpacer(size = 50)
-                SimpleTextDisplay(
-                    text = this.songName,
-                    fontSize = 30,
-                    fontFamily = FontFamily.SansSerif
-                )
-                SimpleSpacer(size = 50)
-                SimpleTextDisplay(
-                    text = this.artist,
-                    fontSize = 30,
-                    fontFamily = FontFamily.SansSerif
-                )
-                SimpleSpacer(size = 50)
-
-                // "Both Right" Button
-                SimpleButton(
-                    modifier = buttonModifier,
-                    onClick = {
-                        points = 2
-                        sips = 0
-                        player!!.addPoints(points = points)
-                        showDialog = true
-                        buttonClicked = true
-                    },
-                    text = "Got Both",
-                    fontSize = 16,
-                    fontFamily = FontFamily.SansSerif,
-                    enabled = !buttonClicked,
-                    buttonType = ButtonType.CORRECT
-                )
-                SimpleSpacer(size = 50)
-
-                // User got only the song name or artist correct
-
-                SimpleButton(
-                    modifier = buttonModifier,
-                    onClick = {
-                        points = 1
-                        sips = Game.getInstance().getSipMultiplier()
-                        player!!.addPoints(points = points)
-                        player.addSips(sips = sips)
-                        showDialog = true
-                        buttonClicked = true
-                    },
-                    text = "One Correct",
-                    fontSize = 16,
-                    fontFamily = FontFamily.SansSerif,
-                    enabled = !buttonClicked,
-                    buttonType = ButtonType.HALF_CORRECT
-                )
-                SimpleSpacer(size = 50)
-
-                // "Wrong" Button
-                SimpleButton(
-                    modifier = buttonModifier,
-                    onClick = {
-                        points = 0
-                        sips = 2 * Game.getInstance().getSipMultiplier()
-                        player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
-                        showDialog = true
-                        buttonClicked = true
-                    },
-                    text = "Wrong",
-                    fontSize = 16,
-                    fontFamily = FontFamily.SansSerif,
-                    enabled = !buttonClicked,
-                    buttonType = ButtonType.INCORRECT
-                )
-                SimpleSpacer(size = 50)
             }
-        } else {
-            // TODO: Sound is currently playing - show an image (e.g. a speaker icon)
-        }
 
-        // Show dialog that tells the player if they were correct
-        if (showDialog) {
-            PointsOrSipsDialog(points = points, sips = sips, callback = {
-                buttonClicked = false
-                showDialog = false
-                showSolution = false
-                soundPlayed = false
-                callback()
-            })
+            MyAnimatedVisibility(visible = showSolution,
+                animationDuration = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis,
+                content = {
+                    // Display song name and artist
+                    SimpleSpacer(size = 50)
+                    SimpleTextDisplay(
+                        text = songName,
+                        fontSize = 30,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                    SimpleSpacer(size = 50)
+                    SimpleTextDisplay(
+                        text = artist,
+                        fontSize = 30,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                    SimpleSpacer(size = 50)
+
+                    // "Both Right" Button
+                    SimpleButton(
+                        modifier = buttonModifier,
+                        onClick = {
+                            points = 2
+                            sips = 0
+                            player!!.addPoints(points = points)
+                            showDialog = true
+                            buttonClicked = true
+                        },
+                        text = "Got Both",
+                        fontSize = 16,
+                        fontFamily = FontFamily.SansSerif,
+                        enabled = !buttonClicked,
+                        buttonType = ButtonType.CORRECT
+                    )
+                    SimpleSpacer(size = 50)
+
+                    // User got only the song name or artist correct
+
+                    SimpleButton(
+                        modifier = buttonModifier,
+                        onClick = {
+                            points = 1
+                            sips = Game.getInstance().getSipMultiplier()
+                            player!!.addPoints(points = points)
+                            player.addSips(sips = sips)
+                            showDialog = true
+                            buttonClicked = true
+                        },
+                        text = "One Correct",
+                        fontSize = 16,
+                        fontFamily = FontFamily.SansSerif,
+                        enabled = !buttonClicked,
+                        buttonType = ButtonType.HALF_CORRECT
+                    )
+                    SimpleSpacer(size = 50)
+
+                    // "Wrong" Button
+                    SimpleButton(
+                        modifier = buttonModifier,
+                        onClick = {
+                            points = 0
+                            sips = 2 * Game.getInstance().getSipMultiplier()
+                            player!!.addSips(sips = sips)
+                            showDialog = true
+                            buttonClicked = true
+                        },
+                        text = "Wrong",
+                        fontSize = 16,
+                        fontFamily = FontFamily.SansSerif,
+                        enabled = !buttonClicked,
+                        buttonType = ButtonType.INCORRECT
+                    )
+                    SimpleSpacer(size = 50)
+
+                    if (showDialog) {
+                        PointsOrSipsDialog(points = points, sips = sips, callback = {
+                            coroutineScope.launch {
+                                showSolution = false
+                                delay(timeMillis = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis.toLong())
+                                buttonClicked = false
+                                showDialog = false
+                                soundPlayed = false
+                                callback()
+                            }
+                        })
+                    }
+                }
+            )
         }
     }
 }
+

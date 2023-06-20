@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.SimpleButton
@@ -20,9 +19,13 @@ import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.viewmodels.GameSettingsViewModel
 
 @Composable
-fun DifficultyPickerScreen(navController: NavController) {
+fun DifficultyPickerScreen(
+    navController: NavController,
+    gameSettingsViewModel: GameSettingsViewModel
+) {
     val scaffoldState = rememberScaffoldState()
 
     Scaffold(
@@ -32,20 +35,26 @@ fun DifficultyPickerScreen(navController: NavController) {
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->
-        DifficultyPickerScreenContent(modifier = Modifier.padding(paddingValues = paddingValues),
-            onStartClicked = { navController.navigate(route = Screen.GameScreen.route) })
+        DifficultyPickerScreenContent(
+            modifier = Modifier.padding(paddingValues = paddingValues),
+            gameSettingsViewModel = gameSettingsViewModel,
+            onStartClicked = {
+                //Make sure to clear the values of the game settings view model
+                gameSettingsViewModel.setDifficulty(difficulty = null)
+                gameSettingsViewModel.setAdultMode(adultMode = null)
+                navController.navigate(route = Screen.GameScreen.route)
+            })
     }
 }
 
-@Preview
 @Composable
 fun DifficultyPickerScreenContent(
     modifier: Modifier = Modifier,
+    gameSettingsViewModel: GameSettingsViewModel,
     onStartClicked: () -> Unit = {}
 ) {
-    var difficulty: Difficulty? by remember {
-        mutableStateOf(value = null)
-    }
+
+    var difficulty = gameSettingsViewModel.getDifficulty()
 
     val buttonFontSize = 20
     val textFontSize = 26
@@ -69,9 +78,10 @@ fun DifficultyPickerScreenContent(
             )
             SimpleSpacer(size = 30)
 
+            //Easy Button
             SimpleButton(
                 modifier = buttonModifier,
-                onClick = { difficulty = Difficulty.EASY },
+                onClick = { gameSettingsViewModel.setDifficulty(difficulty = Difficulty.EASY) },
                 text = "Easy",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
@@ -84,9 +94,10 @@ fun DifficultyPickerScreenContent(
             )
             SimpleSpacer(size = 40)
 
+            //Medium Button
             SimpleButton(
                 modifier = buttonModifier,
-                onClick = { difficulty = Difficulty.MEDIUM },
+                onClick = { gameSettingsViewModel.setDifficulty(difficulty = Difficulty.MEDIUM) },
                 text = "Medium",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
@@ -99,9 +110,10 @@ fun DifficultyPickerScreenContent(
             )
             SimpleSpacer(size = 40)
 
+            //Hard Button
             SimpleButton(
                 modifier = buttonModifier,
-                onClick = { difficulty = Difficulty.HARD },
+                onClick = { gameSettingsViewModel.setDifficulty(difficulty = Difficulty.HARD) },
                 text = "Hard",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,
@@ -114,9 +126,10 @@ fun DifficultyPickerScreenContent(
             )
             SimpleSpacer(size = 40)
 
+            //Alcoholic Button
             SimpleButton(
                 modifier = buttonModifier,
-                onClick = { difficulty = Difficulty.ALCOHOLIC },
+                onClick = { gameSettingsViewModel.setDifficulty(difficulty = Difficulty.ALCOHOLIC) },
                 text = "Alcoholic",
                 fontSize = buttonFontSize,
                 fontFamily = fontFamily,

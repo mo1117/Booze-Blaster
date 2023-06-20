@@ -15,12 +15,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.boozeblaster.R
 import com.boozeblaster.composables.*
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.viewmodels.GameSettingsViewModel
 
 @Composable
-fun AdultModePickerScreen(navController: NavController) {
+fun AdultModePickerScreen(
+    navController: NavController,
+    gameSettingsViewModel: GameSettingsViewModel
+) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         scaffoldState = scaffoldState,
@@ -29,7 +34,9 @@ fun AdultModePickerScreen(navController: NavController) {
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->
-        AdultModePickerScreenContent(modifier = Modifier.padding(paddingValues = paddingValues),
+        AdultModePickerScreenContent(
+            modifier = Modifier.padding(paddingValues = paddingValues),
+            gameSettingsViewModel = gameSettingsViewModel,
             onContinueClicked = { navController.navigate(route = Screen.DifficultyPickerScreen.route) }
         )
     }
@@ -38,17 +45,16 @@ fun AdultModePickerScreen(navController: NavController) {
 @Composable
 fun AdultModePickerScreenContent(
     modifier: Modifier,
+    gameSettingsViewModel: GameSettingsViewModel,
     onContinueClicked: () -> Unit
 ) {
+
+    var adultModeEnabled = gameSettingsViewModel.getAdultMode()
 
     val buttonFontSize = 20
     val textFontSize = 26
     val fontFamily = FontFamily.SansSerif
     val buttonModifier = Modifier.sizeIn(minWidth = 150.dp, minHeight = 50.dp)
-
-    var adultModeEnabled: Boolean? by remember {
-        mutableStateOf(value = null)
-    }
 
     Surface(
         modifier = modifier
@@ -69,21 +75,21 @@ fun AdultModePickerScreenContent(
             SimpleSpacer(size = 50)
 
             //PG mode button
-            SimpleIconButton(
-                onClick = { adultModeEnabled = false },
+            SimpleImageButton(
+                onClick = { gameSettingsViewModel.setAdultMode(adultMode = false) },
                 modifier = buttonModifier,
-                imageVector = Icons.Default.Call,
-                color = if (adultModeEnabled == null || adultModeEnabled!!) Color.Gray else null
+                imageId = if (adultModeEnabled != null && !adultModeEnabled)
+                    R.drawable.angel_selected else R.drawable.angel_unselected
             )
 
             SimpleSpacer(size = 50)
 
             //Adult mode button
-            SimpleIconButton(
-                onClick = { adultModeEnabled = true },
+            SimpleImageButton(
+                onClick = { gameSettingsViewModel.setAdultMode(adultMode = true) },
+                imageId = if (adultModeEnabled != null && adultModeEnabled)
+                    R.drawable.adult_mode_selected else R.drawable.adult_mode_unselected,
                 modifier = buttonModifier,
-                imageVector = Icons.Default.AccountBox,
-                color = if (adultModeEnabled != null && adultModeEnabled!!) null else Color.Gray
             )
 
             SimpleSpacer(size = 50)

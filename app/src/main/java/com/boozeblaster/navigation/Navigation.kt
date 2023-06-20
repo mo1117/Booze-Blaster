@@ -5,10 +5,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.screens.*
+import com.boozeblaster.viewmodels.GameSettingsViewModel
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    val gameSettingsViewModel = GameSettingsViewModel()
 
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
 
@@ -25,7 +27,10 @@ fun Navigation() {
         }
 
         composable(route = Screen.StartGameScreen.route) {
-            StartGameScreen(navController = navController)
+            StartGameScreen(
+                navController = navController,
+                gameSettingsViewModel = gameSettingsViewModel
+            )
         }
 
         composable(route = Screen.GameScreen.route) {
@@ -35,17 +40,23 @@ fun Navigation() {
         composable(route = Screen.GameOverScreen.route) {
             GameOverScreen(navController = navController)
         }
-        
+
         composable(route = Screen.TutorialScreen.route) {
             TutorialScreen(navController = navController)
         }
 
         composable(route = Screen.DifficultyPickerScreen.route) {
-            DifficultyPickerScreen(navController = navController)
+            DifficultyPickerScreen(
+                navController = navController,
+                gameSettingsViewModel = gameSettingsViewModel
+            )
         }
-        
+
         composable(route = Screen.AdultModePickerScreen.route) {
-            AdultModePickerScreen(navController = navController)
+            AdultModePickerScreen(
+                navController = navController,
+                gameSettingsViewModel = gameSettingsViewModel
+            )
         }
     }
 }

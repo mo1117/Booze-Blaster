@@ -1,6 +1,5 @@
 package com.boozeblaster.minigames.individual
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -46,10 +45,6 @@ class GuessTheSong(
             mutableStateOf(value = false)
         }
 
-        var shouldHideSolutionButton by remember {
-            mutableStateOf(value = false)
-        }
-
         // Needed to check if the sound is finished playing
         var soundPlayed by remember {
             mutableStateOf(value = false)
@@ -76,23 +71,14 @@ class GuessTheSong(
             SimpleImage(imageId = R.drawable.speaker_on)
             SimpleSpacer(size = 30)
             AnimatingText(text = "Listen up", fontSize = 20, fontFamily = FontFamily.SansSerif)
-//            SimpleTextDisplay(
-//                text = "Listen up!",
-//                fontSize = 30,
-//                fontFamily = fontFamily
-//            )
         }
 
         if (soundPlayed) {
 
-            if (!showSolution && !shouldHideSolutionButton) {
+            if (!showSolution) {
                 // Show Solution Button
-                SimpleImageButton(
-                    onClick = {
-                        showSolution = true
-                        shouldHideSolutionButton = true
-                    },
-                    imageId = R.drawable.lightbulb_off,
+                SimpleButton(
+                    onClick = { showSolution = true },
                     text = "Show Solution",
                     fontSize = fontSize,
                     fontFamily = fontFamily

@@ -28,7 +28,7 @@ fun MyAnimatedVisibility(
         ) + fadeIn(initialAlpha = 0.3f),
         exit = slideOutVertically(
             animationSpec = tween(durationMillis = animationDuration),
-            targetOffsetY = { -500 }
+            targetOffsetY = { 500 }
         ) + shrinkVertically() + fadeOut()
     ) {
         Surface(modifier = Modifier.fillMaxSize(fraction = 1f)) {

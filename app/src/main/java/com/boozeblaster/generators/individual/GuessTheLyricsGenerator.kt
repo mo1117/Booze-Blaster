@@ -288,7 +288,7 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
             GuessTheLyrics(
                 songName = "Last Friday Night",
                 artist = "Katy Perry",
-                lyrics = "Yeah, we maxed our credit card cards and got kicked out of the bar",
+                lyrics = "Yeah, we maxed our credit cards and got kicked out of the bar",
                 lyricsCompletion = "So we hit the boulevard last Friday Night"
             ),
             GuessTheLyrics(
@@ -303,7 +303,12 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
                 lyrics = "Hot chicks, cool drinks make the summer jam",
                 lyricsCompletion = "We gonna party as much as we can"
             ),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+            GuessTheLyrics(
+                songName = "Solo Dance",
+                artist = "Martin Jensen",
+                lyrics = "But you can cool it down",
+                lyricsCompletion = "Not here to fool around"
+            ),
             GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
         )
     }

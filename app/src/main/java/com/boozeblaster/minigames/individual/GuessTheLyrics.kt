@@ -1,13 +1,12 @@
 package com.boozeblaster.minigames.individual
 
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import com.boozeblaster.composables.PointsOrSipsDialog
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
+import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.*
+import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
@@ -34,6 +33,9 @@ class GuessTheLyrics(
             mutableStateOf(value = false)
         }
 
+        val buttonModifier = Modifier
+            .size(width = 150.dp, height = 75.dp)
+
         timer.init(millisInFuture = 15000, onFinished = {
             sips = 2 * Game.getInstance().getSipMultiplier()
             player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
@@ -43,19 +45,18 @@ class GuessTheLyrics(
 //        timer.cancel()
 //        timer.start()
 
-        SimpleSpacer(size = 50)
-        SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = fontFamily)
-        SimpleSpacer(size = 50)
-        SimpleTextDisplay(text = this.artist, fontSize = 32, fontFamily = fontFamily)
-        SimpleSpacer(size = 50)
-        SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = fontFamily)
-        SimpleSpacer(size = 50)
-
         if (!showSolution) {
+            SimpleSpacer(size = 50)
+            SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = fontFamily)
+            SimpleSpacer(size = 50)
+            SimpleTextDisplay(text = this.artist, fontSize = 32, fontFamily = fontFamily)
+            SimpleSpacer(size = 50)
+            SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = fontFamily)
+            SimpleSpacer(size = 50)
 
             // Show Solution Button
             SimpleButton(
-                modifier = Modifier,
+                modifier = buttonModifier,
                 onClick = {
                     showSolution = true
                 },
@@ -63,19 +64,59 @@ class GuessTheLyrics(
                 fontSize = 16,
                 fontFamily = FontFamily.SansSerif
             )
-        } else {
-            SimpleTextDisplay(
-                text = this.lyricsCompletion,
-                fontSize = 28,
-                fontFamily = FontFamily.SansSerif
-            )
-            SimpleSpacer(size = 50)
+        }
 
-            Row {
+        MyAnimatedVisibility(
+            visible = showSolution,
+            animationDuration = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis,
+            content = {
+                SimpleTextDisplay(
+                    text = this.lyricsCompletion,
+                    fontSize = 28,
+                    fontFamily = FontFamily.SansSerif
+                )
+                SimpleSpacer(size = 50)
+
+                // "Correct" Button
+                SimpleButton(
+                    modifier = buttonModifier,
+                    onClick = {
+                        points = 2
+                        sips = 0
+                        player!!.addPoints(points = 1)
+                        showDialog = true
+                        buttonClicked = true
+                    },
+                    text = "Correct",
+                    fontSize = 16,
+                    fontFamily = FontFamily.SansSerif,
+                    enabled = !buttonClicked,
+                    buttonType = ButtonType.CORRECT
+                )
+                SimpleSpacer(size = 50)
+
+                // "Partially correct" Button
+                SimpleButton(
+                    modifier = buttonModifier,
+                    onClick = {
+                        points = 1
+                        sips = Game.getInstance().getSipMultiplier()
+                        player!!.addPoints(points = 1)
+                        player!!.addSips(sips = sips)
+                        showDialog = true
+                        buttonClicked = true
+                    },
+                    text = "Partially Correct",
+                    fontSize = 16,
+                    fontFamily = FontFamily.SansSerif,
+                    enabled = !buttonClicked,
+                    buttonType = ButtonType.HALF_CORRECT
+                )
+                SimpleSpacer(size = 50)
 
                 // "Wrong" Button
                 SimpleButton(
-                    modifier = Modifier,
+                    modifier = buttonModifier,
                     onClick = {
                         points = 0
                         sips = 2 * Game.getInstance().getSipMultiplier()
@@ -91,33 +132,16 @@ class GuessTheLyrics(
                 )
                 SimpleSpacer(size = 50)
 
-                // "Right" Button
-                SimpleButton(
-                    modifier = Modifier,
-                    onClick = {
-                        points = 1
-                        sips = 0
-                        player!!.addPoints(points = 1)
-                        showDialog = true
-                        buttonClicked = true
-                    },
-                    text = "Right",
-                    fontSize = 16,
-                    fontFamily = FontFamily.SansSerif,
-                    enabled = !buttonClicked,
-                    buttonType = ButtonType.CORRECT
-                )
+                // Show dialog that tells the player if they were correct
+                if (showDialog) {
+                    PointsOrSipsDialog(points = points, sips = sips, callback = {
+                        showSolution = false
+                        buttonClicked = false
+                        showDialog = false
+                        callback()
+                    })
+                }
             }
-        }
-
-        // Show dialog that tells the player if they were correct
-        if (showDialog) {
-            PointsOrSipsDialog(points = points, sips = sips, callback = {
-                showSolution = false
-                buttonClicked = false
-                showDialog = false
-                callback()
-            })
-        }
+        )
     }
 }

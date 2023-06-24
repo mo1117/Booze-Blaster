@@ -20,6 +20,7 @@ class PlayerViewModel(private val playerRepository: PlayerRepository) : ViewMode
     private val _playerListState = MutableStateFlow(listOf<Player>())
     val playerListState: StateFlow<List<Player>> = _playerListState.asStateFlow()
 
+
     var playerUIState by mutableStateOf(AddPlayerUIState())
         private set
 
@@ -36,8 +37,9 @@ class PlayerViewModel(private val playerRepository: PlayerRepository) : ViewMode
         return playerRepository.getAllPlayers()
     }
 
-    suspend fun addPlayer(player: Player) {
-        playerRepository.addPlayer(player = player)
+    suspend fun addPlayer() {
+        val player = playerUIState.toPlayer()
+        playerRepository.addPlayer(player)
     }
 
     suspend fun updatePlayer(player: Player) {
@@ -54,22 +56,13 @@ class PlayerViewModel(private val playerRepository: PlayerRepository) : ViewMode
         when (event) {
             is AddPlayerUIEvent.UsernameChanged -> {
                 val usernameResult =
-                    Validator.validateUsername(username = newPlayerUIState.userName)
+                    Validator.validateUsername(username = newPlayerUIState.name)
                 state =
                     if (!usernameResult.success) {
                         newPlayerUIState.copy(nameError = true)
                     } else newPlayerUIState.copy(
                         nameError = false
                     )
-            }
-            is AddPlayerUIEvent.BirthDateChanged -> {
-                val birthDayResult =
-                    Validator.validateBirthdate(birthDate = newPlayerUIState.birthDate)
-                state = if (!birthDayResult.success) {
-                    newPlayerUIState.copy(birthDateError = true)
-                } else newPlayerUIState.copy(
-                    birthDateError = false
-                )
             }
             else -> {}
         }

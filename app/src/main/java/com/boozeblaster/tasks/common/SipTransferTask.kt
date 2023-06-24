@@ -1,52 +1,58 @@
 package com.boozeblaster.tasks.common
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.ClickableSurfaceWithColumn
+import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.common.SipTransfer
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.headerFont
 
-class SipTransferTask(subTasks: List<SipTransfer> = emptyList()) :
-    CommonTask(subTasks = emptyList()) {
+class SipTransferTask(private val subTasks: List<SipTransfer>) :
+    CommonTask(subTasks = subTasks) {
 
     @Composable
     override fun DisplayCover(onSurfaceClicked: () -> Unit) {
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight(fraction = 1f)
-                .fillMaxWidth(fraction = 1f)
-                .clickable(onClick = { onSurfaceClicked() })
+        ClickableSurfaceWithColumn(
+            onSurfaceClicked = { onSurfaceClicked() },
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.background(
-                    color = getBackgroundColor()
-                )
-            ) {
-                Spacer(Modifier.size(50.dp))
-                SimpleTextDisplay(
-                    text = "SipTransfer",
-                    fontSize = 20,
-                    fontFamily = FontFamily.SansSerif
-                )
-            }
+            SimpleTextDisplay(
+                text = "SipTransfer",
+                fontSize = 30,
+                fontFamily = headerFont
+            )
+            SimpleSpacer(size = 50)
+            SimpleTextDisplay(
+                text = "The last round has started!\n\nYou will now have limited time to " +
+                        "trade points for sips!\nStart making offers to your teammates!",
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
         }
     }
 
-    /**
-     * We do not display any content here - just invoke the callback() method instantly
-     */
     @Composable
     override fun Display(callback: () -> Unit) {
-        callback()
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.background(
+                color = getBackgroundColor()
+            )
+        ) {
+            subTasks.get(index = 0).DisplayContent(
+                player = null,
+                callback = { callback() }
+            )
+        }
     }
 }

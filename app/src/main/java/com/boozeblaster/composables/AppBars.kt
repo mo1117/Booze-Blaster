@@ -101,7 +101,7 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
 
 @Composable
 fun GameScreenAppBar(onBackButtonClick: () -> Unit, currentRound: Int) {
-    val totalRounds = Game.getInstance().getRounds()
+    val totalRounds = Game.getRounds()
 
     TopAppBar(
         title = {},

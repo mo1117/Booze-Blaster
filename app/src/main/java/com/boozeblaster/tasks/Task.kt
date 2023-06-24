@@ -69,6 +69,6 @@ abstract class Task {
      * @return Whether we only want to show the cover for this task
      */
     private fun shouldDisplayOnlyCover(task: Task): Boolean {
-        return task is SetRuleTask || this is SipTransferTask
+        return task is SetRuleTask
     }
 }

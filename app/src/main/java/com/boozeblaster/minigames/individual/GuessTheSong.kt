@@ -32,13 +32,10 @@ class GuessTheSong(
 
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit) {
         val coroutineScope = rememberCoroutineScope()
 
         MyMediaPlayer.create(context = LocalContext.current, resid = this.resid)
-
-        val buttonModifier = Modifier
-            .size(width = 150.dp, height = 75.dp)
 
         // Whether or not we want to show the solution
         var showSolution by remember {
@@ -105,7 +102,6 @@ class GuessTheSong(
 
                     // "Both Right" Button
                     SimpleButton(
-                        modifier = buttonModifier,
                         onClick = {
                             points = 2
                             sips = 0
@@ -124,10 +120,9 @@ class GuessTheSong(
                     // User got only the song name or artist correct
 
                     SimpleButton(
-                        modifier = buttonModifier,
                         onClick = {
                             points = 1
-                            sips = Game.getInstance().getSipMultiplier()
+                            sips = Game.getSipMultiplier()
                             player!!.addPoints(points = points)
                             player.addSips(sips = sips)
                             showDialog = true
@@ -143,10 +138,9 @@ class GuessTheSong(
 
                     // "Wrong" Button
                     SimpleButton(
-                        modifier = buttonModifier,
                         onClick = {
                             points = 0
-                            sips = 2 * Game.getInstance().getSipMultiplier()
+                            sips = 2 * Game.getSipMultiplier()
                             player!!.addSips(sips = sips)
                             showDialog = true
                             buttonClicked = true
@@ -163,7 +157,6 @@ class GuessTheSong(
                         PointsOrSipsDialog(points = points, sips = sips, callback = {
                             coroutineScope.launch {
                                 showSolution = false
-                                delay(timeMillis = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis.toLong())
                                 buttonClicked = false
                                 showDialog = false
                                 soundPlayed = false

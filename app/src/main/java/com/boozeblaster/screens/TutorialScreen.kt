@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
+import com.boozeblaster.composables.ClickableSurfaceWithColumn
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.ui.theme.getBackgroundColor
@@ -43,27 +44,19 @@ fun TutorialScreenContent(
     var textCounter by remember {
         mutableStateOf(0)
     }
-    Surface(
-        modifier = modifier
-            .fillMaxWidth(fraction = 1f)
-            .fillMaxHeight(fraction = 1f)
-            .clickable(onClick = {
-                if (textCounter + 1 == tutorialTexts.size) onTutorialFinished() else textCounter++
-            })
+    ClickableSurfaceWithColumn(
+        onSurfaceClicked = {
+            if (textCounter + 1 == tutorialTexts.size)
+                onTutorialFinished() else textCounter++
+        },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
-            modifier = modifier.background(
-                color = getBackgroundColor()
-            )
-        ) {
-            SimpleTextDisplay(
-                text = tutorialTexts.get(index = textCounter),
-                fontSize = 20,
-                fontFamily = FontFamily.SansSerif
-            )
-        }
+        SimpleTextDisplay(
+            text = tutorialTexts.get(index = textCounter),
+            fontSize = 20,
+            fontFamily = FontFamily.SansSerif
+        )
     }
 }
 

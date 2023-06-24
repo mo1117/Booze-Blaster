@@ -21,5 +21,5 @@ abstract class MiniGame {
      * MiniGame
      */
     @Composable
-    abstract fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer)
+    abstract fun DisplayContent(player: Player?, callback: () -> Unit)
 }

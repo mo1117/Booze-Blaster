@@ -13,8 +13,8 @@ import com.boozeblaster.models.Player
  * different statements that have to be marked as fact or fiction
  */
 abstract class IndividualTask(
-    player: Player,
-    subTasks: List<MiniGame>
+    private val player: Player,
+    private val subTasks: List<MiniGame>
 ) : Task() {
     @Composable
     abstract override fun Display(callback: () -> Unit)

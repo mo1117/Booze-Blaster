@@ -58,5 +58,12 @@ fun Navigation() {
                 gameSettingsViewModel = gameSettingsViewModel
             )
         }
+
+        composable(route = Screen.DisplayDaresScreen.route) {
+            DisplayDaresScreen(
+                navController = navController,
+                gameSettingsViewModel = gameSettingsViewModel
+            )
+        }
     }
 }

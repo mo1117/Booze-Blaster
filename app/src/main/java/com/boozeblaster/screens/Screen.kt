@@ -19,4 +19,6 @@ sealed class Screen(val route: String) {
     object DifficultyPickerScreen : Screen(route = "difficulty")
 
     object AdultModePickerScreen : Screen(route = "adultMode")
+
+    object DisplayDaresScreen : Screen(route = "displayDares")
 }

@@ -35,7 +35,7 @@ class MyMediaPlayer private constructor() : MediaPlayer() {
             try {
                 INSTANCE!!.stop()
             } catch (e: Exception) {
-                Log.e("MyMediaPlayer", "Cannot stop MyMediaPlayer!")
+                Log.w("MyMediaPlayer", "Cannot stop MyMediaPlayer!")
             }
         }
     }

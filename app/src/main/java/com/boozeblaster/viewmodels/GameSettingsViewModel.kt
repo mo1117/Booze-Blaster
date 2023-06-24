@@ -1,10 +1,11 @@
 package com.boozeblaster.viewmodels
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.boozeblaster.enums.Difficulty
+import com.boozeblaster.generators.DareTaskGenerator
 
 /**
  * This view model is responsible for storing the set difficulty and whether adult mode is enabled
@@ -14,18 +15,27 @@ import com.boozeblaster.enums.Difficulty
  */
 class GameSettingsViewModel : ViewModel() {
     private var _difficultyState: Difficulty? by mutableStateOf(value = null)
-    private var _adultmodeState: Boolean? by mutableStateOf(value = null)
+    private var _adultModeState: Boolean? by mutableStateOf(value = null)
+    private var _daresAssignedState: Boolean by mutableStateOf(value = false)
 
     fun setAdultMode(adultMode: Boolean?) {
-        _adultmodeState = adultMode
+        _adultModeState = adultMode
     }
 
-    fun getAdultMode() : Boolean? = _adultmodeState
+    fun getAdultMode(): Boolean? = _adultModeState
 
     fun setDifficulty(difficulty: Difficulty?) {
         _difficultyState = difficulty
     }
 
-    fun getDifficulty() : Difficulty? = _difficultyState
+    fun getDifficulty(): Difficulty? = _difficultyState
 
+    fun setDaresAssigned(assigned: Boolean) {
+        _daresAssignedState = assigned
+        if (!assigned) {
+            DareTaskGenerator.resetUsedDares()
+        }
+    }
+
+    fun areDaresAssigned(): Boolean = _daresAssignedState
 }

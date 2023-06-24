@@ -12,9 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.composables.GameScreenAppBar
 import com.boozeblaster.models.Game
+import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.ui.theme.getBackgroundColor
-import com.boozeblaster.widgets.MyMediaPlayer
 
 @Composable
 fun GameScreen(navController: NavController = rememberNavController()) {
@@ -30,12 +30,7 @@ fun GameScreen(navController: NavController = rememberNavController()) {
             //TODO When the back button gets clicked in-game we ask for confirmation to leave
             GameScreenAppBar(
                 onBackButtonClick = {
-                    MyMediaPlayer.stop()
-                    navController.navigate(route = Screen.HomeScreen.route) {
-                        popUpTo(id = navController.graph.startDestinationId) {
-                            inclusive = false
-                        }
-                    }
+                    NavigationController.navigateToHomeScreen(navController = navController)
                 },
                 currentRound = roundCounter
             )
@@ -44,7 +39,6 @@ fun GameScreen(navController: NavController = rememberNavController()) {
     ) { paddingValues ->
         GameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            game = Game.getInstance(),
             gameFinished = {
                 navController.popBackStack() // Remove the current GameScreen
                 navController.navigate(route = Screen.GameOverScreen.route)
@@ -57,7 +51,6 @@ fun GameScreen(navController: NavController = rememberNavController()) {
 @Composable
 fun GameScreenContent(
     modifier: Modifier,
-    game: Game,
     gameFinished: () -> Unit,
     incrementRoundCounter: () -> Unit
 ) {
@@ -73,7 +66,7 @@ fun GameScreenContent(
     }
 
     //The current task to be played
-    val currentTask = game.getTask(index = taskCounter)
+    val currentTask = Game.getTask(index = taskCounter)
 
     //Whether we have already added the dares, this should happen only in the very end
     var daresAdded by remember {
@@ -94,9 +87,9 @@ fun GameScreenContent(
 
         currentTask.DisplayTask(
             callback = {
-                if (taskCounter + 1 == game.getTasks().size) {
+                if (taskCounter + 1 == Game.getTasks().size) {
                     if (!daresAdded) {
-                        game.appendDareTasks()
+                        Game.appendDareTasks()
                         daresAdded = true
                         taskCounter++
                     } else {

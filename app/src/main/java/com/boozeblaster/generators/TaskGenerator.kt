@@ -1,5 +1,6 @@
 package com.boozeblaster.generators
 
+import com.boozeblaster.minigames.common.SipTransfer
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.CommonTask
 import com.boozeblaster.tasks.IndividualTask
@@ -67,7 +68,7 @@ object TaskGenerator {
      */
     private fun generateCommonTask(isLastRound: Boolean): CommonTask {
         if (isLastRound) {
-            return SipTransferTask(subTasks = emptyList())
+            return SipTransferTask(subTasks = listOf(SipTransfer()))
         }
         val random = Random.nextInt(from = 0, until = COMMON_TASKS.size)
         val game = COMMON_TASKS[random]

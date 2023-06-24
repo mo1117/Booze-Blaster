@@ -16,7 +16,7 @@ import com.boozeblaster.utils.CustomConverters
  */
 @Database(
     entities = [Player::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 

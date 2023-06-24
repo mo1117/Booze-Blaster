@@ -19,7 +19,7 @@ class Dare(
     override fun toString(): String = this.dare
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit) {
         // STUB
     }
 }

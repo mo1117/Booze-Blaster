@@ -6,6 +6,16 @@ enum class AnimationConstants(val durationMillis: Int) {
 
     POINTS_OR_SIPS_FADE_IN_OUT(durationMillis = 750),
 
-    ADD_EXISTING_PLAYERS_FADE_IN_OUT(durationMillis = 600)
+    POINTS_OR_SIPS_DIALOG(durationMillis = 2000),
+
+    SIPS_FADE_IN_OUT(durationMillis = 750),
+
+    SIPS_DIALOG(durationMillis = 2000),
+
+    ADD_EXISTING_PLAYERS_FADE_IN_OUT(durationMillis = 600),
+
+    PLAYER_PICKER_FADE_IN_OUT(durationMillis = 600),
+
+    CONTINUE_BUTTON_FADE_IN(durationMillis = 1000)
 
 }

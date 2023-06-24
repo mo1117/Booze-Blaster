@@ -7,7 +7,7 @@ import com.boozeblaster.models.Game
 
 class NeverHaveIEverGenerator : MiniGameGenerator() {
     override fun getList(): List<MiniGame> {
-        val list = if (Game.getInstance().isAdultMode()) adultModeList else normalList
+        val list = if (Game.isAdultMode()) adultModeList else normalList
         return super.getList(list = list, amount = 3)
     }
 
@@ -28,15 +28,10 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
             NeverHaveIEver(statement = ""),
         )
         private val adultModeList = listOf(
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
-            NeverHaveIEver(statement = ""),
+            NeverHaveIEver(statement = "Done Cocaine in Munich."),
+            NeverHaveIEver(statement = "Done Cocaine in Munich."),
+            NeverHaveIEver(statement = "Done Cocaine in Munich."),
+//            NeverHaveIEver(statement = ""),
         )
     }
 }

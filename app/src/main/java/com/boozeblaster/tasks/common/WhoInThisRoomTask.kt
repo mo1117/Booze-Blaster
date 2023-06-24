@@ -1,18 +1,15 @@
 package com.boozeblaster.tasks.common
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.ClickableSurfaceWithColumn
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.minigames.common.WhoInThisRoom
 import com.boozeblaster.tasks.CommonTask
-import com.boozeblaster.ui.theme.getBackgroundColor
-import com.boozeblaster.widgets.Timer
+import com.boozeblaster.ui.theme.headerFont
 
 class WhoInThisRoomTask(
     private val subTasks: List<WhoInThisRoom>
@@ -22,22 +19,23 @@ class WhoInThisRoomTask(
 
     @Composable
     override fun DisplayCover(onSurfaceClicked: () -> Unit) {
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight(fraction = 1f)
-                .fillMaxWidth(fraction = 1f)
-                .clickable(onClick = { onSurfaceClicked() })
+        ClickableSurfaceWithColumn(
+            onSurfaceClicked = { onSurfaceClicked() },
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.background(
-                    color = getBackgroundColor()
-                )
-            ) {
-                Text(text = "WhoInThisRoom")
-                Spacer(Modifier.size(50.dp))
-            }
+            SimpleTextDisplay(
+                text = "Who In This Room",
+                fontSize = 30,
+                fontFamily = headerFont
+            )
+            SimpleSpacer(size = 50)
+            SimpleTextDisplay(
+                text = "Do your own countdown and point to the player that you thought of first " +
+                        "when you heard the statement!",
+                fontSize = super.fontSize,
+                fontFamily = super.fontFamily
+            )
         }
     }
 
@@ -46,29 +44,20 @@ class WhoInThisRoomTask(
         var subTaskCounter by remember {
             mutableStateOf(0)
         }
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth(fraction = 1f)
-                .fillMaxHeight(fraction = 1f)
+        SurfaceWithColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.background(
-                    color = getBackgroundColor()
-                )
-            ) {
-                subTasks.get(subTaskCounter).DisplayContent(
-                    player = null,
-                    callback = {
-                        if (subTaskCounter == subTasks.size - 1) {
-                            subTaskCounter = 0
-                            callback()
-                        } else {
-                            subTaskCounter++
-                        }
-                    }, timer = Timer.getInstance())
-            }
+            subTasks.get(subTaskCounter).DisplayContent(
+                player = null,
+                callback = {
+                    if (subTaskCounter == subTasks.size - 1) {
+                        subTaskCounter = 0
+                        callback()
+                    } else {
+                        subTaskCounter++
+                    }
+                })
         }
     }
 }

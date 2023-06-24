@@ -1,21 +1,22 @@
 package com.boozeblaster.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.composables.*
 import com.boozeblaster.models.Game
+import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.ui.theme.getBackgroundColor
 
 @Composable
@@ -26,11 +27,9 @@ fun GameOverScreen(navController: NavController) {
         scaffoldState = scaffoldState,
         topBar = {
             SimpleTopAppBar(onBackButtonClick = {
-                navController.navigate(route = Screen.HomeScreen.route) {
-                    popUpTo(id = navController.graph.startDestinationId) {
-                        inclusive = false
-                    }
-                }
+                NavigationController.navigateToHomeScreen(
+                    navController = navController
+                )
             })
         },
         backgroundColor = getBackgroundColor()
@@ -39,7 +38,7 @@ fun GameOverScreen(navController: NavController) {
             modifier = Modifier.padding(paddingValues = paddingValues),
             playAgain = {
                 navController.popBackStack()
-                Game.getInstance().reset()
+                Game.reset()
                 navController.navigate(route = Screen.GameScreen.route)
             }
         )
@@ -52,47 +51,52 @@ fun GameOverScreenContent(
     playAgain: () -> Unit
 ) {
     // Sort the list of players by their points
-    val players = Game.getInstance().getPlayers()
+    val players = Game.getPlayers()
         .sortedByDescending(selector = { player -> player.getPoints() })
 //        .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
-    Surface(
-        modifier = modifier
-            .fillMaxWidth(fraction = 1f)
-            .fillMaxHeight(fraction = 1f)
+    SurfaceWithColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier.background(
-                color = getBackgroundColor()
-            )
-        ) {
-            val r = Row {
-                Text(text = "Name")
-                Spacer(modifier = modifier.size(50.dp))
-                Text(text = "Points")
-                Spacer(modifier = modifier.size(50.dp))
-                Text(text = "Sips")
-            }
-            for (player in players) { //TODO wrong order?
-                Row {
-                    Text(text = "${player.getName()}")
-                    Spacer(modifier = modifier.size(50.dp))
-                    Text(text = "${player.getPoints()}")
-                    Spacer(modifier = modifier.size(50.dp))
-                    Text(text = "${player.getSips()}")
+
+        LazyColumn(
+            modifier = Modifier.size(width = 300.dp, height = 400.dp),
+            content = {
+                items(players) { player ->
+                    Row {
+                        SimpleTextDisplay(
+                            text = player.getName(),
+                            fontSize = 20,
+                            fontFamily = FontFamily.SansSerif
+                        )
+                        SimpleSpacer(size = 10)
+
+                        SimpleTextDisplay(
+                            text = "${player.getPoints()} Points",
+                            fontSize = 20,
+                            fontFamily = FontFamily.SansSerif
+                        )
+                        SimpleSpacer(size = 10)
+
+                        SimpleTextDisplay(
+                            text = "${player.getSips()} Sips",
+                            fontSize = 20,
+                            fontFamily = FontFamily.SansSerif
+                        )
+                    }
                 }
-            }
-            SimpleButton(
-                modifier = Modifier,
-                onClick = {
-                    playAgain()
-                },
-                text = "Play Again",
-                fontSize = 20,
-                fontFamily = FontFamily.SansSerif,
-                color = Color.Magenta
-            )
-        }
+            })
+
+        SimpleSpacer(size = 50)
+
+        SimpleButton(
+            modifier = Modifier,
+            onClick = {
+                playAgain()
+            },
+            text = "Play Again",
+            fontSize = 20,
+            fontFamily = FontFamily.SansSerif
+        )
     }
 }

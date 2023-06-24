@@ -11,7 +11,7 @@ class SetRule : MiniGame() {
      * STUB method - we do not need to display any content here
      */
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit) {
         // STUB
     }
 }

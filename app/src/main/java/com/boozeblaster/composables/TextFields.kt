@@ -56,7 +56,7 @@ fun SimpleTextDisplay(
     fontFamily: FontFamily
 ) {
     Text(
-        modifier = Modifier.padding(horizontal = 8.dp),
+        modifier = Modifier.padding(horizontal = 10.dp),
         text = text,
         fontSize = fontSize.sp,
         fontFamily = fontFamily,

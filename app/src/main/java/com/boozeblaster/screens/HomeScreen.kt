@@ -1,19 +1,19 @@
 package com.boozeblaster.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SurfaceWithColumn
+import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
 
 @Composable
@@ -44,55 +44,47 @@ fun HomeScreenContent(
     onTutorialClicked: () -> Unit
 ) {
 
-    Surface(
-        modifier = modifier
-            .fillMaxWidth(fraction = 1f)
-            .fillMaxHeight(fraction = 1f)
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
-            modifier = modifier.background(
-                color = getBackgroundColor()
-            )
-        ) {
-            // Change button specifications here as we want them to look consistent
-            val buttonModifier = Modifier
-                .size(width = 150.dp, height = 75.dp)
-            val fontSize = 16
-            val fontFamily = FontFamily.SansSerif
+    Game.reset()
 
-            SimpleSpacer(size = 100)
-            SimpleButton(
-                modifier = buttonModifier,
-                onClick = {
-                    onStartClicked()
-                },
-                text = "Start",
-                fontSize = fontSize,
-                fontFamily = fontFamily
-            )
-            Spacer(
-                modifier = modifier.size(size = 100.dp)
-            )
-            SimpleButton(
-                modifier = buttonModifier,
-                onClick = { onAddPlayerClicked() },
-                text = "Add Player",
-                fontSize = fontSize,
-                fontFamily = fontFamily
-            )
-            Spacer(
-                modifier = modifier.size(size = 100.dp)
-            )
-            SimpleButton(
-                modifier = buttonModifier,
-                onClick = { onTutorialClicked() },
-                text = "How To Play",
-                fontSize = fontSize,
-                fontFamily = fontFamily
-            )
-        }
+    SurfaceWithColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        // Change button specifications here as we want them to look consistent
+        val minHeight = 75
+        val fontSize = 16
+        val fontFamily = FontFamily.SansSerif
+
+        //Start button
+        SimpleButton(
+            onClick = {
+                onStartClicked()
+            },
+            text = "Start",
+            fontSize = fontSize,
+            fontFamily = fontFamily,
+            minHeight = minHeight
+        )
+        SimpleSpacer(size = 100)
+
+        //Add a player button
+        SimpleButton(
+            onClick = { onAddPlayerClicked() },
+            text = "Add Player",
+            fontSize = fontSize,
+            fontFamily = fontFamily,
+            minHeight = minHeight
+        )
+        SimpleSpacer(size = 100)
+
+        //Tutorial button
+        SimpleButton(
+            onClick = { onTutorialClicked() },
+            text = "How To Play",
+            fontSize = fontSize,
+            fontFamily = fontFamily,
+            minHeight = minHeight
+        )
     }
 }
 

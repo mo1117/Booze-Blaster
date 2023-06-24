@@ -20,7 +20,7 @@ class FactOrFiction(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit) {
 
         // Disable both "Right" and "Wrong" buttons after first click - otherwise a user could
         // spam the button to gain more points
@@ -88,7 +88,7 @@ class FactOrFiction(
             return
         }
         points = 0
-        sips = Game.getInstance().getSipMultiplier()
+        sips = Game.getSipMultiplier()
         player.addSips(sips = sips)
     }
 }

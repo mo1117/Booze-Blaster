@@ -18,14 +18,13 @@ import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.*
 import com.boozeblaster.enums.AnimationConstants
-import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.GameSettingsViewModel
 import com.boozeblaster.viewmodels.PlayerViewModel
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @Composable
@@ -33,7 +32,6 @@ fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSet
     val playerViewModel: PlayerViewModel =
         viewModel(factory = InjectorUtils.providePlayerViewModelFactory(context = LocalContext.current))
     val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
 
 
     Scaffold(
@@ -41,10 +39,12 @@ fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSet
         topBar = {
             SimpleTopAppBar(
                 onBackButtonClick = {
-                    //Set the values of the view model to null
-                    gameSettingsViewModel.setAdultMode(adultMode = null)
-                    gameSettingsViewModel.setDifficulty(difficulty = null)
-                    navController.popBackStack()
+                    NavigationController.popBackStackIntoHomeScreen(
+                        navController = navController,
+                        setAdultMode = gameSettingsViewModel::setAdultMode,
+                        setDifficulty = gameSettingsViewModel::setDifficulty,
+                        setDaresAssigned = gameSettingsViewModel::setDaresAssigned
+                    )
                 }
             )
         },
@@ -68,21 +68,6 @@ fun StartGameScreenContent(
     onAddPlayerClicked: () -> Unit,
     onContinueClicked: () -> Unit
 ) {
-
-    val calendar = GregorianCalendar()
-    calendar.set(2000, 11, 17)
-    val date = calendar.gregorianChange
-
-    val p1 = Player(name = "Mo", birthDate = date)
-    val p2 = Player(2, "Mo2", date)
-    val p3 = Player(3, "Mo3", date)
-
-    Game.init(
-        listOf(p1, p2),
-        2,
-        Difficulty.MEDIUM,
-        false
-    )
 
     var addExistingPlayers by remember {
         mutableStateOf(value = false)
@@ -119,6 +104,8 @@ fun StartGameScreenContent(
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
+                        Game.addPlayer(Player(name = "Mo"))
+                        Game.addPlayer(Player(name = "Mo1337"))
                         onContinueClicked()
                     },
                     text = "Continue",
@@ -161,14 +148,14 @@ fun StartGameScreenContent(
             LazyColumn(
                 modifier = Modifier.size(height = 200.dp, width = 100.dp),
                 content = {
-                items(items = test) {
-                    SimpleTextDisplay(
-                        text = it,
-                        fontSize = 16,
-                        fontFamily = FontFamily.SansSerif
-                    )
+                    items(items = test) {
+                        SimpleTextDisplay(
+                            text = it,
+                            fontSize = 16,
+                            fontFamily = FontFamily.SansSerif
+                        )
+                    }
                 }
-            }
             )
 
             SimpleSpacer(size = 50)

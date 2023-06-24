@@ -1,10 +1,8 @@
 package com.boozeblaster.minigames.individual
 
-import androidx.compose.foundation.layout.size
+import android.os.CountDownTimer
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import com.boozeblaster.composables.*
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
@@ -21,7 +19,8 @@ class GuessTheLyrics(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit, timer: Timer) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+
         // Whether or not we want to show the solution
         var showSolution by remember {
             mutableStateOf(value = false)
@@ -32,18 +31,6 @@ class GuessTheLyrics(
         var buttonClicked by remember {
             mutableStateOf(value = false)
         }
-
-        val buttonModifier = Modifier
-            .size(width = 150.dp, height = 75.dp)
-
-        timer.init(millisInFuture = 15000, onFinished = {
-            sips = 2 * Game.getInstance().getSipMultiplier()
-            player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
-            showSolution = true
-        })
-
-//        timer.cancel()
-//        timer.start()
 
         if (!showSolution) {
             SimpleSpacer(size = 50)
@@ -56,7 +43,6 @@ class GuessTheLyrics(
 
             // Show Solution Button
             SimpleButton(
-                modifier = buttonModifier,
                 onClick = {
                     showSolution = true
                 },
@@ -79,7 +65,6 @@ class GuessTheLyrics(
 
                 // "Correct" Button
                 SimpleButton(
-                    modifier = buttonModifier,
                     onClick = {
                         points = 2
                         sips = 0
@@ -97,12 +82,11 @@ class GuessTheLyrics(
 
                 // "Partially correct" Button
                 SimpleButton(
-                    modifier = buttonModifier,
                     onClick = {
                         points = 1
-                        sips = Game.getInstance().getSipMultiplier()
+                        sips = Game.getSipMultiplier()
                         player!!.addPoints(points = 1)
-                        player!!.addSips(sips = sips)
+                        player.addSips(sips = sips)
                         showDialog = true
                         buttonClicked = true
                     },
@@ -116,11 +100,10 @@ class GuessTheLyrics(
 
                 // "Wrong" Button
                 SimpleButton(
-                    modifier = buttonModifier,
                     onClick = {
                         points = 0
-                        sips = 2 * Game.getInstance().getSipMultiplier()
-                        player!!.addSips(sips = 2 * Game.getInstance().getSipMultiplier())
+                        sips = 2 * Game.getSipMultiplier()
+                        player!!.addSips(sips = 2 * Game.getSipMultiplier())
                         showDialog = true
                         buttonClicked = true
                     },
@@ -130,7 +113,7 @@ class GuessTheLyrics(
                     enabled = !buttonClicked,
                     buttonType = ButtonType.INCORRECT
                 )
-                SimpleSpacer(size = 50)
+                SimpleSpacer(size = 30)
 
                 // Show dialog that tells the player if they were correct
                 if (showDialog) {

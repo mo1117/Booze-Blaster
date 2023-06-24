@@ -7,9 +7,13 @@ import com.boozeblaster.models.Game
 
 class DareGenerator : MiniGameGenerator() {
 
+    /**
+     * Here we return the complete list of dares, matching the dares to the players is done in our
+     * DareTaskGenerator
+     * @see com.boozeblaster.generators.DareTaskGenerator
+     */
     override fun getList(): List<MiniGame> {
-        val list = if (Game.getInstance().isAdultMode()) adultModeList else normalList
-        return super.getList(list = list, amount = Game.getInstance().getPlayers().size)
+        return if (Game.isAdultMode()) adultModeList else normalList
     }
 
     /**
@@ -17,10 +21,15 @@ class DareGenerator : MiniGameGenerator() {
      */
     private companion object {
         private val normalList = listOf(
-            Dare(dare = "Hug everyone in this room!"),
-            Dare(dare = "Hug everyone in this room!"),
-            Dare(dare = "Hug everyone in this room!"),
-            Dare(dare = "Hug everyone in this room!")
+            Dare(dare = "Hug everyone in this room!1"),
+            Dare(dare = "Hug everyone in this room!2"),
+            Dare(dare = "Hug everyone in this room!3"),
+            Dare(dare = "Hug everyone in this room!4"),
+            Dare(dare = "Hug everyone in this room!5"),
+            Dare(dare = "Hug everyone in this room!6"),
+            Dare(dare = "Hug everyone in this room!7"),
+            Dare(dare = "Hug everyone in this room!8"),
+            Dare(dare = "Hug everyone in this room!9"),
         )
         private val adultModeList = listOf(
             Dare(dare = "Kiss everyone in this room!")

@@ -75,7 +75,7 @@ class FactOrFictionTask(
                     } else {
                         subTaskCounter++
                     }
-                }, timer = Timer.getInstance())
+                })
         }
     }
 }

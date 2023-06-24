@@ -66,7 +66,7 @@ class GuessTheLyricsTask(
                     } else {
                         subTaskCounter++
                     }
-                }, timer = Timer.getInstance())
+                })
         }
     }
 }

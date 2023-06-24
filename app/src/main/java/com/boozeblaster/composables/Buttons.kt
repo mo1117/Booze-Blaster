@@ -1,24 +1,19 @@
 package com.boozeblaster.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.getButtonColor
-import com.boozeblaster.ui.theme.getFontColor
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Represents a simple button that can be used to display text and perform onClick actions
@@ -32,55 +27,55 @@ fun SimpleButton(
     fontFamily: FontFamily,
     color: Color? = null,
     enabled: Boolean = true,
-    buttonType: ButtonType = ButtonType.UI
+    buttonType: ButtonType = ButtonType.UI,
+    minWidth: Int = 150,
+    minHeight: Int = 50,
+    needsConfirmation: Boolean = false
 ) {
-
-    //TODO maybe we want some cool standard button onClick effects?
 
     val buttonColor = color ?: getButtonColor(buttonType = buttonType)
 
+    var displayConfirmation by remember {
+        mutableStateOf(value = needsConfirmation)
+    }
+
+    var buttonText by remember {
+        mutableStateOf(value = text)
+    }
+
     Button(
-        onClick = { onClick() },
-        modifier = modifier,
+        onClick = {
+            if (displayConfirmation) {
+                displayConfirmation = false
+                buttonText = "Confirm"
+            } else {
+                displayConfirmation = needsConfirmation
+                buttonText = text
+                onClick()
+            }
+        },
+        modifier = modifier
+            .sizeIn(
+                minWidth = minWidth.dp,
+                minHeight = minHeight.dp
+            ),
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
         shape = AbsoluteRoundedCornerShape(percent = 100)
     ) {
         SimpleTextDisplay(
-            text = text,
+            text = buttonText,
             fontSize = fontSize,
             fontFamily = fontFamily
         )
     }
 }
 
-@Composable
-fun SimpleIconButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-    color: Color? = null,
-    enabled: Boolean = true,
-    buttonType: ButtonType = ButtonType.UI,
-    imageVector: ImageVector,
-    contentDescription: String = ""
-) {
-
-    val buttonColor = color ?: getButtonColor(buttonType = buttonType)
-
-    Button(
-        onClick = { onClick() },
-        modifier = modifier,
-        enabled = enabled,
-        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-    ) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = contentDescription,
-            tint = getFontColor()
-        )
-    }
-}
-
+/**
+ * Simple Button that holds an image and performs onClick actions
+ *
+ * If needed. a text can be added that will then be displayed underneath the picture
+ */
 @Composable
 fun SimpleImageButton(
     modifier: Modifier = Modifier,
@@ -96,14 +91,18 @@ fun SimpleImageButton(
 
     Button(
         onClick = { onClick() },
-        colors = ButtonDefaults.buttonColors(backgroundColor = getBackgroundColor()),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = getBackgroundColor(),
+            disabledBackgroundColor = getBackgroundColor()
+        ),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 0.dp,
             pressedElevation = 0.dp,
             disabledElevation = 0.dp,
             hoveredElevation = 0.dp,
             focusedElevation = 0.dp
-        )
+        ),
+        enabled = enabled
     ) {
         Image(
             modifier = modifier,

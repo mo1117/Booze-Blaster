@@ -1,23 +1,20 @@
 package com.boozeblaster.tasks.individual
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import com.boozeblaster.composables.ClickableSurfaceWithColumn
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.individual.GuessTheSong
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.ui.theme.getBackgroundColor
-import com.boozeblaster.widgets.Timer
+import com.boozeblaster.ui.theme.headerFont
 
 class GuessTheSongTask(
     private val player: Player,
@@ -29,31 +26,34 @@ class GuessTheSongTask(
 
     @Composable
     override fun DisplayCover(onSurfaceClicked: () -> Unit) {
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight(fraction = 1f)
-                .fillMaxWidth(fraction = 1f)
-                .clickable(onClick = { onSurfaceClicked() })
+        ClickableSurfaceWithColumn(
+            onSurfaceClicked = { onSurfaceClicked() },
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.background(
-                    color = getBackgroundColor()
-                )
-            ) {
-                SimpleTextDisplay(
-                    text = player.getName(),
-                    fontSize = 20,
-                    fontFamily = FontFamily.SansSerif
-                )
-                SimpleSpacer(size = 50)
-                SimpleTextDisplay(
-                    text = "Guess the song - watch the timer!",
-                    fontSize = 20,
-                    fontFamily = FontFamily.SansSerif
-                )
-            }
+            SimpleTextDisplay(
+                text = "Guess the Song",
+                fontSize = 30,
+                fontFamily = headerFont
+            )
+            SimpleSpacer(size = 30)
+
+            SimpleTextDisplay(
+                text = player.getName(),
+                fontSize = 26,
+                fontFamily = FontFamily.SansSerif
+            )
+            SimpleSpacer(size = 30)
+
+            SimpleTextDisplay(
+                text = "You will have to guess the following three songs. If you cannot name " +
+                        "both artist and the song's name, you will drink the full amount!\n\n" +
+                        "If you are able to guess both correct, you will be rewarded full points " +
+                        "instead!\n\nIf only one guess is correct, points and sips will both be " +
+                        "halved.",
+                fontSize = super.fontSize,
+                fontFamily = super.fontFamily
+            )
         }
     }
 
@@ -78,7 +78,7 @@ class GuessTheSongTask(
                     } else {
                         subTaskCounter++
                     }
-                }, timer = Timer.getInstance()
+                }
             )
         }
     }

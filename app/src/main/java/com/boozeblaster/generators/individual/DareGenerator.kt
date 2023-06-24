@@ -30,9 +30,25 @@ class DareGenerator : MiniGameGenerator() {
             Dare(dare = "Hug everyone in this room!7"),
             Dare(dare = "Hug everyone in this room!8"),
             Dare(dare = "Hug everyone in this room!9"),
+            Dare(dare = "Hug everyone in this room!9"),
+            Dare(dare = "Hug everyone in this room!9"),
+            Dare(dare = "Hug everyone in this room!9"),
         )
         private val adultModeList = listOf(
-            Dare(dare = "Kiss everyone in this room!")
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
+            Dare(dare = "Kiss everyone in this room!"),
         )
     }
 }

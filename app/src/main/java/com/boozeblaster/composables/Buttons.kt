@@ -114,3 +114,52 @@ fun SimpleImageButton(
         SimpleTextDisplay(text = text, fontSize = fontSize, fontFamily = fontFamily)
     }
 }
+
+@Composable
+fun SimpleButtonAdd(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    text: String,
+    fontSize: Int,
+    fontFamily: FontFamily,
+    color: Color? = null,
+    enabled: Boolean = true,
+    buttonType: ButtonType = ButtonType.UI,
+    minWidth: Int = 150,
+    minHeight: Int = 50,
+    needsConfirmation: Boolean = false
+) {
+    val buttonColor = color ?: getButtonColor(buttonType = buttonType)
+
+    var displayConfirmation by remember { mutableStateOf(value = needsConfirmation) }
+    var buttonText by remember { mutableStateOf(value = text) }
+    var buttonEnabled by remember { mutableStateOf(value = enabled) }
+
+    Button(
+        onClick = {
+            if (displayConfirmation) {
+                displayConfirmation = false
+                buttonText = "Confirm"
+            } else {
+                displayConfirmation = needsConfirmation
+                buttonText = text
+                buttonEnabled = false // Disable the button after clicking
+                onClick()
+            }
+        },
+        modifier = modifier
+            .sizeIn(
+                minWidth = minWidth.dp,
+                minHeight = minHeight.dp
+            ),
+        enabled = buttonEnabled, // Use the updated buttonEnabled value
+        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
+        shape = AbsoluteRoundedCornerShape(percent = 100)
+    ) {
+        SimpleTextDisplay(
+            text = buttonText,
+            fontSize = fontSize,
+            fontFamily = fontFamily
+        )
+    }
+}

@@ -69,3 +69,9 @@ data class Player(
 
     fun getSips(): Int = this.sips
 }
+
+fun getPlayers(): List<Player> {
+    return listOf(
+
+    )
+}

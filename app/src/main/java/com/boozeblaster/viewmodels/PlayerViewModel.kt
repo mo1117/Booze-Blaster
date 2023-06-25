@@ -5,7 +5,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.models.getPlayers
 import com.boozeblaster.repositories.PlayerRepository
 import com.boozeblaster.screens.AddPlayerUIEvent
 import com.boozeblaster.screens.AddPlayerUIState
@@ -40,7 +42,10 @@ class PlayerViewModel(private val playerRepository: PlayerRepository) : ViewMode
     suspend fun addPlayer() {
         val player = playerUIState.toPlayer()
         playerRepository.addPlayer(player)
+        //Game.addPlayer(player)
     }
+
+
 
     suspend fun updatePlayer(player: Player) {
         playerRepository.updatePlayer(player = player)

@@ -23,4 +23,5 @@ interface PlayerDao {
 
     @Query("SELECT * FROM Player")
     fun getAllPlayers(): Flow<List<Player>>
+
 }

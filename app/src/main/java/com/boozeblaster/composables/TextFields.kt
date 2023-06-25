@@ -1,12 +1,17 @@
 package com.boozeblaster.composables
 
+import android.graphics.Color
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
@@ -19,7 +24,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SimpleTextField(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     value: String,
     label: String,
     errorMsg: String = "",
@@ -27,23 +32,32 @@ fun SimpleTextField(
     singleLine: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     onDone: () -> Unit = {},
-    onChange: (String) -> Unit
+    onChange: (String) -> Unit,
 ) {
-    OutlinedTextField(
-        modifier = modifier.fillMaxWidth(fraction = 1f),
-        value = value,
-        label = { Text(text = label) },
-        isError = isError,
-        singleLine = singleLine,
-        onValueChange = { onChange(it) },
-        keyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Done,
-            keyboardType = keyboardType
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = { onDone() }
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(color = androidx.compose.ui.graphics.Color.White, shape = RoundedCornerShape(16.dp)) // Set background color and rounded shape
+            .padding(8.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(fraction = 1f),
+            value = value,
+            label = { Text(text = label) },
+            isError = isError,
+            singleLine = singleLine,
+            onValueChange = { onChange(it) },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done,
+                keyboardType = keyboardType
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = { onDone() }
+            )
         )
-    )
+    }
+
     if (isError) {
         SimpleTextDisplay(text = errorMsg, fontSize = 16, fontFamily = FontFamily.SansSerif)
     }

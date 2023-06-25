@@ -99,7 +99,7 @@ fun StartGameScreenContent(
                     },
                     imageId = R.drawable.add_player,
                     contentDescription = "Add existing Player",
-                    text = "Add already existing player",
+                    text = "Add players to the Game ",
                     fontSize = 20,
                     fontFamily = FontFamily.SansSerif
                 )
@@ -108,12 +108,14 @@ fun StartGameScreenContent(
                 //TODO The adult / pg mode is set in the next screen
                 //TODO The difficulty is picked in the 2nd next screen
                 //TODO Init the
+                
+                SimpleSpacer(size = 20)
 
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
-                        Game.addPlayer(Player(name = "Mo"))
-                        Game.addPlayer(Player(name = "Mo1337"))
+                        //Game.addPlayer(Player(name = "Mo"))
+                        //Game.addPlayer(Player(name = "Mo1337"))
                         onContinueClicked()
                     },
                     text = "Continue",
@@ -128,28 +130,39 @@ fun StartGameScreenContent(
         visible = addExistingPlayers,
         animationDuration = AnimationConstants.ADD_EXISTING_PLAYERS_FADE_IN_OUT.durationMillis,
         content = {
+            Box{
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    SimpleSpacer(size = 20)
 
-            LazyColumn(
-                modifier = Modifier.size(height = 200.dp, width = 100.dp),
-                content = {
-                    items(items = savedPlayersValues) { player ->
-                        SimpleTextDisplay(
-                            text = player.getName(),
-                            fontSize = 16,
+                    LazyColumn(
+
+                        ) {
+                            items(items = savedPlayersValues) { player ->
+                                SimpleButtonAdd(
+                                    onClick = {
+                                        Game.addPlayer(player)
+                                    },
+                                    text = player.getName(),
+                                    fontSize = 20,
+                                    fontFamily = FontFamily.SansSerif
+                                )
+                                SimpleSpacer(size = 10)
+                            }
+
+                        }
+
+                    SimpleSpacer(size = 50)
+
+                        SimpleButton(
+                            onClick = { addExistingPlayers = false },
+                            text = "Done",
+                            fontSize = 20,
                             fontFamily = FontFamily.SansSerif
                         )
                     }
-                }
-            )
-
-            SimpleSpacer(size = 50)
-
-            SimpleButton(
-                onClick = { addExistingPlayers = false },
-                text = "Done",
-                fontSize = 20,
-                fontFamily = FontFamily.SansSerif
-            )
+            }
         }
     )
 

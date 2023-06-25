@@ -68,8 +68,8 @@ class Game private constructor(
         /**
          * Add a player
          */
-        fun addPlayer(player: Player) {
-            INSTANCE.players.add(element = player)
+        fun setPlayers(players: List<Player>) {
+            INSTANCE.players = players as MutableList<Player>
         }
 
         /**

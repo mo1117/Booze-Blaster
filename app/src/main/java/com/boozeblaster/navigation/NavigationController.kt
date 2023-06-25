@@ -21,10 +21,12 @@ object NavigationController {
     fun popBackStackIntoHomeScreen(
         navController: NavController,
         setAdultMode: (Boolean?) -> Unit,
-        setDifficulty: (Difficulty?) -> Unit
+        setDifficulty: (Difficulty?) -> Unit,
+        resetAddedPlayers: () -> Unit
     ) {
         setAdultMode(null)
         setDifficulty(null)
+        resetAddedPlayers()
         navController.popBackStack()
     }
 

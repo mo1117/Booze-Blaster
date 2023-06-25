@@ -1,9 +1,6 @@
 package com.boozeblaster.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
@@ -36,6 +33,7 @@ fun DisplayDaresScreen(navController: NavController, gameSettingsViewModel: Game
                 //Clear the settings
                 gameSettingsViewModel.setDifficulty(difficulty = null)
                 gameSettingsViewModel.setAdultMode(adultMode = null)
+                gameSettingsViewModel.resetAddedPlayers()
                 navController.navigate(route = Screen.GameScreen.route)
             })
     }
@@ -56,9 +54,20 @@ fun DisplayDaresScreenContent(
         }
 
         SimpleTextDisplay(text = "The Dares", fontSize = 30, fontFamily = headerFont)
+        SimpleSpacer(size = 20)
+        SimpleTextDisplay(
+            text = "The following dares have to be completed by the losers!\n\n If some of them " +
+                    "are too boring or hardcore, you might now want to change them.",
+            fontSize = 20,
+            fontFamily = FontFamily.SansSerif
+        )
 
         LazyColumn(
-            modifier = Modifier.size(width = 300.dp, height = 400.dp),
+            modifier = Modifier
+                .height(height = 400.dp)
+                .fillMaxWidth(0.9f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             content = {
                 items(Game.getPlayers()) { player ->
 

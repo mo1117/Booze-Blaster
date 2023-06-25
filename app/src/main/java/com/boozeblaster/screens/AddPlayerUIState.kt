@@ -5,7 +5,7 @@ import com.boozeblaster.utils.Validator
 import java.util.*
 
 data class AddPlayerUIState(
-    val name: String = "",
+    var name: String = "",
     var nameError: Boolean = false,
     var actionEnabled: Boolean = false
 ) {

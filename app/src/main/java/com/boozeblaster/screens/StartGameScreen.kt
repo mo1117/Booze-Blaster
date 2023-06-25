@@ -25,6 +25,9 @@ import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.GameSettingsViewModel
 import com.boozeblaster.viewmodels.PlayerViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @Composable
@@ -52,11 +55,11 @@ fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSet
     ) { paddingValues ->
         StartGameScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            playerViewModel = playerViewModel,
             onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
             onContinueClicked = {
                 navController.navigate(route = Screen.AdultModePickerScreen.route)
-            }
+            },
+            getAllPlayers = playerViewModel::getAllPlayers
         )
     }
 }
@@ -64,10 +67,12 @@ fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSet
 @Composable
 fun StartGameScreenContent(
     modifier: Modifier,
-    playerViewModel: PlayerViewModel,
     onAddPlayerClicked: () -> Unit,
-    onContinueClicked: () -> Unit
+    onContinueClicked: () -> Unit,
+    getAllPlayers: () -> Flow<List<Player>>
 ) {
+
+    val savedPlayersValues by getAllPlayers().collectAsState(initial = emptyList())
 
     var addExistingPlayers by remember {
         mutableStateOf(value = false)
@@ -88,7 +93,10 @@ fun StartGameScreenContent(
             ) {
                 SimpleImageButton(
                     modifier = Modifier.size(width = 100.dp, height = 100.dp),
-                    onClick = { addExistingPlayers = true },
+                    onClick = {
+
+                        addExistingPlayers = true
+                    },
                     imageId = R.drawable.add_player,
                     contentDescription = "Add existing Player",
                     text = "Add already existing player",
@@ -121,36 +129,12 @@ fun StartGameScreenContent(
         animationDuration = AnimationConstants.ADD_EXISTING_PLAYERS_FADE_IN_OUT.durationMillis,
         content = {
 
-            //The actual list, not used now since we might change UI before
-            var savedPlayers = mutableListOf<Player>()
-            LaunchedEffect(Unit) {
-                playerViewModel.getAllPlayers().collect() {
-                    savedPlayers.addAll(it)
-                }
-            }
-
-            val test: List<String> = listOf(
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-                "hi",
-            )
             LazyColumn(
                 modifier = Modifier.size(height = 200.dp, width = 100.dp),
                 content = {
-                    items(items = test) {
+                    items(items = savedPlayersValues) { player ->
                         SimpleTextDisplay(
-                            text = it,
+                            text = player.getName(),
                             fontSize = 16,
                             fontFamily = FontFamily.SansSerif
                         )

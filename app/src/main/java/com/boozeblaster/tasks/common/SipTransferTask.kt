@@ -33,7 +33,7 @@ class SipTransferTask(private val subTasks: List<SipTransfer>) :
             SimpleSpacer(size = 50)
             SimpleTextDisplay(
                 text = "The last round has started!\n\nYou will now have limited time to " +
-                        "trade points for sips!\nStart making offers to your teammates!",
+                        "trade points for sips!\n\nStart making offers to your teammates!",
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif
             )

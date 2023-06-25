@@ -1,10 +1,15 @@
 package com.boozeblaster.minigames.individual
 
+import android.os.CountDownTimer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.R
 import com.boozeblaster.composables.*
@@ -70,10 +75,16 @@ class GuessTheSong(
             AnimatingText(text = "Listen up", fontSize = 20, fontFamily = FontFamily.SansSerif)
         }
 
+
+
         if (soundPlayed) {
 
             if (!showSolution) {
                 // Show Solution Button
+
+                CountdownTimer()
+                SimpleSpacer(size = 20)
+
                 SimpleButton(
                     onClick = { showSolution = true },
                     text = "Show Solution",
@@ -168,5 +179,6 @@ class GuessTheSong(
             )
         }
     }
+
 }
 

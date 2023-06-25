@@ -4,15 +4,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import com.boozeblaster.composables.PointsOrSipsDialog
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.widgets.Timer
+import android.os.CountDownTimer
+import com.boozeblaster.composables.*
+import kotlinx.coroutines.launch
 
 class FactOrFiction(
     private val question: String,
@@ -36,6 +35,8 @@ class FactOrFiction(
         )
         SimpleSpacer(size = 50)
 
+
+
         Row {
             // "Wrong" Button
             SimpleButton(
@@ -44,6 +45,7 @@ class FactOrFiction(
                     checkAnswer(player = player!!, answer = false)
                     showDialog = true
                     buttonClicked = true
+
                 },
                 text = "Wrong",
                 fontSize = 16,
@@ -70,6 +72,7 @@ class FactOrFiction(
         }
         SimpleSpacer(size = 50)
 
+
         // Show dialog that tells the player if they were correct
         if (showDialog) {
             PointsOrSipsDialog(points = points, sips = sips, callback = {
@@ -78,6 +81,12 @@ class FactOrFiction(
                 callback()
             })
         }
+
+        if(!buttonClicked) {
+            CountdownTimer()
+            SimpleSpacer(size = 20)
+        }
+
     }
 
     private fun checkAnswer(player: Player, answer: Boolean) {
@@ -91,4 +100,5 @@ class FactOrFiction(
         sips = Game.getSipMultiplier()
         player.addSips(sips = sips)
     }
+
 }

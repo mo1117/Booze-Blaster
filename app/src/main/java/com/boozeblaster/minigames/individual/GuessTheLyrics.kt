@@ -10,6 +10,7 @@ import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.widgets.Timer
+import kotlinx.coroutines.launch
 
 class GuessTheLyrics(
     private val songName: String,
@@ -40,6 +41,11 @@ class GuessTheLyrics(
             SimpleSpacer(size = 50)
             SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = fontFamily)
             SimpleSpacer(size = 50)
+
+
+            CountdownTimer()
+            
+            SimpleSpacer(size = 10)
 
             // Show Solution Button
             SimpleButton(
@@ -127,4 +133,5 @@ class GuessTheLyrics(
             }
         )
     }
+
 }

@@ -10,6 +10,7 @@ object NavigationController {
 
     fun navigateToHomeScreen(navController: NavController) {
         MyMediaPlayer.stop()
+        Game.reset()
         navController.navigate(route = Screen.HomeScreen.route) {
             popUpTo(id = navController.graph.startDestinationId) {
                 inclusive = false
@@ -20,12 +21,10 @@ object NavigationController {
     fun popBackStackIntoHomeScreen(
         navController: NavController,
         setAdultMode: (Boolean?) -> Unit,
-        setDifficulty: (Difficulty?) -> Unit,
-        setDaresAssigned: (Boolean) -> Unit
+        setDifficulty: (Difficulty?) -> Unit
     ) {
         setAdultMode(null)
         setDifficulty(null)
-        setDaresAssigned(false)
         navController.popBackStack()
     }
 

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.composables.GameScreenAppBar
+import com.boozeblaster.composables.MyAlertDialog
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.tasks.CommonTask
@@ -22,15 +23,26 @@ fun GameScreen(navController: NavController = rememberNavController()) {
         mutableStateOf(value = 0)
     }
 
+    var askForConfirmation by remember {
+        mutableStateOf(value = false)
+    }
+
+    if (askForConfirmation) {
+        MyAlertDialog(
+            title = "Confirm Leave",
+            message = "Do you really wish to leave?",
+            onConfirm = { NavigationController.navigateToHomeScreen(navController = navController) },
+            onDismiss = { askForConfirmation = false })
+    }
+
     val scaffoldState = rememberScaffoldState()
 
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            //TODO When the back button gets clicked in-game we ask for confirmation to leave
             GameScreenAppBar(
                 onBackButtonClick = {
-                    NavigationController.navigateToHomeScreen(navController = navController)
+                    askForConfirmation = true
                 },
                 currentRound = roundCounter
             )

@@ -65,12 +65,13 @@ fun SimpleTextField(
 
 @Composable
 fun SimpleTextDisplay(
+    modifier: Modifier = Modifier,
     text: String,
     fontSize: Int,
-    fontFamily: FontFamily
+    fontFamily: FontFamily,
 ) {
     Text(
-        modifier = Modifier.padding(horizontal = 10.dp),
+        modifier = modifier.padding(horizontal = 10.dp),
         text = text,
         fontSize = fontSize.sp,
         fontFamily = fontFamily,

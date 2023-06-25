@@ -36,7 +36,6 @@ fun DisplayDaresScreen(navController: NavController, gameSettingsViewModel: Game
                 //Clear the settings
                 gameSettingsViewModel.setDifficulty(difficulty = null)
                 gameSettingsViewModel.setAdultMode(adultMode = null)
-                gameSettingsViewModel.setDaresAssigned(assigned = false)
                 navController.navigate(route = Screen.GameScreen.route)
             })
     }

@@ -1,40 +1,43 @@
 package com.boozeblaster.minigames.common
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.R
 import com.boozeblaster.composables.*
+import com.boozeblaster.enums.AnimationConstants
+import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.widgets.MyMediaPlayer
 
 class SipTransfer : MiniGame() {
-    /**
-     * STUB method - we do not need to display any content here
-     */
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit) {
+
+        MyMediaPlayer.create(context = LocalContext.current, resid = R.raw.ka_ching)
 
         var buyerDropdownExpanded by remember {
             mutableStateOf(value = false)
         }
 
-        var sellerDropdownMenuExpanded by remember {
+        var sellerDropdownExpanded by remember {
             mutableStateOf(value = false)
         }
 
-        var pointsDropdownMenuExpanded by remember {
+        var pointsDropdownExpanded by remember {
             mutableStateOf(value = false)
         }
 
-        var sipsDropdownMenuExpanded by remember {
+        var sipsDropdownExpanded by remember {
             mutableStateOf(value = false)
         }
 
@@ -58,190 +61,295 @@ class SipTransfer : MiniGame() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            SimpleTextDisplay(
-                text = "Buyer:",
-                fontSize = super.fontSize,
-                fontFamily = super.fontFamily
-            )
-            SimpleSpacer(size = 10)
-
             //Buyer
-            Box {
+            if (!buyerDropdownExpanded && !sellerDropdownExpanded
+                && !pointsDropdownExpanded && !sipsDropdownExpanded
+            ) {
+                SimpleTextDisplay(
+                    text = "Buyer:",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
+                SimpleSpacer(size = 10)
+
                 SimpleButton(
-                    onClick = { buyerDropdownExpanded = !buyerDropdownExpanded },
+                    onClick = { buyerDropdownExpanded = true },
                     text = if (buyer == null) "Pick Buyer" else buyer!!.getName(),
                     fontSize = super.fontSize,
                     fontFamily = super.fontFamily
                 )
-                DropdownMenu(
-                    expanded = buyerDropdownExpanded,
-                    onDismissRequest = { buyerDropdownExpanded = false }) {
-                    for (player in Game.getPlayers()) {
-                        DropdownMenuItem(onClick = {
-                            buyer = player
-                            buyerDropdownExpanded = false
-                        }) {
-                            SimpleTextDisplay(
-                                text = player.getName(),
-                                fontSize = super.fontSize,
-                                fontFamily = super.fontFamily
-                            )
-                        }
-                    }
-                }
             }
 
-            SimpleSpacer(size = 30)
+            MyAnimatedVisibility(
+                visible = buyerDropdownExpanded,
+                animationDuration = AnimationConstants.SIP_TRANSFER_DIALOGS_FADE_IN_OUT.durationMillis
+            ) {
+                LazyColumn(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.sizeIn(maxHeight = 400.dp),
+                    content = {
+                        items(items = Game.getPlayers()) { player ->
+                            if (player != seller) {
+                                SimpleSpacer(size = 10)
 
-            SimpleTextDisplay(
-                text = "Seller:",
-                fontSize = super.fontSize,
-                fontFamily = super.fontFamily
-            )
-            SimpleSpacer(size = 10)
-
-            //Seller
-            Box {
-                SimpleButton(
-                    onClick = { sellerDropdownMenuExpanded = !sellerDropdownMenuExpanded },
-                    text = if (seller == null) "Pick Seller" else seller!!.getName(),
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily
-                )
-                DropdownMenu(
-                    expanded = sellerDropdownMenuExpanded,
-                    onDismissRequest = { sellerDropdownMenuExpanded = false }) {
-                    for (player in Game.getPlayers()) {
-                        DropdownMenuItem(onClick = {
-                            seller = player
-                            sellerDropdownMenuExpanded = false
-                        }) {
-                            SimpleTextDisplay(
-                                text = player.getName(),
-                                fontSize = super.fontSize,
-                                fontFamily = super.fontFamily
-                            )
-                        }
-                    }
-                }
-            }
-
-            SimpleSpacer(size = 30)
-
-            SimpleTextDisplay(
-                text = "Points bought:",
-                fontSize = super.fontSize,
-                fontFamily = super.fontFamily
-            )
-            SimpleSpacer(size = 10)
-
-            //Points to buy
-            Box {
-                SimpleButton(
-                    onClick = { pointsDropdownMenuExpanded = !pointsDropdownMenuExpanded },
-                    text = "$pointsToBuy",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily
-                )
-                DropdownMenu(
-                    expanded = pointsDropdownMenuExpanded,
-                    onDismissRequest = { pointsDropdownMenuExpanded = false }) {
-                    if (seller == null) {
-                        DropdownMenuItem(onClick = {
-                            pointsDropdownMenuExpanded = false
-                            sellerDropdownMenuExpanded = true
-                        }) {
-                            SimpleTextDisplay(
-                                text = "Select Seller",
-                                fontSize = super.fontSize,
-                                fontFamily = super.fontFamily
-                            )
-                        }
-                    } else {
-                        for (i in 1..seller!!.getPoints()) {
-                            DropdownMenuItem(onClick = {
-                                pointsToBuy = i
-                                pointsDropdownMenuExpanded = false
-                            }) {
-                                SimpleTextDisplay(
-                                    text = "$i",
+                                SimpleButton(
+                                    onClick = {
+                                        buyer = player
+                                        buyerDropdownExpanded = false
+                                    },
+                                    text = player.getName(),
                                     fontSize = super.fontSize,
-                                    fontFamily = super.fontFamily
+                                    fontFamily = super.fontFamily,
+                                    buttonType = if (buyer == player)
+                                        ButtonType.CORRECT else ButtonType.INCORRECT
                                 )
+
+                                SimpleSpacer(size = 10)
                             }
                         }
-                    }
-                }
+                    })
+
+                SimpleSpacer(size = 50)
+
+                SimpleButton(
+                    onClick = { buyerDropdownExpanded = false },
+                    text = "Back",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
             }
 
-            SimpleSpacer(size = 30)
+            //Seller
+            if (!buyerDropdownExpanded && !sellerDropdownExpanded
+                && !pointsDropdownExpanded && !sipsDropdownExpanded
+            ) {
+                SimpleSpacer(size = 30)
 
-            SimpleTextDisplay(
-                text = "Sips offered:",
-                fontSize = super.fontSize,
-                fontFamily = super.fontFamily
-            )
-            SimpleSpacer(size = 10)
-
-            Box {
-                SimpleButton(
-                    onClick = { sipsDropdownMenuExpanded = !sipsDropdownMenuExpanded },
-                    text = "$sipsToOffer",
+                SimpleTextDisplay(
+                    text = "Seller:",
                     fontSize = super.fontSize,
                     fontFamily = super.fontFamily
                 )
 
-                DropdownMenu(
-                    expanded = sipsDropdownMenuExpanded,
-                    onDismissRequest = { sipsDropdownMenuExpanded = false }) {
-                    for (i in 0..30) {
-                        DropdownMenuItem(onClick = {
-                            sipsToOffer = i
-                            sipsDropdownMenuExpanded = false
-                        }) {
-                            SimpleTextDisplay(
-                                text = "$i",
-                                fontSize = super.fontSize,
-                                fontFamily = super.fontFamily
-                            )
-                        }
-                    }
-                }
+                SimpleSpacer(size = 10)
+
+                SimpleButton(
+                    onClick = { sellerDropdownExpanded = true },
+                    text = if (seller == null) "Pick Seller!" else seller!!.getName(),
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
             }
 
-            SimpleSpacer(size = 30)
+            MyAnimatedVisibility(
+                visible = sellerDropdownExpanded,
+                animationDuration = AnimationConstants.SIP_TRANSFER_DIALOGS_FADE_IN_OUT.durationMillis
+            ) {
+                LazyColumn(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.sizeIn(maxHeight = 400.dp),
+                    content = {
+                        items(items = Game.getPlayers()) { player ->
+                            if (player != buyer) {
+                                SimpleSpacer(size = 10)
 
-            SimpleImageButton(
-                modifier = Modifier.size(width = 150.dp, height = 150.dp),
-                onClick = {
-                    performTransaction(
-                        buyer = buyer!!,
-                        seller = seller!!,
-                        pointsToBuy = pointsToBuy,
-                        sipsToOffer = sipsToOffer
-                    )
-                    buyer = null
-                    seller = null
-                    pointsToBuy = 0
-                    sipsToOffer = 0
-                },
-                imageId = R.drawable.handshake,
-                enabled = transactionIsLegit(
-                    buyer = buyer,
-                    seller = seller,
-                    pointsToBuy = pointsToBuy
+                                SimpleButton(
+                                    onClick = {
+                                        seller = player
+                                        sellerDropdownExpanded = false
+                                    },
+                                    text = player.getName(),
+                                    fontSize = super.fontSize,
+                                    fontFamily = super.fontFamily,
+                                    buttonType = if (seller == player)
+                                        ButtonType.CORRECT else ButtonType.INCORRECT
+                                )
+
+                                SimpleSpacer(size = 10)
+                            }
+                        }
+                    })
+
+                SimpleSpacer(size = 50)
+
+                SimpleButton(
+                    onClick = { sellerDropdownExpanded = false },
+                    text = "Back",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
                 )
-            )
+            }
 
-            SimpleSpacer(size = 30)
+            //Points to buy
+            if (!buyerDropdownExpanded && !sellerDropdownExpanded
+                && !pointsDropdownExpanded && !sipsDropdownExpanded
+            ) {
+                SimpleSpacer(size = 30)
 
-            SimpleButton(
-                onClick = { callback() },
-                text = "Continue",
-                fontSize = super.fontSize,
-                fontFamily = super.fontFamily,
-                needsConfirmation = true
-            )
+                SimpleTextDisplay(
+                    text = "Points bought:",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
+
+                SimpleSpacer(size = 10)
+
+                SimpleButton(
+                    onClick = { pointsDropdownExpanded = true },
+                    text = "$pointsToBuy",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily,
+                    enabled = seller != null
+                )
+            }
+
+            MyAnimatedVisibility(
+                visible = pointsDropdownExpanded,
+                animationDuration = AnimationConstants.SIP_TRANSFER_DIALOGS_FADE_IN_OUT.durationMillis
+            ) {
+                LazyColumn(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.sizeIn(maxHeight = 400.dp),
+                    content = {
+                        items(count = seller!!.getPoints()) { points ->
+                            if (points != 0) {
+                                SimpleSpacer(size = 10)
+
+                                SimpleButton(
+                                    onClick = {
+                                        pointsToBuy = points
+                                        pointsDropdownExpanded = false
+                                    },
+                                    text = "$points",
+                                    fontSize = super.fontSize,
+                                    fontFamily = super.fontFamily,
+                                    buttonType = if (points == pointsToBuy)
+                                        ButtonType.CORRECT else ButtonType.INCORRECT
+                                )
+
+                                SimpleSpacer(size = 10)
+                            }
+                        }
+                    })
+
+                SimpleSpacer(size = 50)
+
+                SimpleButton(
+                    onClick = { pointsDropdownExpanded = false },
+                    text = "Back",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
+            }
+
+            //Sips to offer
+            if (!buyerDropdownExpanded && !sellerDropdownExpanded
+                && !pointsDropdownExpanded && !sipsDropdownExpanded
+            ) {
+                SimpleSpacer(size = 30)
+
+                SimpleTextDisplay(
+                    text = "Sips offered:",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
+
+                SimpleSpacer(size = 10)
+
+                SimpleButton(
+                    onClick = { sipsDropdownExpanded = true },
+                    text = "$sipsToOffer",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily,
+                    enabled = buyer != null
+                )
+            }
+
+            MyAnimatedVisibility(
+                visible = sipsDropdownExpanded,
+                animationDuration = AnimationConstants.SIP_TRANSFER_DIALOGS_FADE_IN_OUT.durationMillis
+            ) {
+                LazyColumn(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.sizeIn(maxHeight = 400.dp),
+                    content = {
+                        items(count = 31) { sips ->
+                            if (sips != 0) {
+                                SimpleSpacer(size = 10)
+
+                                SimpleButton(
+                                    onClick = {
+                                        sipsToOffer = sips
+                                        sipsDropdownExpanded = false
+                                    },
+                                    text = "$sips",
+                                    fontSize = super.fontSize,
+                                    fontFamily = super.fontFamily,
+                                    buttonType = if (sips == sipsToOffer)
+                                        ButtonType.CORRECT else ButtonType.INCORRECT
+                                )
+
+                                SimpleSpacer(size = 10)
+                            }
+                        }
+                    })
+
+                SimpleSpacer(size = 50)
+
+                SimpleButton(
+                    onClick = { sipsDropdownExpanded = false },
+                    text = "Back",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
+            }
+
+
+            if (!buyerDropdownExpanded && !sellerDropdownExpanded
+                && !pointsDropdownExpanded && !sipsDropdownExpanded
+            ) {
+                SimpleSpacer(size = 30)
+
+                SimpleImageButton(
+                    modifier = Modifier.size(width = 150.dp, height = 150.dp),
+                    onClick = {
+                        performTransaction(
+                            buyer = buyer!!,
+                            seller = seller!!,
+                            pointsToBuy = pointsToBuy,
+                            sipsToOffer = sipsToOffer
+                        )
+                        buyer = null
+                        seller = null
+                        pointsToBuy = 0
+                        sipsToOffer = 0
+                        MyMediaPlayer.start()
+                    },
+                    imageId = R.drawable.handshake,
+                    enabled = transactionIsLegit(
+                        buyer = buyer,
+                        seller = seller,
+                        pointsToBuy = pointsToBuy
+                    )
+                )
+
+                SimpleSpacer(size = 30)
+
+                SimpleButton(
+                    onClick = {
+                        MyMediaPlayer.stop()
+                        callback()
+                    },
+                    text = "Continue",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily,
+                    needsConfirmation = true
+                )
+            }
         }
     }
 

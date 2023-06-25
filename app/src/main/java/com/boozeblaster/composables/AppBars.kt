@@ -40,7 +40,7 @@ fun HomeTopAppBar() {
                 )
             }
             DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
-                DropdownMenuItem(onClick = { exitProcess(1) }) {
+                DropdownMenuItem(onClick = { exitProcess(status = 1) }) {
                     Text(text = "Quit")
                 }
             }

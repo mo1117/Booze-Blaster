@@ -16,6 +16,8 @@ enum class AnimationConstants(val durationMillis: Int) {
 
     PLAYER_PICKER_FADE_IN_OUT(durationMillis = 600),
 
-    CONTINUE_BUTTON_FADE_IN(durationMillis = 1000)
+    CONTINUE_BUTTON_FADE_IN(durationMillis = 1000),
+
+    SIP_TRANSFER_DIALOGS_FADE_IN_OUT(durationMillis = 500)
 
 }

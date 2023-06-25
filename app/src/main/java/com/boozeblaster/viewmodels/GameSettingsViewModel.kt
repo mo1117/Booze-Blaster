@@ -29,13 +29,4 @@ class GameSettingsViewModel : ViewModel() {
     }
 
     fun getDifficulty(): Difficulty? = _difficultyState
-
-    fun setDaresAssigned(assigned: Boolean) {
-        _daresAssignedState = assigned
-        if (!assigned) {
-            DareTaskGenerator.resetUsedDares()
-        }
-    }
-
-    fun areDaresAssigned(): Boolean = _daresAssignedState
 }

@@ -46,7 +46,7 @@ class GuessTheSongTask(
             SimpleSpacer(size = 30)
 
             SimpleTextDisplay(
-                text = "You will have to guess the following three songs. If you cannot name " +
+                text = "You will have to guess the following three songs.\n\nIf you cannot name " +
                         "both artist and the song's name, you will drink the full amount!\n\n" +
                         "If you are able to guess both correct, you will be rewarded full points " +
                         "instead!\n\nIf only one guess is correct, points and sips will both be " +

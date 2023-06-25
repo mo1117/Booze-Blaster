@@ -62,7 +62,7 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
             NeverHaveIEver(statement = "Never have I ever been to a psychic."),
             NeverHaveIEver(statement = "Never have I ever stayed up all night."),
             NeverHaveIEver(statement = "Never have I ever been on a cruise."),
-            NeverHaveIEver(statement = "Never have I ever beaten a video game. "),
+            NeverHaveIEver(statement = "Never have I ever beaten a video game."),
             NeverHaveIEver(statement = "Never have I ever dyed my hair."),
             NeverHaveIEver(statement = "Never have I ever sleepwalked."),
             NeverHaveIEver(statement = "Never have I ever fainted."),
@@ -71,7 +71,7 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
         )
         private val adultModeList = listOf(
             NeverHaveIEver(statement = "Never have I ever done Cocaine in Munich."),
-            NeverHaveIEver(statement = "Never have I ever wished you would try something new in the bedroom."),
+            NeverHaveIEver(statement = "Never have I ever wished someone would try something new in the bedroom."),
             NeverHaveIEver(statement = "Never have I ever fantasized about someone in this group while having alone time."),
             NeverHaveIEver(statement = "Never have I ever had dirty dreams about someone in this group."),
             NeverHaveIEver(statement = "Never have I ever looked up tips to be better in bed."),
@@ -111,15 +111,14 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
             NeverHaveIEver(statement = "Never have I ever had sex in a bathroom."),
             NeverHaveIEver(statement = "Never have I ever shoplifted."),
             NeverHaveIEver(statement = "Never have I ever been arrested."),
-            NeverHaveIEver(statement = "Never have I ever danced on a bar."),
+            NeverHaveIEver(statement = "Never have I ever danced on a table."),
             NeverHaveIEver(statement = "Never have I ever been kicked out of a pub/bar/club."),
             NeverHaveIEver(statement = "Never have I ever had friends with benefits."),
             NeverHaveIEver(statement = "Never have I ever been in handcuffs."),
             NeverHaveIEver(statement = "Never have I ever quietly farted at work and then left the room."),
-            NeverHaveIEver(statement = "Never have I ever been arrested."),
             NeverHaveIEver(statement = "Never have I ever partied for more than twenty-four hours straight."),
-            NeverHaveIEver(statement = "Never have I ever pretended to get a text to leave a date"),
-            NeverHaveIEver(statement = "Never have I ever talked about my ex on a first date")
+            NeverHaveIEver(statement = "Never have I ever pretended to get a text to leave a date."),
+            NeverHaveIEver(statement = "Never have I ever talked about my ex on a first date.")
         )
     }
 }

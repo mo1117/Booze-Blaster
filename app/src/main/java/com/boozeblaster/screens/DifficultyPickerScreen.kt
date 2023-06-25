@@ -14,7 +14,6 @@ import com.boozeblaster.composables.*
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.models.Game
-import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.viewmodels.GameSettingsViewModel
 
@@ -38,9 +37,7 @@ fun DifficultyPickerScreen(
                 navController.navigate(route = Screen.DisplayDaresScreen.route)
             },
             getDifficulty = gameSettingsViewModel::getDifficulty,
-            setDifficulty = gameSettingsViewModel::setDifficulty,
-            setDaresAssigned = gameSettingsViewModel::setDaresAssigned,
-            areDaresAssigned = gameSettingsViewModel::areDaresAssigned
+            setDifficulty = gameSettingsViewModel::setDifficulty
         )
     }
 }
@@ -50,9 +47,7 @@ fun DifficultyPickerScreenContent(
     modifier: Modifier = Modifier,
     onContinueClicked: () -> Unit = {},
     getDifficulty: () -> Difficulty?,
-    setDifficulty: (Difficulty) -> Unit,
-    setDaresAssigned: (Boolean) -> Unit,
-    areDaresAssigned: () -> Boolean
+    setDifficulty: (Difficulty) -> Unit
 ) {
 
     val buttonFontSize = 20
@@ -133,10 +128,6 @@ fun DifficultyPickerScreenContent(
         SimpleButton(
             onClick = {
                 Game.setDifficulty(difficulty = getDifficulty()!!)
-                if (!areDaresAssigned()) {
-                    DareTaskGenerator.assignDares(players = Game.getPlayers())
-                    setDaresAssigned(true)
-                }
                 onContinueClicked()
             },
             text = "Continue",

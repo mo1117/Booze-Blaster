@@ -45,8 +45,7 @@ fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSet
                     NavigationController.popBackStackIntoHomeScreen(
                         navController = navController,
                         setAdultMode = gameSettingsViewModel::setAdultMode,
-                        setDifficulty = gameSettingsViewModel::setDifficulty,
-                        setDaresAssigned = gameSettingsViewModel::setDaresAssigned
+                        setDifficulty = gameSettingsViewModel::setDifficulty
                     )
                 }
             )
@@ -108,14 +107,12 @@ fun StartGameScreenContent(
                 //TODO The adult / pg mode is set in the next screen
                 //TODO The difficulty is picked in the 2nd next screen
                 //TODO Init the
-                
+
                 SimpleSpacer(size = 20)
 
                 SimpleButton(
                     modifier = Modifier,
                     onClick = {
-                        //Game.addPlayer(Player(name = "Mo"))
-                        //Game.addPlayer(Player(name = "Mo1337"))
                         onContinueClicked()
                     },
                     text = "Continue",
@@ -136,9 +133,7 @@ fun StartGameScreenContent(
                 ) {
                     SimpleSpacer(size = 20)
 
-                    LazyColumn(
-
-                        ) {
+                    LazyColumn {
                             items(items = savedPlayersValues) { player ->
                                 SimpleButtonAdd(
                                     onClick = {

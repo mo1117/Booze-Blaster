@@ -27,6 +27,10 @@ object DareTaskGenerator {
         val dareList = DareGenerator().getList() as List<Dare>
 
         while (counter < players.size) {
+            if (players.get(index = counter).getDare() != null) {
+                counter++
+                continue
+            }
             dare = dareList.get(index = Random.nextInt(from = 0, until = dareList.size))
             if (dare !in usedDares) {
                 usedDares = usedDares.plus(element = dare)

@@ -1,6 +1,7 @@
 package com.boozeblaster.models
 
 import com.boozeblaster.enums.Difficulty
+import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.generators.TaskGenerator
 import com.boozeblaster.tasks.Task
 import com.boozeblaster.tasks.individual.DareTask
@@ -45,7 +46,18 @@ class Game private constructor(
                 player.setSips(sips = 0)
                 player.setDare(dare = null)
             }
+            INSTANCE.players = mutableListOf()
+            DareTaskGenerator.resetUsedDares()
 //            INSTANCE.tasks = emptyList()
+        }
+
+        /**
+         * Resets all dares to null value
+         */
+        fun resetAllDares() {
+            for (player in INSTANCE.players) {
+                player.setDare(dare = null)
+            }
         }
 
         /**

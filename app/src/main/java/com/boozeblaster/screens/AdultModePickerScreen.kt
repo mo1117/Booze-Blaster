@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.*
+import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.viewmodels.GameSettingsViewModel
@@ -65,7 +66,12 @@ fun AdultModePickerScreenContent(
 
         //PG mode button
         SimpleImageButton(
-            onClick = { setAdultMode(false) },
+            onClick = {
+                if (getAdultMode() == true) {
+                    Game.resetAllDares()
+                }
+                setAdultMode(false)
+            },
             imageId = if (adultModeEnabled != null && !adultModeEnabled)
                 R.drawable.angel_selected else R.drawable.angel_unselected
         )
@@ -74,7 +80,12 @@ fun AdultModePickerScreenContent(
 
         //Adult mode button
         SimpleImageButton(
-            onClick = { setAdultMode(true) },
+            onClick = {
+                if (getAdultMode() == false) {
+                    Game.resetAllDares()
+                }
+                setAdultMode(true)
+            },
             imageId = if (adultModeEnabled != null && adultModeEnabled)
                 R.drawable.adult_mode_selected else R.drawable.adult_mode_unselected,
         )
@@ -85,6 +96,7 @@ fun AdultModePickerScreenContent(
         SimpleButton(
             onClick = {
                 Game.setAdultMode(adultMode = adultModeEnabled!!)
+                DareTaskGenerator.assignDares(players = Game.getPlayers())
                 onContinueClicked()
             },
             text = "Continue",

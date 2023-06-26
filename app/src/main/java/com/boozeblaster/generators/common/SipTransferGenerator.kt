@@ -8,6 +8,7 @@ class SipTransferGenerator : MiniGameGenerator() {
      * STUB method - We do not need to return a list with values here
      */
     override fun getList(): List<MiniGame> {
+        //STUB
         return emptyList()
     }
 }

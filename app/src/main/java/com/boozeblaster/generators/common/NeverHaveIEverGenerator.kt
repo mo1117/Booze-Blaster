@@ -23,7 +23,8 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
             NeverHaveIEver(statement = "Never have I ever fallen out of bed."),
             NeverHaveIEver(statement = "Never have I ever been left hanging for a high-five."),
             NeverHaveIEver(statement = "Never have I ever imagined I was someone else."),
-            NeverHaveIEver(statement = "Never have I ever incorrectly answered a simple question about myself, such as “How old are you?”"),
+            NeverHaveIEver(statement = "Never have I ever incorrectly answered a simple question " +
+                    "about myself, such as “How old are you?”"),
             NeverHaveIEver(statement = "Never have I ever copied the work of the person next to me."),
             NeverHaveIEver(statement = "Never have I ever passed notes in class."),
             NeverHaveIEver(statement = "Never have I ever rode a motorcycle"),
@@ -71,8 +72,10 @@ class NeverHaveIEverGenerator : MiniGameGenerator() {
         )
         private val adultModeList = listOf(
             NeverHaveIEver(statement = "Never have I ever done Cocaine in Munich."),
-            NeverHaveIEver(statement = "Never have I ever wished someone would try something new in the bedroom."),
-            NeverHaveIEver(statement = "Never have I ever fantasized about someone in this group while having alone time."),
+            NeverHaveIEver(statement = "Never have I ever wished someone would try something " +
+                    "new in the bedroom."),
+            NeverHaveIEver(statement = "Never have I ever fantasized about someone in this " +
+                    "group while having alone time."),
             NeverHaveIEver(statement = "Never have I ever had dirty dreams about someone in this group."),
             NeverHaveIEver(statement = "Never have I ever looked up tips to be better in bed."),
             NeverHaveIEver(statement = "Never have I ever read a spicy book to get in the mood."),

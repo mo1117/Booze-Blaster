@@ -31,6 +31,8 @@ class DareGenerator : MiniGameGenerator() {
             Dare(dare = "Bark like a dog."),
             Dare(dare = "Pet somebody as if they are a dog."),
             Dare(dare = "Let someone go through your one for a minute."),
+            Dare(dare = "Do a back-flip!"),
+            Dare(dare = "Eat whatever any person in this room offers you.")
         )
         private val adultModeList = listOf(
             Dare(dare = "Drink a mystery drink created by the rest of the group."),
@@ -43,8 +45,12 @@ class DareGenerator : MiniGameGenerator() {
             Dare(dare = "Drink whatever the person to your left gives you."),
             Dare(dare = "Text your ex or finish your drink."),
             Dare(dare = "Chug down a beer!"),
-            Dare(dare = "Do a back-flip!"),
-            Dare(dare = "Remove your T-shirt!")
+            Dare(dare = "Let anyone in this room send a message from your phone."),
+            Dare(dare = "Remove your T-shirt!"),
+            Dare(dare = "Call your mom and tell her you are pregnant / have impregnated someone."),
+            Dare(dare = "Tell your most embarrassing sex-story."),
+            Dare(dare = "Remove your pants!"),
+            Dare(dare = "Call your parents and tell them you got arrested.")
         )
     }
 }

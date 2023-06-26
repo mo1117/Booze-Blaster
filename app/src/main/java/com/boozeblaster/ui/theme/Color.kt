@@ -28,8 +28,8 @@ val DarkIncorrectButtonColor = Color(0xFF581818)
 val LightHalfCorrectButtonColor = Color(0xFFFD5D01)
 val DarkHalfCorrectButtonColor = Color(0xFF924222)
 
-val LightUiButtonColor = Color(0xFFCCCCCC)
-val DarkUiButtonColor = Color(0xFF555555)
+val LightUiButtonColor = Color(0xFF30B1B1)
+val DarkUiButtonColor = Color(0xFF262463)
 
 /**
  * Returns the button color, based on which kind of button it is and if darkmode is enabled or not

@@ -182,7 +182,7 @@ fun AddPlayerScreenContent(
             onClick = {
                 onDoneClicked()
             },
-            text = "Continue",
+            text = "Back",
             fontSize = 16,
             fontFamily = FontFamily.SansSerif
         )

@@ -11,6 +11,7 @@ class SetRuleGenerator : MiniGameGenerator() {
      * This method is still needed so the TaskGenerator can generate an instance of SetRuleTask
      */
     override fun getList(): List<MiniGame> {
+        //STUB
         return emptyList()
     }
 }

@@ -26,7 +26,6 @@ class GuessTheSong(
     private val duration: Long = 10000
 ) : MiniGame() {
 
-
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit) {
         val coroutineScope = rememberCoroutineScope()

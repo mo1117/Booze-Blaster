@@ -4,6 +4,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -102,6 +103,13 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
 @Composable
 fun GameScreenAppBar(onBackButtonClick: () -> Unit, currentRound: Int) {
     val totalRounds = Game.getRounds()
+    var showScore by remember {
+        mutableStateOf(value = false)
+    }
+
+    if (showScore) {
+        DisplayScore(callback = { showScore = false })
+    }
 
     TopAppBar(
         title = {},
@@ -117,6 +125,14 @@ fun GameScreenAppBar(onBackButtonClick: () -> Unit, currentRound: Int) {
             }
         },
         actions = {
+            IconButton(onClick = { showScore = true }) {
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    contentDescription = "Show Score",
+                    tint = getFontColor()
+                )
+            }
+            SimpleSpacer(size = 10)
             SimpleTextDisplay(
                 text = "Round $currentRound / $totalRounds",
                 fontSize = 16,

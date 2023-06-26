@@ -15,6 +15,7 @@ import com.boozeblaster.R
 import com.boozeblaster.composables.*
 import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.models.Game
+import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.ui.theme.getAppBarColor
 import com.boozeblaster.ui.theme.headerFont
 import com.boozeblaster.viewmodels.GameSettingsViewModel
@@ -30,11 +31,13 @@ fun DisplayDaresScreen(navController: NavController, gameSettingsViewModel: Game
     ) { paddingValues ->
         DisplayDaresScreenContent(modifier = Modifier.padding(paddingValues = paddingValues),
             onStartClicked = {
-                //Clear the settings
-                gameSettingsViewModel.setDifficulty(difficulty = null)
-                gameSettingsViewModel.setAdultMode(adultMode = null)
-                gameSettingsViewModel.resetAddedPlayers()
-                navController.navigate(route = Screen.GameScreen.route)
+                NavigationController.navigateToGameScreen(
+                    navController = navController,
+                    setAdultMode = gameSettingsViewModel::setAdultMode,
+                    setDifficulty = gameSettingsViewModel::setDifficulty,
+                    resetAddedPlayers = gameSettingsViewModel::resetAddedPlayers,
+                    setSelectedRounds = gameSettingsViewModel::setSelectedRounds
+                )
             })
     }
 }
@@ -61,10 +64,11 @@ fun DisplayDaresScreenContent(
             fontSize = 20,
             fontFamily = FontFamily.SansSerif
         )
+        SimpleSpacer(size = 20)
 
         LazyColumn(
             modifier = Modifier
-                .height(height = 400.dp)
+                .height(height = 300.dp)
                 .fillMaxWidth(0.9f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,8 +83,9 @@ fun DisplayDaresScreenContent(
 
                     Row {
                         SimpleTextDisplay(
+                            modifier = Modifier.padding(top = 10.dp),
                             text = player.getName(),
-                            fontSize = 16,
+                            fontSize = 20,
                             fontFamily = FontFamily.SansSerif
                         )
 
@@ -91,8 +96,8 @@ fun DisplayDaresScreenContent(
                                 loadedNewDare = DareTaskGenerator.reloadDare(player = player)
                                 dareText = player.getDare().toString()
                             },
-                            imageId = R.drawable.add_player,
-                            modifier = Modifier.size(width = 30.dp, height = 30.dp)
+                            imageId = R.drawable.refresh,
+                            modifier = Modifier.size(size = 40.dp)
                         )
                     }
 
@@ -100,7 +105,7 @@ fun DisplayDaresScreenContent(
 
                     SimpleTextDisplay(
                         text = dareText,
-                        fontSize = 16,
+                        fontSize = 24,
                         fontFamily = FontFamily.SansSerif
                     )
 

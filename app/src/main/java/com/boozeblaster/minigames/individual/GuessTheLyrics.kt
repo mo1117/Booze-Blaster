@@ -1,6 +1,5 @@
 package com.boozeblaster.minigames.individual
 
-import android.os.CountDownTimer
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.composables.*
@@ -9,8 +8,6 @@ import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
-import com.boozeblaster.widgets.Timer
-import kotlinx.coroutines.launch
 
 class GuessTheLyrics(
     private val songName: String,

@@ -65,5 +65,16 @@ fun Navigation() {
                 gameSettingsViewModel = gameSettingsViewModel
             )
         }
+
+        composable(route = Screen.RoundPickerScreen.route) {
+            RoundPickerScreen(
+                navController = navController,
+                gameSettingsViewModel = gameSettingsViewModel
+            )
+        }
+
+        composable(route = Screen.FullfillDaresScreen.route) {
+            FulfillDaresScreen(navController = navController)
+        }
     }
 }

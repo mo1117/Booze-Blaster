@@ -6,13 +6,10 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
@@ -162,7 +159,7 @@ fun MyAlertDialog(
 ) {
     AlertDialog(
         backgroundColor = Color.Gray,
-        onDismissRequest = { onDismissRequest() },
+        onDismissRequest = onDismissRequest,
         title = {
             SimpleTextDisplay(
                 modifier = Modifier.fillMaxWidth(fraction = 1f),
@@ -185,7 +182,9 @@ fun MyAlertDialog(
                 horizontalArrangement = Arrangement.Center
             ) {
                 SimpleButton(
-                    modifier = Modifier.padding(start = 7.dp, end = 7.dp).padding(vertical = 10.dp),
+                    modifier = Modifier
+                        .padding(start = 7.dp, end = 7.dp)
+                        .padding(vertical = 10.dp),
                     onClick = { onDismiss() },
                     text = dismissText,
                     fontSize = 16,
@@ -194,7 +193,9 @@ fun MyAlertDialog(
                     minWidth = 100
                 )
                 SimpleButton(
-                    modifier = Modifier.padding(start = 7.dp, end = 7.dp).padding(vertical = 10.dp),
+                    modifier = Modifier
+                        .padding(start = 7.dp, end = 7.dp)
+                        .padding(vertical = 10.dp),
                     onClick = { onConfirm() },
                     text = confirmText,
                     fontSize = 16,

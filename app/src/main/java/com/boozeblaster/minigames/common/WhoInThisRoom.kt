@@ -60,7 +60,6 @@ class WhoInThisRoom(
 
             sips = Game.getSipMultiplier()
 
-
             MyAnimatedVisibility(
                 visible = selectPlayers,
                 animationDuration = AnimationConstants.PLAYER_PICKER_FADE_IN_OUT.durationMillis

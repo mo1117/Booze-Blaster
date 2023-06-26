@@ -53,7 +53,7 @@ fun GameScreen(navController: NavController = rememberNavController()) {
             modifier = Modifier.padding(paddingValues = paddingValues),
             gameFinished = {
                 navController.popBackStack() // Remove the current GameScreen
-                navController.navigate(route = Screen.GameOverScreen.route)
+                navController.navigate(route = Screen.FullfillDaresScreen.route)
             },
             incrementRoundCounter = { roundCounter++ }
         )
@@ -80,18 +80,12 @@ fun GameScreenContent(
     //The current task to be played
     val currentTask = Game.getTask(index = taskCounter)
 
-    //Whether we have already added the dares, this should happen only in the very end
-    var daresAdded by remember {
-        mutableStateOf(value = false)
-    }
-
     Surface(
         modifier = modifier
             .fillMaxHeight(fraction = 1f)
             .fillMaxWidth(fraction = 1f)
     ) {
 
-        //TODO: maybe use a viewmodel instead
         if (currentTask is CommonTask && !roundCounterIncremented) {
             incrementRoundCounter()
             roundCounterIncremented = true
@@ -100,13 +94,7 @@ fun GameScreenContent(
         currentTask.DisplayTask(
             callback = {
                 if (taskCounter + 1 == Game.getTasks().size) {
-                    if (!daresAdded) {
-                        Game.appendDareTasks()
-                        daresAdded = true
-                        taskCounter++
-                    } else {
-                        gameFinished()
-                    }
+                    gameFinished()
                 } else {
                     taskCounter++
                     roundCounterIncremented = false

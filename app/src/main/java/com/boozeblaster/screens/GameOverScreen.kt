@@ -38,8 +38,8 @@ fun GameOverScreen(navController: NavController) {
             modifier = Modifier.padding(paddingValues = paddingValues),
             playAgain = {
                 navController.popBackStack()
-                Game.reset()
-                navController.navigate(route = Screen.GameScreen.route)
+                Game.playAgain()
+                navController.navigate(route = Screen.DisplayDaresScreen.route)
             }
         )
     }
@@ -51,9 +51,8 @@ fun GameOverScreenContent(
     playAgain: () -> Unit
 ) {
     // Sort the list of players by their points
-    val players = Game.getPlayers()
-        .sortedByDescending(selector = { player -> player.getPoints() })
-//        .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
+    val players = Game.getPlayersByPointsDescending()
+
     SurfaceWithColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

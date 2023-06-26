@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 import com.boozeblaster.composables.*
 import com.boozeblaster.enums.Difficulty
-import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.viewmodels.GameSettingsViewModel

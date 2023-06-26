@@ -7,7 +7,7 @@ import com.boozeblaster.minigames.individual.FactOrFiction
 class FactOrFictionGenerator : MiniGameGenerator() {
 
     override fun getList(): List<MiniGame> {
-        return super.getList(list = list, amount = 3)
+        return super.getList(list = list, amount = 4)
     }
 
     /**
@@ -31,67 +31,67 @@ class FactOrFictionGenerator : MiniGameGenerator() {
                 question = "Humans only use 10% of their brain.",
                 isCorrect = false),
             FactOrFiction(
-                question = "The Spanish Flu first started in Spain?",
+                question = "The Spanish Flu first started in Spain.",
                 isCorrect = false),
             FactOrFiction(
-                question = "The Canary Islands are named after dogs, not birds?",
+                question = "The Canary Islands are named after dogs, not birds.",
                 isCorrect = true),
             FactOrFiction(
-                question = "A man has one less rib than a woman?",
+                question = "A man has one less rib than a woman.",
                 isCorrect = false),
             FactOrFiction(
-                question = "The longest place name on the planet is in Wales?",
+                question = "The longest place name on the planet is in Wales.",
                 isCorrect = false),
             FactOrFiction(
-                question = "The national animal of Scotland is the unicorn?",
+                question = "The national animal of Scotland is the unicorn.",
                 isCorrect = true),
             FactOrFiction(
-                question = "There are more stars in space than grains of sand on every beach in the world?",
+                question = "There are more stars in space than grains of sand on every beach in the world.",
                 isCorrect = true),
             FactOrFiction(
-                question = "Vikings wore horns on their helmets?",
+                question = "Vikings wore horns on their helmets.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Birds do not urinate?",
+                question = "Birds do not urinate.",
                 isCorrect = true),
             FactOrFiction(
-                question = "Ostriches stick their heads in the sand to hide from enemies?",
+                question = "Ostriches stick their heads in the sand to hide from enemies.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Camels store water in their humps?",
+                question = "Camels store water in their humps.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Carrots help you see better in the dark?",
+                question = "Carrots help you see better in the dark.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Brazil is home to the biggest Japanese population outside of Japan?",
+                question = "Brazil is home to the biggest Japanese population outside of Japan.",
                 isCorrect = true),
             FactOrFiction(
-                question = "Goldfish have a three-second memory?",
+                question = "Goldfish have a three-second memory.",
                 isCorrect = false),
             FactOrFiction(
-                question = "In 1752, Britons went to bed on September 2 and woke up on September 14?",
+                question = "In 1752, Britons went to bed on September 2 and woke up on September 14.",
                 isCorrect = true),
             FactOrFiction(
-                question = "Mercury is the warmest planet in the Solar System?",
+                question = "Mercury is the warmest planet in the Solar System.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Shaving makes hair grow back faster?",
+                question = "Shaving makes hair grow back faster.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Houseflies have an average lifespan of 20 to 30 days?",
+                question = "Houseflies have an average lifespan of 20 to 30 days.",
                 isCorrect = true),
             FactOrFiction(
-                question = "Vincent Van Gogh only sold one painting in his lifetime?",
+                question = "Vincent Van Gogh only sold one painting in his lifetime.",
                 isCorrect = true),
             FactOrFiction(
-                question = "Sharks can smell a drop of blood from several miles away?",
+                question = "Sharks can smell a drop of blood from several miles away.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Bats are blind?",
+                question = "Bats are blind.",
                 isCorrect = false),
             FactOrFiction(
-                question = "Alcohol destroys brain cells?",
+                question = "Alcohol destroys brain cells.",
                 isCorrect = false),
             FactOrFiction(
                 question = "The Eiffel Tower grows up to 6 inches over the summer.",
@@ -121,10 +121,11 @@ class FactOrFictionGenerator : MiniGameGenerator() {
                 question = "There are more individual species of mosquitoes than general species of mammals.",
                 isCorrect = false),
             FactOrFiction(
-                question = "At the start of its voyage, the Titanic had 20,000 bottles of beer, 1,500 bottles of wine, and 8,000 cigars on board. ",
+                question = "At the start of its voyage, the Titanic had 20,000 bottles of beer, " +
+                        "1,500 bottles of wine, and 8,000 cigars on board. ",
                 isCorrect = true),
             FactOrFiction(
-                question = "During WWI Australian troops smuggled kangaroos to the warfront as mascots.",
+                question = "During WWI Australian troops smuggled kangaroos to the war front as mascots.",
                 isCorrect = true),
             FactOrFiction(
                 question = "The Caesar salad was named for Julius Caesar. ",

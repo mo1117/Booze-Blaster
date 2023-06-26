@@ -46,8 +46,6 @@ fun AdultModePickerScreenContent(
     setAdultMode: (Boolean) -> Unit
 ) {
 
-    var adultModeEnabled = getAdultMode()
-
     val buttonFontSize = 20
     val textFontSize = 26
     val fontFamily = FontFamily.SansSerif
@@ -72,7 +70,7 @@ fun AdultModePickerScreenContent(
                 }
                 setAdultMode(false)
             },
-            imageId = if (adultModeEnabled != null && !adultModeEnabled)
+            imageId = if (getAdultMode() != null && !getAdultMode()!!)
                 R.drawable.angel_selected else R.drawable.angel_unselected
         )
 
@@ -86,7 +84,7 @@ fun AdultModePickerScreenContent(
                 }
                 setAdultMode(true)
             },
-            imageId = if (adultModeEnabled != null && adultModeEnabled)
+            imageId = if (getAdultMode() != null && getAdultMode()!!)
                 R.drawable.adult_mode_selected else R.drawable.adult_mode_unselected,
         )
 
@@ -95,14 +93,14 @@ fun AdultModePickerScreenContent(
         //Continue Button
         SimpleButton(
             onClick = {
-                Game.setAdultMode(adultMode = adultModeEnabled!!)
+                Game.setAdultMode(adultMode = getAdultMode()!!)
                 DareTaskGenerator.assignDares(players = Game.getPlayers())
                 onContinueClicked()
             },
             text = "Continue",
             fontSize = buttonFontSize,
             fontFamily = fontFamily,
-            enabled = adultModeEnabled != null
+            enabled = getAdultMode() != null
         )
     }
 }

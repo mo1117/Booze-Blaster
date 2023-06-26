@@ -1,6 +1,5 @@
 package com.boozeblaster.composables
 
-import android.graphics.Color
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,12 +12,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.getFontColor
 import kotlinx.coroutines.delay
 
@@ -37,14 +38,17 @@ fun SimpleTextField(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = androidx.compose.ui.graphics.Color.White, shape = RoundedCornerShape(16.dp)) // Set background color and rounded shape
+            .background(
+                color = getBackgroundColor(),
+                shape = RoundedCornerShape(16.dp)
+            )
             .padding(8.dp),
         contentAlignment = Alignment.Center
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(fraction = 1f),
             value = value,
-            label = { Text(text = label) },
+            label = { Text(text = label, color = if (isError) Color.Red else Color.Green) },
             isError = isError,
             singleLine = singleLine,
             onValueChange = { onChange(it) },

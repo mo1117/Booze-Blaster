@@ -21,4 +21,8 @@ sealed class Screen(val route: String) {
     object AdultModePickerScreen : Screen(route = "adultMode")
 
     object DisplayDaresScreen : Screen(route = "displayDares")
+
+    object RoundPickerScreen : Screen(route = "rounds")
+
+    object FullfillDaresScreen : Screen(route = "fulfillDares")
 }

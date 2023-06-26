@@ -48,7 +48,20 @@ class Game private constructor(
             }
             INSTANCE.players = mutableListOf()
             DareTaskGenerator.resetUsedDares()
-//            INSTANCE.tasks = emptyList()
+        }
+
+        /**
+         * Play again with the same players
+         */
+        fun playAgain() {
+            for (player in INSTANCE.players) {
+                player.setPoints(points = 0)
+                player.setSips(sips = 0)
+                player.setDare(dare = null)
+            }
+            TaskGenerator.generateTasks(players = INSTANCE.players, rounds = INSTANCE.rounds)
+            DareTaskGenerator.resetUsedDares()
+            DareTaskGenerator.assignDares(players = INSTANCE.players)
         }
 
         /**
@@ -58,6 +71,10 @@ class Game private constructor(
             for (player in INSTANCE.players) {
                 player.setDare(dare = null)
             }
+        }
+
+        fun getPlayersByPointsDescending(): List<Player> {
+            return getPlayers().sortedByDescending(selector = { player -> player.getPoints() })
         }
 
         /**
@@ -83,18 +100,12 @@ class Game private constructor(
         fun getTask(index: Int): Task = INSTANCE.tasks.get(index = index)
 
         /**
-         * Appends the dare tasks of the 1 to 2 losers to the task list
+         * @return Player(s) with the least points (2 if at least 5 players played)
          */
-        fun appendDareTasks() {
-            val losers = INSTANCE.players // List of players based on their points (ascending)
+        fun getLosers(): List<Player> {
+            return INSTANCE.players // List of players based on their points (ascending)
                 .sortedWith(comparator = compareBy(selector = { player -> player.getPoints() }))
-                .subList(fromIndex = 0, toIndex = 2) // Take only the last two (two losers max)
-
-            INSTANCE.tasks = INSTANCE.tasks.plus(DareTask(player = losers.get(index = 0)))
-
-            if (INSTANCE.players.size > 5) {
-                INSTANCE.tasks = INSTANCE.tasks.plus(DareTask(player = losers.get(index = 1)))
-            }
+                .subList(fromIndex = 0, toIndex = 1 + INSTANCE.players.size / 5)
         }
 
         /**

@@ -1,16 +1,8 @@
 package com.boozeblaster.minigames.individual
 
-import android.os.CountDownTimer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.boozeblaster.R
 import com.boozeblaster.composables.*
 import com.boozeblaster.enums.AnimationConstants
@@ -19,7 +11,6 @@ import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.widgets.MyMediaPlayer
-import com.boozeblaster.widgets.Timer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

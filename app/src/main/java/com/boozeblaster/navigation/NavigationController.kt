@@ -22,13 +22,27 @@ object NavigationController {
         navController: NavController,
         setAdultMode: (Boolean?) -> Unit,
         setDifficulty: (Difficulty?) -> Unit,
-        resetAddedPlayers: () -> Unit
+        resetAddedPlayers: () -> Unit,
+        setSelectedRounds: (Int) -> Unit
     ) {
         setAdultMode(null)
         setDifficulty(null)
         resetAddedPlayers()
+        setSelectedRounds(0)
         navController.popBackStack()
     }
 
+    fun navigateToGameScreen(
+        navController: NavController,
+        setAdultMode: (Boolean?) -> Unit,
+        setDifficulty: (Difficulty?) -> Unit,
+        resetAddedPlayers: () -> Unit,
+        setSelectedRounds: (Int) -> Unit
+    ) {
+        setAdultMode(null)
+        setDifficulty(null)
+        resetAddedPlayers()
+        setSelectedRounds(0)
+        navController.navigate(route = Screen.GameScreen.route)
+    }
 }
-

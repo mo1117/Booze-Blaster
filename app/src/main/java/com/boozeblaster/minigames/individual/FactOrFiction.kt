@@ -8,10 +8,7 @@ import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
-import com.boozeblaster.widgets.Timer
-import android.os.CountDownTimer
 import com.boozeblaster.composables.*
-import kotlinx.coroutines.launch
 
 class FactOrFiction(
     private val question: String,

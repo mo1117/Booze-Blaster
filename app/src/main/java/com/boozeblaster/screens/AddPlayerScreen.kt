@@ -1,23 +1,28 @@
 package com.boozeblaster.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.boozeblaster.R
 import com.boozeblaster.composables.*
+import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.PlayerViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlin.reflect.KSuspendFunction1
 
 @Composable
 fun AddPlayerScreen(navController: NavController = rememberNavController()) {
@@ -46,13 +51,14 @@ fun AddPlayerScreen(navController: NavController = rememberNavController()) {
                     navController.navigate(route = Screen.AddPlayerScreen.route)
                 }
             },
-            onContinueClicked = {
-                navController.navigate(route = Screen.StartGameScreen.route)
+            removePlayer = playerViewModel::deletePlayer,
+            onDoneClicked = {
+                navController.popBackStack()
             },
             onPlayerValueChange = { newUiState, event ->
                 playerViewModel.updateUIState(newUiState, event)
-
-            }
+            },
+            getAllPlayers = playerViewModel::getAllPlayers
         )
     }
 }
@@ -62,15 +68,55 @@ fun AddPlayerScreenContent(
     modifier: Modifier,
     playerUIState: AddPlayerUIState,
     onAddPlayerClicked: () -> Unit,
-    onContinueClicked: () -> Unit,
-    onPlayerValueChange: (AddPlayerUIState, AddPlayerUIEvent) -> Unit
+    removePlayer: KSuspendFunction1<Player, Unit>,
+    onDoneClicked: () -> Unit,
+    onPlayerValueChange: (AddPlayerUIState, AddPlayerUIEvent) -> Unit,
+    getAllPlayers: () -> Flow<List<Player>>
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val savedPlayersValues by getAllPlayers().collectAsState(initial = emptyList())
+
+    var deletedPlayers by remember {
+        mutableStateOf(value = emptyList<Player>())
+    }
 
     SurfaceWithColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        SimpleSpacer(size = 20)
+        LazyColumn(
+            modifier = Modifier
+                .height(height = 300.dp)
+                .fillMaxWidth(fraction = 0.9f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            content = {
+                items(savedPlayersValues) { player ->
+                    if (!deletedPlayers.contains(element = player)) {
+                        Row {
+                            SimpleTextDisplay(
+                                modifier = Modifier.padding(top = 12.dp),
+                                text = player.getName(),
+                                fontSize = 20,
+                                fontFamily = FontFamily.SansSerif
+                            )
+                            SimpleSpacer(size = 30)
+                            SimpleImageButton(
+                                onClick = {
+                                    coroutineScope.launch {
+                                        removePlayer(player)
+                                    }
+                                    deletedPlayers = deletedPlayers.plus(element = player)
+                                }, imageId = R.drawable.delete,
+                                modifier = Modifier.size(size = 40.dp)
+                            )
+                        }
+                        SimpleSpacer(size = 10)
+                    }
+                }
+            })
 
         SimpleTextField(
             modifier = Modifier,
@@ -99,7 +145,9 @@ fun AddPlayerScreenContent(
         SimpleSpacer(size = 20)
 
         SimpleButton(
-            onClick = onContinueClicked,
+            onClick = {
+                onDoneClicked()
+            },
             text = "Continue",
             fontSize = 16,
             fontFamily = FontFamily.SansSerif

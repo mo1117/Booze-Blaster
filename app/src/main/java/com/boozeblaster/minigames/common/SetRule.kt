@@ -3,7 +3,6 @@ package com.boozeblaster.minigames.common
 import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
-import com.boozeblaster.widgets.Timer
 
 class SetRule : MiniGame() {
 

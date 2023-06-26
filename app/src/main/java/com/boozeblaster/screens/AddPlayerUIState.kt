@@ -6,7 +6,7 @@ import java.util.*
 
 data class AddPlayerUIState(
     var name: String = "",
-    var nameError: Boolean = false,
+    var nameError: Boolean = true,
     var actionEnabled: Boolean = false
 ) {
 

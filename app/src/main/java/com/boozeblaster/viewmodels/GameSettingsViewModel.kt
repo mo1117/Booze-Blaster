@@ -18,6 +18,7 @@ class GameSettingsViewModel : ViewModel() {
     private var _difficultyState: Difficulty? by mutableStateOf(value = null)
     private var _adultModeState: Boolean? by mutableStateOf(value = null)
     private var _addedPlayersState: MutableList<Player> by mutableStateOf(value = mutableListOf())
+    private var _roundsState: Int by mutableStateOf(value = 0)
 
     fun setAdultMode(adultMode: Boolean?) {
         _adultModeState = adultMode
@@ -31,17 +32,19 @@ class GameSettingsViewModel : ViewModel() {
 
     fun getDifficulty(): Difficulty? = _difficultyState
 
-    fun addPlayer(player: Player) {
-        _addedPlayersState.add(element = player)
+    fun setPlayers(players: List<Player>) {
+        _addedPlayersState = players as MutableList<Player>
     }
 
-    fun removePlayer(player: Player) {
-        _addedPlayersState.remove(element = player)
-    }
-
-    fun getAddedPlayers() : List<Player> = _addedPlayersState
+    fun getAddedPlayers(): List<Player> = _addedPlayersState
 
     fun resetAddedPlayers() {
         _addedPlayersState = mutableListOf()
+    }
+
+    fun getSelectedRounds() : Int = _roundsState
+
+    fun setSelectedRounds(rounds: Int) {
+        _roundsState = rounds
     }
 }

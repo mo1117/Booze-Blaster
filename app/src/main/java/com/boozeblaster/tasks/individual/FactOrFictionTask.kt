@@ -1,19 +1,24 @@
 package com.boozeblaster.tasks.individual
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.ClickableSurfaceWithColumn
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.individual.FactOrFiction
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.ui.theme.getBackgroundColor
-import com.boozeblaster.widgets.Timer
+import com.boozeblaster.ui.theme.headerFont
 
 /**
  * A class that represents the Fact or Fiction mini-game
@@ -34,23 +39,31 @@ class FactOrFictionTask(
 
     @Composable
     override fun DisplayCover(onSurfaceClicked: () -> Unit) {
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight(fraction = 1f)
-                .fillMaxWidth(fraction = 1f)
-                .clickable(onClick = { onSurfaceClicked() })
+        ClickableSurfaceWithColumn(
+            onSurfaceClicked = onSurfaceClicked,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.background(
-                    color = getBackgroundColor()
-                )
-            ) {
-                Text(text = player.getName())
-                Spacer(Modifier.size(50.dp))
-                Text("Fact or Fiction my guy")
-            }
+            SimpleTextDisplay(
+                text = "Fact or Fiction",
+                fontSize = 30,
+                fontFamily = headerFont
+            )
+            SimpleSpacer(size = 30)
+
+            SimpleTextDisplay(
+                text = player.getName(),
+                fontSize = 26,
+                fontFamily = super.fontFamily
+            )
+            SimpleSpacer(size = 30)
+
+            SimpleTextDisplay(
+                text = "Guess if the following statements are true or false!\n\nIf you are " +
+                        "correct, you are rewarded a point.\n\nOtherwise you drink!",
+                fontSize = super.fontSize,
+                fontFamily = super.fontFamily
+            )
         }
     }
 

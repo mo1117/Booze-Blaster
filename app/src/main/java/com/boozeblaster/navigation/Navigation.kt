@@ -22,10 +22,6 @@ fun Navigation() {
             AddPlayerScreen(navController = navController)
         }
 
-        composable(route = Screen.EditPlayerScreen.route) {
-            EditPlayerScreen(navController = navController)
-        }
-
         composable(route = Screen.StartGameScreen.route) {
             StartGameScreen(
                 navController = navController,
@@ -75,6 +71,10 @@ fun Navigation() {
 
         composable(route = Screen.FullfillDaresScreen.route) {
             FulfillDaresScreen(navController = navController)
+        }
+        
+        composable(route = Screen.GiveSipsScreen.route) {
+            GiveSipsScreen(navController = navController)
         }
     }
 }

@@ -73,9 +73,10 @@ fun SimpleTextDisplay(
     text: String,
     fontSize: Int,
     fontFamily: FontFamily,
+    horizontalTextPadding: Int = 10
 ) {
     Text(
-        modifier = modifier.padding(horizontal = 10.dp),
+        modifier = modifier.padding(horizontal = horizontalTextPadding.dp),
         text = text,
         fontSize = fontSize.sp,
         fontFamily = fontFamily,

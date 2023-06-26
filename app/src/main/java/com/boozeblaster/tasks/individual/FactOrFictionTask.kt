@@ -1,16 +1,16 @@
 package com.boozeblaster.tasks.individual
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.R
 import com.boozeblaster.composables.ClickableSurfaceWithColumn
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
@@ -56,13 +56,23 @@ class FactOrFictionTask(
                 fontSize = 26,
                 fontFamily = super.fontFamily
             )
+
+            SimpleSpacer(size = 30)
+
+            Image(
+                modifier = Modifier.size(size = 100.dp),
+                painter = painterResource(id = R.drawable.fact_or_fiction),
+                contentDescription = "Fact or Fiction Icon"
+            )
+
             SimpleSpacer(size = 30)
 
             SimpleTextDisplay(
                 text = "Guess if the following statements are true or false!\n\nIf you are " +
                         "correct, you are rewarded a point.\n\nOtherwise you drink!",
                 fontSize = super.fontSize,
-                fontFamily = super.fontFamily
+                fontFamily = super.fontFamily,
+                horizontalTextPadding = 15
             )
         }
     }

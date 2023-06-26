@@ -34,7 +34,7 @@ class SetRuleTask(subTasks: List<SetRule> = emptyList()) : CommonTask(subTasks =
             SimpleSpacer(size = 50)
             SimpleTextDisplay(
                 text = "Set any rule you want!\n\nPlayers that break this rule have to " +
-                        "drink ${Game.getSipMultiplier()} sips!\n" +
+                        "drink ${Game.getSipMultiplier()} sips!\n\n" +
                         "This rule is in effect for the rest of the game!",
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif

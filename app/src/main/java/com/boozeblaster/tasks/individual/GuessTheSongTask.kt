@@ -1,12 +1,17 @@
 package com.boozeblaster.tasks.individual
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
+import com.boozeblaster.R
 import com.boozeblaster.composables.ClickableSurfaceWithColumn
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
@@ -45,6 +50,14 @@ class GuessTheSongTask(
             )
             SimpleSpacer(size = 30)
 
+            Image(
+                modifier = Modifier.size(size = 100.dp),
+                painter = painterResource(id = R.drawable.guessing),
+                contentDescription = "Guess The Song Icon"
+            )
+
+            SimpleSpacer(size = 30)
+
             SimpleTextDisplay(
                 text = "You will have to guess the following three songs.\n\nIf you cannot name " +
                         "both artist and the song's name, you will drink the full amount!\n\n" +
@@ -52,7 +65,8 @@ class GuessTheSongTask(
                         "instead!\n\nIf only one guess is correct, points and sips will both be " +
                         "halved.",
                 fontSize = super.fontSize,
-                fontFamily = super.fontFamily
+                fontFamily = super.fontFamily,
+                horizontalTextPadding = 15
             )
         }
     }

@@ -32,7 +32,7 @@ class WhoInThisRoomTask(
             SimpleSpacer(size = 50)
             SimpleTextDisplay(
                 text = "Do your own countdown and point to the player that you thought of first " +
-                        "when you heard the statement!",
+                        "when you heard the statement!\n\nThe loser(s) drink(s)!",
                 fontSize = super.fontSize,
                 fontFamily = super.fontFamily
             )

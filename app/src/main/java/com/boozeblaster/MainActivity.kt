@@ -24,8 +24,9 @@ class MainActivity : ComponentActivity() {
                 }
                 if (!overSixteen) {
                     MyAlertDialog(
-                        title = "Confirm Age",
-                        message = "Are you all over 16 years old?",
+                        title = "Confirm",
+                        message = "This game enforces drinking alcohol and may contain " +
+                                "sensitive language, do you wish to continue?",
                         onConfirm = { overSixteen = true },
                         onDismiss = { exitProcess(status = 1) })
                 }

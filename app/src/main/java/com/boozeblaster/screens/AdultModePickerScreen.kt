@@ -14,6 +14,7 @@ import com.boozeblaster.composables.*
 import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.headerFont
 import com.boozeblaster.viewmodels.GameSettingsViewModel
 
 @Composable
@@ -47,7 +48,6 @@ fun AdultModePickerScreenContent(
 ) {
 
     val buttonFontSize = 20
-    val textFontSize = 26
     val fontFamily = FontFamily.SansSerif
 
     SurfaceWithColumn(
@@ -56,8 +56,8 @@ fun AdultModePickerScreenContent(
     ) {
         SimpleTextDisplay(
             text = "Choose Mode",
-            fontSize = textFontSize,
-            fontFamily = fontFamily
+            fontSize = 30,
+            fontFamily = headerFont
         )
 
         SimpleSpacer(size = 50)

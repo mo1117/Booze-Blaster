@@ -82,6 +82,28 @@ fun AddPlayerScreenContent(
         mutableStateOf(value = emptyList<Player>())
     }
 
+    var displayAgeConfirmation by remember {
+        mutableStateOf(value = false)
+    }
+
+    var ageConfirmed by remember {
+        mutableStateOf(value = false)
+    }
+
+    if (displayAgeConfirmation) {
+        MyAlertDialog(
+            title = "Confirm Age",
+            message = "Are you at least 16 years old?",
+            onConfirm = {
+                ageConfirmed = true
+                displayAgeConfirmation = false
+            },
+            onDismiss = {
+                ageConfirmed = false
+                displayAgeConfirmation = false
+            })
+    }
+
     SurfaceWithColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -132,17 +154,29 @@ fun AddPlayerScreenContent(
             }
         )
 
-        SimpleSpacer(size = 50)
+        SimpleSpacer(size = 30)
 
         SimpleButton(
-            enabled = playerUIState.actionEnabled,
-            onClick = onAddPlayerClicked,
-            text = "Add",
-            fontSize = 16,
+            onClick = { displayAgeConfirmation = true },
+            text = "Confirm Age",
+            fontSize = 20,
             fontFamily = FontFamily.SansSerif
         )
 
-        SimpleSpacer(size = 20)
+        SimpleSpacer(size = 30)
+
+        SimpleButton(
+            enabled = playerUIState.actionEnabled && ageConfirmed,
+            onClick = {
+                ageConfirmed = false
+                onAddPlayerClicked()
+            },
+            text = "Add",
+            fontSize = 16,
+            fontFamily = FontFamily.SansSerif,
+        )
+
+        SimpleSpacer(size = 30)
 
         SimpleButton(
             onClick = {

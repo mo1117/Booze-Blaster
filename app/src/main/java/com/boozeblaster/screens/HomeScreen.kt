@@ -69,7 +69,7 @@ fun HomeScreenContent(
 
         //Add a player button
         SimpleButton(
-            onClick = { onAddPlayerClicked() },
+            onClick = onAddPlayerClicked,
             text = "Add Player",
             fontSize = fontSize,
             fontFamily = fontFamily,
@@ -79,7 +79,7 @@ fun HomeScreenContent(
 
         //Tutorial button
         SimpleButton(
-            onClick = { onTutorialClicked() },
+            onClick = onTutorialClicked,
             text = "How To Play",
             fontSize = fontSize,
             fontFamily = fontFamily,

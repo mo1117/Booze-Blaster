@@ -14,6 +14,7 @@ import com.boozeblaster.composables.*
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.headerFont
 import com.boozeblaster.viewmodels.GameSettingsViewModel
 
 @Composable
@@ -60,7 +61,7 @@ fun DifficultyPickerScreenContent(
         SimpleTextDisplay(
             text = "Pick a Difficulty!",
             fontSize = 30,
-            fontFamily = fontFamily
+            fontFamily = headerFont
         )
         SimpleSpacer(size = 30)
 
@@ -122,7 +123,7 @@ fun DifficultyPickerScreenContent(
             fontSize = textFontSize,
             fontFamily = fontFamily
         )
-        SimpleSpacer(size = 100)
+        SimpleSpacer(size = 60)
 
         SimpleButton(
             onClick = {

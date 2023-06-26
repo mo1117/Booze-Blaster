@@ -8,8 +8,6 @@ sealed class Screen(val route: String) {
 
     object AddPlayerScreen : Screen(route = "addPlayer")
 
-    object EditPlayerScreen : Screen(route = "editPlayer")
-
     object GameScreen : Screen(route = "game")
 
     object GameOverScreen : Screen(route = "gameOver")
@@ -25,4 +23,6 @@ sealed class Screen(val route: String) {
     object RoundPickerScreen : Screen(route = "rounds")
 
     object FullfillDaresScreen : Screen(route = "fulfillDares")
+
+    object GiveSipsScreen : Screen(route = "giveSips")
 }

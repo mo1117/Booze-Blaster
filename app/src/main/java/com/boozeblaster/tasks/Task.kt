@@ -17,7 +17,7 @@ import com.boozeblaster.tasks.common.SipTransferTask
  */
 abstract class Task {
 
-    protected val fontSize = 16
+    protected val fontSize = 18
     protected val fontFamily = FontFamily.SansSerif
 
     /**

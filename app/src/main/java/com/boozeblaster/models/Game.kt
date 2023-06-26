@@ -109,6 +109,16 @@ class Game private constructor(
         }
 
         /**
+         * @return Player(s) with the most points (2 if at least players played, 3 if at least 8 players played)
+         */
+        fun getWinners(): List<Player> {
+            val toIndex = if (INSTANCE.players.size > 4) 2 else if (INSTANCE.players.size > 7) 3 else 1
+            return INSTANCE.players
+                .sortedWith(comparator = compareByDescending(selector = { player -> player.getPoints() }))
+                .subList(fromIndex = 0, toIndex = toIndex)
+        }
+
+        /**
          * Set the adult mode to enabled or disabled
          * @param adultMode Boolean
          */

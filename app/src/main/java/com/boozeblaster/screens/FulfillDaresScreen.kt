@@ -1,14 +1,19 @@
 package com.boozeblaster.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.boozeblaster.R
 import com.boozeblaster.composables.*
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
@@ -39,7 +44,7 @@ fun FulfillDaresScreen(navController: NavController) {
         }) { paddingValues ->
         FulfillDaresScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
-            onContinueClicked = { navController.navigate(route = Screen.GameOverScreen.route) }
+            onContinueClicked = { navController.navigate(route = Screen.GiveSipsScreen.route) }
         )
     }
 }
@@ -66,13 +71,27 @@ fun FulfillDaresScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        SimpleTextDisplay(text = "Complete the Dare!", fontSize = 30, fontFamily = headerFont)
+        SimpleTextDisplay(
+            text = "${
+                Game.getLosers().get(index = loserIndex).getName()
+            }\n\nYou are a loser - complete the Dare!", fontSize = 30, fontFamily = headerFont
+        )
         SimpleSpacer(size = 30)
+
+        Image(
+            modifier = Modifier.size(size = 100.dp),
+            painter = painterResource(id = R.drawable.judge_hammer_black),
+            contentDescription = "Judge Hammer Icon"
+        )
+
+        SimpleSpacer(size = 30)
+
         SimpleTextDisplay(
             text = Game.getLosers().get(index = loserIndex).getDare().toString(),
-            fontSize = 24,
+            fontSize = 20,
             fontFamily = FontFamily.SansSerif
         )
+
         SimpleSpacer(size = 30)
         SimpleButton(
             onClick = {

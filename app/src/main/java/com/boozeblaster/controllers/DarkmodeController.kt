@@ -1,6 +1,7 @@
 package com.boozeblaster.controllers
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -34,11 +35,13 @@ class DarkmodeController private constructor(
          * On -> Off and vice versa
          */
         fun toggle() {
-            if (INSTANCE != null) {
+            try {
                 val darkMode = !isDarkmode()
                 INSTANCE!!.darkmode = darkMode
                 INSTANCE!!.editor.putBoolean("dark_mode", darkMode)
                 INSTANCE!!.editor.apply()
+            } catch (e: NullPointerException) {
+                Log.e("DarkmodeController", "Could not toggle Darkmode Controller!")
             }
         }
     }

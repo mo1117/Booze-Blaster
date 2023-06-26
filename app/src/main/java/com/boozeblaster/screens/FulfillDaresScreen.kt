@@ -124,11 +124,11 @@ fun FulfillDaresScreenContent(
             SimpleSpacer(size = 20)
             AskPlayersToDrinkDialog(
                 players = listOf(Game.getLosers().get(index = loserIndex)),
-                sips = Game.getSipMultiplier() * 2,
+                sips = Game.getSipMultiplier() * 4,
                 callback = {
                     if (loserIndex == Game.getLosers().size - 1) {
                         Game.getLosers().get(index = loserIndex)
-                            .addSips(sips = Game.getSipMultiplier() * 2)
+                            .addSips(sips = Game.getSipMultiplier() * 4)
                         onContinueClicked()
                     } else {
                         loserIndex++

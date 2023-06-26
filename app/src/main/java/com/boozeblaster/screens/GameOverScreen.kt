@@ -38,8 +38,8 @@ fun GameOverScreen(navController: NavController) {
             modifier = Modifier.padding(paddingValues = paddingValues),
             playAgain = {
                 navController.popBackStack()
-                Game.playAgain()
-                navController.navigate(route = Screen.DisplayDaresScreen.route)
+                Game.reset()
+                navController.navigate(route = Screen.StartGameScreen.route)
             }
         )
     }

@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -105,7 +104,11 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
 }
 
 @Composable
-fun GameScreenAppBar(onBackButtonClick: () -> Unit, currentRound: Int) {
+fun GameScreenAppBar(
+    onBackButtonClick: () -> Unit,
+    currentRound: Int,
+    onRestartClicked: () -> Unit
+) {
     val totalRounds = Game.getRounds()
     var showScore by remember {
         mutableStateOf(value = false)
@@ -136,21 +139,29 @@ fun GameScreenAppBar(onBackButtonClick: () -> Unit, currentRound: Int) {
             }
         },
         actions = {
+            IconButton(onClick = onRestartClicked) {
+                Image(
+                    modifier = Modifier.size(size = 35.dp),
+                    painter = painterResource(id = R.drawable.refresh),
+                    contentDescription = "Restart Icon"
+                )
+            }
+
+            SimpleSpacer(size = 10)
             IconButton(onClick = { displayRuleBreaker = true }) {
                 Image(
-                    modifier = Modifier.size(size = 40.dp),
+                    modifier = Modifier.size(size = 35.dp),
                     painter = painterResource(
-                        id = if (DarkmodeController.isDarkmode())
-                            R.drawable.judge_hammer_white else R.drawable.judge_hammer_black
+                        id = R.drawable.judge_hammer_black
                     ),
                     contentDescription = "Rule Breaker Icon"
                 )
             }
-            SimpleSpacer(size = 20)
+            SimpleSpacer(size = 10)
 
             IconButton(onClick = { showScore = true }) {
                 Image(
-                    modifier = Modifier.size(size = 40.dp),
+                    modifier = Modifier.size(size = 35.dp),
                     painter = painterResource(id = R.drawable.scoreboard),
                     contentDescription = "Scoreboard Icon"
                 )

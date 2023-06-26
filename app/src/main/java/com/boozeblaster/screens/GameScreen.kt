@@ -44,7 +44,12 @@ fun GameScreen(navController: NavController = rememberNavController()) {
                 onBackButtonClick = {
                     askForConfirmation = true
                 },
-                currentRound = roundCounter
+                currentRound = roundCounter,
+                onRestartClicked = {
+                    navController.popBackStack()
+                    Game.reset()
+                    navController.navigate(route = Screen.StartGameScreen.route)
+                }
             )
         },
         backgroundColor = getBackgroundColor()

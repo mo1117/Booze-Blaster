@@ -29,7 +29,7 @@ object NavigationController {
         setDifficulty(null)
         resetAddedPlayers()
         setSelectedRounds(0)
-        navController.popBackStack()
+        navigateToHomeScreen(navController = navController)
     }
 
     fun navigateToGameScreen(

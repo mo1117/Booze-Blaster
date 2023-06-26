@@ -2,8 +2,6 @@ package com.boozeblaster.tasks
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.font.FontFamily
-import com.boozeblaster.tasks.common.SetRuleTask
-import com.boozeblaster.tasks.common.SipTransferTask
 
 /**
  * The base class representing a Task
@@ -51,24 +49,10 @@ abstract class Task {
         if (showCover) {
             DisplayCover(onSurfaceClicked = { showCover = false })
         } else {
-            if (shouldDisplayOnlyCover(task = this)) {
+            Display(callback = {
                 showCover = true
                 callback()
-            } else {
-                Display(callback = {
-                    showCover = true
-                    callback()
-                })
-            }
+            })
         }
-    }
-
-    /**
-     * For some tasks, we might only want to show the cover and no actual content
-     * @param task Task
-     * @return Whether we only want to show the cover for this task
-     */
-    private fun shouldDisplayOnlyCover(task: Task): Boolean {
-        return task is SetRuleTask
     }
 }

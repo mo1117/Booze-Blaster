@@ -70,7 +70,7 @@ fun HomeScreenContent(
         //Add a player button
         SimpleButton(
             onClick = onAddPlayerClicked,
-            text = "Add Player",
+            text = "Add Players",
             fontSize = fontSize,
             fontFamily = fontFamily,
             minHeight = minHeight

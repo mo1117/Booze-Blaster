@@ -4,11 +4,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import com.boozeblaster.composables.*
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
-import com.boozeblaster.composables.*
 
 class FactOrFiction(
     private val question: String,
@@ -31,8 +31,6 @@ class FactOrFiction(
             fontFamily = fontFamily
         )
         SimpleSpacer(size = 50)
-
-
 
         Row {
             // "Wrong" Button
@@ -79,7 +77,7 @@ class FactOrFiction(
             })
         }
 
-        if(!buttonClicked) {
+        if (!buttonClicked) {
             CountdownTimer()
             SimpleSpacer(size = 20)
         }

@@ -84,7 +84,7 @@ class FactOrFictionTask(
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier.background(
                 color = getBackgroundColor()
             )

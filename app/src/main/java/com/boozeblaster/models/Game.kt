@@ -51,20 +51,6 @@ class Game private constructor(
         }
 
         /**
-         * Play again with the same players
-         */
-        fun playAgain() {
-            for (player in INSTANCE.players) {
-                player.setPoints(points = 0)
-                player.setSips(sips = 0)
-                player.setDare(dare = null)
-            }
-            TaskGenerator.generateTasks(players = INSTANCE.players, rounds = INSTANCE.rounds)
-            DareTaskGenerator.resetUsedDares()
-            DareTaskGenerator.assignDares(players = INSTANCE.players)
-        }
-
-        /**
          * Resets all dares to null value
          */
         fun resetAllDares() {

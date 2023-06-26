@@ -59,7 +59,9 @@ fun GiveSipsScreenContent(
         verticalArrangement = Arrangement.Center
     ) {
         SimpleTextDisplay(
-            text = "${Game.getWinners().get(index = winnerIndex).getName()}\n\nCongratulations - you are a winner!",
+            text = "${
+                Game.getWinners().get(index = winnerIndex).getName()
+            }\n\nCongratulations - you are a winner!",
             fontSize = 30,
             fontFamily = headerFont
         )

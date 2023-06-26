@@ -41,7 +41,7 @@ class GuessTheLyrics(
 
 
             CountdownTimer()
-            
+
             SimpleSpacer(size = 10)
 
             // Show Solution Button

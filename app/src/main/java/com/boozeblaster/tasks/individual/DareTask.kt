@@ -10,7 +10,6 @@ class DareTask(
     player = player,
     subTasks = emptyList()
 ) {
-
     @Composable
     override fun DisplayCover(onSurfaceClicked: () -> Unit) {
         //STUB

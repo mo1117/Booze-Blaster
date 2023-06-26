@@ -1,6 +1,6 @@
 package com.boozeblaster.tasks
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
 

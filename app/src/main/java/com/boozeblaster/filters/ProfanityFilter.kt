@@ -3,7 +3,6 @@ package com.boozeblaster.filters
 import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import java.io.File
 
 /**
  * The ProfanityFilter is used to check if a username contains profanity
@@ -56,16 +55,23 @@ class ProfanityFilter {
         /**
          * Used to filter some bad words in case the API call throws and exception
          */
-        private val offlineList = listOf("retard")
-
-        private fun loadOfflineList(): List<String> {
-            val list = arrayListOf<String>()
-            File("app/src/main/assets/bad_words.txt").forEachLine(
-                charset = Charsets.UTF_8,
-                action = {
-                    list.add(element = it)
-                })
-            return list
-        }
+        private val offlineList =
+            listOf(
+                "retard",
+                "asshole",
+                "idiot",
+                "nigger",
+                "jew",
+                "mongoloid",
+                "faggot",
+                "gay",
+                "lesbian",
+                "fuck",
+                "fucker",
+                "pussy",
+                "weewee",
+                "scum",
+                "douchebag"
+            )
     }
 }

@@ -39,10 +39,12 @@ class DareGenerator : MiniGameGenerator() {
             Dare(dare = "Not allowed to talk until you finish your drink."),
             Dare(dare = "Reply to the first five Instagram stories on your timeline."),
             Dare(dare = "Let the other players go through your phone for one minute."),
-            Dare(dare = "Always drink double the sips in the next round or finish your drink."),
             Dare(dare = "Take 3 shots."),
             Dare(dare = "Drink whatever the person to your left gives you."),
-            Dare(dare = "Text your ex or finish your drink.")
+            Dare(dare = "Text your ex or finish your drink."),
+            Dare(dare = "Chug down a beer!"),
+            Dare(dare = "Do a back-flip!"),
+            Dare(dare = "Remove your T-shirt!")
         )
     }
 }

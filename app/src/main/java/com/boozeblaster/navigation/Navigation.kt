@@ -72,7 +72,7 @@ fun Navigation() {
         composable(route = Screen.FullfillDaresScreen.route) {
             FulfillDaresScreen(navController = navController)
         }
-        
+
         composable(route = Screen.GiveSipsScreen.route) {
             GiveSipsScreen(navController = navController)
         }

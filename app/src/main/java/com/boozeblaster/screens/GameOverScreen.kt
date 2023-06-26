@@ -64,29 +64,17 @@ fun GameOverScreenContent(
                 items(players) { player ->
                     Row {
                         SimpleTextDisplay(
-                            text = player.getName(),
-                            fontSize = 20,
-                            fontFamily = FontFamily.SansSerif
-                        )
-                        SimpleSpacer(size = 10)
-
-                        SimpleTextDisplay(
-                            text = "${player.getPoints()} Points",
-                            fontSize = 20,
-                            fontFamily = FontFamily.SansSerif
-                        )
-                        SimpleSpacer(size = 10)
-
-                        SimpleTextDisplay(
-                            text = "${player.getSips()} Sips",
+                            text = "${player.getName()} | ${player.getPoints()} Points | " +
+                                    "${player.getSips()} Sips\n",
                             fontSize = 20,
                             fontFamily = FontFamily.SansSerif
                         )
                     }
+                    SimpleSpacer(size = 10)
                 }
             })
 
-        SimpleSpacer(size = 50)
+        SimpleSpacer(size = 30)
 
         SimpleButton(
             modifier = Modifier,

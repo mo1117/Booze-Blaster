@@ -4,7 +4,6 @@ import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.generators.TaskGenerator
 import com.boozeblaster.tasks.Task
-import com.boozeblaster.tasks.individual.DareTask
 
 /**
  * The Game class represents an instance that holds all the tasks that will then be played
@@ -98,7 +97,8 @@ class Game private constructor(
          * @return Player(s) with the most points (2 if at least players played, 3 if at least 8 players played)
          */
         fun getWinners(): List<Player> {
-            val toIndex = if (INSTANCE.players.size > 4) 2 else if (INSTANCE.players.size > 7) 3 else 1
+            val toIndex =
+                if (INSTANCE.players.size > 4) 2 else if (INSTANCE.players.size > 7) 3 else 1
             return INSTANCE.players
                 .sortedWith(comparator = compareByDescending(selector = { player -> player.getPoints() }))
                 .subList(fromIndex = 0, toIndex = toIndex)

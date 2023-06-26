@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.boozeblaster.enums.Difficulty
-import com.boozeblaster.generators.DareTaskGenerator
 import com.boozeblaster.models.Player
 
 /**
@@ -42,7 +41,7 @@ class GameSettingsViewModel : ViewModel() {
         _addedPlayersState = mutableListOf()
     }
 
-    fun getSelectedRounds() : Int = _roundsState
+    fun getSelectedRounds(): Int = _roundsState
 
     fun setSelectedRounds(rounds: Int) {
         _roundsState = rounds

@@ -28,7 +28,6 @@ class GuessTheSongTask(
     player = player,
     subTasks = subTasks
 ) {
-
     @Composable
     override fun DisplayCover(onSurfaceClicked: () -> Unit) {
         ClickableSurfaceWithColumn(

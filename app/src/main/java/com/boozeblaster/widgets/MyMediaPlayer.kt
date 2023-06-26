@@ -11,7 +11,6 @@ class MyMediaPlayer private constructor() : MediaPlayer() {
     companion object {
         @Volatile
         private var INSTANCE: MediaPlayer? = null
-
         fun create(context: Context, resid: Int) {
             INSTANCE = MediaPlayer.create(context, resid)
         }

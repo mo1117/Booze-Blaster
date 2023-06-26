@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun CountdownTimer(){
+fun CountdownTimer() {
     var secondsLeft by remember { mutableStateOf(10) }
 
     val coroutineScope = rememberCoroutineScope()

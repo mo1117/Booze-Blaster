@@ -9,12 +9,12 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
-val DarkAppBar = Color(0xFF6A1B9A)
-val DarkBackGround = Color(0xFF0D47A1)
+val DarkAppBar = Color(0xFF555555)
+val DarkBackGround = Color(0xFF000000)
 val DarkFontColor = Color.White
 
-val LightAppBar = Color(0xFFFFF8E1)
-val LightBackground = Color(0xFFFFCDD2)
+val LightAppBar = Color(0xFFCCCCCC)
+val LightBackground = Color(0xFFFFF8E1)
 val LightFontColor = Color.Black
 
 // Button Colors
@@ -28,8 +28,8 @@ val DarkIncorrectButtonColor = Color(0xFF581818)
 val LightHalfCorrectButtonColor = Color(0xFFFD5D01)
 val DarkHalfCorrectButtonColor = Color(0xFF924222)
 
-val LightUiButtonColor = Color(0xFF36BB96)
-val DarkUiButtonColor = Color(0xFF1D2947)
+val LightUiButtonColor = Color(0xFFCCCCCC)
+val DarkUiButtonColor = Color(0xFF555555)
 
 /**
  * Returns the button color, based on which kind of button it is and if darkmode is enabled or not

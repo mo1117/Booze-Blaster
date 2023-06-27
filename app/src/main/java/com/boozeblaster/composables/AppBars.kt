@@ -139,15 +139,6 @@ fun GameScreenAppBar(
             }
         },
         actions = {
-            IconButton(onClick = onRestartClicked) {
-                Image(
-                    modifier = Modifier.size(size = 35.dp),
-                    painter = painterResource(id = R.drawable.refresh),
-                    contentDescription = "Restart Icon"
-                )
-            }
-
-            SimpleSpacer(size = 10)
             IconButton(onClick = { displayRuleBreaker = true }) {
                 Image(
                     modifier = Modifier.size(size = 35.dp),

@@ -19,7 +19,7 @@ abstract class MiniGameGenerator {
      * @param list List of mini games
      * @param amount How many mini games we want to generate (default = 3)
      */
-    fun getList(list: List<MiniGame>, amount: Int = 3): List<MiniGame> {
+    fun getList(list: List<MiniGame>, amount: Int): List<MiniGame> {
         var randoms = arrayOf<Int>()
         var ret = listOf<MiniGame>()
         var counter = 0

@@ -40,7 +40,7 @@ class GuessTheLyrics(
             SimpleSpacer(size = 50)
 
 
-            CountdownTimer()
+            CountdownTimer(totalTimeInMillis = 20_000)
 
             SimpleSpacer(size = 10)
 

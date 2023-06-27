@@ -1,22 +1,28 @@
 package com.boozeblaster.composables
 
 import android.os.CountDownTimer
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontFamily
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun CountdownTimer() {
-    var secondsLeft by remember { mutableStateOf(10) }
+fun CountdownTimer(totalTimeInMillis: Long = 20_000) {
+    var secondsLeft by remember { mutableStateOf(value = (totalTimeInMillis / 1000).toInt()) }
 
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         coroutineScope.launch {
-            startCountdown {
+            startCountdown(totalTimeInMillis = totalTimeInMillis, updateSeconds = {
                 secondsLeft = it
-            }
+            })
         }
     }
 
@@ -29,9 +35,10 @@ fun CountdownTimer() {
 
 fun startCountdown(
     updateSeconds: (Int) -> Unit,
+    totalTimeInMillis: Long,
 ) {
-    val totalTimeInMillis = 20_000L // Total time in milliseconds (10 seconds)
-    val intervalInMillis = 1_000L // Interval between countdown updates (1 second)
+
+    val intervalInMillis = 1_000L
 
     object : CountDownTimer(totalTimeInMillis, intervalInMillis) {
         override fun onTick(millisUntilFinished: Long) {
@@ -40,8 +47,7 @@ fun startCountdown(
         }
 
         override fun onFinish() {
-            // Countdown finished, perform any desired actions
-            println("END OF TIME")
+            //STUB
         }
     }.start()
 }

@@ -96,7 +96,7 @@ private val tutorialTexts = listOf(
     "You will have to complete a dare or drink a fair amount of sips!",
 
     "Click the judge hammer if someone has broken a rule.\n\nClick the score icon to see the " +
-            "current score.\n\nClick the reload icon to restart.",
+            "current score.",
 
     "Try reading the tutorial again!",
 )

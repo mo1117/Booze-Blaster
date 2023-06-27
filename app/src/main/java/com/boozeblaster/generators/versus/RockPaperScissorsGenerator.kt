@@ -1,10 +1,9 @@
-package com.boozeblaster.generators.common
+package com.boozeblaster.generators.versus
 
 import com.boozeblaster.generators.MiniGameGenerator
 import com.boozeblaster.minigames.MiniGame
 
-class SetRuleGenerator : MiniGameGenerator() {
-
+class RockPaperScissorsGenerator : MiniGameGenerator() {
     override fun getList(): List<MiniGame> {
         //STUB
         return emptyList()

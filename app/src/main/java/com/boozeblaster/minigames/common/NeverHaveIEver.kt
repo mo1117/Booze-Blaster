@@ -1,16 +1,15 @@
 package com.boozeblaster.minigames.common
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.boozeblaster.composables.*
-import com.boozeblaster.enums.AnimationConstants
-import com.boozeblaster.enums.ButtonType
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.boozeblaster.composables.AskPlayersToDrinkDialog
+import com.boozeblaster.composables.PlayerPicker
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
@@ -28,138 +27,69 @@ class NeverHaveIEver(
         }
 
         var playersDoneIt by remember {
-            mutableStateOf(value = listOf<Player>())
+            mutableStateOf(value = mutableListOf<Player>())
         }
 
         var showDialog by remember {
             mutableStateOf(value = false)
         }
 
-        SurfaceWithColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            if (!selectPlayers) {
-                SimpleTextDisplay(
-                    text = "Never Have I Ever",
-                    fontSize = 30,
-                    fontFamily = headerFont
-                )
-                SimpleSpacer(size = 50)
-                SimpleTextDisplay(
-                    text = statement,
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily
-                )
-
-                SimpleSpacer(size = 30)
-                SimpleTextDisplay(
-                    text = "Select all players that have done said thing!",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily
-                )
-                SimpleSpacer(size = 30)
-
-                SimpleButton(
-                    onClick = { selectPlayers = true },
-                    text = "Select Players",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily,
-                    enabled = !showDialog
-                )
-            }
-
-            //Pick Players
-            MyAnimatedVisibility(
-                visible = selectPlayers,
-                animationDuration = AnimationConstants.PLAYER_PICKER_FADE_IN_OUT.durationMillis
-            ) {
-                SimpleButton(
-                    onClick = { },
-                    text = "Done it",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily,
-                    buttonType = ButtonType.CORRECT
-                )
-
-                SimpleSpacer(size = 30)
-
-                SimpleButton(
-                    onClick = { },
-                    text = "Did not do it",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily,
-                    buttonType = ButtonType.INCORRECT
-                )
-
-                SimpleSpacer(size = 30)
-
-                LazyColumn(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.size(width = 300.dp, height = 300.dp),
-                    content = {
-                        items(Game.getPlayers()) { player ->
-
-                            SimpleSpacer(size = 10)
-
-                            SimpleButton(
-                                onClick = {
-                                    playersDoneIt = if (playersDoneIt.contains(element = player)) {
-                                        playersDoneIt.minus(element = player)
-                                    } else {
-                                        playersDoneIt.plus(element = player)
-                                    }
-                                },
-                                text = player.getName(),
-                                fontSize = super.fontSize,
-                                fontFamily = super.fontFamily,
-                                buttonType = if (playersDoneIt.contains(element = player))
-                                    ButtonType.CORRECT else ButtonType.INCORRECT
-                            )
-
-                            SimpleSpacer(size = 10)
-                        }
-                    }
-                )
-                SimpleSpacer(size = 30)
-                SimpleButton(
-                    onClick = { selectPlayers = false },
-                    text = "Done",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily
-                )
-            }
-
-            if (!selectPlayers) {
-                SimpleSpacer(size = 30)
-                SimpleButton(
-                    onClick = {
-                        addPointsOrSips(playersDoneIt = playersDoneIt)
-                        showDialog = true
-                    },
-                    text = "Check",
-                    fontSize = super.fontSize,
-                    fontFamily = super.fontFamily,
-                    needsConfirmation = true,
-                    enabled = !showDialog
-                )
-            }
-
-            SimpleSpacer(size = 50)
-
-            if (showDialog) {
-                AskPlayersToDrinkDialog(
-                    players = playersDoneIt,
-                    sips = Game.getSipMultiplier()
-                ) {
-                    showDialog = false
-                    playersDoneIt = listOf()
-                    callback()
-                }
-            }
-
+        if (selectPlayers) {
+            PlayerPicker(
+                callback = { selectPlayers = false },
+                players = Game.getPlayers(),
+                pickedPlayers = playersDoneIt
+            )
         }
+        SimpleTextDisplay(
+            text = "Never Have I Ever",
+            fontSize = 30,
+            fontFamily = headerFont
+        )
+
+        SimpleSpacer(size = 50)
+
+        SimpleTextDisplay(
+            text = statement,
+            fontSize = super.fontSize,
+            fontFamily = super.fontFamily
+        )
+
+        SimpleSpacer(size = 30)
+
+        SimpleButton(
+            onClick = { selectPlayers = true },
+            text = "Select Player(s)",
+            fontSize = super.fontSize,
+            fontFamily = super.fontFamily,
+            enabled = !showDialog
+        )
+
+        SimpleSpacer(size = 30)
+        SimpleButton(
+            onClick = {
+                addPointsOrSips(playersDoneIt = playersDoneIt)
+                showDialog = true
+            },
+            text = "Check",
+            fontSize = super.fontSize,
+            fontFamily = super.fontFamily,
+            needsConfirmation = true,
+            enabled = !showDialog
+        )
+        SimpleSpacer(size = 50)
+
+        if (showDialog) {
+            AskPlayersToDrinkDialog(
+                players = playersDoneIt,
+                sips = Game.getSipMultiplier()
+            ) {
+                showDialog = false
+                playersDoneIt = mutableListOf()
+                callback()
+            }
+        }
+
     }
 }
 

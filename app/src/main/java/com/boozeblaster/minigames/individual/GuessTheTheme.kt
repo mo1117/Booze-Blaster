@@ -25,7 +25,7 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.widgets.MyMediaPlayer
 import kotlinx.coroutines.delay
 
-class GuessTheMovieTheme(
+class GuessTheTheme(
     private val movieName: String,
     private val resid: Int,
     private val duration: Long = 10_000

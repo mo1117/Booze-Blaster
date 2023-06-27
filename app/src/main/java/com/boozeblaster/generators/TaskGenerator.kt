@@ -13,14 +13,14 @@ import kotlin.random.Random
  * This object handles generating tasks based on the amount of players and the number of rounds
  * that are to be played for a game of BoozeBlaster
  *
- * By generating different common and individual tasks and assigning them to players,
+ * By generating different common, individual, and versus tasks and assigning them to players,
  * if needed, a list of tasks that will then be played can be created
  */
 object TaskGenerator {
 
     private val INDIVIDUAL_TASKS =
-        arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong", "GuessTheMovieTheme")
-    private val COMMON_TASKS = arrayOf("NeverHaveIEver", "WhoInThisRoom", "SetRule")
+        arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong", "GuessTheTheme")
+    private val COMMON_TASKS = arrayOf("WhoInThisRoom")
     private val VERSUS_TASKS = arrayOf("RockPaperScissors", "SingASong")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {

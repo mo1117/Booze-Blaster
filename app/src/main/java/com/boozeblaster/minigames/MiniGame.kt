@@ -6,7 +6,7 @@ import com.boozeblaster.models.Player
 
 abstract class MiniGame {
 
-    protected val fontSize = 16
+    protected val fontSize = 20
     protected val fontFamily = FontFamily.SansSerif
 
     protected var points = 0

@@ -43,7 +43,7 @@ abstract class Task(
     private val headerFontFamily = headerFont
     private val nameFontSize = 26
     private val nameFontFamily = FontFamily.SansSerif
-    protected val fontSize = 18
+    protected val fontSize = 20
     protected val fontFamily = FontFamily.SansSerif
 
     /**

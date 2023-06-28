@@ -29,6 +29,10 @@ class FactOrFiction(
             mutableStateOf(value = false)
         }
 
+        var showDialog by remember {
+            mutableStateOf(value = false)
+        }
+
         SimpleSpacer(size = 50)
         SimpleTextDisplay(
             text = question,

@@ -5,8 +5,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.composables.AskPlayersToDrinkDialog
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleChangeableButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.enums.ButtonType
@@ -87,12 +89,17 @@ class SingASong(
         )
 
         SimpleSpacer(size = 50)
-
-        SimpleButton(
+        SimpleChangeableButton(
             onClick = { showDialog = true },
-            text = "Continue",
-            fontSize = super.fontSize,
-            fontFamily = super.fontFamily,
+            fontSize = 20,
+            fontFamily = FontFamily.SansSerif,
+            text = {
+                SimpleTextDisplay(
+                    text = if (winner == null) "No Winner" else "Continue",
+                    fontSize = 20,
+                    fontFamily = FontFamily.SansSerif
+                )
+            },
             needsConfirmation = true,
             enabled = !showDialog
         )

@@ -22,7 +22,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun PlayerPicker( //TODO
+fun PlayerPicker(
     callback: () -> Unit,
     players: List<Player>,
     pickedPlayers: MutableList<Player>,
@@ -98,6 +98,86 @@ fun PlayerPicker( //TODO
                     callback()
                 }
 
+            },
+            text = "Done",
+            fontSize = fontSize,
+            fontFamily = fontFamily
+        )
+    }
+}
+
+@Composable
+fun SinglePlayerPicker(
+    callback: () -> Unit,
+    players: List<Player>,
+    pickedPlayer: MutableList<Player?>,
+    fontSize: Int = 20,
+    fontFamily: FontFamily = FontFamily.SansSerif,
+    message: String = "Picked Player"
+) {
+    val coroutineScope = rememberCoroutineScope()
+
+    var selectedPlayer: Player? by remember {
+        mutableStateOf(value = pickedPlayer.get(index = 0))
+    }
+
+    var isVisible by remember {
+        mutableStateOf(value = false)
+    }
+
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
+
+    MyAnimatedVisibility(
+        visible = isVisible,
+        animationDuration = AnimationConstants.PLAYER_PICKER_FADE_IN_OUT.durationMillis
+    ) {
+
+        SimpleButton(
+            onClick = { },
+            text = message,
+            fontSize = fontSize,
+            fontFamily = fontFamily,
+            buttonType = ButtonType.CORRECT
+        )
+
+        SimpleSpacer(size = 30)
+
+        LazyColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.sizeIn(maxHeight = 400.dp),
+            content = {
+                items(items = players) { player ->
+                    SimpleSpacer(size = 10)
+
+                    SimpleButton(
+                        onClick = {
+                            selectedPlayer = if (player == selectedPlayer) null else player
+                            pickedPlayer[0] = selectedPlayer
+
+                        },
+                        text = player.getName(),
+                        fontSize = fontSize,
+                        fontFamily = fontFamily,
+                        buttonType = if (selectedPlayer == player)
+                            ButtonType.CORRECT else ButtonType.INCORRECT
+                    )
+                }
+            }
+        )
+
+        SimpleSpacer(size = 30)
+
+        SimpleButton(
+            onClick = {
+                selectedPlayer = null
+                coroutineScope.launch {
+                    isVisible = false
+                    delay(timeMillis = AnimationConstants.PLAYER_PICKER_FADE_IN_OUT.durationMillis.toLong())
+                    callback()
+                }
             },
             text = "Done",
             fontSize = fontSize,

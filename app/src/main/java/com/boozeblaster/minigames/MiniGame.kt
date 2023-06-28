@@ -12,7 +12,6 @@ abstract class MiniGame {
 
     protected var points = 0
     protected var sips = 0
-    protected var showDialog = false
 
     /**
      * Every type of MiniGame needs to implement the DisplayContent method
@@ -37,6 +36,11 @@ abstract class MiniGame {
 
     fun addSips(players: List<Player>, sips: Int) {
         players.forEach(action = { player -> player.addSips(sips = sips) })
+    }
+
+    fun addPointsAndSips(player: Player, points: Int, sips: Int) {
+        player.addPoints(points = points)
+        player.addSips(sips = sips)
     }
 
     fun addPointsOrSips(playersToGetSips: List<Player>, points: Int, sips: Int) {

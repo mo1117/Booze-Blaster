@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -72,6 +73,60 @@ fun SimpleButton(
             fontSize = fontSize,
             fontFamily = fontFamily
         )
+    }
+}
+
+@Composable
+fun SimpleChangeableButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    text: @Composable () -> Unit,
+    fontSize: Int,
+    fontFamily: FontFamily,
+    color: Color? = null,
+    enabled: Boolean = true,
+    buttonType: ButtonType = ButtonType.UI,
+    minWidth: Int = 150,
+    minHeight: Int = 50,
+    needsConfirmation: Boolean = false
+) {
+    val buttonColor = color ?: getButtonColor(buttonType = buttonType)
+
+    var displayConfirmation by remember {
+        mutableStateOf(value = needsConfirmation)
+    }
+
+    var buttonText by remember {
+        mutableStateOf(value = text)
+    }
+
+    Button(
+        onClick = {
+            if (displayConfirmation) {
+                displayConfirmation = false
+                buttonText = {
+                    SimpleTextDisplay(
+                        text = "Confirm",
+                        fontSize = fontSize,
+                        fontFamily = fontFamily
+                    )
+                }
+            } else {
+                displayConfirmation = needsConfirmation
+                buttonText = text
+                onClick()
+            }
+        },
+        modifier = modifier
+            .sizeIn(
+                minWidth = minWidth.dp,
+                minHeight = minHeight.dp
+            ),
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
+        shape = AbsoluteRoundedCornerShape(percent = 100)
+    ) {
+        buttonText()
     }
 }
 

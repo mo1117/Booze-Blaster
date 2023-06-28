@@ -21,16 +21,15 @@ class WhoInThisRoom(
 
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
-
-        var showDialog by remember {
-            mutableStateOf(value = false)
-        }
-
         var pickedPlayers by remember {
             mutableStateOf(value = mutableListOf<Player>())
         }
 
         var selectPlayers by remember {
+            mutableStateOf(value = false)
+        }
+
+        var showDialog by remember {
             mutableStateOf(value = false)
         }
 

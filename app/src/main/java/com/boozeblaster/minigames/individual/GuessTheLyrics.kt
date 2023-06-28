@@ -39,6 +39,10 @@ class GuessTheLyrics(
             mutableStateOf(value = false)
         }
 
+        var showDialog by remember {
+            mutableStateOf(value = false)
+        }
+
         if (!showSolution) {
             SimpleSpacer(size = 50)
             SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = fontFamily)

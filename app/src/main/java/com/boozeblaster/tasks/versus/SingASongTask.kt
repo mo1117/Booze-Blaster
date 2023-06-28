@@ -12,9 +12,8 @@ class SingASongTask(player: Player, subTasks: List<SingASong>, versusPlayer: Pla
     override fun getImageId(): Int = R.drawable.delete //TODO
 
     override fun getCoverDescription(): String = "Prepare your vocal chords - you will have " +
-            "to sing!\n\nYou will not sing any song though, there will be specific requirements!" +
-            "\n\nHand the phone over to an unbiased referee that will then read each instruction " +
-            "loud and clear.\n\nWhoever starts singing am appropriate song first received points, " +
+            "to sing!\n\nHand the phone over to an unbiased referee that will then read each " +
+            "instruction loud and clear.\n\nWhoever starts singing first will receive points, " +
             "the other one has to drink!\n\nFor some songs, the crowd will decide if it was " +
             "appropriate or not!\n\nIf someone sings a false / unsuitable song the other player " +
             "wins by default!"

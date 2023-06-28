@@ -20,7 +20,7 @@ class NeverHaveIEver(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
 
         var selectPlayers by remember {
             mutableStateOf(value = false)
@@ -68,7 +68,11 @@ class NeverHaveIEver(
         SimpleSpacer(size = 30)
         SimpleButton(
             onClick = {
-                addPointsOrSips(playersDoneIt = playersDoneIt)
+                addPointsOrSips(
+                    playersToGetSips = playersDoneIt,
+                    points = 1,
+                    sips = Game.getSipMultiplier()
+                )
                 showDialog = true
             },
             text = "Check",
@@ -82,29 +86,14 @@ class NeverHaveIEver(
         if (showDialog) {
             AskPlayersToDrinkDialog(
                 players = playersDoneIt,
-                sips = Game.getSipMultiplier()
-            ) {
-                showDialog = false
-                playersDoneIt = mutableListOf()
-                callback()
-            }
+                sips = Game.getSipMultiplier(),
+                callback = {
+                    showDialog = false
+                    playersDoneIt = mutableListOf()
+                    callback()
+                }
+            )
         }
 
-    }
-}
-
-/**
- * Gives points to all players that have not done the said thing
- *
- * Gives sips to all players that have done it
- * @param playersDoneIt List of players that have done the said statement
- */
-private fun addPointsOrSips(playersDoneIt: List<Player>) {
-    for (player in Game.getPlayers()) {
-        if (playersDoneIt.contains(element = player)) {
-            player.addSips(sips = Game.getSipMultiplier())
-        } else {
-            player.addPoints(points = 1)
-        }
     }
 }

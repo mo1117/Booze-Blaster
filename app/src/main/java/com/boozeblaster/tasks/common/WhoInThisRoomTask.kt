@@ -5,7 +5,7 @@ import com.boozeblaster.minigames.common.WhoInThisRoom
 import com.boozeblaster.tasks.CommonTask
 
 class WhoInThisRoomTask(
-    private val subTasks: List<WhoInThisRoom>
+    subTasks: List<WhoInThisRoom>
 ) : CommonTask(subTasks = subTasks) {
 
     override fun getName(): String = "Who In This Room"

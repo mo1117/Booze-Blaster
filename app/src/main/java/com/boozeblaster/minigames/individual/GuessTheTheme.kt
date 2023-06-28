@@ -26,13 +26,13 @@ import com.boozeblaster.widgets.MyMediaPlayer
 import kotlinx.coroutines.delay
 
 class GuessTheTheme(
-    private val movieName: String,
+    private val name: String,
     private val resid: Int,
     private val duration: Long = 10_000
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
 
         MyMediaPlayer.create(context = LocalContext.current, resid = this.resid)
 
@@ -87,9 +87,9 @@ class GuessTheTheme(
             MyAnimatedVisibility(visible = showSolution,
                 animationDuration = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis,
                 content = {
-                    //Display movie name
+                    //Display name
                     SimpleTextDisplay(
-                        text = this.movieName,
+                        text = this.name,
                         fontSize = 30,
                         fontFamily = FontFamily.SansSerif
                     )

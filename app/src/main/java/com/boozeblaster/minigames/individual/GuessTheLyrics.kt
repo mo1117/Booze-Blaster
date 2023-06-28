@@ -1,8 +1,17 @@
 package com.boozeblaster.minigames.individual
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontFamily
-import com.boozeblaster.composables.*
+import com.boozeblaster.composables.CountdownTimer
+import com.boozeblaster.composables.MyAnimatedVisibility
+import com.boozeblaster.composables.PointsOrSipsDialog
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
@@ -17,7 +26,7 @@ class GuessTheLyrics(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
 
         // Whether or not we want to show the solution
         var showSolution by remember {

@@ -38,7 +38,7 @@ class GuessTheSong(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
 
         MyMediaPlayer.create(context = LocalContext.current, resid = this.resid)
 

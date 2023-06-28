@@ -378,9 +378,7 @@ class GuessTheSongGenerator : MiniGameGenerator() {
                 artist = "Red Hot Chili Peppers",
                 resid = R.raw.snow
             ),
-//            GuessTheSong(songName = "", artist = "", resid = 0),
-//            GuessTheSong(songName = "", artist = "", resid = 0),
-//            GuessTheSong(songName = "", artist = "", resid = 0),
+            GuessTheSong(songName = "Bad Habits", artist = "Ed Sheeran", resid = R.raw.bad_habits),
 //            GuessTheSong(songName = "", artist = "", resid = 0),
         )
     }

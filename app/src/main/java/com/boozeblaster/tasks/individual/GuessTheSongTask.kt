@@ -6,8 +6,8 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.IndividualTask
 
 class GuessTheSongTask(
-    private val player: Player,
-    private val subTasks: List<GuessTheSong>
+    player: Player,
+    subTasks: List<GuessTheSong>
 ) : IndividualTask(
     player = player,
     subTasks = subTasks

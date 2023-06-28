@@ -19,14 +19,34 @@ import kotlin.random.Random
 object TaskGenerator {
 
     private val INDIVIDUAL_TASKS =
-        arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong", "GuessTheTheme")
-    private val COMMON_TASKS = arrayOf("WhoInThisRoom")
+        arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong")
+    private val COMMON_TASKS = arrayOf("WhoInThisRoom", "SetRule", "NeverHaveIEver")
     private val VERSUS_TASKS = arrayOf("RockPaperScissors", "SingASong")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
         var tasks = listOf<Task>()
+        var randomPlayer: Player
+        var randomVersusPlayer: Player
+
         for (round in 0 until rounds) {
             tasks = tasks.plus(element = generateCommonTask(isLastRound = rounds - round == 1))
+            randomPlayer = players.get(index = Random.nextInt(from = 0, until = players.size))
+
+            while (true) {
+                randomVersusPlayer =
+                    players.get(index = Random.nextInt(from = 0, until = players.size))
+
+                if (randomPlayer != randomVersusPlayer) {
+                    tasks = tasks.plus(
+                        element = generateVersusTask(
+                            player = randomPlayer,
+                            versusPlayer = randomVersusPlayer
+                        )
+                    )
+                    break
+                }
+            }
+
             for (i in players.indices) {
                 tasks =
                     tasks.plus(element = generateIndividualTask(player = players.get(index = i)))
@@ -93,11 +113,11 @@ object TaskGenerator {
      * Generates a random VersusTask
      * @see VersusTask
      */
-    private fun generateVersusTask(): VersusTask {
+    private fun generateVersusTask(player: Player, versusPlayer: Player): VersusTask {
         val game = getRandomTask(availableTasks = VERSUS_TASKS)
 
         val constructor = Class.forName("com.boozeblaster.tasks.versus.${game}Task")
-            .getConstructor(List::class.java)
+            .getConstructor(Player::class.java, List::class.java, Player::class.java)
 
         val instance = Class.forName("com.boozeblaster.generators.versus.${game}Generator")
             .newInstance()
@@ -105,7 +125,11 @@ object TaskGenerator {
         val generator = Class.forName("com.boozeblaster.generators.versus.${game}Generator")
             .getMethod("getList")
 
-        return constructor.newInstance(generator.invoke(instance)) as VersusTask
+        return constructor.newInstance(
+            player,
+            generator.invoke(instance),
+            versusPlayer
+        ) as VersusTask
     }
 
     private fun getRandomTask(availableTasks: Array<String>): String {

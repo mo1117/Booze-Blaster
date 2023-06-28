@@ -15,8 +15,8 @@ import com.boozeblaster.tasks.IndividualTask
  * 1 point per correct answer can be achieved
  */
 class FactOrFictionTask(
-    private val player: Player,
-    private val subTasks: List<FactOrFiction>
+    player: Player,
+    subTasks: List<FactOrFiction>
 ) : IndividualTask(
     player = player,
     subTasks = subTasks

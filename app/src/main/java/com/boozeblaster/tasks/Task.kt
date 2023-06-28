@@ -20,6 +20,7 @@ import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
+import com.boozeblaster.tasks.common.SetRuleTask
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.headerFont
 
@@ -81,8 +82,9 @@ abstract class Task(
                     fontSize = nameFontSize,
                     fontFamily = nameFontFamily
                 )
-                SimpleSpacer(size = 30)
             }
+
+            SimpleSpacer(size = 30)
 
             Image(
                 modifier = Modifier.size(size = 100.dp),
@@ -126,7 +128,8 @@ abstract class Task(
                     } else {
                         subTaskCounter++
                     }
-                }
+                },
+                versusPlayer = versusPlayer
             )
         }
     }
@@ -143,13 +146,23 @@ abstract class Task(
         }
 
         if (showCover) {
-            DisplayCover(onSurfaceClicked = { showCover = false })
+            DisplayCover(onSurfaceClicked = {
+                if (shouldOnlyDisplayCover()) {
+                    callback()
+                } else {
+                    showCover = false
+                }
+            })
         } else {
             Display(callback = {
                 showCover = true
                 callback()
             })
         }
+    }
+
+    private fun shouldOnlyDisplayCover(): Boolean {
+        return this is SetRuleTask
     }
 
     protected abstract fun getName(): String

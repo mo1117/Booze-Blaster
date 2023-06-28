@@ -4,7 +4,7 @@ import com.boozeblaster.R
 import com.boozeblaster.minigames.common.SipTransfer
 import com.boozeblaster.tasks.CommonTask
 
-class SipTransferTask(private val subTasks: List<SipTransfer>) : CommonTask(subTasks = subTasks) {
+class SipTransferTask(subTasks: List<SipTransfer>) : CommonTask(subTasks = subTasks) {
 
     override fun getName(): String = "Sip Transfer"
 

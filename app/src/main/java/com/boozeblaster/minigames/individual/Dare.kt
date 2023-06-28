@@ -11,7 +11,8 @@ class Dare(
     override fun toString(): String = this.dare
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
         // STUB
+        callback()
     }
 }

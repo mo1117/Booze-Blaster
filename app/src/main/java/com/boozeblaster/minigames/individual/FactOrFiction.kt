@@ -24,7 +24,7 @@ class FactOrFiction(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
         var buttonClicked by remember {
             mutableStateOf(value = false)
         }

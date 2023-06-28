@@ -1,11 +1,23 @@
 package com.boozeblaster.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -14,7 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.R
-import com.boozeblaster.composables.*
+import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleChangeableButton
+import com.boozeblaster.composables.SimpleImageButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
@@ -133,13 +152,25 @@ fun StartGameScreenContent(
 
             SimpleSpacer(size = 30)
 
-            SimpleButton(
+            SimpleChangeableButton(
                 onClick = {
                     Game.setPlayers(players = addedPlayers)
                     setAddedPlayers(addedPlayers)
                     onContinueClicked()
                 },
-                text = "Continue",
+                text = {
+                    SimpleTextDisplay(
+                        text = if (addedPlayers.size < 2) {
+                            "Add more Players"
+                        } else if (addedPlayers.size > 10) {
+                            "Too many Players"
+                        } else {
+                            "Continue"
+                        },
+                        fontSize = 20,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                },
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif,
                 enabled = addedPlayers.size in 2..10
@@ -147,7 +178,7 @@ fun StartGameScreenContent(
         }
     }
 
-    MyAnimatedVisibility(
+    MyAnimatedVisibilityTopToTop(
         visible = addExistingPlayers,
         animationDuration = AnimationConstants.ADD_EXISTING_PLAYERS_FADE_IN_OUT.durationMillis,
         content = {

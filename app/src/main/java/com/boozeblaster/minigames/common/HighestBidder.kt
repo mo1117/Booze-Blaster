@@ -88,7 +88,7 @@ class HighestBidder(
 
         SimpleSpacer(size = 30)
 
-        SimpleButton(
+        SimpleChangeableButton(
             onClick = {
                 if (winner.get(index = 0) != null) {
                     addPointsAndSips(
@@ -99,7 +99,13 @@ class HighestBidder(
                 }
                 showDialog = true
             },
-            text = "Check",
+            text = {
+                SimpleTextDisplay(
+                    text = if (winner.get(index = 0) == null) "No Winner" else "Check",
+                    fontSize = super.fontSize,
+                    fontFamily = super.fontFamily
+                )
+            },
             fontSize = super.fontSize,
             fontFamily = super.fontFamily,
             needsConfirmation = true,

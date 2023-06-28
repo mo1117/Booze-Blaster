@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.R
 import com.boozeblaster.composables.AnimatingText
 import com.boozeblaster.composables.CountdownTimer
-import com.boozeblaster.composables.MyAnimatedVisibility
+import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.PointsOrSipsDialog
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleImage
@@ -84,7 +84,7 @@ class GuessTheTheme(
                 )
             }
 
-            MyAnimatedVisibility(visible = showSolution,
+            MyAnimatedVisibilityTopToTop(visible = showSolution,
                 animationDuration = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis,
                 content = {
                     //Display name

@@ -86,6 +86,7 @@ class RockPaperScissors : MiniGame() {
                 sips = Game.getSipMultiplier(),
                 callback = {
                     addSips(player = loser!!, sips = Game.getSipMultiplier())
+                    addPoints(player = winner!!, points = 2)
                     showDialog = false
                     winner = null
                     callback()

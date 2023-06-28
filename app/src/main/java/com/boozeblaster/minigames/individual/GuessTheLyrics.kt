@@ -7,7 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontFamily
 import com.boozeblaster.composables.CountdownTimer
-import com.boozeblaster.composables.MyAnimatedVisibility
+import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.PointsOrSipsDialog
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleSpacer
@@ -68,7 +68,7 @@ class GuessTheLyrics(
             )
         }
 
-        MyAnimatedVisibility(
+        MyAnimatedVisibilityTopToTop(
             visible = showSolution,
             animationDuration = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis,
             content = {

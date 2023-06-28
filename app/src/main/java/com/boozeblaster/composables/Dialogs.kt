@@ -91,6 +91,11 @@ fun PointsOrSipsDialog(
     }
 }
 
+/**
+ * Lists all players and tells them how many sips they have to drink
+ * @param players Players that need to drink - When calling this with an empty list or null,
+ * 'No one drinks' will be displayed
+ */
 @Composable
 fun AskPlayersToDrinkDialog(
     players: List<Player>?,

@@ -13,19 +13,24 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.headerFont
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun ClickableSurfaceWithColumn(
@@ -76,41 +81,62 @@ fun SurfaceWithColumn(
 fun DisplayScore(
     callback: () -> Unit
 ) {
-    SurfaceWithColumn(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    val coroutineScope = rememberCoroutineScope()
+
+    var isVisible by remember {
+        mutableStateOf(value = false)
+    }
+
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
+
+    MyAnimatedVisibilityTopToTop(
+        visible = isVisible,
+        animationDuration = AnimationConstants.SHOW_SCOREBOARD_FADE_IN_OUT.durationMillis
     ) {
-        val players = Game.getPlayersByPointsDescending()
-
-        SimpleTextDisplay(text = "Scoreboard", fontSize = 30, fontFamily = headerFont)
-        SimpleSpacer(size = 30)
-
-        LazyColumn(
-            modifier = Modifier
-                .height(height = 300.dp)
-                .fillMaxWidth(fraction = 0.9f),
+        SurfaceWithColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            content = {
-                items(players) { player ->
-                    Row {
-                        SimpleTextDisplay(
-                            text = "${player.getName()} | ${player.getPoints()} Points | " +
-                                    "${player.getSips()} Sips\n",
-                            fontSize = 20,
-                            fontFamily = FontFamily.SansSerif
-                        )
-                    }
-                }
-            })
+            verticalArrangement = Arrangement.Center
+        ) {
+            val players = Game.getPlayersByPointsDescending()
 
-        SimpleSpacer(size = 30)
-        SimpleButton(
-            onClick = callback,
-            text = "Continue",
-            fontSize = 20,
-            fontFamily = FontFamily.SansSerif
-        )
+            SimpleTextDisplay(text = "Scoreboard", fontSize = 30, fontFamily = headerFont)
+            SimpleSpacer(size = 30)
+
+            LazyColumn(
+                modifier = Modifier
+                    .height(height = 300.dp)
+                    .fillMaxWidth(fraction = 0.9f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                content = {
+                    items(players) { player ->
+                        Row {
+                            SimpleTextDisplay(
+                                text = "${player.getName()} | ${player.getPoints()} Points | " +
+                                        "${player.getSips()} Sips\n",
+                                fontSize = 20,
+                                fontFamily = FontFamily.SansSerif
+                            )
+                        }
+                    }
+                })
+
+            SimpleSpacer(size = 30)
+            SimpleButton(
+                onClick = {
+                    coroutineScope.launch {
+                        isVisible = false
+                        delay(timeMillis = AnimationConstants.SHOW_SCOREBOARD_FADE_IN_OUT.durationMillis.toLong())
+                        callback()
+                    }
+                },
+                text = "Continue",
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
+        }
     }
 }
 
@@ -118,7 +144,14 @@ fun DisplayScore(
 fun DisplayRuleBreaker(
     callback: () -> Unit
 ) {
-    var check by remember {
+
+    val coroutineScope = rememberCoroutineScope()
+
+    var isVisible by remember {
+        mutableStateOf(value = false)
+    }
+
+    var showDialog by remember {
         mutableStateOf(value = false)
     }
 
@@ -126,58 +159,82 @@ fun DisplayRuleBreaker(
         mutableStateOf(value = emptyList<Player>())
     }
 
-    SurfaceWithColumn(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
+
+    MyAnimatedVisibilityTopToTop(
+        visible = isVisible,
+        animationDuration = AnimationConstants.SHOW_RULEBREAKER_FADE_IN_OUT.durationMillis
     ) {
-        SimpleTextDisplay(
-            text = "Pick Players that have broken a rule!",
-            fontSize = 30,
-            fontFamily = headerFont
-        )
-
-        LazyColumn(
+        SurfaceWithColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .height(height = 400.dp)
-                .fillMaxWidth(fraction = 0.9f),
-            content = {
-                items(items = Game.getPlayers()) { player ->
-                    SimpleSpacer(size = 10)
+            verticalArrangement = Arrangement.Center
+        ) {
+            SimpleTextDisplay(
+                text = "Pick Players that have broken a rule!",
+                fontSize = 30,
+                fontFamily = headerFont
+            )
 
-                    SimpleButton(
-                        onClick = {
-                            pickedPlayers = if (pickedPlayers.contains(element = player)) {
-                                pickedPlayers.minus(element = player)
-                            } else {
-                                pickedPlayers.plus(element = player)
-                            }
-                        },
-                        text = player.getName(),
-                        fontSize = 20,
-                        fontFamily = FontFamily.SansSerif,
-                        buttonType = if (pickedPlayers.contains(element = player))
-                            ButtonType.CORRECT else ButtonType.INCORRECT
-                    )
-                }
-            })
+            LazyColumn(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .height(height = 400.dp)
+                    .fillMaxWidth(fraction = 0.9f),
+                content = {
+                    items(items = Game.getPlayers()) { player ->
+                        SimpleSpacer(size = 10)
 
-        SimpleSpacer(size = 30)
-        SimpleButton(
-            onClick = { check = true },
-            text = "Check",
-            fontSize = 20,
-            fontFamily = FontFamily.SansSerif,
-            needsConfirmation = true
-        )
+                        SimpleButton(
+                            onClick = {
+                                pickedPlayers = if (pickedPlayers.contains(element = player)) {
+                                    pickedPlayers.minus(element = player)
+                                } else {
+                                    pickedPlayers.plus(element = player)
+                                }
+                            },
+                            text = player.getName(),
+                            fontSize = 20,
+                            fontFamily = FontFamily.SansSerif,
+                            buttonType = if (pickedPlayers.contains(element = player))
+                                ButtonType.CORRECT else ButtonType.INCORRECT,
+                            enabled = !showDialog
+                        )
+                    }
+                })
 
-        if (check) {
-            for (player in pickedPlayers) {
-                player.addSips(sips = Game.getSipMultiplier())
+            SimpleSpacer(size = 30)
+
+            SimpleButton(
+                onClick = { showDialog = true },
+                text = "Check",
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif,
+                needsConfirmation = true,
+                enabled = !showDialog
+            )
+
+            SimpleSpacer(size = 50)
+
+            if (showDialog) {
+                AskPlayersToDrinkDialog(
+                    players = pickedPlayers,
+                    sips = Game.getSipMultiplier(),
+                    callback = {
+                        for (player in pickedPlayers) {
+                            player.addSips(sips = Game.getSipMultiplier())
+                        }
+                        coroutineScope.launch {
+                            isVisible = false
+                            delay(timeMillis = AnimationConstants.SHOW_SCOREBOARD_FADE_IN_OUT.durationMillis.toLong())
+                            pickedPlayers = emptyList()
+                            showDialog = false
+                            callback()
+                        }
+                    })
             }
-            check = false
-            callback()
         }
     }
 }

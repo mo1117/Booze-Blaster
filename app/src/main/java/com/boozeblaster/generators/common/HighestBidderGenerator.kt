@@ -11,11 +11,6 @@ class HighestBidderGenerator : MiniGameGenerator() {
 
     private companion object {
         private val list = listOf(
-            HighestBidder(pointsToGet = 0),
-            HighestBidder(pointsToGet = 1),
-            HighestBidder(pointsToGet = 2),
-            HighestBidder(pointsToGet = 3),
-            HighestBidder(pointsToGet = 4),
             HighestBidder(pointsToGet = 5),
             HighestBidder(pointsToGet = 6),
             HighestBidder(pointsToGet = 7),

@@ -21,7 +21,7 @@ object TaskGenerator {
     private val INDIVIDUAL_TASKS =
         arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong")
     private val COMMON_TASKS =
-        arrayOf("WhoInThisRoom", "SetRule", "NeverHaveIEver", "HighestBidder")
+        arrayOf("HighestBidder")
     private val VERSUS_TASKS = arrayOf("RockPaperScissors", "SingASong")
 
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {

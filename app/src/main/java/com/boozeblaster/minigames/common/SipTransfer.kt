@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.R
-import com.boozeblaster.composables.MyAnimatedVisibility
+import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleChangeableButton
 import com.boozeblaster.composables.SimpleImageButton
@@ -154,7 +154,7 @@ class SipTransfer : MiniGame() {
             enabled = seller.get(index = 0) != null
         )
 
-        MyAnimatedVisibility(
+        MyAnimatedVisibilityTopToTop(
             visible = pointsDropdownExpanded,
             animationDuration = AnimationConstants.SIP_TRANSFER_DIALOGS_FADE_IN_OUT.durationMillis
         ) {
@@ -219,7 +219,7 @@ class SipTransfer : MiniGame() {
             enabled = buyer.get(index = 0) != null
         )
 
-        MyAnimatedVisibility(
+        MyAnimatedVisibilityTopToTop(
             visible = sipsDropdownExpanded,
             animationDuration = AnimationConstants.SIP_TRANSFER_DIALOGS_FADE_IN_OUT.durationMillis
         ) {

@@ -21,6 +21,11 @@ import com.boozeblaster.models.Player
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * Used to pick one to multiple players
+ * @param players Players to list
+ * @param pickedPlayers For this, pass a mutable list of players that can then be edited
+ */
 @Composable
 fun PlayerPicker(
     callback: () -> Unit,
@@ -44,7 +49,7 @@ fun PlayerPicker(
         isVisible = true
     }
 
-    MyAnimatedVisibility(
+    MyAnimatedVisibilityTopToTop(
         visible = isVisible,
         animationDuration = AnimationConstants.PLAYER_PICKER_FADE_IN_OUT.durationMillis
     ) {
@@ -106,6 +111,13 @@ fun PlayerPicker(
     }
 }
 
+/**
+ * Used to pick a maximum of one player only
+ * @param players Players to list
+ * @param pickedPlayer For this pass a mutable list of nullable player elements. This method will
+ * ensure that there is never more than one player in that list. It needs to be nullable so we can
+ * actually de-select players by setting the value of index 0 to null
+ */
 @Composable
 fun SinglePlayerPicker(
     callback: () -> Unit,
@@ -129,7 +141,7 @@ fun SinglePlayerPicker(
         isVisible = true
     }
 
-    MyAnimatedVisibility(
+    MyAnimatedVisibilityTopToTop(
         visible = isVisible,
         animationDuration = AnimationConstants.PLAYER_PICKER_FADE_IN_OUT.durationMillis
     ) {

@@ -116,7 +116,6 @@ fun DisplayDaresScreenContent(
         SimpleButton(
             onClick = {
                 Game.load()
-                Game.getPlayers().get(0).addPoints(10)
                 onStartClicked()
             },
             text = "Start",

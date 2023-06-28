@@ -76,6 +76,11 @@ fun SimpleButton(
     }
 }
 
+/**
+ * Instead of passing a String as an argument, pass a composable function that is used as the text
+ * e.g. SimpleTextDisplay. This method will update the text anytime a state variable changes
+ * @see SimpleTextDisplay
+ */
 @Composable
 fun SimpleChangeableButton(
     modifier: Modifier = Modifier,

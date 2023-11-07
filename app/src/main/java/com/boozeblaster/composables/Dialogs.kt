@@ -4,9 +4,18 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.AlertDialog
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -82,9 +91,14 @@ fun PointsOrSipsDialog(
     }
 }
 
+/**
+ * Lists all players and tells them how many sips they have to drink
+ * @param players Players that need to drink - When calling this with an empty list or null,
+ * 'No one drinks' will be displayed
+ */
 @Composable
 fun AskPlayersToDrinkDialog(
-    players: List<Player>,
+    players: List<Player>?,
     sips: Int,
     callback: () -> Unit
 ) {
@@ -233,11 +247,11 @@ private fun getPointsOrSipsMessage(points: Int, sips: Int): String {
  * @return The textual output for the AskPlayersToDrinkDialog
  * @see AskPlayersToDrinkDialog
  */
-private fun getSipsMessage(players: List<Player>, sips: Int): String {
+private fun getSipsMessage(players: List<Player>?, sips: Int): String {
     val appendSForSips = if (sips > 1) "s" else ""
     val goOrGoes = if (sips > 1) "go" else "goes"
 
-    if (players.isEmpty()) {
+    if (players.isNullOrEmpty()) {
         return "No one drinks!"
     }
 

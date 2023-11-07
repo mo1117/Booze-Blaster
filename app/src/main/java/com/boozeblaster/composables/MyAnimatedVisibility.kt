@@ -1,19 +1,49 @@
 package com.boozeblaster.composables
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.boozeblaster.ui.theme.getBackgroundColor
 
 @Composable
-fun MyAnimatedVisibility(
+fun MyAnimatedVisibilityTopToTop(
+    visible: Boolean,
+    animationDuration: Int,
+    content: @Composable () -> Unit,
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically(
+            animationSpec = tween(durationMillis = animationDuration),
+            initialOffsetY = { -500 })
+                + expandVertically(
+            expandFrom = Alignment.Bottom
+        ) + fadeIn(initialAlpha = 0.3f),
+        exit = slideOutVertically(
+            animationSpec = tween(durationMillis = animationDuration),
+            targetOffsetY = { -500 }
+        ) + shrinkVertically(
+            shrinkTowards = Alignment.Bottom
+        ) + fadeOut(targetAlpha = 0.3f)
+    ) {
+        SurfaceWithColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+fun MyAnimatedVisibilityBottomToTop(
     visible: Boolean,
     animationDuration: Int,
     content: @Composable() () -> Unit,
@@ -22,54 +52,22 @@ fun MyAnimatedVisibility(
         visible = visible,
         enter = slideInVertically(
             animationSpec = tween(durationMillis = animationDuration),
-            initialOffsetY = { 500 })
+            initialOffsetY = { 800 })
                 + expandVertically(
-            expandFrom = Alignment.Top
+            expandFrom = Alignment.Bottom
         ) + fadeIn(initialAlpha = 0.3f),
         exit = slideOutVertically(
             animationSpec = tween(durationMillis = animationDuration),
-            targetOffsetY = { 500 }
-        ) + shrinkVertically() + fadeOut()
+            targetOffsetY = { -800 }
+        ) + shrinkVertically(
+            shrinkTowards = Alignment.Bottom
+        ) + fadeOut(targetAlpha = 0.3f)
     ) {
-        Surface(modifier = Modifier.fillMaxSize(fraction = 1f)) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.background(color = getBackgroundColor())
-            ) {
-                content()
-            }
-        }
-    }
-}
-
-@Composable
-fun MyAnimatedImageChanger(
-    visible: Boolean,
-    animationDuration: Int,
-    content: @Composable() () -> Unit
-) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = slideInVertically(
-            animationSpec = tween(durationMillis = animationDuration),
-            initialOffsetY = { 700 })
-                + expandVertically(
-            expandFrom = Alignment.Top
-        ) + fadeIn(initialAlpha = 0.3f),
-        exit = slideOutVertically(
-            animationSpec = tween(durationMillis = animationDuration),
-            targetOffsetY = { -700 }
-        ) + shrinkVertically() + fadeOut()
-    ) {
-        Surface(modifier = Modifier.fillMaxSize(fraction = 1f)) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.background(color = getBackgroundColor())
-            ) {
-                content()
-            }
+        SurfaceWithColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            content()
         }
     }
 }

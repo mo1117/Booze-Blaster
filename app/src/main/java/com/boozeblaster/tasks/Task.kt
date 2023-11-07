@@ -1,7 +1,28 @@
 package com.boozeblaster.tasks
 
-import androidx.compose.runtime.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
+import com.boozeblaster.composables.ClickableSurfaceWithColumn
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.minigames.MiniGame
+import com.boozeblaster.models.Player
+import com.boozeblaster.tasks.common.SetRuleTask
+import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.headerFont
 
 /**
  * The base class representing a Task
@@ -13,9 +34,17 @@ import androidx.compose.ui.text.font.FontFamily
  * @see IndividualTask
  * @see CommonTask
  */
-abstract class Task {
+abstract class Task(
+    private val player: Player? = null,
+    private val subTasks: List<MiniGame> = emptyList(),
+    private val versusPlayer: Player? = null
+) {
 
-    protected val fontSize = 18
+    private val headerFontSize = 30
+    private val headerFontFamily = headerFont
+    private val nameFontSize = 26
+    private val nameFontFamily = FontFamily.SansSerif
+    protected val fontSize = 20
     protected val fontFamily = FontFamily.SansSerif
 
     /**
@@ -26,14 +55,84 @@ abstract class Task {
      * @param onSurfaceClicked Invoke this method to start loading the subTasks
      */
     @Composable
-    abstract fun DisplayCover(onSurfaceClicked: () -> Unit)
+    open fun DisplayCover(onSurfaceClicked: () -> Unit) {
+        ClickableSurfaceWithColumn(
+            onSurfaceClicked = onSurfaceClicked,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+
+            SimpleTextDisplay(
+                text = getName(),
+                fontSize = headerFontSize,
+                fontFamily = headerFontFamily
+            )
+
+            SimpleSpacer(size = 30)
+
+            if (player != null && versusPlayer != null) {
+                SimpleTextDisplay(
+                    text = "${player.getName()} versus ${versusPlayer.getName()}",
+                    fontSize = nameFontSize,
+                    fontFamily = nameFontFamily
+                )
+            } else if (player != null) {
+                SimpleTextDisplay(
+                    text = player.getName(),
+                    fontSize = nameFontSize,
+                    fontFamily = nameFontFamily
+                )
+            }
+
+            SimpleSpacer(size = 30)
+
+            Image(
+                modifier = Modifier.size(size = 100.dp),
+                painter = painterResource(id = getImageId()),
+                contentDescription = "${getName()} Cover Image"
+            )
+
+            SimpleSpacer(size = 30)
+
+            SimpleTextDisplay(
+                text = getCoverDescription(),
+                fontSize = fontSize,
+                fontFamily = fontFamily,
+                horizontalTextPadding = 15
+            )
+        }
+    }
 
     /**
      * This method actually displays the current tasks content
      * @param callback Invoke this method to load the next subTask, if there is one
      */
     @Composable
-    abstract fun Display(callback: () -> Unit)
+    open fun Display(callback: () -> Unit) {
+        var subTaskCounter by remember {
+            mutableStateOf(0)
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.background(
+                color = getBackgroundColor()
+            )
+        ) {
+            subTasks.get(index = subTaskCounter).DisplayContent(
+                player = player,
+                callback = {
+                    if (subTaskCounter == subTasks.size - 1) {
+                        subTaskCounter = 0
+                        callback()
+                    } else {
+                        subTaskCounter++
+                    }
+                },
+                versusPlayer = versusPlayer
+            )
+        }
+    }
 
     /**
      * This method handles displaying a certain Task
@@ -47,7 +146,13 @@ abstract class Task {
         }
 
         if (showCover) {
-            DisplayCover(onSurfaceClicked = { showCover = false })
+            DisplayCover(onSurfaceClicked = {
+                if (shouldOnlyDisplayCover()) {
+                    callback()
+                } else {
+                    showCover = false
+                }
+            })
         } else {
             Display(callback = {
                 showCover = true
@@ -55,4 +160,14 @@ abstract class Task {
             })
         }
     }
+
+    private fun shouldOnlyDisplayCover(): Boolean {
+        return this is SetRuleTask
+    }
+
+    protected abstract fun getName(): String
+
+    protected abstract fun getImageId(): Int
+
+    protected abstract fun getCoverDescription(): String
 }

@@ -1,10 +1,18 @@
 package com.boozeblaster.minigames.individual
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import com.boozeblaster.composables.*
+import com.boozeblaster.composables.CountdownTimer
+import com.boozeblaster.composables.PointsOrSipsDialog
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
@@ -16,11 +24,12 @@ class FactOrFiction(
 ) : MiniGame() {
 
     @Composable
-    override fun DisplayContent(player: Player?, callback: () -> Unit) {
-
-        // Disable both "Right" and "Wrong" buttons after first click - otherwise a user could
-        // spam the button to gain more points
+    override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
         var buttonClicked by remember {
+            mutableStateOf(value = false)
+        }
+
+        var showDialog by remember {
             mutableStateOf(value = false)
         }
 
@@ -78,7 +87,7 @@ class FactOrFiction(
         }
 
         if (!buttonClicked) {
-            CountdownTimer()
+            CountdownTimer(totalTimeInMillis = 15_000)
             SimpleSpacer(size = 20)
         }
 

@@ -18,6 +18,10 @@ enum class AnimationConstants(val durationMillis: Int) {
 
     CONTINUE_BUTTON_FADE_IN(durationMillis = 1000),
 
-    SIP_TRANSFER_DIALOGS_FADE_IN_OUT(durationMillis = 500)
+    SIP_TRANSFER_DIALOGS_FADE_IN_OUT(durationMillis = 500),
+
+    SHOW_SCOREBOARD_FADE_IN_OUT(durationMillis = 700),
+
+    SHOW_RULEBREAKER_FADE_IN_OUT(durationMillis = 700)
 
 }

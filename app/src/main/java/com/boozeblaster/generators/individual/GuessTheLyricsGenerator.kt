@@ -309,7 +309,7 @@ class GuessTheLyricsGenerator : MiniGameGenerator() {
                 lyrics = "But you can cool it down",
                 lyricsCompletion = "Not here to fool around"
             ),
-            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
+//            GuessTheLyrics(songName = "", artist = "", lyrics = "", lyricsCompletion = ""),
         )
     }
 }

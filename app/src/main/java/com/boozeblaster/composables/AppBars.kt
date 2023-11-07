@@ -3,11 +3,21 @@ package com.boozeblaster.composables
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Switch
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -28,9 +38,10 @@ fun HomeTopAppBar() {
 
     TopAppBar(
         title = {
-            Text(
+            SimpleTextDisplay(
                 text = "Booze Blaster",
-                color = getFontColor()
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
             )
         },
         navigationIcon = {
@@ -139,15 +150,6 @@ fun GameScreenAppBar(
             }
         },
         actions = {
-            IconButton(onClick = onRestartClicked) {
-                Image(
-                    modifier = Modifier.size(size = 35.dp),
-                    painter = painterResource(id = R.drawable.refresh),
-                    contentDescription = "Restart Icon"
-                )
-            }
-
-            SimpleSpacer(size = 10)
             IconButton(onClick = { displayRuleBreaker = true }) {
                 Image(
                     modifier = Modifier.size(size = 35.dp),

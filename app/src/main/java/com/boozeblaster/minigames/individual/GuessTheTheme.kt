@@ -25,14 +25,8 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.widgets.MyMediaPlayer
 import kotlinx.coroutines.delay
 
-/**
- * Class representing the GuessTheSong minigame
- * @param duration Per default always 10 seconds, change in GuessTheSongGenerator if needed
- * @see com.boozeblaster.generators.individual.GuessTheSongGenerator
- */
-class GuessTheSong(
-    private val songName: String,
-    private val artist: String,
+class GuessTheTheme(
+    private val name: String,
     private val resid: Int,
     private val duration: Long = 10_000
 ) : MiniGame() {
@@ -93,22 +87,15 @@ class GuessTheSong(
             MyAnimatedVisibilityTopToTop(visible = showSolution,
                 animationDuration = AnimationConstants.SHOW_SOLUTION_FADE_IN_OUT.durationMillis,
                 content = {
-                    // Display song name and artist
-                    SimpleSpacer(size = 50)
+                    //Display name
                     SimpleTextDisplay(
-                        text = songName,
-                        fontSize = 30,
-                        fontFamily = FontFamily.SansSerif
-                    )
-                    SimpleSpacer(size = 50)
-                    SimpleTextDisplay(
-                        text = artist,
+                        text = this.name,
                         fontSize = 30,
                         fontFamily = FontFamily.SansSerif
                     )
                     SimpleSpacer(size = 50)
 
-                    // "Both Right" Button
+                    //Completely correct button
                     SimpleButton(
                         onClick = {
                             points = 2
@@ -117,7 +104,7 @@ class GuessTheSong(
                             showDialog = true
                             buttonClicked = true
                         },
-                        text = "Got Both",
+                        text = "Correct",
                         fontSize = 16,
                         fontFamily = FontFamily.SansSerif,
                         enabled = !buttonClicked,
@@ -125,8 +112,7 @@ class GuessTheSong(
                     )
                     SimpleSpacer(size = 50)
 
-                    // User got only the song name or artist correct
-
+                    //User almost guessed the correct movie
                     SimpleButton(
                         onClick = {
                             points = 1
@@ -136,7 +122,7 @@ class GuessTheSong(
                             showDialog = true
                             buttonClicked = true
                         },
-                        text = "One Correct",
+                        text = "Almost",
                         fontSize = 16,
                         fontFamily = FontFamily.SansSerif,
                         enabled = !buttonClicked,
@@ -173,7 +159,6 @@ class GuessTheSong(
                 }
             )
         }
+
     }
-
 }
-

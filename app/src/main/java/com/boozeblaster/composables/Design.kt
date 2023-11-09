@@ -1,5 +1,6 @@
 package com.boozeblaster.composables
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -70,7 +72,7 @@ fun SurfaceWithColumn(
             verticalArrangement = verticalArrangement,
             modifier = Modifier.background(
                 color = getBackgroundColor()
-            )
+            ).verticalScroll(state = ScrollState(initial = 0))
         ) {
             content()
         }

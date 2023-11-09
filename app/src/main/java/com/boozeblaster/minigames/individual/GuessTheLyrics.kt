@@ -17,10 +17,10 @@ import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.models.Song
 
 class GuessTheLyrics(
-    private val songName: String,
-    private val artist: String,
+    private val song: Song,
     private val lyrics: String,
     private val lyricsCompletion: String,
 ) : MiniGame() {
@@ -45,11 +45,11 @@ class GuessTheLyrics(
 
         if (!showSolution) {
             SimpleSpacer(size = 50)
-            SimpleTextDisplay(text = this.songName, fontSize = 38, fontFamily = fontFamily)
+            SimpleTextDisplay(text = song.getSongName(), fontSize = 38, fontFamily = fontFamily)
             SimpleSpacer(size = 50)
-            SimpleTextDisplay(text = this.artist, fontSize = 32, fontFamily = fontFamily)
+            SimpleTextDisplay(text = song.getArtistName(), fontSize = 32, fontFamily = fontFamily)
             SimpleSpacer(size = 50)
-            SimpleTextDisplay(text = this.lyrics, fontSize = 28, fontFamily = fontFamily)
+            SimpleTextDisplay(text = lyrics, fontSize = 28, fontFamily = fontFamily)
             SimpleSpacer(size = 50)
 
 
@@ -143,5 +143,4 @@ class GuessTheLyrics(
             }
         )
     }
-
 }

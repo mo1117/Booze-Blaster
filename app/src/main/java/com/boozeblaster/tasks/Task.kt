@@ -55,7 +55,7 @@ abstract class Task(
      * @param onSurfaceClicked Invoke this method to start loading the subTasks
      */
     @Composable
-    open fun DisplayCover(onSurfaceClicked: () -> Unit) {
+    fun DisplayCover(onSurfaceClicked: () -> Unit) {
         ClickableSurfaceWithColumn(
             onSurfaceClicked = onSurfaceClicked,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -108,7 +108,7 @@ abstract class Task(
      * @param callback Invoke this method to load the next subTask, if there is one
      */
     @Composable
-    open fun Display(callback: () -> Unit) {
+    fun Display(callback: () -> Unit) {
         var subTaskCounter by remember {
             mutableStateOf(0)
         }

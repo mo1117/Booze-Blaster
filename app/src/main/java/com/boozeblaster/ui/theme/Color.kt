@@ -10,11 +10,11 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
 val DarkAppBar = Color(0xFF555555)
-val DarkBackGround = Color(0xFF684747)
+val DarkBackGround = Color(0xFF302C2C)
 val DarkFontColor = Color.White
 
-val LightAppBar = Color(0xFFCCCCCC)
-val LightBackground = Color(0xFFFFF8E1)
+val LightAppBar = Color(0xFFECEC15)
+val LightBackground = Color(0xFFDA7924)
 val LightFontColor = Color.Black
 
 // Button Colors

@@ -30,6 +30,8 @@ class Game private constructor(
          * Loads the tasks and dares
          */
         fun load() {
+            resetAllPoints()
+            resetAllDares()
             INSTANCE.tasks = TaskGenerator.generateTasks(
                 players = INSTANCE.players,
                 rounds = INSTANCE.rounds
@@ -56,6 +58,14 @@ class Game private constructor(
             for (player in INSTANCE.players) {
                 player.setDare(dare = null)
             }
+            DareTaskGenerator.resetUsedDares()
+        }
+
+        /**
+         * Resets all players' points to zero
+         */
+        fun resetAllPoints() {
+            INSTANCE.players.stream().forEach { player -> player.setPoints(points = 0) }
         }
 
         fun getPlayersByPointsDescending(): List<Player> {

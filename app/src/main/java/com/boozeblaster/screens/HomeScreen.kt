@@ -11,7 +11,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
@@ -55,11 +57,22 @@ fun HomeScreenContent(
         val fontSize = 16
         val fontFamily = FontFamily.SansSerif
 
+        SimpleCard(onClick = onStartClicked) {
+            SimpleTextDisplay(text = "Classic Game", fontSize = fontSize, fontFamily = fontFamily)
+        }
+        SimpleSpacer(size = 30)
+
+        SimpleCard(onClick = {}) {
+            SimpleTextDisplay(
+                text = "Create Custom Game",
+                fontSize = fontSize,
+                fontFamily = fontFamily
+            )
+        }
+
         //Start button
         SimpleButton(
-            onClick = {
-                onStartClicked()
-            },
+            onClick = onStartClicked,
             text = "Start",
             fontSize = fontSize,
             fontFamily = fontFamily,

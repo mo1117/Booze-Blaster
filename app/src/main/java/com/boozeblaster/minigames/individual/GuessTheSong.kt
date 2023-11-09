@@ -22,6 +22,7 @@ import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
+import com.boozeblaster.models.Song
 import com.boozeblaster.widgets.MyMediaPlayer
 import kotlinx.coroutines.delay
 
@@ -31,8 +32,7 @@ import kotlinx.coroutines.delay
  * @see com.boozeblaster.generators.individual.GuessTheSongGenerator
  */
 class GuessTheSong(
-    private val songName: String,
-    private val artist: String,
+    private val song: Song,
     private val resid: Int,
     private val duration: Long = 10_000
 ) : MiniGame() {
@@ -96,13 +96,13 @@ class GuessTheSong(
                     // Display song name and artist
                     SimpleSpacer(size = 50)
                     SimpleTextDisplay(
-                        text = songName,
+                        text = song.getSongName(),
                         fontSize = 30,
                         fontFamily = FontFamily.SansSerif
                     )
                     SimpleSpacer(size = 50)
                     SimpleTextDisplay(
-                        text = artist,
+                        text = song.getArtistName(),
                         fontSize = 30,
                         fontFamily = FontFamily.SansSerif
                     )

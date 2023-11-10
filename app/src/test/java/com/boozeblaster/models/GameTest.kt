@@ -10,17 +10,13 @@ import kotlin.random.Random
 
 class GameTest {
 
-    @Test
+    @Test(expected = NoSuchMethodException::class)
     fun testGameContainsNoPublicConstructor() {
-        try {
-            Game::class.java.getConstructor()
-            fail(
-                "There should be no public constructor available in the Game class! " +
-                        "Keep it a singleton object."
-            )
-        } catch (e: NoSuchMethodException) {
-            assertTrue(true)
-        }
+        Game::class.java.getConstructor()
+        fail(
+            "There should be no public constructor available in the Game class! " +
+                    "Keep it a singleton object."
+        )
     }
 
     @Test
@@ -33,7 +29,7 @@ class GameTest {
     fun testZeroPointsAtStart() {
         setPlayers()
         Game.getPlayers().get(index = 1).setPoints(points = 10)
-        Game.load()
+        Game.loadTasks()
         assertTrue(Game.getPlayers().stream().allMatch { player -> player.getPoints() == 0 })
     }
 

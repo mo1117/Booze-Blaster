@@ -70,9 +70,30 @@ fun SurfaceWithColumn(
         Column(
             horizontalAlignment = horizontalAlignment,
             verticalArrangement = verticalArrangement,
-            modifier = Modifier.background(
-                color = getBackgroundColor()
-            ).verticalScroll(state = ScrollState(initial = 0))
+            modifier = Modifier.background(color = getBackgroundColor())
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+fun SurfaceWithScrollableColumn(
+    horizontalAlignment: Alignment.Horizontal,
+    verticalArrangement: Arrangement.Vertical,
+    content: @Composable (ColumnScope.() -> Unit)
+) {
+    Surface(
+        modifier = Modifier.fillMaxSize(fraction = 1f)
+    ) {
+        Column(
+            horizontalAlignment = horizontalAlignment,
+            verticalArrangement = verticalArrangement,
+            modifier = Modifier
+                .background(
+                    color = getBackgroundColor()
+                )
+                .verticalScroll(state = ScrollState(initial = 0))
         ) {
             content()
         }

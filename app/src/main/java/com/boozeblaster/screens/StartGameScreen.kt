@@ -34,6 +34,7 @@ import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithColumn
+import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player

@@ -27,11 +27,10 @@ class Game private constructor(
         )
 
         /**
-         * Loads the tasks and dares
+         * Loads the tasks
          */
-        fun load() {
+        fun loadTasks() {
             resetAllPoints()
-            resetAllDares()
             INSTANCE.tasks = TaskGenerator.generateTasks(
                 players = INSTANCE.players,
                 rounds = INSTANCE.rounds

@@ -14,16 +14,19 @@ import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
+import com.boozeblaster.enums.Genre
+import com.boozeblaster.generators.individual.GuessTheLyricsGenerator
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.models.Song
+import com.boozeblaster.utils.GenrePicker
 
 class GuessTheLyrics(
     private val song: Song,
     private val lyrics: String,
     private val lyricsCompletion: String,
-) : MiniGame() {
+) : MiniGame(), GenrePicker {
 
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
@@ -142,5 +145,12 @@ class GuessTheLyrics(
                 }
             }
         )
+    }
+
+    fun getSong(): Song = this.song
+
+    @Override
+    override fun getListForGenre(genre: Genre): List<MiniGame> {
+        return GuessTheLyricsGenerator().getListForGenre(genre = genre)
     }
 }

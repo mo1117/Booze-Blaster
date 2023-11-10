@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Card
@@ -28,12 +29,14 @@ fun SimpleCard(
     contentColor: Color = contentColorFor(backgroundColor = backgroundColor),
     border: BorderStroke? = null,
     elevation: Dp = 10.dp,
+    padding: Dp = 10.dp,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     Card(
         modifier = modifier
             .size(width = width, height = height)
-            .clickable(onClick = onClick),
+            .clickable(onClick = onClick)
+            .padding(all = padding),
         shape = shape,
         backgroundColor = backgroundColor,
         contentColor = contentColor,

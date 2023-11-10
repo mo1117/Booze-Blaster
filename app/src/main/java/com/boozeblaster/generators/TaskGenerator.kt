@@ -19,7 +19,7 @@ import kotlin.random.Random
 object TaskGenerator {
 
     private val INDIVIDUAL_TASKS =
-        arrayOf("GuessTheLyrics", "FactOrFiction", "GuessTheSong")
+        arrayOf("GuessTheSong")
     private val COMMON_TASKS =
         arrayOf("HighestBidder")
     private val VERSUS_TASKS = arrayOf("RockPaperScissors", "SingASong")
@@ -33,20 +33,20 @@ object TaskGenerator {
             tasks = tasks.plus(element = generateCommonTask(isLastRound = rounds - round == 1))
             randomPlayer = players.get(index = Random.nextInt(from = 0, until = players.size))
 
-            while (true) {
-                randomVersusPlayer =
-                    players.get(index = Random.nextInt(from = 0, until = players.size))
-
-                if (randomPlayer != randomVersusPlayer) {
-                    tasks = tasks.plus(
-                        element = generateVersusTask(
-                            player = randomPlayer,
-                            versusPlayer = randomVersusPlayer
-                        )
-                    )
-                    break
-                }
-            }
+//            while (true) {
+//                randomVersusPlayer =
+//                    players.get(index = Random.nextInt(from = 0, until = players.size))
+//
+//                if (randomPlayer != randomVersusPlayer) {
+//                    tasks = tasks.plus(
+//                        element = generateVersusTask(
+//                            player = randomPlayer,
+//                            versusPlayer = randomVersusPlayer
+//                        )
+//                    )
+//                    break
+//                }
+//            }
 
             for (i in players.indices) {
                 tasks =

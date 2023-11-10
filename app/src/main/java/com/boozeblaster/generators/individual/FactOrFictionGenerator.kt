@@ -7,7 +7,7 @@ import com.boozeblaster.minigames.individual.FactOrFiction
 class FactOrFictionGenerator : MiniGameGenerator() {
 
     override fun getList(): List<MiniGame> {
-        return super.getList(list = list, amount = 4)
+        return super.getList(list = list, amount = 4, resetAllToUnused = false)
     }
 
     /**

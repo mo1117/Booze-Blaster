@@ -15,6 +15,7 @@ import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SurfaceWithColumn
+import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
 
@@ -48,7 +49,7 @@ fun HomeScreenContent(
 
     Game.reset()
 
-    SurfaceWithColumn(
+    SurfaceWithScrollableColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

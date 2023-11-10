@@ -17,9 +17,22 @@ abstract class MiniGameGenerator {
      *
      * This method is used to fill the subTasks lists of each Task
      * @param list List of mini games
-     * @param amount How many mini games we want to generate (default = 3)
+     * @param amount How many mini games we want to generate
+     * @param resetAllToUnused If we want to reset all to unused after creating a list. This is
+     * needed for [com.boozeblaster.generators.individual.GuessTheSongGenerator] and
+     * [com.boozeblaster.generators.individual.GuessTheLyricsGenerator], since we always
+     * re-generate the list when the user picked a Genre.
      */
-    fun getList(list: List<MiniGame>, amount: Int): List<MiniGame> {
+    fun getList(
+        list: List<MiniGame>,
+        amount: Int,
+        resetAllToUnused: Boolean
+    ): List<MiniGame> {
+
+        if (list.size < amount) {
+            throw IllegalArgumentException("The list holds less instances than is required!")
+        }
+
         var randoms = arrayOf<Int>()
         var ret = listOf<MiniGame>()
         var counter = 0
@@ -27,12 +40,38 @@ abstract class MiniGameGenerator {
 
         while (counter < amount) {
             random = Random.nextInt(from = 0, until = list.size)
-            if (random !in randoms) {
+            val game = list.get(index = random)
+
+            if (list.haveAllBeenUsed()) {
+                list.resetAllToUnused()
+            }
+
+            if (random !in randoms && !game.hasBeenUsed()) {
                 randoms = randoms.plus(element = random)
-                ret = ret.plus(list.get(index = random))
+                ret = ret.plus(element = game)
+                game.setUsed(used = true)
                 counter++
             }
         }
+
+        if (resetAllToUnused) {
+            list.resetAllToUnused()
+        }
+
         return ret
+    }
+
+    /**
+     * Check if a list of MiniGames consists of only elements that have all been used at least once
+     */
+    private fun List<MiniGame>.haveAllBeenUsed(): Boolean {
+        return this.stream().allMatch(MiniGame::hasBeenUsed)
+    }
+
+    /**
+     * Resets all elements of a list to 'unused' again
+     */
+    private fun List<MiniGame>.resetAllToUnused() {
+        this.stream().forEach { game -> game.setUsed(used = false) }
     }
 }

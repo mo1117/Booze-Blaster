@@ -7,6 +7,8 @@ import com.boozeblaster.models.Player
 
 abstract class MiniGame {
 
+    private var used = false
+
     protected val fontSize = 20
     protected val fontFamily = FontFamily.SansSerif
 
@@ -51,5 +53,11 @@ abstract class MiniGame {
                 player.addPoints(points = points)
             }
         }
+    }
+
+    fun hasBeenUsed(): Boolean = this.used
+
+    fun setUsed(used: Boolean) {
+        this.used = used
     }
 }

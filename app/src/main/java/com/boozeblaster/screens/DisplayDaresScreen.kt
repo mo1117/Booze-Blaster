@@ -115,7 +115,7 @@ fun DisplayDaresScreenContent(
         SimpleSpacer(size = 50)
         SimpleButton(
             onClick = {
-                Game.load()
+                Game.loadTasks()
                 onStartClicked()
             },
             text = "Start",

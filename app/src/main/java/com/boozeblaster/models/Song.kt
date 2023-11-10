@@ -13,6 +13,5 @@ class Song(
 
     fun getSongName() = this.songName
     fun getArtistName() = this.artistName
-
     fun getGenre() = this.genre
 }

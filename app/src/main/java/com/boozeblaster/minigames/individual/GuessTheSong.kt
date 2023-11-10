@@ -19,10 +19,13 @@ import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
+import com.boozeblaster.enums.Genre
+import com.boozeblaster.generators.individual.GuessTheSongGenerator
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.models.Song
+import com.boozeblaster.utils.GenrePicker
 import com.boozeblaster.widgets.MyMediaPlayer
 import kotlinx.coroutines.delay
 
@@ -35,7 +38,7 @@ class GuessTheSong(
     private val song: Song,
     private val resid: Int,
     private val duration: Long = 10_000
-) : MiniGame() {
+) : MiniGame(), GenrePicker {
 
     @Composable
     override fun DisplayContent(player: Player?, callback: () -> Unit, versusPlayer: Player?) {
@@ -175,5 +178,10 @@ class GuessTheSong(
         }
     }
 
+    fun getSong(): Song = this.song
+
+    override fun getListForGenre(genre: Genre): List<MiniGame> {
+        return GuessTheSongGenerator().getListForGenre(genre = genre)
+    }
 }
 

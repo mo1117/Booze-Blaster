@@ -8,7 +8,7 @@ import com.boozeblaster.models.Game
 class SingASongGenerator : MiniGameGenerator() {
     override fun getList(): List<MiniGame> {
         val list = if (Game.isAdultMode()) adultModeList else normalList
-        return super.getList(list = list, amount = 5)
+        return super.getList(list = list, amount = 5, resetAllToUnused = false)
     }
 
     private companion object {

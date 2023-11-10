@@ -6,7 +6,7 @@ import com.boozeblaster.minigames.common.HighestBidder
 
 class HighestBidderGenerator : MiniGameGenerator() {
     override fun getList(): List<MiniGame> {
-        return super.getList(list = list, amount = 1)
+        return super.getList(list = list, amount = 1, resetAllToUnused = false)
     }
 
     private companion object {

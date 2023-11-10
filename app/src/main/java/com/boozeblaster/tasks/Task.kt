@@ -16,13 +16,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.composables.ClickableSurfaceWithColumn
+import com.boozeblaster.composables.PickGenre
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.enums.Genre
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.common.SetRuleTask
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.headerFont
+import com.boozeblaster.utils.GenrePicker
 
 /**
  * The base class representing a Task
@@ -36,7 +39,7 @@ import com.boozeblaster.ui.theme.headerFont
  */
 abstract class Task(
     private val player: Player? = null,
-    private val subTasks: List<MiniGame> = emptyList(),
+    private var subTasks: List<MiniGame> = emptyList(),
     private val versusPlayer: Player? = null
 ) {
 
@@ -110,8 +113,13 @@ abstract class Task(
     @Composable
     fun Display(callback: () -> Unit) {
         var subTaskCounter by remember {
-            mutableStateOf(0)
+            mutableStateOf(value = 0)
         }
+
+        var genre: Genre? by remember {
+            mutableStateOf(value = null)
+        }
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -119,18 +127,39 @@ abstract class Task(
                 color = getBackgroundColor()
             )
         ) {
-            subTasks.get(index = subTaskCounter).DisplayContent(
-                player = player,
-                callback = {
-                    if (subTaskCounter == subTasks.size - 1) {
-                        subTaskCounter = 0
-                        callback()
-                    } else {
-                        subTaskCounter++
+            if (genre == null && subTasks.shouldAskForGenre()) {
+                PickGenre(
+                    pickRock = {
+                        genre = Genre.ROCK
+                        setSubTasksBasedOnGenre(genre = genre!!)
+                    },
+                    pickRap = {
+                        genre = Genre.RAP
+                        setSubTasksBasedOnGenre(genre = genre!!)
+                    },
+                    pickHipHop = {
+                        genre = Genre.HIP_HOP
+                        setSubTasksBasedOnGenre(genre = genre!!)
+                    },
+                    pickPop = {
+                        genre = Genre.POP
+                        setSubTasksBasedOnGenre(genre = genre!!)
                     }
-                },
-                versusPlayer = versusPlayer
-            )
+                )
+            } else {
+                subTasks.get(index = subTaskCounter).DisplayContent(
+                    player = player,
+                    callback = {
+                        if (subTaskCounter == subTasks.size - 1) {
+                            subTaskCounter = 0
+                            callback()
+                        } else {
+                            subTaskCounter++
+                        }
+                    },
+                    versusPlayer = versusPlayer
+                )
+            }
         }
     }
 
@@ -170,4 +199,12 @@ abstract class Task(
     protected abstract fun getImageId(): Int
 
     protected abstract fun getCoverDescription(): String
+
+    private fun List<MiniGame>.shouldAskForGenre(): Boolean {
+        return this.all { it is GenrePicker }
+    }
+
+    private fun setSubTasksBasedOnGenre(genre: Genre) {
+        subTasks = (subTasks.get(index = 0) as GenrePicker).getListForGenre(genre = genre)
+    }
 }

@@ -6,11 +6,21 @@ import com.boozeblaster.generators.MiniGameGenerator
 import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.minigames.individual.GuessTheSong
 import com.boozeblaster.models.Song
+import java.util.stream.Collectors
 
 class GuessTheSongGenerator : MiniGameGenerator() {
 
     override fun getList(): List<MiniGame> {
-        return super.getList(list = list, amount = 3)
+        return super.getList(list = list, amount = 3, resetAllToUnused = true)
+    }
+
+    fun getListForGenre(genre: Genre): List<MiniGame> {
+        return super.getList(
+            list = list.stream().filter { element -> element.getSong().getGenre() == genre }
+                .collect(
+                    Collectors.toList()
+                ), amount = 3, resetAllToUnused = false
+        )
     }
 
     private companion object {

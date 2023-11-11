@@ -7,6 +7,7 @@ import com.boozeblaster.tasks.IndividualTask
 import com.boozeblaster.tasks.Task
 import com.boozeblaster.tasks.VersusTask
 import com.boozeblaster.tasks.common.SipTransferTask
+import com.boozeblaster.utils.GameSettings
 import kotlin.random.Random
 
 /**
@@ -18,42 +19,72 @@ import kotlin.random.Random
  */
 object TaskGenerator {
 
-    private val INDIVIDUAL_TASKS =
-        arrayOf("GuessTheSong")
-    private val COMMON_TASKS =
-        arrayOf("HighestBidder")
-    private val VERSUS_TASKS = arrayOf("RockPaperScissors", "SingASong")
-
     fun generateTasks(players: List<Player>, rounds: Int): List<Task> {
         var tasks = listOf<Task>()
         var randomPlayer: Player
         var randomVersusPlayer: Player
 
         for (round in 0 until rounds) {
-            tasks = tasks.plus(element = generateCommonTask(isLastRound = rounds - round == 1))
-            randomPlayer = players.get(index = Random.nextInt(from = 0, until = players.size))
-
-//            while (true) {
-//                randomVersusPlayer =
-//                    players.get(index = Random.nextInt(from = 0, until = players.size))
-//
-//                if (randomPlayer != randomVersusPlayer) {
-//                    tasks = tasks.plus(
-//                        element = generateVersusTask(
-//                            player = randomPlayer,
-//                            versusPlayer = randomVersusPlayer
-//                        )
-//                    )
-//                    break
-//                }
-//            }
-
-            for (i in players.indices) {
+            if (GameSettings.playCommonTasks()) {
                 tasks =
-                    tasks.plus(element = generateIndividualTask(player = players.get(index = i)))
+                    tasks.plus(
+                        element = generateCommonTask(
+                            generateSipTransferTask = rounds - round == 1 && rounds > 1
+                        )
+                    )
+            }
+
+            if (GameSettings.playVersusTasks()) {
+                randomPlayer = players.get(index = Random.nextInt(from = 0, until = players.size))
+                while (true) {
+                    randomVersusPlayer =
+                        players.get(index = Random.nextInt(from = 0, until = players.size))
+
+                    if (randomPlayer != randomVersusPlayer) {
+                        tasks = tasks.plus(
+                            element = generateVersusTask(
+                                player = randomPlayer,
+                                versusPlayer = randomVersusPlayer
+                            )
+                        )
+                        break
+                    }
+                }
+            }
+
+            if (GameSettings.playIndividualTasks()) {
+                for (i in players.indices) {
+                    tasks =
+                        tasks.plus(element = generateIndividualTask(player = players.get(index = i)))
+                }
             }
         }
         return tasks
+    }
+
+    /**
+     * Generates a random common task
+     * @param generateSipTransferTask Whether we want to generate a sip transfer task
+     * @return CommonTask (Specific common task - Or a SipTransferTask if we are in the last round)
+     * @see TaskGenerator.generateIndividualTask
+     * @see CommonTask
+     */
+    private fun generateCommonTask(generateSipTransferTask: Boolean): CommonTask {
+        if (generateSipTransferTask) {
+            return SipTransferTask(subTasks = listOf(SipTransfer()))
+        }
+        val game = getRandomTask(availableTasks = GameSettings.getCommonTasks())
+
+        val constructor = Class.forName("com.boozeblaster.tasks.common.${game}Task")
+            .getConstructor(List::class.java)
+
+        val instance = Class.forName("com.boozeblaster.generators.common.${game}Generator")
+            .newInstance()
+
+        val generator = Class.forName("com.boozeblaster.generators.common.${game}Generator")
+            .getMethod("getList")
+
+        return constructor.newInstance(generator.invoke(instance)) as CommonTask
     }
 
     /**
@@ -71,7 +102,7 @@ object TaskGenerator {
      * @see IndividualTask
      */
     private fun generateIndividualTask(player: Player): IndividualTask {
-        val game = getRandomTask(availableTasks = INDIVIDUAL_TASKS)
+        val game = getRandomTask(availableTasks = GameSettings.getIndividualTasks())
 
         val constructor = Class.forName("com.boozeblaster.tasks.individual.${game}Task")
             .getConstructor(Player::class.java, List::class.java)
@@ -86,36 +117,11 @@ object TaskGenerator {
     }
 
     /**
-     * Generates a random common task
-     * @param isLastRound Whether we are in the last round
-     * @return CommonTask (Specific common task - Or a SipTransferTask if we are in the last round)
-     * @see TaskGenerator.generateIndividualTask
-     * @see CommonTask
-     */
-    private fun generateCommonTask(isLastRound: Boolean): CommonTask {
-        if (isLastRound) {
-            return SipTransferTask(subTasks = listOf(SipTransfer()))
-        }
-        val game = getRandomTask(availableTasks = COMMON_TASKS)
-
-        val constructor = Class.forName("com.boozeblaster.tasks.common.${game}Task")
-            .getConstructor(List::class.java)
-
-        val instance = Class.forName("com.boozeblaster.generators.common.${game}Generator")
-            .newInstance()
-
-        val generator = Class.forName("com.boozeblaster.generators.common.${game}Generator")
-            .getMethod("getList")
-
-        return constructor.newInstance(generator.invoke(instance)) as CommonTask
-    }
-
-    /**
      * Generates a random VersusTask
      * @see VersusTask
      */
     private fun generateVersusTask(player: Player, versusPlayer: Player): VersusTask {
-        val game = getRandomTask(availableTasks = VERSUS_TASKS)
+        val game = getRandomTask(availableTasks = GameSettings.getVersusTasks())
 
         val constructor = Class.forName("com.boozeblaster.tasks.versus.${game}Task")
             .getConstructor(Player::class.java, List::class.java, Player::class.java)

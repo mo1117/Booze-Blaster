@@ -20,7 +20,11 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: Run Tests
+      run: ./gradlew test ./coverage.xml
+
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3 -f
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./codecov.xml

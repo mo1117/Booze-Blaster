@@ -25,4 +25,6 @@ sealed class Screen(val route: String) {
     object FullfillDaresScreen : Screen(route = "fulfillDares")
 
     object GiveSipsScreen : Screen(route = "giveSips")
+
+    object CustomizeGameScreen : Screen(route = "customizeGame")
 }

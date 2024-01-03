@@ -33,6 +33,7 @@ fun HomeScreen(navController: NavController) {
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             onStartClicked = { navController.navigate(route = Screen.StartGameScreen.route) },
+            onCustomizeGameClicked = { navController.navigate(route = Screen.CustomizeGameScreen.route) },
             onAddPlayerClicked = { navController.navigate(route = Screen.AddPlayerScreen.route) },
             onTutorialClicked = { navController.navigate(route = Screen.TutorialScreen.route) }
         )
@@ -43,6 +44,7 @@ fun HomeScreen(navController: NavController) {
 fun HomeScreenContent(
     modifier: Modifier,
     onStartClicked: () -> Unit,
+    onCustomizeGameClicked: () -> Unit,
     onAddPlayerClicked: () -> Unit,
     onTutorialClicked: () -> Unit
 ) {
@@ -63,7 +65,7 @@ fun HomeScreenContent(
         }
         SimpleSpacer(size = 30)
 
-        SimpleCard(onClick = {}) {
+        SimpleCard(onClick = onCustomizeGameClicked) {
             SimpleTextDisplay(
                 text = "Create Custom Game",
                 fontSize = fontSize,

@@ -76,5 +76,9 @@ fun Navigation() {
         composable(route = Screen.GiveSipsScreen.route) {
             GiveSipsScreen(navController = navController)
         }
+
+        composable(route = Screen.CustomizeGameScreen.route) {
+            CustomizeGameScreen(navController = navController)
+        }
     }
 }

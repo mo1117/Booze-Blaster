@@ -29,7 +29,7 @@ object TaskGenerator {
                 tasks =
                     tasks.plus(
                         element = generateCommonTask(
-                            generateSipTransferTask = rounds - round == 1 && rounds > 1
+                            generateSipTransferTask = rounds - round == 1 && rounds > 1 && GameSettings.playSipTransfer()
                         )
                     )
             }

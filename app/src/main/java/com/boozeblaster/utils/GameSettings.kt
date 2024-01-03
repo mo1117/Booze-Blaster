@@ -5,9 +5,9 @@ package com.boozeblaster.utils
  */
 object GameSettings {
 
-    private var individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
-    private var commonTasks = arrayOf("HighestBidder")
+    private var commonTasks = arrayOf("HighestBidder", "SipTransfer")
     private var versusTasks = arrayOf("RockPaperScissors", "SingASong")
+    private var individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
 
     fun getIndividualTasks(): Array<String> = this.individualTasks
     fun getCommonTasks(): Array<String> = this.commonTasks
@@ -25,8 +25,9 @@ object GameSettings {
         this.versusTasks = options
     }
 
-    fun playIndividualTasks(): Boolean = !this.individualTasks.isEmpty()
-    fun playCommonTasks(): Boolean = !this.commonTasks.isEmpty()
-    fun playVersusTasks(): Boolean = !this.versusTasks.isEmpty()
+    fun playIndividualTasks(): Boolean = this.individualTasks.isNotEmpty()
+    fun playCommonTasks(): Boolean = this.commonTasks.isNotEmpty()
+    fun playVersusTasks(): Boolean = this.versusTasks.isNotEmpty()
+    fun playSipTransfer(): Boolean = this.commonTasks.contains(element = "SipTransfer")
 
 }

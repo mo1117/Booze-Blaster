@@ -69,3 +69,16 @@ fun getFontColor(): Color {
 fun getAppBarColor(): Color {
     return if (DarkmodeController.isDarkmode()) DarkAppBar else LightAppBar
 }
+
+fun Color.backgroundColorForCard(): Color {
+    return this.copy(
+        alpha = this.alpha,
+        red = this.red.reduceBy(percent = 15),
+        green = this.green.reduceBy(percent = 15),
+        blue = this.blue.reduceBy(percent = 15)
+    )
+}
+
+private fun Float.reduceBy(percent: Int): Float {
+    return this * ((100f - percent) / 100f)
+}

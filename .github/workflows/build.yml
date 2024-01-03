@@ -25,9 +25,3 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
-
-    - name: Run Tests
-      run: ./gradlew test
-
-    - name: Upload coverage reports to Codecov with GitHub Action
-      uses: codecov/codecov-action@v3

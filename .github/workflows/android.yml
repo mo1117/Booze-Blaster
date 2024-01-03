@@ -21,7 +21,7 @@ jobs:
         cache: gradle
 
     - name: Run Tests
-      run: ./gradlew test ./coverage.xml
+      run: ./gradlew test coverage.xml
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3

@@ -28,6 +28,20 @@ object GameSettings {
         this.versusTasks = options
     }
 
+    fun resetIndividualTasks() {
+        this.individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
+    }
+
+    fun resetCommonTasks() {
+        this.commonTasks = arrayOf(
+            "HighestBidder", "SipTransfer", "NeverHaveIEver", "SetRule", "WhoInThisRoom"
+        )
+    }
+
+    fun resetVersusTasks() {
+        this.versusTasks = arrayOf("RockPaperScissors", "SingASong")
+    }
+
     fun playIndividualTasks(): Boolean = this.individualTasks.isNotEmpty()
     fun playCommonTasks(): Boolean = this.commonTasks.isNotEmpty()
     fun playVersusTasks(): Boolean = this.versusTasks.isNotEmpty()

@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.screens.Screen
+import com.boozeblaster.utils.GameSettings
 import com.boozeblaster.widgets.MyMediaPlayer
 
 object NavigationController {
@@ -11,6 +12,9 @@ object NavigationController {
     fun navigateToHomeScreen(navController: NavController) {
         MyMediaPlayer.stop()
         Game.reset()
+        GameSettings.resetIndividualTasks()
+        GameSettings.resetVersusTasks()
+        GameSettings.resetCommonTasks()
         navController.navigate(route = Screen.HomeScreen.route) {
             popUpTo(id = navController.graph.startDestinationId) {
                 inclusive = false

@@ -95,25 +95,25 @@ class TaskGeneratorTest {
 //        }
 //    }
 
-    private fun getTasksField(type: String): Field {
-        val tasks = GameSettings.javaClass.getDeclaredField(type)
-        tasks.isAccessible = true
-        return tasks
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun getTasksFieldAsArray(type: String): Array<String> {
-        val individualTask = getTasksField(type = type)
-        return individualTask.get(this) as Array<String>
-    }
-
-    /**
-     * @param task Name of the task
-     * @param type Name of the type of task (Individual, Common, Versus)
-     * @return True if the task can be found within the list of tasks, false else
-     */
-    private fun containsTask(task: String, type: String): Boolean {
-        return getTasksFieldAsArray(type = type).contains(element = task)
-    }
+//    private fun getTasksField(type: String): Field {
+//        val tasks = GameSettings.javaClass.getDeclaredField(type)
+//        tasks.isAccessible = true
+//        return tasks
+//    }
+//
+//    @Suppress("UNCHECKED_CAST")
+//    private fun getTasksFieldAsArray(type: String): Array<String> {
+//        val individualTask = getTasksField(type = type)
+//        return individualTask.get(this) as Array<String>
+//    }
+//
+//    /**
+//     * @param task Name of the task
+//     * @param type Name of the type of task (Individual, Common, Versus)
+//     * @return True if the task can be found within the list of tasks, false else
+//     */
+//    private fun containsTask(task: String, type: String): Boolean {
+//        return getTasksFieldAsArray(type = type).contains(element = task)
+//    }
 
 }

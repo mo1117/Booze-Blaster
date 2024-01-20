@@ -73,9 +73,9 @@ fun getAppBarColor(): Color {
 fun Color.backgroundColorForCard(): Color {
     return this.copy(
         alpha = this.alpha,
-        red = this.red.reduceBy(percent = 15),
-        green = this.green.reduceBy(percent = 15),
-        blue = this.blue.reduceBy(percent = 15)
+        red = this.red.reduceBy(percent = 25),
+        green = this.green.reduceBy(percent = 25),
+        blue = this.blue.reduceBy(percent = 25)
     )
 }
 

@@ -10,6 +10,7 @@ import java.util.stream.Collectors
 
 class GuessTheSongGenerator : MiniGameGenerator() {
 
+    @Override
     override fun getList(): List<MiniGame> {
         return super.getList(list = list, amount = 3, resetAllToUnused = true)
     }

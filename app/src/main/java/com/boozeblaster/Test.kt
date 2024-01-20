@@ -1,10 +1,10 @@
 package com.boozeblaster
 
-class Test {
-    fun name() : String = javaClass.simpleName
-}
+import android.content.Context
+import java.io.File
 
 fun main() {
-    val test = Test()
-    println(test.name())
+    File("app/src/main/assets/higher_lower.txt").forEachLine {
+        println(it)
+    }
 }

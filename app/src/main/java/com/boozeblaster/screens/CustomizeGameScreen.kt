@@ -11,13 +11,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimplePickableCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
-import com.boozeblaster.composables.SurfaceWithColumn
+import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.GameSettings
 
@@ -48,7 +49,7 @@ fun CustomizeGameScreenContent(
     modifier: Modifier,
     onContinueClicked: () -> Unit
 ) {
-    SurfaceWithColumn(
+    SurfaceWithScrollableColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -75,7 +76,8 @@ fun CustomizeGameScreenContent(
             fontSize = 20,
             fontFamily = FontFamily.SansSerif,
             enabled = pickedCommonTasks.isNotEmpty()
-                    || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty()
+                    || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
+            modifier = Modifier.padding(bottom = 10.dp)
         )
     }
 
@@ -110,7 +112,7 @@ private fun displayCommonTasks(pickedCommonTasks: MutableList<String>) {
                 SimplePickableCard(callback = {
                     onCardClicked(
                         pickedCommonTasks,
-                        commonTasks.get(index = i + i)
+                        commonTasks.get(index = i + 1)
                     )
                 }) {
                     SimpleTextDisplay(

@@ -5,9 +5,12 @@ package com.boozeblaster.utils
  */
 object GameSettings {
 
-    private var commonTasks = arrayOf("HighestBidder", "SipTransfer")
+    private var commonTasks = arrayOf(
+        "HighestBidder", "SipTransfer", "NeverHaveIEver", "SetRule", "WhoInThisRoom"
+    )
     private var versusTasks = arrayOf("RockPaperScissors", "SingASong")
-    private var individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
+    private var individualTasks =
+        arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
 
     fun getIndividualTasks(): Array<String> = this.individualTasks
     fun getCommonTasks(): Array<String> = this.commonTasks

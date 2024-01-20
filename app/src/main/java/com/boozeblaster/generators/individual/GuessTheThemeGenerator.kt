@@ -7,6 +7,7 @@ import com.boozeblaster.minigames.individual.GuessTheTheme
 
 class GuessTheThemeGenerator : MiniGameGenerator() {
 
+    @Override
     override fun getList(): List<MiniGame> {
         return super.getList(list = list, amount = 3, resetAllToUnused = false)
     }

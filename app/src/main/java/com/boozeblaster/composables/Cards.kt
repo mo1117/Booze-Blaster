@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
-import androidx.compose.material.ButtonColors
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.backgroundColorForCard
 import com.boozeblaster.ui.theme.getBackgroundColor
 
@@ -33,7 +31,7 @@ fun SimpleCard(
     onClick: () -> Unit = {},
     shape: Shape = AbsoluteRoundedCornerShape(20.dp),
     backgroundColor: Color = getBackgroundColor().backgroundColorForCard(),
-    contentColor: Color = backgroundColor,
+    contentColor: Color = Color.Black,
     border: BorderStroke? = null,
     elevation: Dp = 0.dp,
     padding: Dp = 10.dp,
@@ -73,7 +71,7 @@ fun SimplePickableCard(
     var isPicked by remember {
         mutableStateOf(value = false)
     }
-    var color = if (isPicked) Color.Green else Color.Red
+    val color = if (isPicked) Color.Green else Color.Red
 
 
     SimpleCard(

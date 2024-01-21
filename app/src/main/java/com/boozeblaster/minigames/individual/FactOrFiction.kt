@@ -76,8 +76,6 @@ class FactOrFiction(
         }
         SimpleSpacer(size = 50)
 
-
-        // Show dialog that tells the player if they were correct
         if (showDialog) {
             PointsOrSipsDialog(points = points, sips = sips, callback = {
                 buttonClicked = false

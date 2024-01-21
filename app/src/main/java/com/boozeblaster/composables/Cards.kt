@@ -20,8 +20,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.backgroundColorForCard
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.getButtonColor
 
 @Composable
 fun SimpleCard(
@@ -31,7 +33,6 @@ fun SimpleCard(
     onClick: () -> Unit = {},
     shape: Shape = AbsoluteRoundedCornerShape(20.dp),
     backgroundColor: Color = getBackgroundColor().backgroundColorForCard(),
-    contentColor: Color = Color.Black,
     border: BorderStroke? = null,
     elevation: Dp = 0.dp,
     padding: Dp = 10.dp,
@@ -44,7 +45,6 @@ fun SimpleCard(
             .padding(all = padding),
         shape = shape,
         backgroundColor = backgroundColor,
-        contentColor = contentColor,
         border = border,
         elevation = elevation
     ) {
@@ -71,7 +71,7 @@ fun SimplePickableCard(
     var isPicked by remember {
         mutableStateOf(value = false)
     }
-    val color = if (isPicked) Color.Green else Color.Red
+    val color = if (isPicked) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT)
 
 
     SimpleCard(
@@ -84,7 +84,6 @@ fun SimplePickableCard(
         },
         shape = shape,
         backgroundColor = color,
-        contentColor = color,
         border = border,
         elevation = elevation,
         padding = padding,

@@ -10,7 +10,7 @@ object GameSettings {
     )
     private var versusTasks = arrayOf("RockPaperScissors", "SingASong", "MentalArithmetic")
     private var individualTasks =
-        arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
+        arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction", "HigherLower")
 
     fun getIndividualTasks(): Array<String> = this.individualTasks
     fun getCommonTasks(): Array<String> = this.commonTasks
@@ -35,7 +35,7 @@ object GameSettings {
     }
 
     fun resetIndividualTasks() {
-        this.individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
+        this.individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction", "HigherLower")
     }
 
     fun resetCommonTasks() {
@@ -45,7 +45,7 @@ object GameSettings {
     }
 
     fun resetVersusTasks() {
-        this.versusTasks = arrayOf("RockPaperScissors", "SingASong")
+        this.versusTasks = arrayOf("RockPaperScissors", "SingASong", "MentalArithmetic")
     }
 
     fun playIndividualTasks(): Boolean = this.individualTasks.isNotEmpty()

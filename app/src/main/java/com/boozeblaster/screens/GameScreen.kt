@@ -19,7 +19,11 @@ import com.boozeblaster.composables.MyAlertDialog
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.tasks.CommonTask
+import com.boozeblaster.tasks.IndividualTask
+import com.boozeblaster.tasks.Task
+import com.boozeblaster.tasks.VersusTask
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.utils.GameSettings
 
 @Composable
 fun GameScreen(navController: NavController = rememberNavController()) {
@@ -76,17 +80,14 @@ fun GameScreenContent(
     incrementRoundCounter: () -> Unit
 ) {
 
-    //Whether we have already incremented the round counter
     var roundCounterIncremented by remember {
         mutableStateOf(value = false)
     }
 
-    //The task counter is responsible for iterating through our list of tasks
     var taskCounter by remember {
         mutableStateOf(value = 0)
     }
 
-    //The current task to be played
     val currentTask = Game.getTask(index = taskCounter)
 
     Surface(
@@ -95,7 +96,7 @@ fun GameScreenContent(
             .fillMaxWidth(fraction = 1f)
     ) {
 
-        if (currentTask is CommonTask && !roundCounterIncremented) {
+        if (shouldIncrementRoundCounter(currentTask = currentTask) && !roundCounterIncremented) {
             incrementRoundCounter()
             roundCounterIncremented = true
         }
@@ -113,3 +114,13 @@ fun GameScreenContent(
     }
 }
 
+private fun shouldIncrementRoundCounter(currentTask: Task): Boolean {
+    if (currentTask is CommonTask) {
+        return true
+    } else if (currentTask is VersusTask && !GameSettings.playCommonTasks()) {
+        return true
+    } else if (currentTask is IndividualTask && !GameSettings.playCommonTasks() && !GameSettings.playVersusTasks()) {
+        return Game.getTasks().indexOf(element = currentTask) % Game.getPlayers().size == 0
+    }
+    return false
+}

@@ -20,6 +20,7 @@ import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.headerFont
 import com.boozeblaster.utils.GameSettings
 
 private val onCardClicked: (MutableList<String>, String) -> Unit = { list, string ->
@@ -82,6 +83,7 @@ fun CustomizeGameScreenContent(
                     || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
             modifier = Modifier.padding(bottom = 10.dp)
         )
+        SimpleSpacer(size = 20)
     }
 
 }
@@ -90,43 +92,24 @@ fun CustomizeGameScreenContent(
 private fun DisplayCommonTasks(pickedCommonTasks: MutableList<String>) {
     val commonTasks = GameSettings.getCommonTasks()
 
-    SimpleTextDisplay(text = "Common Tasks", fontSize = 20, fontFamily = FontFamily.SansSerif)
+    SimpleSpacer(size = 20)
+    SimpleTextDisplay(text = "Common Tasks", fontSize = 30, fontFamily = headerFont)
     SimpleSpacer(size = 20)
 
-    for (i in commonTasks.indices step 2) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            SimplePickableCard(callback = {
-                onCardClicked(
-                    pickedCommonTasks,
-                    commonTasks.get(index = i)
-                )
-            }) {
-                SimpleTextDisplay(
-                    text = commonTasks.get(index = i),
-                    fontSize = 20,
-                    fontFamily = FontFamily.SansSerif
-                )
-            }
-
-            if (i + 1 < commonTasks.size) {
-                SimplePickableCard(callback = {
-                    onCardClicked(
-                        pickedCommonTasks,
-                        commonTasks.get(index = i + 1)
-                    )
-                }) {
-                    SimpleTextDisplay(
-                        text = commonTasks.get(index = i + 1),
-                        fontSize = 20,
-                        fontFamily = FontFamily.SansSerif
-                    )
-                }
-            }
-            SimpleSpacer(size = 20)
+    for (i in commonTasks.indices) {
+        SimplePickableCard(callback = {
+            onCardClicked(
+                pickedCommonTasks,
+                commonTasks.get(index = i)
+            )
+        }) {
+            SimpleTextDisplay(
+                text = commonTasks.get(index = i),
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
         }
+        SimpleSpacer(size = 20)
     }
 }
 
@@ -134,43 +117,24 @@ private fun DisplayCommonTasks(pickedCommonTasks: MutableList<String>) {
 private fun DisplayVersusTasks(pickedVersusTasks: MutableList<String>) {
     val versusTasks = GameSettings.getVersusTasks()
 
-    SimpleTextDisplay(text = "Versus Tasks", fontSize = 20, fontFamily = FontFamily.SansSerif)
+    SimpleSpacer(size = 20)
+    SimpleTextDisplay(text = "Versus Tasks", fontSize = 30, fontFamily = headerFont)
     SimpleSpacer(size = 20)
 
-    for (i in versusTasks.indices step 2) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            SimplePickableCard(callback = {
-                onCardClicked(
-                    pickedVersusTasks,
-                    versusTasks.get(index = i)
-                )
-            }) {
-                SimpleTextDisplay(
-                    text = versusTasks.get(index = i),
-                    fontSize = 20,
-                    fontFamily = FontFamily.SansSerif
-                )
-            }
-
-            if (i + 1 < versusTasks.size) {
-                SimplePickableCard(callback = {
-                    onCardClicked(
-                        pickedVersusTasks,
-                        versusTasks.get(index = i + 1)
-                    )
-                }) {
-                    SimpleTextDisplay(
-                        text = versusTasks.get(index = i + 1),
-                        fontSize = 20,
-                        fontFamily = FontFamily.SansSerif
-                    )
-                }
-            }
-            SimpleSpacer(size = 20)
+    for (i in versusTasks.indices) {
+        SimplePickableCard(callback = {
+            onCardClicked(
+                pickedVersusTasks,
+                versusTasks.get(index = i)
+            )
+        }) {
+            SimpleTextDisplay(
+                text = versusTasks.get(index = i),
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
         }
+        SimpleSpacer(size = 20)
     }
 }
 
@@ -178,42 +142,22 @@ private fun DisplayVersusTasks(pickedVersusTasks: MutableList<String>) {
 private fun DisplayIndividualTasks(pickedIndividualTasks: MutableList<String>) {
     val individualTasks = GameSettings.getIndividualTasks()
 
-    SimpleTextDisplay(text = "Individual Tasks", fontSize = 20, fontFamily = FontFamily.SansSerif)
+    SimpleTextDisplay(text = "Individual Tasks", fontSize = 30, fontFamily = headerFont)
     SimpleSpacer(size = 20)
 
-    for (i in individualTasks.indices step 2) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            SimplePickableCard(callback = {
-                onCardClicked(
-                    pickedIndividualTasks,
-                    individualTasks.get(index = i)
-                )
-            }) {
-                SimpleTextDisplay(
-                    text = individualTasks.get(index = i),
-                    fontSize = 20,
-                    fontFamily = FontFamily.SansSerif
-                )
-            }
-
-            if (i + 1 < individualTasks.size) {
-                SimplePickableCard(callback = {
-                    onCardClicked(
-                        pickedIndividualTasks,
-                        individualTasks.get(index = i + 1)
-                    )
-                }) {
-                    SimpleTextDisplay(
-                        text = individualTasks.get(index = i + 1),
-                        fontSize = 20,
-                        fontFamily = FontFamily.SansSerif
-                    )
-                }
-            }
-            SimpleSpacer(size = 20)
+    for (i in individualTasks.indices) {
+        SimplePickableCard(callback = {
+            onCardClicked(
+                pickedIndividualTasks,
+                individualTasks.get(index = i)
+            )
+        }) {
+            SimpleTextDisplay(
+                text = individualTasks.get(index = i),
+                fontSize = 20,
+                fontFamily = FontFamily.SansSerif
+            )
         }
+        SimpleSpacer(size = 20)
     }
 }

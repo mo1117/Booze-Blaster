@@ -10,11 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 import com.boozeblaster.composables.HomeTopAppBar
-import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
@@ -63,6 +61,7 @@ fun HomeScreenContent(
         SimpleCard(onClick = onStartClicked) {
             SimpleTextDisplay(text = "Classic Game", fontSize = fontSize, fontFamily = fontFamily)
         }
+
         SimpleSpacer(size = 30)
 
         SimpleCard(onClick = onCustomizeGameClicked) {
@@ -73,34 +72,17 @@ fun HomeScreenContent(
             )
         }
 
-        //Start button
-        SimpleButton(
-            onClick = onStartClicked,
-            text = "Start",
-            fontSize = fontSize,
-            fontFamily = fontFamily,
-            minHeight = minHeight
-        )
-        SimpleSpacer(size = 100)
+        SimpleSpacer(size = 30)
 
-        //Add a player button
-        SimpleButton(
-            onClick = onAddPlayerClicked,
-            text = "Add Players",
-            fontSize = fontSize,
-            fontFamily = fontFamily,
-            minHeight = minHeight
-        )
-        SimpleSpacer(size = 100)
+        SimpleCard(onClick = onAddPlayerClicked) {
+            SimpleTextDisplay(text = "Add Players", fontSize = fontSize, fontFamily = fontFamily)
+        }
 
-        //Tutorial button
-        SimpleButton(
-            onClick = onTutorialClicked,
-            text = "How To Play",
-            fontSize = fontSize,
-            fontFamily = fontFamily,
-            minHeight = minHeight
-        )
+        SimpleSpacer(size = 30)
+
+        SimpleCard(onClick = onTutorialClicked) {
+            SimpleTextDisplay(text = "How To Play", fontSize = fontSize, fontFamily = fontFamily)
+        }
     }
 }
 

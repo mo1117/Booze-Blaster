@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun CountdownTimer(totalTimeInMillis: Long = 20_000) {
+fun CountdownTimer(totalTimeInMillis: Long = 20_000, contentDescription: String = "Timer") {
     var secondsLeft by remember { mutableStateOf(value = (totalTimeInMillis / 1000).toInt()) }
 
     val coroutineScope = rememberCoroutineScope()

@@ -1,8 +1,12 @@
 package com.boozeblaster.filters
 
 import android.util.Log
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 /**
  * The ProfanityFilter is used to check if a username contains profanity
@@ -34,6 +38,8 @@ class ProfanityFilter {
                     )
                     .build()
                 val response = client.newCall(request).execute()
+
+                val string = response.body.toString()
 
                 if (response.body!!.string() == "true") {
                     return true

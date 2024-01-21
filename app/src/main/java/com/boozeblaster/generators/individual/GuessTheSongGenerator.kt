@@ -8,6 +8,7 @@ import com.boozeblaster.minigames.individual.GuessTheSong
 import com.boozeblaster.models.Song
 import java.util.stream.Collectors
 
+
 class GuessTheSongGenerator : MiniGameGenerator() {
 
     @Override

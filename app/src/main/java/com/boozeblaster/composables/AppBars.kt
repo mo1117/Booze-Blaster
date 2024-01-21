@@ -144,7 +144,7 @@ fun GameScreenAppBar(
             }) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "BackButton Icon",
+                    contentDescription = "BackButton",
                     tint = getFontColor()
                 )
             }

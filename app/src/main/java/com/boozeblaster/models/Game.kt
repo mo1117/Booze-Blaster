@@ -47,6 +47,7 @@ class Game private constructor(
                 player.setDare(dare = null)
             }
             INSTANCE.players = mutableListOf()
+            INSTANCE.tasks = emptyList()
             DareTaskGenerator.resetUsedDares()
         }
 
@@ -103,11 +104,11 @@ class Game private constructor(
         }
 
         /**
-         * @return Player(s) with the most points (2 if at least players played, 3 if at least 8 players played)
+         * @return Player(s) with the most points (2 if at least 5 players played, 3 if at least 8 players played)
          */
         fun getWinners(): List<Player> {
             val toIndex =
-                if (INSTANCE.players.size > 4) 2 else if (INSTANCE.players.size > 7) 3 else 1
+                if (INSTANCE.players.size > 7) 3 else if (INSTANCE.players.size > 4) 2 else 1
             return INSTANCE.players
                 .sortedWith(comparator = compareByDescending(selector = { player -> player.getPoints() }))
                 .subList(fromIndex = 0, toIndex = toIndex)
@@ -127,7 +128,11 @@ class Game private constructor(
         fun isAdultMode(): Boolean = INSTANCE.adultMode
 
         fun setRounds(rounds: Int) {
-            INSTANCE.rounds = rounds
+            if (rounds in 1..10) {
+                INSTANCE.rounds = rounds
+                return
+            }
+            throw IllegalArgumentException("You cannot play $rounds rounds!")
         }
 
         /**

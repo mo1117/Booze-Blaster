@@ -12,9 +12,7 @@ object NavigationController {
     fun navigateToHomeScreen(navController: NavController) {
         MyMediaPlayer.stop()
         Game.reset()
-        GameSettings.resetIndividualTasks()
-        GameSettings.resetVersusTasks()
-        GameSettings.resetCommonTasks()
+        GameSettings.reset()
         navController.navigate(route = Screen.HomeScreen.route) {
             popUpTo(id = navController.graph.startDestinationId) {
                 inclusive = false

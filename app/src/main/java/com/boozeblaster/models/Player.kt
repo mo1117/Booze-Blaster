@@ -29,10 +29,6 @@ data class Player(
 
     fun getId(): Int = this.id
 
-    fun setName(name: String) {
-        this.name = name
-    }
-
     fun getName(): String = this.name
 
     fun setDare(dare: Dare?) {
@@ -68,10 +64,5 @@ data class Player(
     }
 
     fun getSips(): Int = this.sips
-}
 
-fun getPlayers(): List<Player> {
-    return listOf(
-
-    )
 }

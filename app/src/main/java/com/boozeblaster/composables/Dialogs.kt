@@ -264,13 +264,13 @@ private fun getSipsMessage(players: List<Player>?, sips: Int): String {
     for (i in players.indices) {
         output = if (i + 1 == players.size) {
             if (players.size == 2) {
-                "$output and ${players.get(index = i).getName()}!"
+                "$output and ${players.get(index = i).getName()}"
             } else {
-                "$output, and ${players.get(index = i).getName()}!"
+                "$output, and ${players.get(index = i).getName()}"
             }
         } else {
             if (i == 0) {
-                "$output ${players.get(index = i).getName()}"
+                "$output${players.get(index = i).getName()}"
             } else {
                 "$output, ${players.get(index = i).getName()}"
             }

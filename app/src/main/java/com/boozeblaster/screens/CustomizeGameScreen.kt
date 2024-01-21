@@ -37,9 +37,7 @@ fun CustomizeGameScreen(
     val scaffoldState = rememberScaffoldState()
     Scaffold(scaffoldState = scaffoldState, topBar = {
         SimpleTopAppBar(onBackButtonClick = {
-            GameSettings.resetCommonTasks()
-            GameSettings.resetVersusTasks()
-            GameSettings.resetIndividualTasks()
+            GameSettings.reset()
             navController.popBackStack()
         })
     }, backgroundColor = getBackgroundColor()) { paddingValues ->

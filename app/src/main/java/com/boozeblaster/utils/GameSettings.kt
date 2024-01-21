@@ -28,6 +28,12 @@ object GameSettings {
         this.versusTasks = options
     }
 
+    fun reset() {
+        resetCommonTasks()
+        resetIndividualTasks()
+        resetVersusTasks()
+    }
+
     fun resetIndividualTasks() {
         this.individualTasks = arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
     }

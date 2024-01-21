@@ -97,7 +97,8 @@ fun DisplayDaresScreenContent(
                                 dareText = player.getDare().toString()
                             },
                             imageId = R.drawable.refresh,
-                            modifier = Modifier.size(size = 40.dp)
+                            modifier = Modifier.size(size = 40.dp),
+                            contentDescription = "Reload Dare"
                         )
                     }
 

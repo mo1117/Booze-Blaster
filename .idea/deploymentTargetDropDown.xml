@@ -5,19 +5,19 @@
       <entry key="All Tests">
         <State />
       </entry>
+      <entry key="DarkmodeControllerTest">
+        <State />
+      </entry>
+      <entry key="DisplayDaresScreenTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="testCountdownTimer()">
+      <entry key="testFulfillDaresScreenShowsCorrectLosers1()">
         <State />
       </entry>
-      <entry key="testDarkmodeController()">
-        <State />
-      </entry>
-      <entry key="testMyAlertDialogOnConfirm()">
-        <State />
-      </entry>
-      <entry key="testToggleDarkmodeController()">
+      <entry key="testToggleDarkmodeControllerThrowsNPE()">
         <State />
       </entry>
     </value>

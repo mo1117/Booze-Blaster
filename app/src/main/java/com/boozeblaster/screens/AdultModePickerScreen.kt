@@ -71,7 +71,8 @@ fun AdultModePickerScreenContent(
                 setAdultMode(false)
             },
             imageId = if (getAdultMode() != null && !getAdultMode()!!)
-                R.drawable.angel_selected else R.drawable.angel_unselected
+                R.drawable.angel_selected else R.drawable.angel_unselected,
+            contentDescription = "PG Mode"
         )
 
         SimpleSpacer(size = 50)
@@ -86,6 +87,7 @@ fun AdultModePickerScreenContent(
             },
             imageId = if (getAdultMode() != null && getAdultMode()!!)
                 R.drawable.adult_mode_selected else R.drawable.adult_mode_unselected,
+            contentDescription = "Adult Mode"
         )
 
         SimpleSpacer(size = 50)

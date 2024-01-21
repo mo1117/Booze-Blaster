@@ -8,7 +8,7 @@ object GameSettings {
     private var commonTasks = arrayOf(
         "HighestBidder", "SipTransfer", "NeverHaveIEver", "SetRule", "WhoInThisRoom"
     )
-    private var versusTasks = arrayOf("RockPaperScissors", "SingASong")
+    private var versusTasks = arrayOf("RockPaperScissors", "SingASong", "MentalArithmetic")
     private var individualTasks =
         arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
 

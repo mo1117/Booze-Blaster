@@ -1,7 +1,6 @@
 package com.boozeblaster.utils
 
 import com.boozeblaster.filters.ProfanityFilter
-import java.util.*
 
 object Validator {
 
@@ -10,10 +9,6 @@ object Validator {
             return ValidationResult(success = false)
         }
         return ValidationResult(success = true)
-    }
-
-    fun validateBirthdate(birthDate: Date): ValidationResult {
-        return ValidationResult(false)
     }
 }
 

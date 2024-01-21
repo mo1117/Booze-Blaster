@@ -22,6 +22,11 @@ class PlayerTest {
     }
 
     @Test
+    fun testDareIsNullInitially() {
+        assertNull(player.getDare())
+    }
+
+    @Test
     fun testSetGetDare() {
         assertNull("The initial dare should be null!", player.getDare())
         player.setDare(dare = dare)

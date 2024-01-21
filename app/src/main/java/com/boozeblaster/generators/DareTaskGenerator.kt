@@ -70,6 +70,4 @@ object DareTaskGenerator {
     fun resetUsedDares() {
         usedDares = emptyArray()
     }
-
-    fun getUsedDares() = this.usedDares
 }

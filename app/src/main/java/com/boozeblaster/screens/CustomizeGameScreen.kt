@@ -65,9 +65,9 @@ fun CustomizeGameScreenContent(
         val pickedIndividualTasks = remember {
             mutableStateListOf<String>()
         }
-        displayCommonTasks(pickedCommonTasks = pickedCommonTasks)
-        displayVersusTasks(pickedVersusTasks = pickedVersusTasks)
-        displayIndividualTasks(pickedIndividualTasks = pickedIndividualTasks)
+        DisplayCommonTasks(pickedCommonTasks = pickedCommonTasks)
+        DisplayVersusTasks(pickedVersusTasks = pickedVersusTasks)
+        DisplayIndividualTasks(pickedIndividualTasks = pickedIndividualTasks)
         SimpleButton(
             onClick = {
                 GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
@@ -87,7 +87,7 @@ fun CustomizeGameScreenContent(
 }
 
 @Composable
-private fun displayCommonTasks(pickedCommonTasks: MutableList<String>) {
+private fun DisplayCommonTasks(pickedCommonTasks: MutableList<String>) {
     val commonTasks = GameSettings.getCommonTasks()
 
     SimpleTextDisplay(text = "Common Tasks", fontSize = 20, fontFamily = FontFamily.SansSerif)
@@ -131,7 +131,7 @@ private fun displayCommonTasks(pickedCommonTasks: MutableList<String>) {
 }
 
 @Composable
-private fun displayVersusTasks(pickedVersusTasks: MutableList<String>) {
+private fun DisplayVersusTasks(pickedVersusTasks: MutableList<String>) {
     val versusTasks = GameSettings.getVersusTasks()
 
     SimpleTextDisplay(text = "Versus Tasks", fontSize = 20, fontFamily = FontFamily.SansSerif)
@@ -175,7 +175,7 @@ private fun displayVersusTasks(pickedVersusTasks: MutableList<String>) {
 }
 
 @Composable
-private fun displayIndividualTasks(pickedIndividualTasks: MutableList<String>) {
+private fun DisplayIndividualTasks(pickedIndividualTasks: MutableList<String>) {
     val individualTasks = GameSettings.getIndividualTasks()
 
     SimpleTextDisplay(text = "Individual Tasks", fontSize = 20, fontFamily = FontFamily.SansSerif)

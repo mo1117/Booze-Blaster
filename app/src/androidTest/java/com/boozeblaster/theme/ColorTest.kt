@@ -1,7 +1,8 @@
-package com.boozeblaster.ui.theme
+package com.boozeblaster.theme
 
 import androidx.compose.ui.graphics.Color
 import com.boozeblaster.enums.ButtonType
+import com.boozeblaster.ui.theme.*
 import org.junit.Test
 import org.junit.Assert.assertEquals
 

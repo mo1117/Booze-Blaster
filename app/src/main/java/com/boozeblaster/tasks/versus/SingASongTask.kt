@@ -9,7 +9,7 @@ class SingASongTask(player: Player, subTasks: List<SingASong>, versusPlayer: Pla
     VersusTask(player = player, subTasks = subTasks, versusPlayer = versusPlayer) {
     override fun getName(): String = "Sing A Song"
 
-    override fun getImageId(): Int = R.drawable.delete //TODO
+    override fun getImageId(): Int = R.drawable.karaoke
 
     override fun getCoverDescription(): String = "Prepare your vocal chords - you will have " +
             "to sing!\n\nHand the phone over to an unbiased referee that will then read each " +

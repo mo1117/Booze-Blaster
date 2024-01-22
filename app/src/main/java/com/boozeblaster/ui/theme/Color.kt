@@ -13,8 +13,8 @@ val DarkAppBar = Color(0xFF292929)
 val DarkBackGround = Color(0xFF494646)
 val DarkFontColor = Color.White
 
-val LightAppBar = Color(0xFFD6AC15)
-val LightBackground = Color(0xFFBDC226)
+val LightAppBar = Color(0xFF8D7F21)
+val LightBackground = Color(0xFFDF8C10)
 val LightFontColor = Color.Black
 
 // Button Colors

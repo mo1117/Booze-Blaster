@@ -194,11 +194,11 @@ abstract class Task(
         return this is SetRuleTask
     }
 
-    protected abstract fun getName(): String
+    abstract fun getName(): String
 
-    protected abstract fun getImageId(): Int
+    abstract fun getImageId(): Int
 
-    protected abstract fun getCoverDescription(): String
+    abstract fun getCoverDescription(): String
 
     private fun List<MiniGame>.shouldAskForGenre(): Boolean {
         return this.all { it is GenrePicker }

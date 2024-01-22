@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.utils.GameSettings
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -14,6 +15,11 @@ class CustomizeGameScreenTest {
 
     @get:Rule
     val testComposableRule = createComposeRule()
+
+    @Before
+    fun setUp() {
+        GameSettings.reset()
+    }
 
     @Test
     fun testCustomizeGameScreenDisplaysAllCommonTasksInitially() {
@@ -31,6 +37,8 @@ class CustomizeGameScreenTest {
 
     @Test
     fun testCustomizeGameScreenDisplaysAllIndividualTasksInitially() {
+        GameSettings.setCommonTasks(options = emptyArray())
+        GameSettings.setVersusTasks(options = emptyArray())
         testComposableRule.setContent {
             val navController = rememberNavController()
             CustomizeGameScreen(navController = navController)
@@ -43,6 +51,8 @@ class CustomizeGameScreenTest {
 
     @Test
     fun testCustomizeGameScreenDisplaysAllVersusTasksInitially() {
+        GameSettings.setCommonTasks(options = emptyArray())
+        GameSettings.setIndividualTasks(options = emptyArray())
         testComposableRule.setContent {
             val navController = rememberNavController()
             CustomizeGameScreen(navController = navController)

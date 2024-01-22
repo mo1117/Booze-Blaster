@@ -10,7 +10,7 @@ class NeverHaveIEverTask(
 
     override fun getName(): String = "Never Have I Ever"
 
-    override fun getImageId(): Int = R.drawable.delete //TODO
+    override fun getImageId(): Int = R.drawable.guessing
 
     override fun getCoverDescription(): String = "There will be three tasks of Never Have I " +
             "Ever coming up.\n\nPlayers that have done said statement have to drink, " +

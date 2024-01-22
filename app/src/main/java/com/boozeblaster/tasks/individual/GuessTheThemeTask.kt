@@ -13,7 +13,7 @@ class GuessTheThemeTask(
 
     override fun getName(): String = "Guess The Theme"
 
-    override fun getImageId(): Int = R.drawable.guessing //TODO maybe another image
+    override fun getImageId(): Int = R.drawable.guessing
 
     override fun getCoverDescription(): String = "You will have to guess the following three " +
             "movies, TV-series, or video games based on a music that is to be played.\n\nNote " +

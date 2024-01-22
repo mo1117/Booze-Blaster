@@ -11,9 +11,9 @@ class GameSettingsTest {
     private val commonTasks = arrayOf(
         "HighestBidder", "SipTransfer", "NeverHaveIEver", "SetRule", "WhoInThisRoom"
     )
-    private val versusTasks = arrayOf("RockPaperScissors", "SingASong")
+    private val versusTasks = arrayOf("RockPaperScissors", "SingASong", "MentalArithmetic")
     private val individualTasks =
-        arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction")
+        arrayOf("GuessTheSong", "GuessTheLyrics", "FactOrFiction", "HigherLower", "GuessTheTheme")
 
     private val commonTasksToSet = arrayOf("NeverHaveIEver", "SetRule")
     private val individualTasksToSet = arrayOf("GuessTheSong", "GuessTheLyrics")

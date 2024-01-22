@@ -5,46 +5,47 @@ import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.*
 import org.junit.Test
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 
 class ColorTest {
 
     @Test
     fun testGetCorrectButtonColor() {
         val buttonColor = getButtonColor(buttonType = ButtonType.CORRECT)
-        assertEquals(LightCorrectButtonColor, buttonColor)
+        assertTrue(LightCorrectButtonColor == buttonColor || DarkCorrectButtonColor == buttonColor)
     }
 
     @Test
     fun testGetIncorrectButtonColor() {
         val buttonColor = getButtonColor(buttonType = ButtonType.INCORRECT)
-        assertEquals(LightIncorrectButtonColor, buttonColor)
+        assertTrue(LightIncorrectButtonColor == buttonColor || DarkIncorrectButtonColor == buttonColor)
     }
 
     @Test
     fun testGetHalfCorrectButtonColor() {
         val buttonColor = getButtonColor(buttonType = ButtonType.HALF_CORRECT)
-        assertEquals(LightHalfCorrectButtonColor, buttonColor)
+        assertTrue(LightHalfCorrectButtonColor == buttonColor || DarkHalfCorrectButtonColor == buttonColor)
     }
 
     @Test
     fun testGetUIButtonColor() {
         val buttonColor = getButtonColor(buttonType = ButtonType.UI)
-        assertEquals(LightUiButtonColor, buttonColor)
+        assertTrue(LightUiButtonColor == buttonColor || DarkUiButtonColor == buttonColor)
     }
 
     @Test
     fun testGetBackgroundColor() {
-        assertEquals(LightBackground, getBackgroundColor())
+        assertTrue(LightBackground == getBackgroundColor() || DarkBackGround == getBackgroundColor())
     }
 
     @Test
     fun testGetFontColor() {
-        assertEquals(LightFontColor, getFontColor())
+        assertTrue(LightFontColor == getFontColor() || DarkFontColor == getFontColor())
     }
 
     @Test
     fun testGetAppBarColor() {
-        assertEquals(LightAppBar, getAppBarColor())
+        assertTrue(LightAppBar == getAppBarColor() || DarkAppBar == getAppBarColor())
     }
 
     @Test

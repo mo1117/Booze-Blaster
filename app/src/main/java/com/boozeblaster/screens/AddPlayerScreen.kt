@@ -132,7 +132,8 @@ fun AddPlayerScreenContent(
                                     }
                                     deletedPlayers = deletedPlayers.plus(element = player)
                                 }, imageId = R.drawable.delete,
-                                modifier = Modifier.size(size = 40.dp)
+                                modifier = Modifier.size(size = 40.dp),
+                                contentDescription = "Delete"
                             )
                         }
                         SimpleSpacer(size = 10)

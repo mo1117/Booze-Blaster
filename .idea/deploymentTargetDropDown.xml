@@ -2,22 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="All Tests">
-        <State />
-      </entry>
-      <entry key="DarkmodeControllerTest">
-        <State />
-      </entry>
-      <entry key="DisplayDaresScreenTest">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="testFulfillDaresScreenShowsCorrectLosers1()">
+      <entry key="testAddPlayerScreen()">
         <State />
       </entry>
-      <entry key="testToggleDarkmodeControllerThrowsNPE()">
+      <entry key="testDisplayGameOverScreen()">
+        <State />
+      </entry>
+      <entry key="testRoundPickerScreenContainsCorrectRound()">
+        <State />
+      </entry>
+      <entry key="testRoundPickerScreenContainsCorrectRounds()">
         <State />
       </entry>
     </value>

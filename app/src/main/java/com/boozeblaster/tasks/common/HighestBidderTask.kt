@@ -8,7 +8,7 @@ class HighestBidderTask(subTasks: List<HighestBidder>) : CommonTask(subTasks = s
 
     override fun getName(): String = "Highest Bidder"
 
-    override fun getImageId(): Int = R.drawable.delete //TODO
+    override fun getImageId(): Int = R.drawable.higher_lower
 
     override fun getCoverDescription(): String = "You can now gather points by offering the most " +
             "sips.\n\nWhoever bids the most sips, will be rewarded with a certain amount of " +

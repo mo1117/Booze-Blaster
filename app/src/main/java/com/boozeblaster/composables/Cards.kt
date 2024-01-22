@@ -34,14 +34,15 @@ fun SimpleCard(
     shape: Shape = AbsoluteRoundedCornerShape(20.dp),
     backgroundColor: Color = getBackgroundColor().backgroundColorForCard(),
     border: BorderStroke? = null,
-    elevation: Dp = 0.dp,
-    padding: Dp = 10.dp,
+    elevation: Dp = 4.dp,
+    padding: Dp = 16.dp,
+    enabled: Boolean = true,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     Card(
         modifier = modifier
             .size(width = width, height = height)
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClick, enabled = enabled)
             .padding(all = padding),
         shape = shape,
         backgroundColor = backgroundColor,
@@ -63,8 +64,8 @@ fun SimplePickableCard(
     height: Dp = 120.dp,
     shape: Shape = AbsoluteRoundedCornerShape(20.dp),
     border: BorderStroke? = null,
-    elevation: Dp = 0.dp,
-    padding: Dp = 10.dp,
+    elevation: Dp = 4.dp,
+    padding: Dp = 16.dp,
     callback: () -> Unit,
     content: @Composable (BoxScope.() -> Unit)
 ) {

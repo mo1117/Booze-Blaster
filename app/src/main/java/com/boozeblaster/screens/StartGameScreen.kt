@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimpleChangeableButton
 import com.boozeblaster.composables.SimpleImageButton
 import com.boozeblaster.composables.SimpleSpacer
@@ -36,10 +37,12 @@ import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.enums.AnimationConstants
+import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
 import com.boozeblaster.models.Player
 import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.getButtonColor
 import com.boozeblaster.ui.theme.headerFont
 import com.boozeblaster.utils.InjectorUtils
 import com.boozeblaster.viewmodels.GameSettingsViewModel
@@ -137,8 +140,6 @@ fun StartGameScreenContent(
                 }
             }
 
-            SimpleSpacer(size = 30)
-
             SimpleImageButton(
                 modifier = Modifier.size(width = 100.dp, height = 100.dp),
                 onClick = {
@@ -146,20 +147,21 @@ fun StartGameScreenContent(
                 },
                 imageId = R.drawable.add_player,
                 contentDescription = "Add existing Player",
-                text = "Add players to the Game",
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif
             )
+            SimpleSpacer(size = 10)
+            SimpleTextDisplay(text = "Add Players", fontSize = 30, fontFamily = headerFont)
 
             SimpleSpacer(size = 30)
 
-            SimpleChangeableButton(
+            SimpleCard(
                 onClick = {
                     Game.setPlayers(players = addedPlayers)
                     setAddedPlayers(addedPlayers)
                     onContinueClicked()
                 },
-                text = {
+                content = {
                     SimpleTextDisplay(
                         text = if (addedPlayers.size < 2) {
                             "Add more Players"
@@ -172,10 +174,9 @@ fun StartGameScreenContent(
                         fontFamily = FontFamily.SansSerif
                     )
                 },
-                fontSize = 20,
-                fontFamily = FontFamily.SansSerif,
-                enabled = addedPlayers.size in 2..10
-            )
+                backgroundColor = if (addedPlayers.size in 2..10) getButtonColor(ButtonType.CORRECT) else getButtonColor(
+                    ButtonType.INCORRECT
+                ))
         }
     }
 

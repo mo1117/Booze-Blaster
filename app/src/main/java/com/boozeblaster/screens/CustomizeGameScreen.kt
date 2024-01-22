@@ -14,12 +14,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimplePickableCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
+import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.getButtonColor
 import com.boozeblaster.ui.theme.headerFont
 import com.boozeblaster.utils.GameSettings
 
@@ -69,23 +72,23 @@ fun CustomizeGameScreenContent(
         DisplayCommonTasks(pickedCommonTasks = pickedCommonTasks)
         DisplayVersusTasks(pickedVersusTasks = pickedVersusTasks)
         DisplayIndividualTasks(pickedIndividualTasks = pickedIndividualTasks)
-        SimpleButton(
-            onClick = {
-                GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
-                GameSettings.setVersusTasks(options = pickedVersusTasks.toTypedArray())
-                GameSettings.setIndividualTasks(options = pickedIndividualTasks.toTypedArray())
-                onContinueClicked()
-            },
-            text = "Continue",
-            fontSize = 20,
-            fontFamily = FontFamily.SansSerif,
-            enabled = pickedCommonTasks.isNotEmpty()
-                    || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
-            modifier = Modifier.padding(bottom = 10.dp)
+
+        SimpleCard(onClick = {
+            GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
+            GameSettings.setVersusTasks(options = pickedVersusTasks.toTypedArray())
+            GameSettings.setIndividualTasks(options = pickedIndividualTasks.toTypedArray())
+            onContinueClicked()
+        }, content = {
+            SimpleTextDisplay(text = "Continue", fontSize = 30, fontFamily = headerFont)
+        }, enabled = pickedCommonTasks.isNotEmpty()
+                || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
+            backgroundColor = if (pickedCommonTasks.isNotEmpty()
+                || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty()
+            ) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT),
+            width = 260.dp, height = 140.dp
         )
         SimpleSpacer(size = 20)
     }
-
 }
 
 @Composable
@@ -142,6 +145,7 @@ private fun DisplayVersusTasks(pickedVersusTasks: MutableList<String>) {
 private fun DisplayIndividualTasks(pickedIndividualTasks: MutableList<String>) {
     val individualTasks = GameSettings.getIndividualTasks()
 
+    SimpleSpacer(size = 20)
     SimpleTextDisplay(text = "Individual Tasks", fontSize = 30, fontFamily = headerFont)
     SimpleSpacer(size = 20)
 

@@ -16,6 +16,7 @@ import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.ui.theme.headerFont
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -59,7 +60,7 @@ fun HomeScreenContent(
         val fontFamily = FontFamily.SansSerif
 
         SimpleCard(onClick = onStartClicked) {
-            SimpleTextDisplay(text = "Classic Game", fontSize = fontSize, fontFamily = fontFamily)
+            SimpleTextDisplay(text = "Classic Game", fontSize = fontSize, fontFamily = headerFont)
         }
 
         SimpleSpacer(size = 30)
@@ -68,20 +69,20 @@ fun HomeScreenContent(
             SimpleTextDisplay(
                 text = "Create Custom Game",
                 fontSize = fontSize,
-                fontFamily = fontFamily
+                fontFamily = headerFont
             )
         }
 
         SimpleSpacer(size = 30)
 
         SimpleCard(onClick = onAddPlayerClicked) {
-            SimpleTextDisplay(text = "Add Players", fontSize = fontSize, fontFamily = fontFamily)
+            SimpleTextDisplay(text = "Add Players", fontSize = fontSize, fontFamily = headerFont)
         }
 
         SimpleSpacer(size = 30)
 
         SimpleCard(onClick = onTutorialClicked) {
-            SimpleTextDisplay(text = "How To Play", fontSize = fontSize, fontFamily = fontFamily)
+            SimpleTextDisplay(text = "How To Play", fontSize = fontSize, fontFamily = headerFont)
         }
     }
 }

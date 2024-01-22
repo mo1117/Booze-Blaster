@@ -10,7 +10,7 @@ class HigherLowerGenerator : MiniGameGenerator() {
 
     @Override
     override fun getList(): List<MiniGame> {
-        val randoms = generateRandomIndexes(size = list.size)
+        val randoms = generateRandomIndexes(size = 6)
         val higherLowerList = listOf(
             HigherLower(
                 first = list.get(index = randoms.get(index = 0)),
@@ -33,7 +33,7 @@ class HigherLowerGenerator : MiniGameGenerator() {
                 second = list.get(index = randoms.get(index = 5))
             )
         )
-        return super.getList(list = higherLowerList, amount = 5, resetAllToUnused = false)
+        return higherLowerList
     }
 
     private companion object {
@@ -43,7 +43,7 @@ class HigherLowerGenerator : MiniGameGenerator() {
                 throw Exception("Loading a list of searched terms not working(?)")
             }
             while (randoms.size < size) {
-                val random = Random.nextInt(from = 0, until = size)
+                val random = Random.nextInt(from = 0, until = list.size)
                 if (!randoms.contains(element = random)) {
                     randoms = randoms.plus(element = random)
                 }

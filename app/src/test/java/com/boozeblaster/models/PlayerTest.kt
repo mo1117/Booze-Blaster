@@ -52,12 +52,6 @@ class PlayerTest {
         assertEquals(3, player.getPoints())
     }
 
-//    @Test
-//    fun testSubtractPointsShouldTriggerLogWarning() {
-//        player.setPoints(points = 3)
-//        player.subtractPoints(points = 4)
-//    }
-
     @Test
     fun testGetSetSips() {
         player.setSips(sips = 5)

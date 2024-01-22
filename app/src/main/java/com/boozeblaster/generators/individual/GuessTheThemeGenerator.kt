@@ -33,7 +33,7 @@ class GuessTheThemeGenerator : MiniGameGenerator() {
             GuessTheTheme(name = "James Bond", resid = R.raw.james_bond),
             GuessTheTheme(name = "Jaws", resid = R.raw.jaws),
             GuessTheTheme(name = "Jimmy Neutron", resid = R.raw.jimmy_neutron),
-            GuessTheTheme(name = "The Lion Kind", resid = R.raw.lion_king),
+            GuessTheTheme(name = "The Lion King", resid = R.raw.lion_king),
             GuessTheTheme(name = "The Lord of the Rings", resid = R.raw.lotr),
             GuessTheTheme(name = "Pink Panther", resid = R.raw.pink_panther),
             GuessTheTheme(name = "Pirates of the Caribbean", resid = R.raw.pirates_of_the_caribbean),

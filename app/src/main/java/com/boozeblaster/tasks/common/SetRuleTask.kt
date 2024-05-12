@@ -1,11 +1,12 @@
 package com.boozeblaster.tasks.common
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.common.SetRule
+import com.boozeblaster.generators.common.SetRuleGenerator
+import com.boozeblaster.minigames.MiniGame
 import com.boozeblaster.models.Game
-import com.boozeblaster.tasks.CommonTask
 
-class SetRuleTask(subTasks: List<SetRule>) : CommonTask(subTasks = emptyList()) {
+class SetRuleTask(subTasks: List<MiniGame> = SetRuleGenerator().getList()) :
+    CommonTask(subTasks = emptyList()) {
 
     override fun getName(): String = "Set A Rule"
 

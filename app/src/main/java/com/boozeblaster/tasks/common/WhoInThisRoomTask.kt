@@ -1,11 +1,11 @@
 package com.boozeblaster.tasks.common
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.common.WhoInThisRoom
-import com.boozeblaster.tasks.CommonTask
+import com.boozeblaster.generators.common.WhoInThisRoomGenerator
+import com.boozeblaster.minigames.MiniGame
 
 class WhoInThisRoomTask(
-    subTasks: List<WhoInThisRoom>
+    subTasks: List<MiniGame> = WhoInThisRoomGenerator().getList()
 ) : CommonTask(subTasks = subTasks) {
 
     override fun getName(): String = "Who In This Room"

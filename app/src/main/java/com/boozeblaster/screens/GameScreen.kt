@@ -18,10 +18,10 @@ import com.boozeblaster.composables.GameScreenAppBar
 import com.boozeblaster.composables.MyAlertDialog
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
-import com.boozeblaster.tasks.CommonTask
-import com.boozeblaster.tasks.IndividualTask
+import com.boozeblaster.tasks.common.CommonTask
+import com.boozeblaster.tasks.individual.IndividualTask
 import com.boozeblaster.tasks.Task
-import com.boozeblaster.tasks.VersusTask
+import com.boozeblaster.tasks.versus.VersusTask
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.GameSettings
 

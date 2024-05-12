@@ -1,16 +1,14 @@
 package com.boozeblaster.tasks.individual
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.individual.GuessTheSong
+import com.boozeblaster.generators.individual.GuessTheSongGenerator
 import com.boozeblaster.models.Player
-import com.boozeblaster.tasks.IndividualTask
 
 class GuessTheSongTask(
-    player: Player,
-    subTasks: List<GuessTheSong>
+    player: Player
 ) : IndividualTask(
     player = player,
-    subTasks = subTasks
+    subTasks = GuessTheSongGenerator().getList()
 ) {
 
     override fun getName(): String = "Guess The Song"

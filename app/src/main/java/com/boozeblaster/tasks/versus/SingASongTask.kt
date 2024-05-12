@@ -1,12 +1,18 @@
 package com.boozeblaster.tasks.versus
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.versus.SingASong
+import com.boozeblaster.generators.versus.SingASongGenerator
 import com.boozeblaster.models.Player
-import com.boozeblaster.tasks.VersusTask
 
-class SingASongTask(player: Player, subTasks: List<SingASong>, versusPlayer: Player) :
-    VersusTask(player = player, subTasks = subTasks, versusPlayer = versusPlayer) {
+class SingASongTask(
+    player: Player,
+    versusPlayer: Player
+) : VersusTask(
+    player = player,
+    subTasks = SingASongGenerator().getList(),
+    versusPlayer = versusPlayer
+) {
+
     override fun getName(): String = "Sing A Song"
 
     override fun getImageId(): Int = R.drawable.karaoke

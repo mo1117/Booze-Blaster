@@ -1,14 +1,12 @@
 package com.boozeblaster.tasks.individual
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.individual.HigherLower
+import com.boozeblaster.generators.individual.HigherLowerGenerator
 import com.boozeblaster.models.Player
-import com.boozeblaster.tasks.IndividualTask
 
 class HigherLowerTask(
-    player: Player,
-    subTasks: List<HigherLower>
-) : IndividualTask(player = player, subTasks = subTasks) {
+    player: Player
+) : IndividualTask(player = player, subTasks = HigherLowerGenerator().getList()) {
 
     override fun getName(): String = "Higher / Lower"
 

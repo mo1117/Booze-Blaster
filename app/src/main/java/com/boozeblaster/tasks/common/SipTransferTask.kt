@@ -1,10 +1,11 @@
 package com.boozeblaster.tasks.common
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.common.SipTransfer
-import com.boozeblaster.tasks.CommonTask
+import com.boozeblaster.generators.common.SipTransferGenerator
+import com.boozeblaster.minigames.MiniGame
 
-class SipTransferTask(subTasks: List<SipTransfer>) : CommonTask(subTasks = subTasks) {
+class SipTransferTask(subTasks: List<MiniGame> = SipTransferGenerator().getList()) :
+    CommonTask(subTasks = subTasks) {
 
     override fun getName(): String = "Sip Transfer"
 

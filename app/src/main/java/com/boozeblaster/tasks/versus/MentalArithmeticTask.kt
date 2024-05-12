@@ -1,15 +1,17 @@
 package com.boozeblaster.tasks.versus
 
-import com.boozeblaster.minigames.versus.MentalArithmetic
-import com.boozeblaster.models.Player
-import com.boozeblaster.tasks.VersusTask
 import com.boozeblaster.R
+import com.boozeblaster.generators.versus.MentalArithmeticGenerator
+import com.boozeblaster.models.Player
 
 class MentalArithmeticTask(
     player: Player,
-    subTasks: List<MentalArithmetic>,
     versusPlayer: Player
-) : VersusTask(player = player, subTasks = subTasks, versusPlayer = versusPlayer) {
+) : VersusTask(
+    player = player,
+    subTasks = MentalArithmeticGenerator().getList(),
+    versusPlayer = versusPlayer
+) {
 
     override fun getName(): String = "Mental Arithmetic"
 

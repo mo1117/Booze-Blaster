@@ -1,11 +1,11 @@
 package com.boozeblaster.tasks.common
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.common.NeverHaveIEver
-import com.boozeblaster.tasks.CommonTask
+import com.boozeblaster.generators.common.NeverHaveIEverGenerator
+import com.boozeblaster.minigames.MiniGame
 
 class NeverHaveIEverTask(
-    subTasks: List<NeverHaveIEver>
+    subTasks: List<MiniGame> = NeverHaveIEverGenerator().getList()
 ) : CommonTask(subTasks = subTasks) {
 
     override fun getName(): String = "Never Have I Ever"

@@ -1,9 +1,8 @@
 package com.boozeblaster.tasks.individual
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.individual.FactOrFiction
+import com.boozeblaster.generators.individual.FactOrFictionGenerator
 import com.boozeblaster.models.Player
-import com.boozeblaster.tasks.IndividualTask
 
 /**
  * A class that represents the Fact or Fiction mini-game
@@ -15,11 +14,10 @@ import com.boozeblaster.tasks.IndividualTask
  * 1 point per correct answer can be achieved
  */
 class FactOrFictionTask(
-    player: Player,
-    subTasks: List<FactOrFiction>
+    player: Player
 ) : IndividualTask(
     player = player,
-    subTasks = subTasks
+    subTasks = FactOrFictionGenerator().getList()
 ) {
     override fun getName(): String = "Fact Or Fiction"
 

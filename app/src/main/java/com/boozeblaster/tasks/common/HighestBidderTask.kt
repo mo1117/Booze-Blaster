@@ -1,10 +1,11 @@
 package com.boozeblaster.tasks.common
 
 import com.boozeblaster.R
-import com.boozeblaster.minigames.common.HighestBidder
-import com.boozeblaster.tasks.CommonTask
+import com.boozeblaster.generators.common.HighestBidderGenerator
+import com.boozeblaster.minigames.MiniGame
 
-class HighestBidderTask(subTasks: List<HighestBidder>) : CommonTask(subTasks = subTasks) {
+class HighestBidderTask(subTasks: List<MiniGame> = HighestBidderGenerator().getList()) :
+    CommonTask(subTasks = subTasks) {
 
     override fun getName(): String = "Highest Bidder"
 

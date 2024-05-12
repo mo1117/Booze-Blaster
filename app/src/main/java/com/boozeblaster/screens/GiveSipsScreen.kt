@@ -4,12 +4,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
-import com.boozeblaster.composables.*
+import com.boozeblaster.composables.MyAlertDialog
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
+import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
@@ -35,7 +44,9 @@ fun GiveSipsScreen(navController: NavController) {
     Scaffold(scaffoldState = scaffoldState,
         backgroundColor = getBackgroundColor(),
         topBar = {
-            SimpleTopAppBar(onBackButtonClick = { askForConfirmation = true })
+            SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                askForConfirmation = true
+            })
         }) { paddingValues ->
         GiveSipsScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),

@@ -14,7 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.boozeblaster.composables.GameScreenAppBar
+import com.boozeblaster.composables.topAppBars.GameScreenTopAppBarCreator
 import com.boozeblaster.composables.MyAlertDialog
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
@@ -48,17 +48,9 @@ fun GameScreen(navController: NavController = rememberNavController()) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            GameScreenAppBar(
-                onBackButtonClick = {
-                    askForConfirmation = true
-                },
-                currentRound = roundCounter,
-                onRestartClicked = {
-                    navController.popBackStack()
-                    Game.reset()
-                    navController.navigate(route = Screen.StartGameScreen.route)
-                }
-            )
+            GameScreenTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                askForConfirmation = true
+            }, currentRound = roundCounter)
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->

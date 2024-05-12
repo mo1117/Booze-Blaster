@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.*
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
 import com.boozeblaster.ui.theme.getBackgroundColor
@@ -26,10 +27,8 @@ fun GameOverScreen(navController: NavController) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            SimpleTopAppBar(onBackButtonClick = {
-                NavigationController.navigateToHomeScreen(
-                    navController = navController
-                )
+            SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                NavigationController.navigateToHomeScreen(navController = navController)
             })
         },
         backgroundColor = getBackgroundColor()

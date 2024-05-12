@@ -4,7 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
@@ -12,7 +16,7 @@ import androidx.navigation.NavController
 import com.boozeblaster.composables.ClickableSurfaceWithColumn
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.headerFont
 
@@ -23,9 +27,9 @@ fun TutorialScreen(navController: NavController) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            SimpleTopAppBar(
-                onBackButtonClick = { navController.popBackStack() }
-            )
+            SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                navController.popBackStack()
+            })
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->

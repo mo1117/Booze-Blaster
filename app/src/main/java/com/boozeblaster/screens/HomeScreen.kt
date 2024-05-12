@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
-import com.boozeblaster.composables.HomeTopAppBar
+import com.boozeblaster.composables.topAppBars.HomeTopAppBarCreator
 import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
@@ -25,7 +25,7 @@ fun HomeScreen(navController: NavController) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            HomeTopAppBar()
+            HomeTopAppBarCreator().CreateAppBar()
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->

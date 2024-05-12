@@ -29,13 +29,11 @@ import com.boozeblaster.R
 import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleCard
-import com.boozeblaster.composables.SimpleChangeableButton
 import com.boozeblaster.composables.SimpleImageButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
 import com.boozeblaster.composables.SurfaceWithColumn
-import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
@@ -59,17 +57,15 @@ fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSet
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            SimpleTopAppBar(
-                onBackButtonClick = {
-                    NavigationController.popBackStackIntoHomeScreen(
-                        navController = navController,
-                        setAdultMode = gameSettingsViewModel::setAdultMode,
-                        setDifficulty = gameSettingsViewModel::setDifficulty,
-                        resetAddedPlayers = gameSettingsViewModel::resetAddedPlayers,
-                        setSelectedRounds = gameSettingsViewModel::setSelectedRounds
-                    )
-                }
-            )
+            SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                NavigationController.popBackStackIntoHomeScreen(
+                    navController = navController,
+                    setAdultMode = gameSettingsViewModel::setAdultMode,
+                    setDifficulty = gameSettingsViewModel::setDifficulty,
+                    resetAddedPlayers = gameSettingsViewModel::resetAddedPlayers,
+                    setSelectedRounds = gameSettingsViewModel::setSelectedRounds
+                )
+            })
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->

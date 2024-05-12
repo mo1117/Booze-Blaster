@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -14,7 +18,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.R
-import com.boozeblaster.composables.*
+import com.boozeblaster.composables.AskPlayersToDrinkDialog
+import com.boozeblaster.composables.MyAlertDialog
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
+import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController
@@ -40,7 +50,9 @@ fun FulfillDaresScreen(navController: NavController) {
     Scaffold(scaffoldState = scaffoldState,
         backgroundColor = getBackgroundColor(),
         topBar = {
-            SimpleTopAppBar(onBackButtonClick = { askForConfirmation = true })
+            SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                askForConfirmation = true
+            })
         }) { paddingValues ->
         FulfillDaresScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),

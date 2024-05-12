@@ -10,7 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
-import com.boozeblaster.composables.*
+import com.boozeblaster.composables.SimpleButton
+import com.boozeblaster.composables.SimpleSpacer
+import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
+import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.enums.Difficulty
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
@@ -27,7 +31,9 @@ fun DifficultyPickerScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            SimpleTopAppBar(onBackButtonClick = { navController.popBackStack() })
+            SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
+                navController.popBackStack()
+            })
         },
         backgroundColor = getBackgroundColor()
     ) { paddingValues ->

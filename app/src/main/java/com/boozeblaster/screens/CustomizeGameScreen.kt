@@ -1,7 +1,6 @@
 package com.boozeblaster.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
@@ -13,12 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimplePickableCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.composables.SimpleTopAppBar
+import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.getBackgroundColor
@@ -40,7 +38,7 @@ fun CustomizeGameScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(scaffoldState = scaffoldState, topBar = {
-        SimpleTopAppBar(onBackButtonClick = {
+        SimpleTopAppBarCreator().CreateAppBar(onBackButtonClick = {
             GameSettings.reset()
             navController.popBackStack()
         })

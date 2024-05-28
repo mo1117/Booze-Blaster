@@ -3,5 +3,6 @@ package com.boozeblaster
 import java.io.File
 
 fun main() {
-    println("xd")
+    val add: (Int, Int) -> Int = {a, b -> a + b}
+    println(add(1, 2))
 }

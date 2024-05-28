@@ -117,8 +117,7 @@ fun SimpleTopAppBar(onBackButtonClick: () -> Unit) {
 @Composable
 fun GameScreenAppBar(
     onBackButtonClick: () -> Unit,
-    currentRound: Int,
-    onRestartClicked: () -> Unit
+    currentRound: Int
 ) {
     val totalRounds = Game.getRounds()
     var showScore by remember {

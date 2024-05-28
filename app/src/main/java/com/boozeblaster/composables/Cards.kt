@@ -21,53 +21,51 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.enums.ButtonType
-import com.boozeblaster.ui.theme.backgroundColorForCard
-import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.getButtonColor
 
 @Composable
 fun SimpleCard(
-    modifier: Modifier = Modifier,
-    width: Dp = 220.dp,
-    height: Dp = 120.dp,
-    onClick: () -> Unit = {},
-    shape: Shape = AbsoluteRoundedCornerShape(20.dp),
-    backgroundColor: Color = getBackgroundColor().backgroundColorForCard(),
-    border: BorderStroke? = null,
-    elevation: Dp = 4.dp,
-    padding: Dp = 16.dp,
-    enabled: Boolean = true,
-    content: @Composable (BoxScope.() -> Unit)
+        modifier: Modifier,
+        width: Dp,
+        height: Dp,
+        onClick: () -> Unit,
+        shape: Shape,
+        backgroundColor: Color,
+        border: BorderStroke?,
+        elevation: Dp,
+        padding: Dp,
+        enabled: Boolean,
+        content: @Composable (BoxScope.() -> Unit)
 ) {
     Card(
-        modifier = modifier
-            .size(width = width, height = height)
-            .clickable(onClick = onClick, enabled = enabled)
-            .padding(all = padding),
-        shape = shape,
-        backgroundColor = backgroundColor,
-        border = border,
-        elevation = elevation
+            modifier = modifier
+                    .size(width = width, height = height)
+                    .clickable(onClick = onClick, enabled = enabled)
+                    .padding(all = padding),
+            shape = shape,
+            backgroundColor = backgroundColor,
+            border = border,
+            elevation = elevation
     ) {
         Box(
-            contentAlignment = Alignment.Center,
-            content = content,
-            modifier = Modifier.background(color = backgroundColor)
+                contentAlignment = Alignment.Center,
+                content = content,
+                modifier = Modifier.background(color = backgroundColor)
         )
     }
 }
 
 @Composable
 fun SimplePickableCard(
-    modifier: Modifier = Modifier,
-    width: Dp = 220.dp,
-    height: Dp = 120.dp,
-    shape: Shape = AbsoluteRoundedCornerShape(20.dp),
-    border: BorderStroke? = null,
-    elevation: Dp = 4.dp,
-    padding: Dp = 16.dp,
-    callback: () -> Unit,
-    content: @Composable (BoxScope.() -> Unit)
+        modifier: Modifier = Modifier,
+        width: Dp = 220.dp,
+        height: Dp = 120.dp,
+        shape: Shape = AbsoluteRoundedCornerShape(20.dp),
+        border: BorderStroke? = null,
+        elevation: Dp = 4.dp,
+        padding: Dp = 16.dp,
+        callback: () -> Unit,
+        content: @Composable (BoxScope.() -> Unit)
 ) {
     var isPicked by remember {
         mutableStateOf(value = false)
@@ -76,18 +74,19 @@ fun SimplePickableCard(
 
 
     SimpleCard(
-        modifier = modifier,
-        width = width,
-        height = height,
-        onClick = {
-            isPicked = !isPicked
-            callback()
-        },
-        shape = shape,
-        backgroundColor = color,
-        border = border,
-        elevation = elevation,
-        padding = padding,
-        content = content
+            modifier = modifier,
+            width = width,
+            height = height,
+            onClick = {
+                isPicked = !isPicked
+                callback()
+            },
+            shape = shape,
+            backgroundColor = color,
+            border = border,
+            elevation = elevation,
+            padding = padding,
+            enabled = true,
+            content = content
     )
 }

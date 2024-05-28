@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -29,13 +30,11 @@ import com.boozeblaster.R
 import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.SimpleButton
 import com.boozeblaster.composables.SimpleCard
-import com.boozeblaster.composables.SimpleChangeableButton
 import com.boozeblaster.composables.SimpleImageButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithColumn
-import com.boozeblaster.composables.SurfaceWithScrollableColumn
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
@@ -52,46 +51,46 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun StartGameScreen(navController: NavController, gameSettingsViewModel: GameSettingsViewModel) {
     val playerViewModel: PlayerViewModel =
-        viewModel(factory = InjectorUtils.providePlayerViewModelFactory(context = LocalContext.current))
+            viewModel(factory = InjectorUtils.providePlayerViewModelFactory(context = LocalContext.current))
     val scaffoldState = rememberScaffoldState()
 
 
     Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = {
-            SimpleTopAppBar(
-                onBackButtonClick = {
-                    NavigationController.popBackStackIntoHomeScreen(
-                        navController = navController,
-                        setAdultMode = gameSettingsViewModel::setAdultMode,
-                        setDifficulty = gameSettingsViewModel::setDifficulty,
-                        resetAddedPlayers = gameSettingsViewModel::resetAddedPlayers,
-                        setSelectedRounds = gameSettingsViewModel::setSelectedRounds
-                    )
-                }
-            )
-        },
-        backgroundColor = getBackgroundColor()
+            scaffoldState = scaffoldState,
+            topBar = {
+                SimpleTopAppBar(
+                        onBackButtonClick = {
+                            NavigationController.popBackStackIntoHomeScreen(
+                                    navController = navController,
+                                    setAdultMode = gameSettingsViewModel::setAdultMode,
+                                    setDifficulty = gameSettingsViewModel::setDifficulty,
+                                    resetAddedPlayers = gameSettingsViewModel::resetAddedPlayers,
+                                    setSelectedRounds = gameSettingsViewModel::setSelectedRounds
+                            )
+                        }
+                )
+            },
+            backgroundColor = getBackgroundColor()
     ) { paddingValues ->
         StartGameScreenContent(
-            modifier = Modifier.padding(paddingValues = paddingValues),
-            onContinueClicked = {
-                navController.navigate(route = Screen.RoundPickerScreen.route)
-            },
-            getAllPlayers = playerViewModel::getAllPlayers,
-            getAddedPlayers = gameSettingsViewModel::getAddedPlayers,
-            setAddedPlayers = gameSettingsViewModel::setPlayers
+                modifier = Modifier.padding(paddingValues = paddingValues),
+                onContinueClicked = {
+                    navController.navigate(route = Screen.RoundPickerScreen.route)
+                },
+                getAllPlayers = playerViewModel::getAllPlayers,
+                getAddedPlayers = gameSettingsViewModel::getAddedPlayers,
+                setAddedPlayers = gameSettingsViewModel::setPlayers
         )
     }
 }
 
 @Composable
 fun StartGameScreenContent(
-    modifier: Modifier,
-    onContinueClicked: () -> Unit,
-    getAllPlayers: () -> Flow<List<Player>>,
-    getAddedPlayers: () -> List<Player>,
-    setAddedPlayers: (List<Player>) -> Unit
+        modifier: Modifier,
+        onContinueClicked: () -> Unit,
+        getAllPlayers: () -> Flow<List<Player>>,
+        getAddedPlayers: () -> List<Player>,
+        setAddedPlayers: (List<Player>) -> Unit
 ) {
 
     val savedPlayersValues by getAllPlayers().collectAsState(initial = emptyList())
@@ -106,34 +105,34 @@ fun StartGameScreenContent(
 
     if (!addExistingPlayers) {
         SurfaceWithColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
         ) {
 
             SimpleTextDisplay(text = "Players in Session", fontSize = 30, fontFamily = headerFont)
             SimpleSpacer(size = 30)
 
             LazyColumn(
-                modifier = Modifier
-                    .height(200.dp)
-                    .fillMaxWidth(fraction = 0.9f),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier
+                            .height(200.dp)
+                            .fillMaxWidth(fraction = 0.9f),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(items = addedPlayers) { player ->
                     Row {
                         SimpleTextDisplay(
-                            modifier = Modifier.padding(top = 12.dp),
-                            text = player.getName(),
-                            fontSize = 20,
-                            fontFamily = FontFamily.SansSerif
+                                modifier = Modifier.padding(top = 12.dp),
+                                text = player.getName(),
+                                fontSize = 20,
+                                fontFamily = FontFamily.SansSerif
                         )
                         SimpleSpacer(size = 30)
                         SimpleImageButton(
-                            onClick = {
-                                addedPlayers = addedPlayers.minus(element = player)
-                            }, imageId = R.drawable.delete,
-                            modifier = Modifier.size(size = 40.dp)
+                                onClick = {
+                                    addedPlayers = addedPlayers.minus(element = player)
+                                }, imageId = R.drawable.delete,
+                                modifier = Modifier.size(size = 40.dp)
                         )
                     }
                     SimpleSpacer(size = 10)
@@ -141,14 +140,14 @@ fun StartGameScreenContent(
             }
 
             SimpleImageButton(
-                modifier = Modifier.size(width = 100.dp, height = 100.dp),
-                onClick = {
-                    addExistingPlayers = true
-                },
-                imageId = R.drawable.add_player,
-                contentDescription = "Add existing Player",
-                fontSize = 20,
-                fontFamily = FontFamily.SansSerif
+                    modifier = Modifier.size(width = 100.dp, height = 100.dp),
+                    onClick = {
+                        addExistingPlayers = true
+                    },
+                    imageId = R.drawable.add_player,
+                    contentDescription = "Add existing Player",
+                    fontSize = 20,
+                    fontFamily = FontFamily.SansSerif
             )
             SimpleSpacer(size = 10)
             SimpleTextDisplay(text = "Add Players", fontSize = 30, fontFamily = headerFont)
@@ -156,68 +155,75 @@ fun StartGameScreenContent(
             SimpleSpacer(size = 30)
 
             SimpleCard(
-                onClick = {
-                    Game.setPlayers(players = addedPlayers)
-                    setAddedPlayers(addedPlayers)
-                    onContinueClicked()
-                },
-                content = {
-                    SimpleTextDisplay(
-                        text = if (addedPlayers.size < 2) {
-                            "Add more Players"
-                        } else if (addedPlayers.size > 10) {
-                            "Too many Players"
-                        } else {
-                            "Continue"
-                        },
-                        fontSize = 20,
-                        fontFamily = FontFamily.SansSerif
-                    )
-                },
-                backgroundColor = if (addedPlayers.size in 2..10) getButtonColor(ButtonType.CORRECT) else getButtonColor(
-                    ButtonType.INCORRECT
-                ))
+                    onClick = {
+                        Game.setPlayers(players = addedPlayers)
+                        setAddedPlayers(addedPlayers)
+                        onContinueClicked()
+                    },
+                    content = {
+                        SimpleTextDisplay(
+                                text = if (addedPlayers.size < 2) {
+                                    "Add more Players"
+                                } else if (addedPlayers.size > 10) {
+                                    "Too many Players"
+                                } else {
+                                    "Continue"
+                                },
+                                fontSize = 20,
+                                fontFamily = FontFamily.SansSerif
+                        )
+                    },
+                    backgroundColor = if (addedPlayers.size in 2..10) getButtonColor(ButtonType.CORRECT)
+                    else getButtonColor(ButtonType.INCORRECT),
+                    modifier = Modifier,
+                    width = 220.dp,
+                    height = 120.dp,
+                    shape = AbsoluteRoundedCornerShape(20.dp),
+                    border = null,
+                    elevation = 4.dp,
+                    padding = 16.dp,
+                    enabled = true)
         }
     }
 
     MyAnimatedVisibilityTopToTop(
-        visible = addExistingPlayers,
-        animationDuration = AnimationConstants.ADD_EXISTING_PLAYERS_FADE_IN_OUT.durationMillis,
-        content = {
-            Box {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    SimpleSpacer(size = 20)
+            visible = addExistingPlayers,
+            animationDuration = AnimationConstants.ADD_EXISTING_PLAYERS_FADE_IN_OUT.durationMillis,
+            content = {
+                Box {
+                    Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        SimpleSpacer(size = 20)
 
-                    LazyColumn {
-                        items(items = savedPlayersValues) { player ->
-                            if (!addedPlayers.contains(element = player)) {
-                                SimpleButton(
-                                    onClick = {
-                                        addedPlayers = addedPlayers.plus(element = player)
-                                    },
-                                    text = player.getName(),
-                                    fontSize = 20,
-                                    fontFamily = FontFamily.SansSerif
-                                )
-                                SimpleSpacer(size = 10)
+                        LazyColumn {
+                            items(items = savedPlayersValues) { player ->
+                                if (!addedPlayers.contains(element = player)) {
+                                    SimpleButton(
+                                            onClick = {
+                                                addedPlayers = addedPlayers.plus(element = player)
+                                            },
+                                            text = player.getName(),
+                                            fontSize = 20,
+                                            fontFamily = FontFamily.SansSerif
+                                    )
+                                    SimpleSpacer(size = 10)
+                                }
                             }
                         }
+
+                        SimpleSpacer(size = 50)
+
+                        SimpleButton(
+                                onClick = {
+                                    addExistingPlayers = false
+                                },
+                                text = "Done",
+                                fontSize = 20,
+                                fontFamily = FontFamily.SansSerif
+                        )
                     }
-
-                    SimpleSpacer(size = 50)
-
-                    SimpleButton(
-                        onClick = {
-                            addExistingPlayers = false
-                        },
-                        text = "Done",
-                        fontSize = 20,
-                        fontFamily = FontFamily.SansSerif
-                    )
                 }
             }
-        }
     )
 }

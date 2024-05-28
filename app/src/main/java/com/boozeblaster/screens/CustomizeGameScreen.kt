@@ -2,6 +2,7 @@ package com.boozeblaster.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -71,19 +72,26 @@ fun CustomizeGameScreenContent(
         DisplayVersusTasks(pickedVersusTasks = pickedVersusTasks)
         DisplayIndividualTasks(pickedIndividualTasks = pickedIndividualTasks)
 
-        SimpleCard(onClick = {
-            GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
-            GameSettings.setVersusTasks(options = pickedVersusTasks.toTypedArray())
-            GameSettings.setIndividualTasks(options = pickedIndividualTasks.toTypedArray())
-            onContinueClicked()
-        }, content = {
-            SimpleTextDisplay(text = "Continue", fontSize = 30, fontFamily = headerFont)
-        }, enabled = pickedCommonTasks.isNotEmpty()
-                || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
+        SimpleCard(
+            onClick = {
+                GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
+                GameSettings.setVersusTasks(options = pickedVersusTasks.toTypedArray())
+                GameSettings.setIndividualTasks(options = pickedIndividualTasks.toTypedArray())
+                onContinueClicked()
+            },
+            content = {
+                SimpleTextDisplay(text = "Continue", fontSize = 30, fontFamily = headerFont)
+            },
+            enabled = pickedCommonTasks.isNotEmpty()
+                    || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
             backgroundColor = if (pickedCommonTasks.isNotEmpty()
                 || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty()
             ) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT),
-            width = 260.dp, height = 140.dp
+            width = 260.dp, height = 140.dp, modifier = Modifier,
+            shape = AbsoluteRoundedCornerShape(20.dp),
+            border = null,
+            elevation = 4.dp,
+            padding = 16.dp,
         )
         SimpleSpacer(size = 20)
     }

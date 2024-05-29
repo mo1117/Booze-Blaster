@@ -15,17 +15,17 @@ fun PickGenre(
 
     cardBuilder.onClick = pickRock
     cardBuilder.content = { SimpleTextDisplay(text = "Rock", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.build()
+    cardBuilder.Build()
 
     cardBuilder.onClick = pickRap
     cardBuilder.content = { SimpleTextDisplay(text = "Rap", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.build()
+    cardBuilder.Build()
 
     cardBuilder.onClick = pickHipHop
     cardBuilder.content = { SimpleTextDisplay(text = "Hip-Hop", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.build()
+    cardBuilder.Build()
 
     cardBuilder.onClick = pickPop
     cardBuilder.content = { SimpleTextDisplay(text = "Pop", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.build()
+    cardBuilder.Build()
 }

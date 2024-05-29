@@ -1,12 +1,8 @@
 package com.boozeblaster.composables
 
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
-import com.boozeblaster.ui.theme.backgroundColorForCard
-import com.boozeblaster.ui.theme.getBackgroundColor
+import com.boozeblaster.composables.builder.CardBuilder
 
 @Composable
 fun PickGenre(
@@ -15,56 +11,21 @@ fun PickGenre(
         pickHipHop: () -> Unit,
         pickPop: () -> Unit
 ) {
+    val cardBuilder = CardBuilder()
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickRock,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
-        SimpleTextDisplay(text = "Rock", fontSize = 20, fontFamily = FontFamily.SansSerif)
-    }
+    cardBuilder.onClick = pickRock
+    cardBuilder.content = { SimpleTextDisplay(text = "Rock", fontSize = 20, fontFamily = FontFamily.SansSerif) }
+    cardBuilder.build()
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickRap,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
-        SimpleTextDisplay(text = "Rap", fontSize = 20, fontFamily = FontFamily.SansSerif)
-    }
+    cardBuilder.onClick = pickRap
+    cardBuilder.content = { SimpleTextDisplay(text = "Rap", fontSize = 20, fontFamily = FontFamily.SansSerif) }
+    cardBuilder.build()
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickHipHop,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
-        SimpleTextDisplay(text = "Hip-Hop", fontSize = 20, fontFamily = FontFamily.SansSerif)
-    }
+    cardBuilder.onClick = pickHipHop
+    cardBuilder.content = { SimpleTextDisplay(text = "Hip-Hop", fontSize = 20, fontFamily = FontFamily.SansSerif) }
+    cardBuilder.build()
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickPop,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
-        SimpleTextDisplay(text = "Pop", fontSize = 20, fontFamily = FontFamily.SansSerif)
-    }
+    cardBuilder.onClick = pickPop
+    cardBuilder.content = { SimpleTextDisplay(text = "Pop", fontSize = 20, fontFamily = FontFamily.SansSerif) }
+    cardBuilder.build()
 }

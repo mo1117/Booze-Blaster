@@ -44,7 +44,7 @@ class CardBuilder {
             var isPicked by remember {
                 mutableStateOf(value = false)
             }
-            val color =
+            backgroundColor =
                 if (isPicked) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT)
             onClick = {
                 isPicked = !isPicked

@@ -6,7 +6,6 @@ import com.boozeblaster.tasks.Task
 import com.boozeblaster.tasks.common.CommonTask
 import com.boozeblaster.tasks.common.SipTransferTask
 import com.boozeblaster.utils.GameSettings
-import kotlin.reflect.full.createInstance
 
 object CommonTaskFactory : TaskFactory {
 
@@ -18,7 +17,7 @@ object CommonTaskFactory : TaskFactory {
                 val randomCommonTask = GameSettings.getCommonTasks().random()
                 CommonTask::class.sealedSubclasses.find { commonTask ->
                     commonTask.simpleName!!.contains(other = randomCommonTask)
-                }!!.createInstance()
+                }!!.constructors.first().call()
             }
         }
 }

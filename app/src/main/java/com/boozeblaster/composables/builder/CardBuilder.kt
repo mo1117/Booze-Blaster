@@ -39,7 +39,7 @@ class CardBuilder {
     var pickable = false
 
     @Composable
-    fun Build() {
+    fun build(): @Composable () -> Unit = {
         if (pickable) {
             var isPicked by remember {
                 mutableStateOf(value = false)

@@ -15,17 +15,22 @@ fun PickGenre(
 
     cardBuilder.onClick = pickRock
     cardBuilder.content = { SimpleTextDisplay(text = "Rock", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.Build()
+    val pickRockCard = cardBuilder.build()
 
     cardBuilder.onClick = pickRap
     cardBuilder.content = { SimpleTextDisplay(text = "Rap", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.Build()
+    val pickRapCard = cardBuilder.build()
 
     cardBuilder.onClick = pickHipHop
     cardBuilder.content = { SimpleTextDisplay(text = "Hip-Hop", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.Build()
+    val pickHipHopCard = cardBuilder.build()
 
     cardBuilder.onClick = pickPop
     cardBuilder.content = { SimpleTextDisplay(text = "Pop", fontSize = 20, fontFamily = FontFamily.SansSerif) }
-    cardBuilder.Build()
+    val pickPopCard = cardBuilder.build()
+
+    pickRockCard()
+    pickRapCard()
+    pickHipHopCard()
+    pickPopCard()
 }

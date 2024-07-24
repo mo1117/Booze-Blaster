@@ -12,16 +12,14 @@ class PickableCardBuilder : SimpleCardBuilder() {
 
     @Composable
     override fun build(): @Composable () -> Unit = {
-        if (pickable) {
-            var isPicked by remember {
-                mutableStateOf(value = false)
-            }
-            backgroundColor =
-                    if (isPicked) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT)
-            onClick = {
-                isPicked = !isPicked
-                callback()
-            }
+        var isPicked by remember {
+            mutableStateOf(value = false)
+        }
+        backgroundColor =
+                if (isPicked) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT)
+        onClick = {
+            isPicked = !isPicked
+            callback()
         }
         super.build()
     }

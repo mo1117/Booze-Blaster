@@ -23,7 +23,6 @@ abstract class CardBuilder {
     var padding = 16.dp
     var enabled = true
     var content: @Composable BoxScope.() -> Unit = {}
-    var pickable = false
 
     @Composable
     abstract fun build(): @Composable () -> Unit

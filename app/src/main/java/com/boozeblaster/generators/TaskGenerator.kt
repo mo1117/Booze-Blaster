@@ -2,7 +2,6 @@ package com.boozeblaster.generators
 
 import com.boozeblaster.generators.taskFactories.CommonTaskFactory
 import com.boozeblaster.generators.taskFactories.IndividualTaskFactory
-import com.boozeblaster.generators.taskFactories.TaskFactory
 import com.boozeblaster.generators.taskFactories.VersusTaskFactory
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.Task
@@ -22,14 +21,17 @@ object TaskGenerator {
         var tasks = listOf<Task>()
         var randomPlayer: Player
         var randomVersusPlayer: Player
+        val createCommonTask = CommonTaskFactory.createTask
+        val createVersusTask = VersusTaskFactory.createTask
+        val createIndividualTask = IndividualTaskFactory.createTask
 
         for (round in 0 until rounds) {
             if (GameSettings.playCommonTasks()) {
                 tasks =
                     tasks.plus(
-                        element = generateTask(
-                            taskFactory = CommonTaskFactory,
-                            generateSipTransferTask = rounds - round == 1 && rounds > 1 && GameSettings.playSipTransfer()
+                        element = createCommonTask(
+                            null, null,
+                            rounds - round == 1 && rounds > 1 && GameSettings.playSipTransfer()
                         )
                     )
             }
@@ -42,11 +44,7 @@ object TaskGenerator {
 
                     if (randomPlayer != randomVersusPlayer) {
                         tasks = tasks.plus(
-                            element = generateTask(
-                                taskFactory = VersusTaskFactory,
-                                player = randomPlayer,
-                                versusPlayer = randomVersusPlayer
-                            )
+                            element = createVersusTask(randomPlayer, randomVersusPlayer, null)
                         )
                         break
                     }
@@ -57,21 +55,11 @@ object TaskGenerator {
                 for (i in players.indices) {
                     tasks =
                         tasks.plus(
-                            element = generateTask(
-                                taskFactory = IndividualTaskFactory,
-                                player = players.get(index = i)
-                            )
+                            element = createIndividualTask(players.get(index = i), null, null)
                         )
                 }
             }
         }
         return tasks
     }
-
-    private fun generateTask(
-        taskFactory: TaskFactory,
-        player: Player? = null,
-        versusPlayer: Player? = null,
-        generateSipTransferTask: Boolean? = null
-    ): Task = taskFactory.createTask(player, versusPlayer, generateSipTransferTask)
 }

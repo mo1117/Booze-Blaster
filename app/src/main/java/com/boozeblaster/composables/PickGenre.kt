@@ -2,7 +2,7 @@ package com.boozeblaster.composables
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
-import com.boozeblaster.composables.builder.CardBuilder
+import com.boozeblaster.composables.builder.PickableCardBuilder
 
 @Composable
 fun PickGenre(
@@ -11,7 +11,7 @@ fun PickGenre(
         pickHipHop: () -> Unit,
         pickPop: () -> Unit
 ) {
-    val cardBuilder = CardBuilder()
+    val cardBuilder = PickableCardBuilder()
 
     cardBuilder.onClick = pickRock
     cardBuilder.content = { SimpleTextDisplay(text = "Rock", fontSize = 20, fontFamily = FontFamily.SansSerif) }

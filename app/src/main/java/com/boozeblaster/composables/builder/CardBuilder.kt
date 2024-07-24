@@ -22,7 +22,7 @@ import com.boozeblaster.ui.theme.backgroundColorForCard
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.getButtonColor
 
-class CardBuilder {
+abstract class CardBuilder {
 
     var modifier: Modifier = Modifier
     var width = 220.dp
@@ -39,7 +39,7 @@ class CardBuilder {
     var pickable = false
 
     @Composable
-    fun build(): @Composable () -> Unit = {
+    open fun build(): @Composable () -> Unit = {
         if (pickable) {
             var isPicked by remember {
                 mutableStateOf(value = false)

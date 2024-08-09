@@ -2,7 +2,6 @@ package com.boozeblaster.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -13,12 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.boozeblaster.composables.SimpleCard
-import com.boozeblaster.composables.SimplePickableCard
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithScrollableColumn
+import com.boozeblaster.composables.builder.PickableCardBuilder
+import com.boozeblaster.composables.builder.SimpleCardBuilder
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.getButtonColor
@@ -32,6 +31,8 @@ private val onCardClicked: (MutableList<String>, String) -> Unit = { list, strin
         list.add(element = string)
     }
 }
+
+private val pickableCardBuilder = PickableCardBuilder()
 
 @Composable
 fun CustomizeGameScreen(
@@ -72,27 +73,24 @@ fun CustomizeGameScreenContent(
         DisplayVersusTasks(pickedVersusTasks = pickedVersusTasks)
         DisplayIndividualTasks(pickedIndividualTasks = pickedIndividualTasks)
 
-        SimpleCard(
-            onClick = {
-                GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
-                GameSettings.setVersusTasks(options = pickedVersusTasks.toTypedArray())
-                GameSettings.setIndividualTasks(options = pickedIndividualTasks.toTypedArray())
-                onContinueClicked()
-            },
-            content = {
-                SimpleTextDisplay(text = "Continue", fontSize = 30, fontFamily = headerFont)
-            },
-            enabled = pickedCommonTasks.isNotEmpty()
-                    || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
-            backgroundColor = if (pickedCommonTasks.isNotEmpty()
+        val simpleCardBuilder = SimpleCardBuilder()
+        simpleCardBuilder.callback = {
+            GameSettings.setCommonTasks(options = pickedCommonTasks.toTypedArray())
+            GameSettings.setVersusTasks(options = pickedVersusTasks.toTypedArray())
+            GameSettings.setIndividualTasks(options = pickedIndividualTasks.toTypedArray())
+            onContinueClicked()
+        }
+        simpleCardBuilder.content = {
+            SimpleTextDisplay(text = "Continue", fontSize = 30, fontFamily = headerFont)
+        }
+        simpleCardBuilder.enabled = pickedCommonTasks.isNotEmpty()
                 || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty()
-            ) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT),
-            width = 260.dp, height = 140.dp, modifier = Modifier,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-        )
+        simpleCardBuilder.backgroundColor = if (pickedCommonTasks.isNotEmpty()
+            || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty()
+        ) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT)
+        simpleCardBuilder.width = 260.dp
+        simpleCardBuilder.height = 140.dp
+        simpleCardBuilder.build()()
         SimpleSpacer(size = 20)
     }
 }
@@ -106,18 +104,20 @@ private fun DisplayCommonTasks(pickedCommonTasks: MutableList<String>) {
     SimpleSpacer(size = 20)
 
     for (i in commonTasks.indices) {
-        SimplePickableCard(callback = {
+        pickableCardBuilder.callback = {
             onCardClicked(
                 pickedCommonTasks,
                 commonTasks.get(index = i)
             )
-        }) {
+        }
+        pickableCardBuilder.content = {
             SimpleTextDisplay(
                 text = commonTasks.get(index = i),
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif
             )
         }
+        pickableCardBuilder.build()()
         SimpleSpacer(size = 20)
     }
 }
@@ -131,18 +131,20 @@ private fun DisplayVersusTasks(pickedVersusTasks: MutableList<String>) {
     SimpleSpacer(size = 20)
 
     for (i in versusTasks.indices) {
-        SimplePickableCard(callback = {
+        pickableCardBuilder.callback = {
             onCardClicked(
                 pickedVersusTasks,
                 versusTasks.get(index = i)
             )
-        }) {
+        }
+        pickableCardBuilder.content = {
             SimpleTextDisplay(
                 text = versusTasks.get(index = i),
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif
             )
         }
+        pickableCardBuilder.build()()
         SimpleSpacer(size = 20)
     }
 }
@@ -156,18 +158,20 @@ private fun DisplayIndividualTasks(pickedIndividualTasks: MutableList<String>) {
     SimpleSpacer(size = 20)
 
     for (i in individualTasks.indices) {
-        SimplePickableCard(callback = {
+        pickableCardBuilder.callback = {
             onCardClicked(
                 pickedIndividualTasks,
                 individualTasks.get(index = i)
             )
-        }) {
+        }
+        pickableCardBuilder.content = {
             SimpleTextDisplay(
                 text = individualTasks.get(index = i),
                 fontSize = 20,
                 fontFamily = FontFamily.SansSerif
             )
         }
+        pickableCardBuilder.build()()
         SimpleSpacer(size = 20)
     }
 }

@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -29,12 +28,12 @@ import androidx.navigation.NavController
 import com.boozeblaster.R
 import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
 import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimpleImageButton
 import com.boozeblaster.composables.SimpleSpacer
 import com.boozeblaster.composables.SimpleTextDisplay
 import com.boozeblaster.composables.SimpleTopAppBar
 import com.boozeblaster.composables.SurfaceWithColumn
+import com.boozeblaster.composables.builder.SimpleCardBuilder
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
@@ -114,8 +113,8 @@ fun StartGameScreenContent(
 
             LazyColumn(
                     modifier = Modifier
-                            .height(200.dp)
-                            .fillMaxWidth(fraction = 0.9f),
+                        .height(200.dp)
+                        .fillMaxWidth(fraction = 0.9f),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -154,35 +153,31 @@ fun StartGameScreenContent(
 
             SimpleSpacer(size = 30)
 
-            SimpleCard(
-                    onClick = {
-                        Game.setPlayers(players = addedPlayers)
-                        setAddedPlayers(addedPlayers)
-                        onContinueClicked()
+            val simpleCardBuilder = SimpleCardBuilder()
+            simpleCardBuilder.callback = {
+                Game.setPlayers(players = addedPlayers)
+                setAddedPlayers(addedPlayers)
+                onContinueClicked()
+            }
+            simpleCardBuilder.content = {
+                SimpleTextDisplay(
+                    text = if (addedPlayers.size < 2) {
+                        "Add more Players"
+                    } else if (addedPlayers.size > 10) {
+                        "Too many Players"
+                    } else {
+                        "Continue"
                     },
-                    content = {
-                        SimpleTextDisplay(
-                                text = if (addedPlayers.size < 2) {
-                                    "Add more Players"
-                                } else if (addedPlayers.size > 10) {
-                                    "Too many Players"
-                                } else {
-                                    "Continue"
-                                },
-                                fontSize = 20,
-                                fontFamily = FontFamily.SansSerif
-                        )
-                    },
-                    backgroundColor = if (addedPlayers.size in 2..10) getButtonColor(ButtonType.CORRECT)
-                    else getButtonColor(ButtonType.INCORRECT),
-                    modifier = Modifier,
-                    width = 220.dp,
-                    height = 120.dp,
-                    shape = AbsoluteRoundedCornerShape(20.dp),
-                    border = null,
-                    elevation = 4.dp,
-                    padding = 16.dp,
-                    enabled = true)
+                    fontSize = 20,
+                    fontFamily = FontFamily.SansSerif
+                )
+            }
+            simpleCardBuilder.backgroundColor = if (addedPlayers.size in 2..10) {
+                getButtonColor(ButtonType.CORRECT)
+            } else {
+                getButtonColor(ButtonType.INCORRECT)
+            }
+            simpleCardBuilder.build()()
         }
     }
 

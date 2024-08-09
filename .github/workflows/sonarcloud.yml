@@ -34,6 +34,11 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      branch:
+        description: "The branch to analyze"
+        default: "main"
+        required: true
 
 permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results

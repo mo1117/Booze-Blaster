@@ -2,7 +2,7 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main", "builder", "abstract_factory", "factory_method" ]
+    branches: [ "*" ]
   pull_request:
     branches: [ "main" ]
 

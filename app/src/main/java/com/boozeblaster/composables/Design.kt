@@ -41,36 +41,26 @@ fun ClickableSurfaceWithColumn(
     verticalArrangement: Arrangement.Vertical,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize(fraction = 1f)
-            .clickable(onClick = onSurfaceClicked)
-    ) {
-        Column(
-            horizontalAlignment = horizontalAlignment,
-            verticalArrangement = verticalArrangement,
-            modifier = Modifier.background(
-                color = getBackgroundColor()
-            )
-        ) {
-            content()
-        }
-    }
+    SurfaceWithColumn(columnModifier = Modifier.clickable(onClick = onSurfaceClicked),
+        horizontalAlignment = horizontalAlignment,
+        verticalArrangement = verticalArrangement, content = content)
 }
 
 @Composable
 fun SurfaceWithColumn(
+    surfaceModifier: Modifier = Modifier,
+    columnModifier: Modifier = Modifier,
     horizontalAlignment: Alignment.Horizontal,
     verticalArrangement: Arrangement.Vertical,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
     Surface(
-        modifier = Modifier.fillMaxSize(fraction = 1f)
+        modifier = surfaceModifier.fillMaxSize(fraction = 1f)
     ) {
         Column(
             horizontalAlignment = horizontalAlignment,
             verticalArrangement = verticalArrangement,
-            modifier = Modifier.background(color = getBackgroundColor())
+            modifier = columnModifier.background(color = getBackgroundColor())
         ) {
             content()
         }
@@ -83,21 +73,9 @@ fun SurfaceWithScrollableColumn(
     verticalArrangement: Arrangement.Vertical,
     content: @Composable (ColumnScope.() -> Unit)
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(fraction = 1f)
-    ) {
-        Column(
-            horizontalAlignment = horizontalAlignment,
-            verticalArrangement = verticalArrangement,
-            modifier = Modifier
-                .background(
-                    color = getBackgroundColor()
-                )
-                .verticalScroll(state = ScrollState(initial = 0))
-        ) {
-            content()
-        }
-    }
+    SurfaceWithColumn(columnModifier = Modifier.verticalScroll(state = ScrollState(0)),
+        horizontalAlignment = horizontalAlignment,
+        verticalArrangement = verticalArrangement, content = content)
 }
 
 @Composable

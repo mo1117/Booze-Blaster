@@ -9,8 +9,8 @@ import com.boozeblaster.utils.GameSettings
 
 class CommonTaskGenerationStrategy : TaskGenerationStrategy {
 
-    override val generateTask: (Boolean?, Player?, Player?, List<Task>) -> List<Task> = {
-        sipTransfer, _, _, tasks ->
+    override val generateTask: (Boolean?, List<Player>?, List<Task>) -> List<Task> = {
+        sipTransfer, _, tasks ->
         if (!GameSettings.playCommonTasks()) {
             tasks
         }

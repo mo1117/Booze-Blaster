@@ -4,15 +4,26 @@ import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.Task
 import com.boozeblaster.tasks.VersusTask
 import com.boozeblaster.utils.GameSettings
+import kotlin.random.Random
 
 class VersusTaskGenerationStrategy : TaskGenerationStrategy {
 
-    override val generateTask: (Boolean?, Player?, Player?, List<Task>) -> List<Task> = {
-        _, player, versusPlayer, tasks ->
+    override val generateTask: (Boolean?, List<Player>?, List<Task>) -> List<Task> = {
+        _, players, tasks ->
         if (!GameSettings.playVersusTasks()) {
             tasks
         }
-        tasks.plus(generateVersusTask(player!!, versusPlayer!!))
+        val randomPlayer = players!!.get(index = Random.nextInt(from = 0, until = players.size))
+        var randomVersusPlayer: Player
+        while (true) {
+            randomVersusPlayer = players.get(index = Random.nextInt(from = 0, until = players.size))
+
+            if (randomPlayer != randomVersusPlayer) {
+                tasks.plus(generateVersusTask(randomPlayer, randomVersusPlayer))
+                break
+            }
+        }
+        tasks
     }
 
     private fun generateVersusTask(player: Player, versusPlayer: Player): VersusTask {

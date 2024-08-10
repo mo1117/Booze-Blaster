@@ -6,7 +6,6 @@ import com.boozeblaster.generators.strategy.VersusTaskGenerationStrategy
 import com.boozeblaster.models.Player
 import com.boozeblaster.tasks.Task
 import com.boozeblaster.utils.GameSettings
-import kotlin.random.Random
 
 private val commonTaskGenerationStrategy = CommonTaskGenerationStrategy()
 private val versusTaskGenerationStrategy = VersusTaskGenerationStrategy()
@@ -29,22 +28,9 @@ object TaskGenerator {
 
         for (round in 0 until rounds) {
             commonTaskGenerationStrategy.generateTask(
-                rounds - round == 1 && rounds > 1 && GameSettings.playSipTransfer(), null, null, tasks)
-
-            randomPlayer = players.get(index = Random.nextInt(from = 0, until = players.size))
-            while (true) {
-                randomVersusPlayer =
-                    players.get(index = Random.nextInt(from = 0, until = players.size))
-
-                if (randomPlayer != randomVersusPlayer) {
-                    versusTaskGenerationStrategy.generateTask(null, randomPlayer, randomVersusPlayer, tasks)
-                    break
-                }
-            }
-
-            for (i in players.indices) {
-                individualTaskGenerationStrategy.generateTask(null, players[i], null, tasks)
-            }
+                rounds - round == 1 && rounds > 1 && GameSettings.playSipTransfer(), null, tasks)
+            versusTaskGenerationStrategy.generateTask(null, players, tasks)
+            individualTaskGenerationStrategy.generateTask(null, players, tasks)
         }
         return tasks
     }

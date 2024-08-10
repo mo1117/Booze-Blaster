@@ -10,6 +10,6 @@ interface TaskGenerationStrategy {
         return availableTasks[Random.nextInt(from = 0, until = availableTasks.size)]
     }
 
-    val generateTask: (Boolean?, Player?, Player?, List<Task>) -> List<Task>
+    val generateTask: (Boolean?, List<Player>?, List<Task>) -> List<Task>
 
 }

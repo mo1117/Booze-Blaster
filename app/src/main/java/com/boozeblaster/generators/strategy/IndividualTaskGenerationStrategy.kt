@@ -7,12 +7,16 @@ import com.boozeblaster.utils.GameSettings
 
 class IndividualTaskGenerationStrategy : TaskGenerationStrategy {
 
-    override val generateTask: (Boolean?, Player?, Player?, List<Task>) -> List<Task> = {
-        _, player, _, tasks ->
+    override val generateTask: (Boolean?, List<Player>?, List<Task>) -> List<Task> = {
+        _, players, tasks ->
+        var newTasks = tasks
         if (!GameSettings.playIndividualTasks()) {
             tasks
         }
-        tasks.plus(generateIndividualTask(player!!))
+        for (i in players!!.indices) {
+            newTasks = tasks.plus(generateIndividualTask(players[i]))
+        }
+        newTasks
     }
 
     private fun generateIndividualTask(player: Player): IndividualTask {

@@ -10,10 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
 import com.boozeblaster.composables.topAppBars.HomeTopAppBarCreator
-import com.boozeblaster.composables.SimpleCard
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.composables.SurfaceWithScrollableColumn
+import com.boozeblaster.composables.*
 import com.boozeblaster.models.Game
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.headerFont

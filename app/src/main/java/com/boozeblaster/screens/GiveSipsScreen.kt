@@ -13,12 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavController
-import com.boozeblaster.composables.MyAlertDialog
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.*
 import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
-import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game
 import com.boozeblaster.navigation.NavigationController

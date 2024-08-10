@@ -26,14 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.boozeblaster.R
-import com.boozeblaster.composables.MyAnimatedVisibilityTopToTop
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleCard
-import com.boozeblaster.composables.SimpleImageButton
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
+import com.boozeblaster.composables.*
 import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
-import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.enums.AnimationConstants
 import com.boozeblaster.enums.ButtonType
 import com.boozeblaster.models.Game

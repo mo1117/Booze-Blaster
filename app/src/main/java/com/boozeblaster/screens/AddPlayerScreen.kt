@@ -26,14 +26,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.boozeblaster.R
-import com.boozeblaster.composables.MyAlertDialog
-import com.boozeblaster.composables.SimpleButton
-import com.boozeblaster.composables.SimpleImageButton
-import com.boozeblaster.composables.SimpleSpacer
-import com.boozeblaster.composables.SimpleTextDisplay
-import com.boozeblaster.composables.SimpleTextField
+import com.boozeblaster.composables.*
 import com.boozeblaster.composables.topAppBars.SimpleTopAppBarCreator
-import com.boozeblaster.composables.SurfaceWithColumn
 import com.boozeblaster.models.Player
 import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.utils.InjectorUtils

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,42 +37,19 @@ fun SimpleButton(
     needsConfirmation: Boolean = false
 ) {
 
-    val buttonColor = color ?: getButtonColor(buttonType = buttonType)
-
-    var displayConfirmation by remember {
-        mutableStateOf(value = needsConfirmation)
-    }
-
-    var buttonText by remember {
-        mutableStateOf(value = text)
-    }
-
-    Button(
-        onClick = {
-            if (displayConfirmation) {
-                displayConfirmation = false
-                buttonText = "Confirm"
-            } else {
-                displayConfirmation = needsConfirmation
-                buttonText = text
-                onClick()
-            }
-        },
-        modifier = modifier
-            .sizeIn(
-                minWidth = minWidth.dp,
-                minHeight = minHeight.dp
-            ),
+    SimpleChangeableButton(
+        onClick = onClick,
+        text = { SimpleTextDisplay(text = text, fontSize = fontSize, fontFamily = fontFamily)},
+        fontSize = fontSize,
+        fontFamily = fontFamily,
+        modifier = modifier,
+        color = color,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(backgroundColor = buttonColor),
-        shape = AbsoluteRoundedCornerShape(percent = 100)
-    ) {
-        SimpleTextDisplay(
-            text = buttonText,
-            fontSize = fontSize,
-            fontFamily = fontFamily
-        )
-    }
+        buttonType = buttonType,
+        minWidth = minWidth,
+        minHeight = minHeight,
+        needsConfirmation = needsConfirmation
+    )
 }
 
 /**

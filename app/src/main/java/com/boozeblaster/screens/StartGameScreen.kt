@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -174,15 +173,7 @@ fun StartGameScreenContent(
                         )
                     },
                     backgroundColor = if (addedPlayers.size in 2..10) getButtonColor(ButtonType.CORRECT)
-                    else getButtonColor(ButtonType.INCORRECT),
-                    modifier = Modifier,
-                    width = 220.dp,
-                    height = 120.dp,
-                    shape = AbsoluteRoundedCornerShape(20.dp),
-                    border = null,
-                    elevation = 4.dp,
-                    padding = 16.dp,
-                    enabled = true)
+                    else getButtonColor(ButtonType.INCORRECT))
         }
     }
 

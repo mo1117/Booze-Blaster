@@ -21,20 +21,22 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.boozeblaster.enums.ButtonType
+import com.boozeblaster.ui.theme.backgroundColorForCard
+import com.boozeblaster.ui.theme.getBackgroundColor
 import com.boozeblaster.ui.theme.getButtonColor
 
 @Composable
 fun SimpleCard(
-        modifier: Modifier,
-        width: Dp,
-        height: Dp,
+        modifier: Modifier = Modifier,
+        width: Dp = 220.dp,
+        height: Dp = 120.dp,
         onClick: () -> Unit,
-        shape: Shape,
-        backgroundColor: Color,
-        border: BorderStroke?,
-        elevation: Dp,
-        padding: Dp,
-        enabled: Boolean,
+        shape: Shape = AbsoluteRoundedCornerShape(20.dp),
+        backgroundColor: Color = getBackgroundColor().backgroundColorForCard(),
+        border: BorderStroke? = null,
+        elevation: Dp = 4.dp,
+        padding: Dp = 16.dp,
+        enabled: Boolean = true,
         content: @Composable (BoxScope.() -> Unit)
 ) {
     Card(

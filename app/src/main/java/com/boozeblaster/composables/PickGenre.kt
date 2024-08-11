@@ -1,12 +1,7 @@
 package com.boozeblaster.composables
 
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
-import com.boozeblaster.ui.theme.backgroundColorForCard
-import com.boozeblaster.ui.theme.getBackgroundColor
 
 @Composable
 fun PickGenre(
@@ -16,55 +11,19 @@ fun PickGenre(
         pickPop: () -> Unit
 ) {
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickRock,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
+    SimpleCard(onClick = pickRock) {
         SimpleTextDisplay(text = "Rock", fontSize = 20, fontFamily = FontFamily.SansSerif)
     }
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickRap,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
+    SimpleCard(onClick = pickRap,) {
         SimpleTextDisplay(text = "Rap", fontSize = 20, fontFamily = FontFamily.SansSerif)
     }
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickHipHop,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
+    SimpleCard(onClick = pickHipHop) {
         SimpleTextDisplay(text = "Hip-Hop", fontSize = 20, fontFamily = FontFamily.SansSerif)
     }
 
-    SimpleCard(modifier = Modifier,
-            width = 220.dp,
-            height = 120.dp,
-            onClick = pickPop,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            backgroundColor = getBackgroundColor().backgroundColorForCard(),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
-            enabled = true) {
+    SimpleCard(onClick = pickPop) {
         SimpleTextDisplay(text = "Pop", fontSize = 20, fontFamily = FontFamily.SansSerif)
     }
 }

@@ -2,7 +2,6 @@ package com.boozeblaster.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -11,7 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.boozeblaster.composables.SimpleCard
 import com.boozeblaster.composables.SimplePickableCard
@@ -86,12 +84,7 @@ fun CustomizeGameScreenContent(
                     || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty(),
             backgroundColor = if (pickedCommonTasks.isNotEmpty()
                 || pickedVersusTasks.isNotEmpty() || pickedIndividualTasks.isNotEmpty()
-            ) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT),
-            width = 260.dp, height = 140.dp, modifier = Modifier,
-            shape = AbsoluteRoundedCornerShape(20.dp),
-            border = null,
-            elevation = 4.dp,
-            padding = 16.dp,
+            ) getButtonColor(ButtonType.CORRECT) else getButtonColor(ButtonType.INCORRECT)
         )
         SimpleSpacer(size = 20)
     }
